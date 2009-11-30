@@ -1,6 +1,6 @@
 obj/Debug/libs/openFrameworks/sound/ofSoundStream.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/sound/ofSoundStream.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/sound/ofSoundStream.h \
+ /tmp/trunk/libs/openFrameworks/sound/ofSoundStream.cpp \
+ /tmp/trunk/libs/openFrameworks/sound/ofSoundStream.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/app/ofBaseApp.h \
  ../../../libs/openFrameworks/utils/ofTypes.h \

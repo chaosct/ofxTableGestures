@@ -1,9 +1,9 @@
 obj/Debug/libs/openFrameworks/graphics/ofTrueTypeFont.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofTrueTypeFont.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofTrueTypeFont.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofTrueTypeFont.cpp \
+ /tmp/trunk/libs/openFrameworks/graphics/ofTrueTypeFont.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofGraphics.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofGraphics.h \
  ../../../libs/openFrameworks/utils/ofTypes.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/openFrameworks/utils/ofUtils.h \

@@ -1,6 +1,6 @@
 obj/Debug/libs/openFrameworks/communication/ofStandardFirmata.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/communication/ofStandardFirmata.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/communication/ofStandardFirmata.h \
+ /tmp/trunk/libs/openFrameworks/communication/ofStandardFirmata.cpp \
+ /tmp/trunk/libs/openFrameworks/communication/ofStandardFirmata.h \
  ../../../libs/openFrameworks/events/ofEvents.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h \
@@ -40,4 +40,4 @@ obj/Debug/libs/openFrameworks/communication/ofStandardFirmata.o: \
  ../../../libs/poco/include/Poco/FunctionDelegate.h \
  ../../../libs/poco/include/Poco/Expire.h \
  ../../../libs/poco/include/Poco/Timestamp.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/communication/ofSerial.h
+ /tmp/trunk/libs/openFrameworks/communication/ofSerial.h

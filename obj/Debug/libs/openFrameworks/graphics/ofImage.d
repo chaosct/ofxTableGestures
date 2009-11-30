@@ -1,10 +1,10 @@
 obj/Debug/libs/openFrameworks/graphics/ofImage.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofImage.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofImage.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofImage.cpp \
+ /tmp/trunk/libs/openFrameworks/graphics/ofImage.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofTexture.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofGraphics.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofTexture.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofGraphics.h \
  ../../../libs/openFrameworks/utils/ofTypes.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/openFrameworks/app/ofAppRunner.h \

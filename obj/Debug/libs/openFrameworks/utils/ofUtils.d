@@ -1,7 +1,7 @@
 obj/Debug/libs/openFrameworks/utils/ofUtils.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofUtils.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofUtils.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofConstants.h \
+ /tmp/trunk/libs/openFrameworks/utils/ofUtils.cpp \
+ /tmp/trunk/libs/openFrameworks/utils/ofUtils.h \
+ /tmp/trunk/libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h \
  ../../../libs/openFrameworks/graphics/ofImage.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \

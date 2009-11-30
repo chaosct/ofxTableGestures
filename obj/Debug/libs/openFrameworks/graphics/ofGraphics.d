@@ -1,6 +1,6 @@
 obj/Debug/libs/openFrameworks/graphics/ofGraphics.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofGraphics.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofGraphics.h \
+ /tmp/trunk/libs/openFrameworks/graphics/ofGraphics.cpp \
+ /tmp/trunk/libs/openFrameworks/graphics/ofGraphics.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/utils/ofTypes.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
@@ -204,4 +204,4 @@ obj/Debug/libs/openFrameworks/graphics/ofGraphics.o: \
  ../../../libs/openFrameworks/app/ofBaseApp.h \
  ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/graphics/ofBitmapFont.h
+ /tmp/trunk/libs/openFrameworks/graphics/ofBitmapFont.h

@@ -1,6 +1,6 @@
 obj/Debug/src/testApp.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h \
+ /tmp/trunk/apps/myApps/TSIframework/src/testApp.cpp \
+ /tmp/trunk/apps/myApps/TSIframework/src/testApp.h \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/utils/ofMath.h \

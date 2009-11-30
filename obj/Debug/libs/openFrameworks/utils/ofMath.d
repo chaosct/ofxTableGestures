@@ -1,7 +1,7 @@
 obj/Debug/libs/openFrameworks/utils/ofMath.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofMath.cpp \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofMath.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/utils/ofConstants.h \
+ /tmp/trunk/libs/openFrameworks/utils/ofMath.cpp \
+ /tmp/trunk/libs/openFrameworks/utils/ofMath.h \
+ /tmp/trunk/libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/app/ofAppRunner.h \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \

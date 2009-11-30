@@ -1,5 +1,4 @@
-obj/Debug/src/main.o: \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/main.cpp \
+obj/Debug/src/main.o: /tmp/trunk/apps/myApps/TSIframework/src/main.cpp \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/utils/ofMath.h \
@@ -203,4 +202,4 @@ obj/Debug/src/main.o: \
  /usr/include/gstreamer-0.10/gst/gstparse.h \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
  /usr/include/gstreamer-0.10/gst/gstcompat.h \
- /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h
+ /tmp/trunk/apps/myApps/TSIframework/src/testApp.h
