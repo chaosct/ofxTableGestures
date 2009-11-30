@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1236626424 source:/home/thechaos/tmp/TSIframework/src/main.cpp
+	"ofMain.h"
+	"testApp.h"
+	"ofAppGlutWindow.h"
+
+1236629978 /home/thechaos/tmp/TSIframework/src/testApp.h
+	"ofMain.h"
+
+1236632120 source:/home/thechaos/tmp/TSIframework/src/testApp.cpp
+	"testApp.h"
+
