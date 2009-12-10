@@ -1,6 +1,6 @@
 obj/Debug/libs/openFrameworks/communication/ofSerial.o: \
- /tmp/trunk/libs/openFrameworks/communication/ofSerial.cpp \
- /tmp/trunk/libs/openFrameworks/communication/ofSerial.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/communication/ofSerial.cpp \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/communication/ofSerial.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofMath.h \

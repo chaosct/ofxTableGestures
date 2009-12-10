@@ -1,12 +1,12 @@
 obj/Debug/libs/openFrameworks/app/ofAppGlutWindow.o: \
- /tmp/trunk/libs/openFrameworks/app/ofAppGlutWindow.cpp \
- /tmp/trunk/libs/openFrameworks/app/ofAppGlutWindow.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppGlutWindow.cpp \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppGlutWindow.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h \
- /tmp/trunk/libs/openFrameworks/app/ofAppBaseWindow.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/utils/ofTypes.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
- /tmp/trunk/libs/openFrameworks/app/ofBaseApp.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofBaseApp.h \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofMath.h \
  ../../../libs/openFrameworks/utils/ofUtils.h \

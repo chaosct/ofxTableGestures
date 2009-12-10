@@ -1,6 +1,6 @@
 obj/Debug/libs/openFrameworks/app/ofAppRunner.o: \
- /tmp/trunk/libs/openFrameworks/app/ofAppRunner.cpp \
- /tmp/trunk/libs/openFrameworks/app/ofAppRunner.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppRunner.cpp \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppRunner.h \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/utils/ofMath.h \
@@ -201,6 +201,6 @@ obj/Debug/libs/openFrameworks/app/ofAppRunner.o: \
  /usr/include/gstreamer-0.10/gst/gstparse.h \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
  /usr/include/gstreamer-0.10/gst/gstcompat.h \
- /tmp/trunk/libs/openFrameworks/app/ofBaseApp.h \
- /tmp/trunk/libs/openFrameworks/app/ofAppBaseWindow.h \
- /tmp/trunk/libs/openFrameworks/app/ofAppGlutWindow.h
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofBaseApp.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppBaseWindow.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppGlutWindow.h
