@@ -204,5 +204,6 @@ obj/Release/src/main.o: \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
  /usr/include/gstreamer-0.10/gst/gstcompat.h \
  /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h \
- lib/tuio/h/tuioinput.h lib/oscpack/ip/UdpSocket.h \
- lib/oscpack/ip/NetworkingUtils.h lib/oscpack/ip/IpEndpointName.h
+ lib/tuio/h/EventQueue.h lib/tuio/h/tuioinput.h \
+ lib/oscpack/ip/UdpSocket.h lib/oscpack/ip/NetworkingUtils.h \
+ lib/oscpack/ip/IpEndpointName.h

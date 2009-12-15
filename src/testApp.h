@@ -12,6 +12,7 @@
 class testApp : public ofBaseApp{
     private:
         void processTevents();
+        double dx, dy;
 	public:
         tuio::EventQueue * equeue;
 		void setup();

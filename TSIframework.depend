@@ -1206,13 +1206,14 @@
 
 1254924117 /usr/include/gstreamer-0.10/gst/gstcompat.h
 
-1260894297 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h
+1260900690 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h
 	"ofMain.h"
 	"EventQueue.h"
 
-1260897646 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
+1260900757 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
 	"testApp.h"
 	"TEvent.h"
+	"InputGestureClasses.h"
 
 1237940399 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/libs/openFrameworks/app/ofAppGlutWindow.cpp
 	"ofAppGlutWindow.h"
@@ -1518,14 +1519,14 @@
 
 1164030578 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/oscpack/tests/OscUnitTests.h
 
-1260897900 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/EventQueue.cpp
+1260900006 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/EventQueue.cpp
 	"EventQueue.h"
 	"TEvent.h"
 	<iostream>
 
-1260897900 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/EventQueue.h
+1260901342 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/EventQueue.h
 
-1260897061 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
+1260900243 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
 	<string>
 	<vector>
 	<iostream>

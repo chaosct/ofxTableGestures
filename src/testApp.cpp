@@ -1,10 +1,12 @@
 #include "testApp.h"
 #include "TEvent.h"
+#include "InputGestureClasses.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
 ofSetCircleResolution(100);
 ofBackground(255,255,255);
+dx = dy = 0;
 }
 
 void testApp::processTevents()
@@ -12,8 +14,15 @@ void testApp::processTevents()
     tuio::TEvent * te;
     while((te = equeue->pop())!= NULL)
     {
-        std::cout << "Event rebut! " << te->name << std::endl;
-        //delete te;
+        //std::cout << "Event rebut! " << te->name << std::endl;
+        if (te->name == "finger.move")
+        {
+            tuio::TeventBasicFingersMoveFinger * me = static_cast<tuio::TeventBasicFingersMoveFinger *>(te);
+            dx = me->xpos;
+            dy = me->ypos;
+            //std::cout << "Event processat! "<< std::endl;
+        }
+        delete te;
     }
 }
 
@@ -27,7 +36,7 @@ void testApp::draw(){
     processTevents();
     ofSetColor(0xFF0000);
     ofFill();
-    ofCircle(100,400,20);
+    ofCircle(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,20);
 }
 
 //--------------------------------------------------------------

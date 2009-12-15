@@ -203,4 +203,11 @@ obj/Release/src/testApp.o: \
  /usr/include/gstreamer-0.10/gst/gstutils.h \
  /usr/include/gstreamer-0.10/gst/gstparse.h \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
- /usr/include/gstreamer-0.10/gst/gstcompat.h
+ /usr/include/gstreamer-0.10/gst/gstcompat.h lib/tuio/h/EventQueue.h \
+ lib/tuio/h/TEvent.h lib/tuio/h/InputGestureClasses.h \
+ lib/tuio/h/InputGestureBasicFingers.h \
+ lib/oscpack/osc/OscReceivedElements.h lib/oscpack/osc/OscTypes.h \
+ lib/oscpack/osc/OscException.h lib/tuio/h/InputGesture.h \
+ lib/tuio/h/OSCListener.h lib/oscpack/osc/OscPacketListener.h \
+ lib/oscpack/osc/OscReceivedElements.h \
+ lib/oscpack/osc/../ip/PacketListener.h lib/tuio/h/TEvent.h

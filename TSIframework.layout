@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Linux-Debug" />
+	<ActiveTarget name="Linux-Release" />
 	<File name="lib/oscpack/ip/IpEndpointName.h" open="0" top="0" tabpos="0">
 		<Cursor position="1505" topLine="38" />
 	</File>
 	<File name="lib/oscpack/ip/UdpSocket.h" open="0" top="0" tabpos="0">
 		<Cursor position="4640" topLine="35" />
 	</File>
-	<File name="lib/oscpack/ip/posix/UdpSocket.cpp" open="1" top="0" tabpos="14">
+	<File name="lib/oscpack/ip/posix/UdpSocket.cpp" open="0" top="0" tabpos="14">
 		<Cursor position="8587" topLine="285" />
 	</File>
 	<File name="lib/oscpack/ip/win32/NetworkingUtils.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1611" topLine="0" />
 	</File>
-	<File name="lib/oscpack/ip/win32/UdpSocket.cpp" open="1" top="0" tabpos="15">
+	<File name="lib/oscpack/ip/win32/UdpSocket.cpp" open="0" top="0" tabpos="15">
 		<Cursor position="8441" topLine="277" />
 	</File>
 	<File name="lib/oscpack/osc/OscHostEndianness.h" open="0" top="0" tabpos="0">
@@ -34,29 +34,29 @@
 	<File name="lib/oscpack/osc/OscReceivedElements.h" open="0" top="0" tabpos="0">
 		<Cursor position="12596" topLine="265" />
 	</File>
-	<File name="lib/tuio/c/EventQueue.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="812" topLine="8" />
+	<File name="lib/tuio/c/EventQueue.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="921" topLine="0" />
 	</File>
-	<File name="lib/tuio/c/InputGestureBasicFingers.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="2342" topLine="55" />
+	<File name="lib/tuio/c/InputGestureBasicFingers.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="2342" topLine="42" />
 	</File>
 	<File name="lib/tuio/c/OSCListener.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="184" topLine="0" />
 	</File>
-	<File name="lib/tuio/c/inputGestureManager.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="740" topLine="11" />
+	<File name="lib/tuio/c/inputGestureManager.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="740" topLine="0" />
 	</File>
-	<File name="lib/tuio/c/tuioinput.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="931" topLine="15" />
+	<File name="lib/tuio/c/tuioinput.cpp" open="0" top="0" tabpos="11">
+		<Cursor position="931" topLine="2" />
 	</File>
-	<File name="lib/tuio/h/EventQueue.h" open="1" top="0" tabpos="7">
+	<File name="lib/tuio/h/EventQueue.h" open="1" top="0" tabpos="5">
 		<Cursor position="311" topLine="0" />
 	</File>
-	<File name="lib/tuio/h/InputGesture.h" open="1" top="0" tabpos="13">
+	<File name="lib/tuio/h/InputGesture.h" open="0" top="0" tabpos="13">
 		<Cursor position="119" topLine="0" />
 	</File>
 	<File name="lib/tuio/h/InputGestureBasicFingers.h" open="1" top="0" tabpos="3">
-		<Cursor position="622" topLine="7" />
+		<Cursor position="731" topLine="4" />
 	</File>
 	<File name="lib/tuio/h/InputGestureClasses.h" open="0" top="0" tabpos="0">
 		<Cursor position="119" topLine="0" />
@@ -64,25 +64,25 @@
 	<File name="lib/tuio/h/OSCListener.h" open="0" top="0" tabpos="0">
 		<Cursor position="480" topLine="0" />
 	</File>
-	<File name="lib/tuio/h/TEvent.h" open="1" top="0" tabpos="9">
-		<Cursor position="197" topLine="0" />
+	<File name="lib/tuio/h/TEvent.h" open="1" top="0" tabpos="2">
+		<Cursor position="278" topLine="0" />
 	</File>
-	<File name="lib/tuio/h/inputGestureManager.h" open="1" top="0" tabpos="12">
+	<File name="lib/tuio/h/inputGestureManager.h" open="0" top="0" tabpos="12">
 		<Cursor position="407" topLine="0" />
 	</File>
 	<File name="lib/tuio/h/tuioinput.h" open="0" top="0" tabpos="0">
 		<Cursor position="457" topLine="0" />
 	</File>
-	<File name="src/main.cpp" open="1" top="0" tabpos="5">
+	<File name="src/main.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="540" topLine="0" />
 	</File>
-	<File name="src/testApp.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="343" topLine="0" />
+	<File name="src/testApp.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="351" topLine="0" />
 	</File>
-	<File name="src/testApp.h" open="1" top="0" tabpos="6">
-		<Cursor position="216" topLine="0" />
+	<File name="src/testApp.h" open="1" top="0" tabpos="4">
+		<Cursor position="244" topLine="0" />
 	</File>
-	<File name="../../../libs/openFrameworks/app/ofAppGlutWindow.cpp" open="1" top="0" tabpos="10">
+	<File name="../../../libs/openFrameworks/app/ofAppGlutWindow.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="9679" topLine="327" />
 	</File>
 	<File name="../../../libs/openFrameworks/graphics/ofGraphics.h" open="0" top="0" tabpos="0">

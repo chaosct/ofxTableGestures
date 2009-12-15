@@ -16,7 +16,7 @@ class TEvent {
     //std::vector<void *> args;
     ~TEvent()
     {
-        std::cout << "Destruint " << name << std::endl;
+        //std::cout << "Destruint " << name << std::endl;
     }
 };
 

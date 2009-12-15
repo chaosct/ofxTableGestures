@@ -8,7 +8,7 @@ namespace tuio {
 EventQueue::EventQueue() {
   // Bouml preserved body begin 0002852A
   reader = 0;
-  writer = 1;
+  writer = 0;
   // Bouml preserved body end 0002852A
 }
 
@@ -28,7 +28,7 @@ void EventQueue::push(TEvent * evt) {
 
 TEvent * EventQueue::pop() {
   // Bouml preserved body begin 000284AA
-  if( (reader +1)%QUEUE_SIZE ==  writer)
+  if( reader ==  writer)
   {
       //std::cout << "Final de la cua!" << std::endl;
       return NULL; // return NULL when empty
