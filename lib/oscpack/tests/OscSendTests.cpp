@@ -30,7 +30,8 @@
 #include "OscSendTests.h"
 
 #include <iostream>
-#include <string.h>
+#include <cstring>
+#include <cstdlib>
 
 #include "osc/OscOutboundPacketStream.h"
 
@@ -40,7 +41,7 @@
 #define IP_MTU_SIZE 1536
 
 namespace osc{
-    
+
 void RunSendTests( const IpEndpointName& host )
 {
     char buffer[IP_MTU_SIZE];
@@ -95,7 +96,7 @@ void RunSendTests( const IpEndpointName& host )
     p << osc::BeginMessage( "/test3" )
            << "hello" << osc::EndMessage;
     socket.Send( p.Data(), p.Size() );
-    
+
 
     // send a bundle
     p.Clear();
@@ -191,7 +192,7 @@ int main(int argc, char* argv[])
 
     char *hostName = "localhost";
     int port = 7000;
-    
+
     if( argc >= 2 )
         hostName = argv[1];
 
@@ -204,7 +205,7 @@ int main(int argc, char* argv[])
 	char hostIpAddress[ IpEndpointName::ADDRESS_STRING_LENGTH ];
 	host.AddressAsString( hostIpAddress );
 
-    std::cout << "sending test messages to " << hostName 
+    std::cout << "sending test messages to " << hostName
 		<< " (" << hostIpAddress << ") on port " << port << "...\n";
 
     osc::RunSendTests( host );

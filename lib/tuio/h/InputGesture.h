@@ -4,15 +4,16 @@
 
 #include "OSCListener.h"
 #include <list>
-using namespace std;
 
-namespace tuio { class TEvent; } 
+#include "TEvent.h"
+
+
 
 namespace tuio {
 
 class InputGesture : public OSCListener {
-  private:
-    list<TEvent *> events;
+  public:
+    std::list<TEvent *> events;
 
 };
 

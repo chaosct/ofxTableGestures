@@ -203,4 +203,5 @@ obj/Debug/src/testApp.o: \
  /usr/include/gstreamer-0.10/gst/gstutils.h \
  /usr/include/gstreamer-0.10/gst/gstparse.h \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
- /usr/include/gstreamer-0.10/gst/gstcompat.h
+ /usr/include/gstreamer-0.10/gst/gstcompat.h lib/tuio/h/EventQueue.h \
+ lib/tuio/h/TEvent.h

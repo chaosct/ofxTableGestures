@@ -1,4 +1,5 @@
-obj/Release/src/main.o: src/main.cpp \
+obj/Release/src/main.o: \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/main.cpp \
  ../../../libs/openFrameworks/ofMain.h \
  ../../../libs/openFrameworks/utils/ofConstants.h \
  ../../../libs/glee/GLee.h ../../../libs/openFrameworks/utils/ofMath.h \
@@ -201,4 +202,7 @@ obj/Release/src/main.o: src/main.cpp \
  /usr/include/gstreamer-0.10/gst/gstutils.h \
  /usr/include/gstreamer-0.10/gst/gstparse.h \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
- /usr/include/gstreamer-0.10/gst/gstcompat.h src/testApp.h
+ /usr/include/gstreamer-0.10/gst/gstcompat.h \
+ /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h \
+ lib/tuio/h/tuioinput.h lib/oscpack/ip/UdpSocket.h \
+ lib/oscpack/ip/NetworkingUtils.h lib/oscpack/ip/IpEndpointName.h

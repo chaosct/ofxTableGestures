@@ -2,13 +2,15 @@
 #define TUIO_EVENTQUEUE_H
 
 
-namespace tuio { class TEvent; } 
+namespace tuio { class TEvent; }
+
+#define QUEUE_SIZE 1024
 
 namespace tuio {
 
 class EventQueue {
   private:
-    TEvent * events[1024];
+    TEvent * events[QUEUE_SIZE];
 
     unsigned int reader;
 

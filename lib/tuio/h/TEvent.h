@@ -3,19 +3,21 @@
 
 
 #include <string>
-using namespace std;
 #include <vector>
-using namespace std;
+#include <iostream>
 
 namespace tuio {
 
 //Els destructors s'usen a través d'herencia
 class TEvent {
-  private:
-    string name;
+  public:
+     std::string name;
 
-    vector<void *> args;
-
+    //std::vector<void *> args;
+    ~TEvent()
+    {
+        std::cout << "Destruint " << name << std::endl;
+    }
 };
 
 } // namespace tuio

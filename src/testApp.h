@@ -4,9 +4,16 @@
 
 #include "ofMain.h"
 
-class testApp : public ofBaseApp{
+#include "EventQueue.h"
 
+#define WINDOW_HEIGHT 768
+#define WINDOW_WIDTH 1024
+
+class testApp : public ofBaseApp{
+    private:
+        void processTevents();
 	public:
+        tuio::EventQueue * equeue;
 		void setup();
 		void update();
 		void draw();

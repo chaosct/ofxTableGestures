@@ -1,8 +1,20 @@
 #include "testApp.h"
+#include "TEvent.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
+ofSetCircleResolution(100);
+ofBackground(255,255,255);
+}
 
+void testApp::processTevents()
+{
+    tuio::TEvent * te;
+    while((te = equeue->pop())!= NULL)
+    {
+        std::cout << "Event rebut! " << te->name << std::endl;
+        //delete te;
+    }
 }
 
 //--------------------------------------------------------------
@@ -12,7 +24,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    processTevents();
+    ofSetColor(0xFF0000);
+    ofFill();
+    ofCircle(100,400,20);
 }
 
 //--------------------------------------------------------------

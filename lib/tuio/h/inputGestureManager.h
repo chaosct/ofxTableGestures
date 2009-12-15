@@ -3,26 +3,23 @@
 
 
 #include <list>
-using namespace std;
 #include "OSCListener.h"
 
-namespace tuio { class InputGesture; } 
-namespace tuio { class EventQueue; } 
-namespace osc { class ReceivedMessageArgumentStream; } 
+namespace tuio { class InputGesture; }
+namespace tuio { class EventQueue; }
+namespace osc { class ReceivedMessageArgumentStream; }
 
 namespace tuio {
 
 class inputGestureManager : public OSCListener {
   private:
-    list<InputGesture *> gestures;
-
-    EventQueue * queue;
+    std::list<InputGesture *> gestures;
 
 
   public:
     inputGestureManager();
-
-    virtual  ReceiveCall(char * addr, const osc::ReceivedMessageArgumentStream & argList);
+    EventQueue * queue;
+    virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
 
 };
 
