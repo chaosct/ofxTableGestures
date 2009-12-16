@@ -3,6 +3,7 @@
 
 #include "osc/OscReceivedElements.h"
 #include "InputGesture.h"
+#include "TEvent.h"
 #include <set>
 
 using namespace osc;
@@ -20,20 +21,14 @@ class InputGestureBasicFingers : public InputGesture {
 class TeventBasicFingersRemoveFinger : public TEvent
 {
     public:
-    TeventBasicFingersRemoveFinger()
-    {
-        name = "finger.remove";
-    }
+    TeventBasicFingersRemoveFinger():TEvent(event_finger_remove){}
     int32 s_id;
 };
 
 class TeventBasicFingersNewFinger : public TEvent
 {
     public:
-    TeventBasicFingersNewFinger()
-    {
-        name = "finger.new";
-    }
+    TeventBasicFingersNewFinger():TEvent(event_finger_new){}
     int32 s_id;
     float xpos, ypos, xspeed, yspeed, maccel;
 };
@@ -41,10 +36,7 @@ class TeventBasicFingersNewFinger : public TEvent
 class TeventBasicFingersMoveFinger : public TEvent
 {
     public:
-    TeventBasicFingersMoveFinger()
-    {
-        name = "finger.move";
-    }
+    TeventBasicFingersMoveFinger():TEvent(event_finger_move){}
     int32 s_id;
     float xpos, ypos, xspeed, yspeed, maccel;
 };

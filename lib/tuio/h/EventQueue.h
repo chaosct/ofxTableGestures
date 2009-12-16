@@ -2,7 +2,7 @@
 #define TUIO_EVENTQUEUE_H
 
 
-namespace tuio { class TEvent; }
+#include "TEvent.h"
 
 #define QUEUE_SIZE 1024
 

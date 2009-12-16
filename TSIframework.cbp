@@ -15,9 +15,13 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-MMD" />
 				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+				</Linker>
 			</Target>
 			<Target title="Linux-Release">
 				<Option platforms="Unix;" />
@@ -248,11 +252,6 @@
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/OSCListener.cpp">
-			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="lib/tuio/c/TEvent.cpp">
 			<Option virtualFolder="libs/tuio/" />
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />

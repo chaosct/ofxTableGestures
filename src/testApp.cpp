@@ -15,7 +15,7 @@ void testApp::processTevents()
     while((te = equeue->pop())!= NULL)
     {
         //std::cout << "Event rebut! " << te->name << std::endl;
-        if (te->name == "finger.move")
+        if (te->name == tuio::event_finger_move)
         {
             tuio::TeventBasicFingersMoveFinger * me = static_cast<tuio::TeventBasicFingersMoveFinger *>(te);
             dx = me->xpos;

@@ -10,7 +10,7 @@
 1236632120 source:/home/thechaos/tmp/TSIframework/src/testApp.cpp
 	"testApp.h"
 
-1260894243 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/main.cpp
+1260982155 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/main.cpp
 	"ofMain.h"
 	"testApp.h"
 	"ofAppGlutWindow.h"
@@ -1210,7 +1210,7 @@
 	"ofMain.h"
 	"EventQueue.h"
 
-1260900757 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
+1260977773 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
 	"testApp.h"
 	"TEvent.h"
 	"InputGestureClasses.h"
@@ -1519,14 +1519,15 @@
 
 1164030578 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/oscpack/tests/OscUnitTests.h
 
-1260900006 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/EventQueue.cpp
+1260901435 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/EventQueue.cpp
 	"EventQueue.h"
 	"TEvent.h"
 	<iostream>
 
-1260901342 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/EventQueue.h
+1260977716 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/EventQueue.h
+	"TEvent.h"
 
-1260900243 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
+1260977733 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
 	<string>
 	<vector>
 	<iostream>
@@ -1543,14 +1544,15 @@
 1260881832 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/OSCListener.h
 	"osc/OscPacketListener.h"
 
-1260892770 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/InputGestureBasicFingers.cpp
+1260967582 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/InputGestureBasicFingers.cpp
 	"InputGestureBasicFingers.h"
 	<iostream>
 	<cstring>
 
-1260892683 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureBasicFingers.h
+1260977682 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureBasicFingers.h
 	"osc/OscReceivedElements.h"
 	"InputGesture.h"
+	"TEvent.h"
 	<set>
 
 1260458292 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/InputGestureBasicObjects.cpp
@@ -1567,7 +1569,7 @@
 1260458292 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/TEvent.cpp
 	"TEvent.h"
 
-1260891763 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/inputGestureManager.cpp
+1260976712 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/inputGestureManager.cpp
 	"inputGestureManager.h"
 	"InputGesture.h"
 	"EventQueue.h"
@@ -1589,6 +1591,6 @@
 	<windows.h>
 	"ip/UdpSocket.h"
 
-1260813207 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureClasses.h
+1260977649 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureClasses.h
 	"InputGestureBasicFingers.h"
 

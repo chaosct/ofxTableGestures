@@ -8,7 +8,7 @@ int main( ){
 
     ofAppGlutWindow window;
 	ofSetupOpenGL(&window, WINDOW_WIDTH ,WINDOW_HEIGHT, OF_WINDOW);			// <-------- setup the GL context
-
+    ofSetFrameRate(30);
     tuio::tuioinput t;
     t.init();
     testApp * ta = new testApp();

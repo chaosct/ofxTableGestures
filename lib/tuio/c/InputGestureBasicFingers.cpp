@@ -10,12 +10,17 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
 {
     if( strcmp( addr, "/tuio/2Dcur" ) == 0 )
     {
-        if (currentFrame<lastFrame) return;
+
         const char* cmd;
         args >> cmd;
 
         if(strcmp(cmd,"set")== 0)
         {
+            if (currentFrame<lastFrame)
+            {
+                std::cout << "Frame dropped: " << currentFrame << "<" << lastFrame << std::endl;
+                return;
+            }
             int32 s_id;
             float xpos, ypos, xspeed, yspeed, maccel;
 
@@ -50,7 +55,11 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
         }
         else if( strcmp( cmd, "alive" ) == 0 )
         {
-            if (currentFrame<lastFrame) return;
+            if (currentFrame<lastFrame)
+            {
+                std::cout << "Frame dropped: " << currentFrame << "<" << lastFrame << std::endl;
+                return;
+            }
             int32 s_id;
             std::set<int32> t(s_ids);
             while(!args.Eos())
