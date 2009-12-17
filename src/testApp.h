@@ -3,29 +3,34 @@
 
 
 #include "ofMain.h"
-
-#include "EventQueue.h"
+#include "tuioApp.h"
+#include "InputGestureClasses.h"
 
 #define WINDOW_HEIGHT 768
 #define WINDOW_WIDTH 1024
 
-class testApp : public ofBaseApp{
-    private:
-        void processTevents();
-        double dx, dy;
-	public:
-        tuio::EventQueue * equeue;
-		void setup();
-		void update();
-		void draw();
+using namespace tuio;
 
-		void keyPressed  (int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
+class testApp : public CanBasicFingers<tuioApp <ofBaseApp> >
+{
+private:
+
+    double dx, dy;
+public:
+
+    void setup();
+    void update();
+    void draw();
+
+    void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
+
+    void keyPressed  (int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
 
 };
 

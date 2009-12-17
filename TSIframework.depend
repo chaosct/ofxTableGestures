@@ -1206,11 +1206,12 @@
 
 1254924117 /usr/include/gstreamer-0.10/gst/gstcompat.h
 
-1260900690 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h
+1261076287 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h
 	"ofMain.h"
-	"EventQueue.h"
+	"tuioApp.h"
+	"InputGestureClasses.h"
 
-1260982470 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
+1261075377 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.cpp
 	"testApp.h"
 	"TEvent.h"
 	"InputGestureClasses.h"
@@ -1527,8 +1528,7 @@
 1260977716 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/EventQueue.h
 	"TEvent.h"
 
-1260977733 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
-	<string>
+1261074175 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/TEvent.h
 	<vector>
 	<iostream>
 
@@ -1549,11 +1549,12 @@
 	<iostream>
 	<cstring>
 
-1260977682 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureBasicFingers.h
+1261076203 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureBasicFingers.h
 	"osc/OscReceivedElements.h"
 	"InputGesture.h"
 	"TEvent.h"
 	<set>
+	"tuioApp.h"
 
 1260458292 source:/home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/c/InputGestureBasicObjects.cpp
 	"InputGestureBasicObjects.h"
@@ -1593,4 +1594,7 @@
 
 1260977649 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/InputGestureClasses.h
 	"InputGestureBasicFingers.h"
+
+1261075979 /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/lib/tuio/h/tuioApp.h
+	"EventQueue.h"
 

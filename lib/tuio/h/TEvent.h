@@ -2,7 +2,7 @@
 #define TUIO_TEVENT_H
 
 
-#include <string>
+
 #include <vector>
 #include <iostream>
 

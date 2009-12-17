@@ -1,6 +1,8 @@
 #include "testApp.h"
 #include "TEvent.h"
-#include "InputGestureClasses.h"
+
+
+
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -9,22 +11,31 @@ ofBackground(255,255,255);
 dx = dy = 0;
 }
 
-void testApp::processTevents()
+//void testApp::processTevents()
+//{
+//    tuio::TEvent * te;
+//    while((te = equeue->pop())!= NULL)
+//    {
+//        //std::cout << "Event rebut! " << te->name << std::endl;
+//
+//        if (te->name == tuio::event_finger_move)
+//        {
+//            tuio::TeventBasicFingersMoveFinger * me = static_cast<tuio::TeventBasicFingersMoveFinger *>(te);
+//            dx = me->xpos;
+//            dy = me->ypos;
+//            //std::cout << "Event processat! "<< std::endl;
+//        }
+//        delete te;
+//    }
+//}
+
+
+void testApp::updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
 {
-    tuio::TEvent * te;
-    while((te = equeue->pop())!= NULL)
-    {
-        //std::cout << "Event rebut! " << te->name << std::endl;
-        if (te->name == tuio::event_finger_move)
-        {
-            tuio::TeventBasicFingersMoveFinger * me = static_cast<tuio::TeventBasicFingersMoveFinger *>(te);
-            dx = me->xpos;
-            dy = me->ypos;
-            //std::cout << "Event processat! "<< std::endl;
-        }
-        delete te;
-    }
+    dx = xpos;
+    dy = ypos;
 }
+
 
 //--------------------------------------------------------------
 void testApp::update(){
@@ -74,3 +85,4 @@ void testApp::windowResized(int w, int h){
 
 }
 
+//--------------------------------------------------------------
