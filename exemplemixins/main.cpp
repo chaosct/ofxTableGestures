@@ -7,6 +7,7 @@ using namespace std;
 // Define a new mixin class with a constructor that accepts all arguments.
 
 //inspirat per http://www.ddj.com/cpp/184404445
+//macros http://en.wikipedia.org/wiki/C_preprocessor
 
 class GenericCallback
 {
