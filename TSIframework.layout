@@ -73,10 +73,10 @@
 	<File name="lib/tuio/h/tuioinput.h" open="0" top="0" tabpos="0">
 		<Cursor position="457" topLine="0" />
 	</File>
-	<File name="src/main.cpp" open="1" top="0" tabpos="14">
-		<Cursor position="571" topLine="0" />
+	<File name="src/main.cpp" open="1" top="1" tabpos="14">
+		<Cursor position="320" topLine="0" />
 	</File>
-	<File name="src/testApp.cpp" open="1" top="1" tabpos="6">
+	<File name="src/testApp.cpp" open="1" top="0" tabpos="6">
 		<Cursor position="706" topLine="9" />
 	</File>
 	<File name="src/testApp.h" open="1" top="0" tabpos="3">
