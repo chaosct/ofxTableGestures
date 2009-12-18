@@ -204,6 +204,12 @@ obj/Debug/src/main.o: \
  /usr/include/gstreamer-0.10/gst/gstxml.h \
  /usr/include/gstreamer-0.10/gst/gstcompat.h \
  /home/thechaos/Escriptori/of_preRelease_v0.06_linux_cb_FAT/apps/myApps/TSIframework/src/testApp.h \
- lib/tuio/h/EventQueue.h lib/tuio/h/TEvent.h lib/tuio/h/tuioinput.h \
- lib/oscpack/ip/UdpSocket.h lib/oscpack/ip/NetworkingUtils.h \
- lib/oscpack/ip/IpEndpointName.h
+ lib/tuio/h/tuioApp.h lib/tuio/h/EventQueue.h lib/tuio/h/TEvent.h \
+ lib/tuio/h/InputGestureClasses.h lib/tuio/h/InputGestureBasicFingers.h \
+ lib/oscpack/osc/OscReceivedElements.h lib/oscpack/osc/OscTypes.h \
+ lib/oscpack/osc/OscException.h lib/tuio/h/InputGesture.h \
+ lib/tuio/h/OSCListener.h lib/oscpack/osc/OscPacketListener.h \
+ lib/oscpack/osc/OscReceivedElements.h \
+ lib/oscpack/osc/../ip/PacketListener.h lib/tuio/h/tuioApp.h \
+ lib/tuio/h/tuioinput.h lib/oscpack/ip/UdpSocket.h \
+ lib/oscpack/ip/NetworkingUtils.h lib/oscpack/ip/IpEndpointName.h
