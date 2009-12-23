@@ -27,17 +27,15 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "InputGestureBasicFingers.h"
-
-#include <iostream>
+#include "InputGestureDirectFingers.h"
 #include <cstring>
 
 namespace tuio
 {
 
-bool InputGestureBasicFingers::active = false;
+bool InputGestureDirectFingers::active = false;
 
-void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
+void InputGestureDirectFingers::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
 {
     if(!active) return;
     if( strcmp( addr, "/tuio/2Dcur" ) == 0 )
@@ -58,30 +56,34 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
 
             args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel >> EndMessage;
 
-            if(s_ids.find(s_id) == s_ids.end())
+            if(fingers.find(s_id) == fingers.end())
             {
 
-                TeventBasicFingersNewFinger * e = new TeventBasicFingersNewFinger();
+                DirectFinger * e = new DirectFinger();
                 e->s_id = s_id;
                 e->xpos = xpos;
                 e->ypos = ypos;
                 e->xspeed = xspeed;
                 e->yspeed = yspeed;
                 e->maccel = maccel;
-                events.push_back(e);
-                s_ids.insert(s_id);
+                fingers[s_id]=e;
+
+                TeventDirectFingersNewFinger * evt = new TeventDirectFingersNewFinger();
+                evt->s_id = s_id;
+                evt->df = e;
+                events.push_back(evt);
+
             }
             else
             {
 
-                TeventBasicFingersMoveFinger * e = new TeventBasicFingersMoveFinger();
+                DirectFinger * e = fingers[s_id];
                 e->s_id = s_id;
                 e->xpos = xpos;
                 e->ypos = ypos;
                 e->xspeed = xspeed;
                 e->yspeed = yspeed;
                 e->maccel = maccel;
-                events.push_back(e);
             }
 
         }
@@ -93,21 +95,26 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
                 return;
             }
             int32 s_id;
-            std::set<int32> t(s_ids);
+            std::map<int32,DirectFinger *> t;
             while(!args.Eos())
             {
                 args >> s_id;
-                t.erase(s_id);
+                std::map<int32,DirectFinger *>::iterator it = fingers.find(s_id);
+                if(it != fingers.end())
+                {
+                    t[s_id]=it->second;
+                    fingers.erase(it);
+                }
             }
             args >> EndMessage;
-            for (std::set<int32>::iterator it = t.begin(); it != t.end(); it++)
+            for (std::map<int32,DirectFinger *>::iterator it = fingers.begin(); it != fingers.end(); it++)
             {
-                s_id = *it;
-                s_ids.erase(s_id);
-                TeventBasicFingersRemoveFinger * e = new TeventBasicFingersRemoveFinger();
-                e->s_id = s_id;
-                events.push_back(e);
+                TeventDirectFingersRemoveFinger * evt = new TeventDirectFingersRemoveFinger();
+                evt->s_id = it->first;
+                events.push_back(evt);
+                //delete it->second;
             }
+            fingers = t;
         }
         else if( strcmp(cmd,"fseq") == 0)
         {
@@ -127,5 +134,4 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
 }
 
 
-
-} // namespace tuio
+}

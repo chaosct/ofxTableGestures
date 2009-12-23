@@ -67,7 +67,8 @@ class InputGestureBasicFingers : public InputGesture {
     std::set<int32> s_ids;
     int32 currentFrame, lastFrame;
     public:
-        InputGestureBasicFingers():currentFrame(0),lastFrame(0){s_ids.empty();}
+        static bool active;
+        InputGestureBasicFingers():currentFrame(0),lastFrame(0){}
         virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
 };
 
@@ -106,6 +107,7 @@ class CanBasicFingers : public Base
         TRegistraCallback(event_finger_remove);
         TRegistraCallback(event_finger_new);
         TRegistraCallback(event_finger_move);
+        InputGestureBasicFingers::active = true;
     }
 
     //allways needed

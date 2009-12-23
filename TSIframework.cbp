@@ -5,7 +5,7 @@
 		<Option title="TSIframework" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;libs/;src/;libs/openframeworks/;libs/openframeworks/app/;libs/openframeworks/communication/;libs/openframeworks/graphics/;libs/openframeworks/sound/;libs/openframeworks/utils/;libs/openframeworks/video/;libs/openframeworks/events/;libs/tuio/;libs/oscpack/;libs/oscpack/ip/;libs/oscpack/osc/;libs/oscpack/ip/posix/;libs/oscpack/ip/win32/;" />
+		<Option virtualFolders="addons/;libs/;src/;libs/openframeworks/;libs/openframeworks/app/;libs/openframeworks/communication/;libs/openframeworks/graphics/;libs/openframeworks/sound/;libs/openframeworks/utils/;libs/openframeworks/video/;libs/openframeworks/events/;libs/tuio/;libs/oscpack/;libs/oscpack/ip/;libs/oscpack/osc/;libs/oscpack/ip/posix/;libs/oscpack/ip/win32/;libs/tuio/gestures/;" />
 		<Build>
 			<Target title="Linux-Debug">
 				<Option platforms="Unix;" />
@@ -243,12 +243,12 @@
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGestureBasicFingers.cpp">
-			<Option virtualFolder="libs/tuio/" />
+			<Option virtualFolder="libs/tuio/gestures/" />
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGestureBasicObjects.cpp">
-			<Option virtualFolder="libs/tuio/" />
+			<Option virtualFolder="libs/tuio/gestures/" />
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />
 		</Unit>
@@ -278,17 +278,23 @@
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureBasicFingers.h">
-			<Option virtualFolder="libs/tuio/" />
+			<Option virtualFolder="libs/tuio/gestures/" />
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureBasicObjects.h">
-			<Option virtualFolder="libs/tuio/" />
+			<Option virtualFolder="libs/tuio/gestures/" />
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureClasses.h">
-			<Option virtualFolder="libs/tuio/" />
+			<Option virtualFolder="libs/tuio/gestures/" />
+		</Unit>
+		<Unit filename="lib/tuio/h/InputGestureDirectFingers.cpp">
+			<Option virtualFolder="libs/tuio/gestures/" />
+		</Unit>
+		<Unit filename="lib/tuio/h/InputGestureDirectFingers.h">
+			<Option virtualFolder="libs/tuio/gestures/" />
 		</Unit>
 		<Unit filename="lib/tuio/h/OSCListener.h">
 			<Option virtualFolder="libs/tuio/" />

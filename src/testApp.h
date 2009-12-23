@@ -11,11 +11,13 @@
 
 using namespace tuio;
 
-class testApp : public CanBasicFingers<tuioApp <ofBaseApp> >
+class testApp : public CanDirectFingers<tuioApp <ofBaseApp> >
 {
 private:
 
     double dx, dy;
+    DirectFinger * mydf;
+
 public:
 
     void setup();
@@ -23,6 +25,9 @@ public:
     void draw();
 
     void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
+
+    void newCursor(int32 id, DirectFinger * df);
+    void removeCursor(int32 id);
 
     void keyPressed  (int key);
     void keyReleased(int key);

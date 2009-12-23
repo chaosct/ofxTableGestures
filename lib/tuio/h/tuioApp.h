@@ -83,6 +83,8 @@ public:
         {
             if (eventprocessors[te->name])
                 eventprocessors[te->name]->run(te);
+            else
+                std::cout << "Ouch" << std::endl;
             delete te;
         }
     }

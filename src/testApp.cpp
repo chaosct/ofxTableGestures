@@ -8,6 +8,7 @@ void testApp::setup(){
 ofSetCircleResolution(100);
 ofBackground(255,255,255);
 dx = dy = 0;
+mydf = NULL;
 }
 
 
@@ -18,6 +19,18 @@ void testApp::updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,floa
 }
 
 
+void testApp::newCursor(int32 id, DirectFinger * df)
+{
+    mydf = df;
+}
+
+void testApp::removeCursor(int32 id)
+{
+    if(mydf && (mydf->s_id == id))
+        mydf = NULL;
+
+}
+
 //--------------------------------------------------------------
 void testApp::update(){
 
@@ -26,9 +39,15 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     processTevents();
-    ofSetColor(0xFF0000);
+    if(mydf)
+    {
+        dx = mydf->xpos;
+        dy = mydf->ypos;
+        ofSetColor(0xFF0000);
     ofFill();
     ofCircle(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,20);
+    }
+
 }
 
 //--------------------------------------------------------------

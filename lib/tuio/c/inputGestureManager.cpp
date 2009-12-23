@@ -48,7 +48,8 @@ inputGestureManager::inputGestureManager() {
 
     i = new InputGestureBasicFingers();
     gestures.push_back(i);
-
+    i = new InputGestureDirectFingers();
+    gestures.push_back(i);
   // Bouml preserved body end 000286AA
 }
 
