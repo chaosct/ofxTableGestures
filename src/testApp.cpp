@@ -4,7 +4,7 @@
 
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void testApp::Setup(){
 ofSetCircleResolution(100);
 ofBackground(255,255,255);
 dx = dy = 0;
@@ -43,12 +43,12 @@ void testApp::removeObject(int32 s_id, int32 f_id)
 
 
 //--------------------------------------------------------------
-void testApp::update(){
+void testApp::Update(){
 
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void testApp::Draw(){
     processTevents();
     if(mydf)
     {
@@ -56,7 +56,7 @@ void testApp::draw(){
         dy = mydf->ypos;
         ofSetColor(0xFF0000);
     ofFill();
-    ofCircle(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,20);
+    ofCircle(dx*ofGetWidth(),dy*ofGetHeight(),20);
     }
     if(mdo)
     {
@@ -66,43 +66,13 @@ void testApp::draw(){
         ofSetColor(0xFF0000);
     ofFill();
     ofRotateZ(r);
-    ofRect(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,40,40);
+    ofRect(dx*ofGetWidth(),dy*ofGetHeight(),40,40);
     }
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
-
-}
-
-//--------------------------------------------------------------
-void testApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void testApp::WindowResized(int w, int h){
 
 }
 

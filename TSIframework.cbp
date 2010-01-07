@@ -2,34 +2,35 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="TSIframework" />
+		<Option title="TSIFramework" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;libs/;src/;libs/openframeworks/;libs/openframeworks/app/;libs/openframeworks/communication/;libs/openframeworks/graphics/;libs/openframeworks/sound/;libs/openframeworks/utils/;libs/openframeworks/video/;libs/openframeworks/events/;libs/tuio/;libs/oscpack/;libs/oscpack/ip/;libs/oscpack/osc/;libs/oscpack/ip/posix/;libs/oscpack/ip/win32/;libs/tuio/gestures/;" />
+		<Option virtualFolders="addons/;src/;addons/TableDistortion/;libs/oscpack/ip/;libs/oscpack/ip/posix/;libs/oscpack/ip/win32/;libs/oscpack/osc/;libs/tuio/;libs/tuio/gestures/;" />
 		<Build>
-			<Target title="Linux-Debug">
-				<Option platforms="Unix;" />
+			<Target title="Debug">
 				<Option output="bin/TSIframework_debug" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworksDebug.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-MMD" />
 				</Compiler>
 				<Linker>
-					<Add option="-pg" />
+					<Add library="openFrameworksDebug" />
 				</Linker>
 			</Target>
-			<Target title="Linux-Release">
-				<Option platforms="Unix;" />
+			<Target title="Release">
 				<Option output="bin/TSIframework" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-march=core2" />
 					<Add option="-O3" />
@@ -37,23 +38,18 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="openFrameworks" />
 				</Linker>
 			</Target>
-			<Target title="Windows-Release">
-				<Option platforms="Windows;" />
-				<Option output="TSIframework" prefix_auto="1" extension_auto="1" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-			</Target>
 			<Environment>
-				<Variable name="target" value="TSIframework" />
+				<Variable name="target" value="TSIFramework" />
 				<Variable name="nautilusOnBuild" value="false" />
 				<Variable name="runOnBuild" value="false" />
 			</Environment>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-fexceptions" />
+			<Add option="-fexceptions " />
 			<Add option="-DOSC_HOST_LITTLE_ENDIAN" />
 			<Add directory="../../../addons/" />
 			<Add directory="../../../libs/openFrameworks/" />
@@ -65,13 +61,9 @@
 			<Add directory="../../../libs/openFrameworks/utils" />
 			<Add directory="../../../libs/openFrameworks/sound" />
 			<Add directory="../../../libs/rtAudio" />
-			<Add directory="../../../libs/fmodex/inc" />
+			<Add directory="../../../libs/fmodex/include" />
 			<Add directory="../../../libs/glee/include" />
-			<Add directory="../../../libs/glee/" />
-			<Add directory="../../../libs/freeimage/Source" />
-			<Add directory="../../../libs/FreeImage" />
-			<Add directory="../../../libs/alsa/include" />
-			<Add directory="../../../libs/alsa/include/alsa" />
+			<Add directory="../../../libs/FreeImage/include" />
 			<Add directory="../../../libs/freetype/include" />
 			<Add directory="../../../libs/freetype/include/freetype2" />
 			<Add directory="../../../libs/unicap/include" />
@@ -80,8 +72,10 @@
 			<Add directory="../../../libs/poco/include" />
 			<Add directory="lib/oscpack" />
 			<Add directory="lib/tuio/h" />
+			<Add directory="../../../addons/ofxTableDistortion/src/" />
 		</Compiler>
 		<Linker>
+			<Add library="openFrameworks" />
 			<Add library="fmodex" />
 			<Add library="raw1394" />
 			<Add library="glut" />
@@ -90,22 +84,28 @@
 			<Add library="Xxf86vm" />
 			<Add library="asound" />
 			<Add library="PocoFoundation" />
-			<Add library="../../../libs/freetype/lib/libfreetype.a" />
-			<Add library="../../../libs/FreeImage/libfreeimage.a" />
-			<Add library="../../../libs/rtAudio/libRtAudio.a" />
-			<Add library="../../../libs/glee/libGLee.a" />
 			<Add library="unicap" />
-			<Add library="../../../libs/gstappsink/lib/liboFappsink.a" />
-			<Add directory="../../../libs/fmodex/lib" />
-			<Add directory="../../../libs/unicap/lib" />
-			<Add directory="../../../libs/poco/lib" />
+			<Add library="freetype" />
+			<Add library="freeimage" />
+			<Add library="RtAudio" />
+			<Add library="GLee" />
+			<Add library="oFappsink" />
+			<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
+			<Add directory="../../../libs/freetype/lib/linux" />
+			<Add directory="../../../libs/FreeImage/lib/linux" />
+			<Add directory="../../../libs/rtAudio/lib/linux" />
+			<Add directory="../../../libs/glee/lib/linux" />
+			<Add directory="../../../libs/gstappsink/lib/linux" />
+			<Add directory="../../../libs/fmodex/lib/linux" />
+			<Add directory="../../../libs/unicap/lib/linux" />
+			<Add directory="../../../libs/poco/lib/linux" />
 		</Linker>
 		<ExtraCommands>
 			<Add after="#" />
 			<Add after="#      copy libs and shell script to bin directory:" />
 			<Add after="#" />
-			<Add after="cp -r ../../../export/libs $(PROJECT_DIR)bin/" />
-			<Add after="cp ../../../export/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
+			<Add after="cp -r ../../../export/linux/libs $(PROJECT_DIR)bin/" />
+			<Add after="cp ../../../export/linux/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
 			<Add after="sed -i s/applicationName/$(TARGET_OUTPUT_BASENAME)/g  $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
 			<Add after="#" />
 			<Add after="#    this is a shell script that can either (a) run the app or (b) launch nautilus to a good directory for you to run the app" />
@@ -119,50 +119,41 @@
 			<Add after="#" />
 			<Mode after="always" />
 		</ExtraCommands>
-		<Unit filename="../../../addons/ofAddons.h">
-			<Option virtualFolder="addons/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
+		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.cpp">
+			<Option virtualFolder="addons/TableDistortion" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.hpp">
+			<Option virtualFolder="addons/TableDistortion" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.cpp">
+			<Option virtualFolder="addons/TableDistortion" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.hpp">
+			<Option virtualFolder="addons/TableDistortion" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/IpEndpointName.cpp">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/IpEndpointName.h">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/NetworkingUtils.h">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/PacketListener.h">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/TimerListener.h">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/UdpSocket.h">
 			<Option virtualFolder="libs/oscpack/ip/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/posix/NetworkingUtils.cpp">
 			<Option virtualFolder="libs/oscpack/ip/posix/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/posix/UdpSocket.cpp">
 			<Option virtualFolder="libs/oscpack/ip/posix/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/ip/win32/NetworkingUtils.cpp">
 			<Option virtualFolder="libs/oscpack/ip/win32/" />
@@ -174,83 +165,51 @@
 		</Unit>
 		<Unit filename="lib/oscpack/osc/MessageMappingOscPacketListener.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscException.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscHostEndianness.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscOutboundPacketStream.cpp">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscOutboundPacketStream.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscPacketListener.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscPrintReceivedElements.cpp">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscPrintReceivedElements.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscReceivedElements.cpp">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscReceivedElements.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscTypes.cpp">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/oscpack/osc/OscTypes.h">
 			<Option virtualFolder="libs/oscpack/osc/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/EventQueue.cpp">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGesture.cpp">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGestureBasicFingers.cpp">
 			<Option virtualFolder="libs/tuio/gestures/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGestureBasicObjects.cpp">
 			<Option virtualFolder="libs/tuio/gestures/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/InputGestureDirectFingers.cpp">
 			<Option virtualFolder="libs/tuio/gestures/" />
@@ -260,41 +219,27 @@
 		</Unit>
 		<Unit filename="lib/tuio/c/OSCListener.cpp">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/inputGestureManager.cpp">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/c/tuioApp.cpp">
 			<Option virtualFolder="libs/tuio/" />
 		</Unit>
 		<Unit filename="lib/tuio/c/tuioinput.cpp">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/EventQueue.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGesture.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureBasicFingers.h">
 			<Option virtualFolder="libs/tuio/gestures/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureBasicObjects.h">
 			<Option virtualFolder="libs/tuio/gestures/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureClasses.h">
 			<Option virtualFolder="libs/tuio/gestures/" />
@@ -307,256 +252,34 @@
 		</Unit>
 		<Unit filename="lib/tuio/h/OSCListener.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/TEvent.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/inputGestureManager.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="lib/tuio/h/tuioApp.h">
 			<Option virtualFolder="libs/tuio/" />
 		</Unit>
 		<Unit filename="lib/tuio/h/tuioinput.h">
 			<Option virtualFolder="libs/tuio/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="src/testApp.cpp">
 			<Option virtualFolder="src/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Unit filename="src/testApp.h">
 			<Option virtualFolder="src/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofAppBaseWindow.h">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofAppGlutWindow.cpp">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofAppGlutWindow.h">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofAppRunner.cpp">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofAppRunner.h">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/app/ofBaseApp.h">
-			<Option virtualFolder="libs/openframeworks/app/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofArduino.cpp">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofArduino.h">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofSerial.cpp">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofSerial.h">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofStandardFirmata.cpp">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/communication/ofStandardFirmata.h">
-			<Option virtualFolder="libs/openframeworks/communication/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/events/ofEventUtils.h">
-			<Option virtualFolder="libs/openframeworks/events/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/events/ofEvents.h">
-			<Option virtualFolder="libs/openframeworks/events/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofBitmapFont.cpp">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofBitmapFont.h">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofGraphics.cpp">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofGraphics.h">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofImage.cpp">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofImage.h">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofTexture.cpp">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofTexture.h">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofTrueTypeFont.cpp">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/graphics/ofTrueTypeFont.h">
-			<Option virtualFolder="libs/openframeworks/graphics/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/ofMain.h">
-			<Option virtualFolder="libs/openframeworks/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/sound/ofSoundPlayer.cpp">
-			<Option virtualFolder="libs/openframeworks/sound/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/sound/ofSoundPlayer.h">
-			<Option virtualFolder="libs/openframeworks/sound/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/sound/ofSoundStream.cpp">
-			<Option virtualFolder="libs/openframeworks/sound/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/sound/ofSoundStream.h">
-			<Option virtualFolder="libs/openframeworks/sound/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofConstants.h">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofMath.cpp">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofMath.h">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofTypes.h">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofUtils.cpp">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/utils/ofUtils.h">
-			<Option virtualFolder="libs/openframeworks/utils/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofUCUtils.cpp">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofUCUtils.h">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofVideoGrabber.cpp">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofVideoGrabber.h">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofVideoPlayer.cpp">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
-		</Unit>
-		<Unit filename="../../../libs/openFrameworks/video/ofVideoPlayer.h">
-			<Option virtualFolder="libs/openframeworks/video/" />
-			<Option target="Linux-Debug" />
-			<Option target="Linux-Release" />
 		</Unit>
 		<Extensions>
 			<lib_finder>
 				<lib name="gstreamer-0.10" />
 				<lib name="gstreamer-video-0.10" />
 				<lib name="gstreamer-base-0.10" />
-				<lib name="libavcodec" />
-				<lib name="libavformat" />
-				<lib name="libavutil" />
-				<lib name="libswscale" />
+				<lib name="libudev" />
 			</lib_finder>
 			<code_completion />
 			<envvars />

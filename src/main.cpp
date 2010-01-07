@@ -7,7 +7,7 @@
 int main( ){
 
     ofAppGlutWindow window;
-	ofSetupOpenGL(&window, WINDOW_WIDTH ,WINDOW_HEIGHT, OF_WINDOW);			// <-------- setup the GL context
+	ofSetupOpenGL(&window, 1024 ,768, OF_WINDOW);			// <-------- setup the GL context
     //ofSetFrameRate(30);
     ofSetVerticalSync(true);
     tuio::tuioinput t;

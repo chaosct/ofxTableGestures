@@ -4,14 +4,12 @@
 
 #include "ofMain.h"
 #include "tuioApp.h"
+#include "TableApp.hpp"
 #include "InputGestureClasses.h"
-
-#define WINDOW_HEIGHT 768
-#define WINDOW_WIDTH 1024
 
 using namespace tuio;
 
-class testApp : public CanDirectObjects< CanDirectFingers<tuioApp <ofBaseApp> > >
+class testApp : public CanDirectObjects< CanDirectFingers<tuioApp <TableApp> > >
 {
 private:
 
@@ -21,9 +19,9 @@ private:
 
 public:
 
-    void setup();
-    void update();
-    void draw();
+    void Setup();
+    void Update();
+    void Draw();
 
     void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
 
@@ -33,13 +31,7 @@ public:
     void newObject(int32 s_id, int32 f_id, DirectObject *);
     void removeObject(int32 s_id, int32 f_id);
 
-    void keyPressed  (int key);
-    void keyReleased(int key);
-    void mouseMoved(int x, int y );
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void windowResized(int w, int h);
+    void WindowResized(int w, int h);
 
 };
 
