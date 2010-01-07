@@ -54,7 +54,7 @@ class tuioinput {
 #else
     HANDLE thread;
 #endif
-
+    bool running;
   public:
     void init();
     tuioinput();

@@ -50,6 +50,8 @@
 
 
 #include "EventQueue.h"
+#include "tuioinput.h"
+#include "InputGesture.h"
 
 namespace tuio
 {
@@ -72,6 +74,8 @@ public:
 
     tuioApp()
     {
+        Singleton<tuio::tuioinput>::Instance().init();
+        equeue = Singleton<tuio::tuioinput>::Instance().getQueue();
         //TODO: fora magic number o fer servir map
         eventprocessors.resize(100,NULL);
     }

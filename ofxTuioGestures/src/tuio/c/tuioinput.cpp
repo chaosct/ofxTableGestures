@@ -50,7 +50,12 @@ static DWORD WINAPI ThreadFunc( LPVOID obj )
 namespace tuio {
 
 void tuioinput::init() {
-  // Bouml preserved body begin 000285AA
+
+    //Only init once
+    if(running)
+        return;
+    running = true;
+
     s = new UdpListeningReceiveSocket(
             IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
             gesturemanager );
@@ -60,7 +65,7 @@ void tuioinput::init() {
     DWORD threadId;
     thread = CreateThread( 0, 0, ThreadFunc, this, 0, &threadId );
     #endif
-  // Bouml preserved body end 000285AA
+
 }
 
 EventQueue  * tuioinput::getQueue() {
@@ -69,7 +74,7 @@ EventQueue  * tuioinput::getQueue() {
   // Bouml preserved body end 0002862A
 }
 
-tuioinput::tuioinput(){
+tuioinput::tuioinput():running(false){
 
     gesturemanager = new inputGestureManager();
 

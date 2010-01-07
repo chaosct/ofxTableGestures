@@ -1,10 +1,12 @@
 #include "testApp.h"
 #include "TEvent.h"
+#include "tuioinput.h"
 
 
 
 //--------------------------------------------------------------
 void testApp::Setup(){
+
 ofSetCircleResolution(100);
 ofBackground(255,255,255);
 dx = dy = 0;
@@ -50,6 +52,7 @@ void testApp::Update(){
 //--------------------------------------------------------------
 void testApp::Draw(){
     processTevents();
+
     if(mydf)
     {
         dx = mydf->xpos;
