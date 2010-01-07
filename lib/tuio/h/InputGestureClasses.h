@@ -34,6 +34,6 @@
 
 #include "InputGestureBasicFingers.h"
 #include "InputGestureDirectFingers.h"
-
+#include "InputGestureBasicObjects.h"
 
 #endif // INPUTGESTURECLASSES_H_INCLUDED

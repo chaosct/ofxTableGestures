@@ -11,7 +11,7 @@
 
 using namespace tuio;
 
-class testApp : public CanDirectFingers<tuioApp <ofBaseApp> >
+class testApp : public CanBasicObjects< CanDirectFingers<tuioApp <ofBaseApp> > >
 {
 private:
 

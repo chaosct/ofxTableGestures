@@ -43,7 +43,9 @@ enum EventType {
     //InputGestureBasicFingers
     event_finger_remove, event_finger_move, event_finger_new,
     //InputGestureDirectFingers
-    event_dfinger_remove, event_dfinger_new
+    event_dfinger_remove, event_dfinger_new,
+    //InputGestureBasicObjects
+    event_object_remove, event_object_move, event_object_new,
 };
 
 //Els destructors s'usen a través d'herencia

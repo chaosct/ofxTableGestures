@@ -29,7 +29,111 @@
 */
 #include "InputGestureBasicObjects.h"
 
+#include <iostream>
+#include <cstring>
+
 namespace tuio {
+
+
+bool InputGestureBasicObjects::active = false;
+
+void InputGestureBasicObjects::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
+{
+    if(!active) return;
+    if( strcmp( addr, "/tuio/2Dobj" ) == 0 )
+    {
+
+        const char* cmd;
+        args >> cmd;
+
+        if(strcmp(cmd,"set")== 0)
+        {
+            if (currentFrame<lastFrame)
+            {
+                std::cout << "Frame dropped: " << currentFrame << "<" << lastFrame << std::endl;
+                return;
+            }
+            int32 s_id, f_id;
+            float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
+
+            args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel >> EndMessage;
+
+            if(s_ids.find(s_id) == s_ids.end())
+            {
+
+                TeventBasicObjectsNewObject * e = new TeventBasicObjectsNewObject();
+                e->s_id = s_id;
+                e->f_id = f_id;
+                e->xpos = xpos;
+                e->ypos = ypos;
+                e->angle = angle;
+                e->xspeed = xspeed;
+                e->yspeed = yspeed;
+                e->rspeed = rspeed;
+                e->maccel = maccel;
+                e->raccel = raccel;
+                events.push_back(e);
+                s_ids.insert(s_id);
+            }
+            else
+            {
+
+                TeventBasicObjectsMoveObject * e = new TeventBasicObjectsMoveObject();
+                e->s_id = s_id;
+                e->f_id = f_id;
+                e->xpos = xpos;
+                e->ypos = ypos;
+                e->angle = angle;
+                e->xspeed = xspeed;
+                e->yspeed = yspeed;
+                e->rspeed = rspeed;
+                e->maccel = maccel;
+                e->raccel = raccel;
+                events.push_back(e);
+            }
+
+        }
+        else if( strcmp( cmd, "alive" ) == 0 )
+        {
+            if (currentFrame<lastFrame)
+            {
+                std::cout << "Frame dropped: " << currentFrame << "<" << lastFrame << std::endl;
+                return;
+            }
+            int32 s_id;
+            std::set<int32> t(s_ids);
+            while(!args.Eos())
+            {
+                args >> s_id;
+                t.erase(s_id);
+            }
+            args >> EndMessage;
+            for (std::set<int32>::iterator it = t.begin(); it != t.end(); it++)
+            {
+                s_id = *it;
+                s_ids.erase(s_id);
+                TeventBasicObjectsRemoveObject * e = new TeventBasicObjectsRemoveObject();
+                e->s_id = s_id;
+                events.push_back(e);
+            }
+        }
+        else if( strcmp(cmd,"fseq") == 0)
+        {
+            lastFrame = currentFrame;
+            args >> currentFrame  >> EndMessage;
+            //std::cout << "frame " << currentFrame << std::endl;
+        }
+        else
+        {
+
+            std::cout << "Unkwnown command in  : /tuio/2Dobj" << cmd << std::endl;
+
+        }
+
+
+    }
+}
+
 
 
 } // namespace tuio
