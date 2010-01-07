@@ -69,11 +69,9 @@ class InputGestureBasicObjects : public InputGesture {
     std::set<int32> s_ids;
     int32 currentFrame, lastFrame;
     public:
-        static bool active;
         InputGestureBasicObjects():currentFrame(0),lastFrame(0){}
         virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
 };
-
 
 template <class Base>
 class CanBasicObjects : public Base
@@ -110,7 +108,7 @@ class CanBasicObjects : public Base
         TRegistraCallback(event_object_remove);
         TRegistraCallback(event_object_new);
         TRegistraCallback(event_object_move);
-        InputGestureBasicObjects::active = true;
+        registerMeToInputGestureManager(new InputGestureBasicObjects());
     }
 
     //allways needed

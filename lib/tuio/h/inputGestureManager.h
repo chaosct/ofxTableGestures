@@ -44,9 +44,13 @@ namespace tuio {
 class inputGestureManager : public OSCListener {
   private:
     std::list<InputGesture *> gestures;
-
+    static inputGestureManager * instance;
 
   public:
+    static void addGesture(InputGesture *IG)
+    {
+        instance->gestures.push_back(IG);
+    }
     inputGestureManager();
     EventQueue * queue;
     virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);

@@ -34,43 +34,47 @@
 
 #include "InputGestureClasses.h"
 
-namespace tuio {
+namespace tuio
+{
 
-inputGestureManager::inputGestureManager() {
-  // Bouml preserved body begin 000286AA
-  queue = new EventQueue();
+inputGestureManager * inputGestureManager::instance = NULL;
 
-  InputGesture * i;
+inputGestureManager::inputGestureManager()
+{
+    queue = new EventQueue();
+    instance = this;
+    //InputGesture * i;
 
-  //per a cada tipus de inputgesture, l'afegim a la llista:
-  //i = new Exemple_de_imputgesture();
-  //gestures.push_back(i);
+    //per a cada tipus de inputgesture, l'afegim a la llista:
+    //i = new Exemple_de_imputgesture();
+    //gestures.push_back(i);
 
-    i = new InputGestureBasicFingers();
-    gestures.push_back(i);
-    i = new InputGestureDirectFingers();
-    gestures.push_back(i);
-    i = new InputGestureBasicObjects();
-    gestures.push_back(i);
-  // Bouml preserved body end 000286AA
+    //  i = new InputGestureBasicFingers();
+    //  gestures.push_back(i);
+    //  i = new InputGestureDirectFingers();
+    //  gestures.push_back(i);
+    //  i = new InputGestureBasicObjects();
+    //  gestures.push_back(i);
+
 }
 
-void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList) {
-  // Bouml preserved body begin 0002872A
+void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
+{
+    // Bouml preserved body begin 0002872A
 
-  InputGesture * i;
-  for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); it++)
-  {
-    i = *it;
-    i->ReceiveCall(addr, argList.getCopy());
-    for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); it++)
+    InputGesture * i;
+    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); it++)
     {
-        queue->push(*it);
+        i = *it;
+        i->ReceiveCall(addr, argList.getCopy());
+        for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); it++)
+        {
+            queue->push(*it);
+        }
+        i->events.clear();
     }
-    i->events.clear();
-  }
 
-  // Bouml preserved body end 0002872A
+    // Bouml preserved body end 0002872A
 }
 
 

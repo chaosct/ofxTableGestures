@@ -33,11 +33,9 @@
 namespace tuio
 {
 
-bool InputGestureDirectFingers::active = false;
 
 void InputGestureDirectFingers::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
 {
-    if(!active) return;
     if( strcmp( addr, "/tuio/2Dcur" ) == 0 )
     {
 

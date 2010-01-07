@@ -95,5 +95,9 @@ public:
     }
 };
 
+class InputGesture;
+
+void registerMeToInputGestureManager(InputGesture * IG);
+
 }
 #endif // TUIOAPP_H_INCLUDED

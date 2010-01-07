@@ -35,11 +35,11 @@
 namespace tuio {
 
 
-bool InputGestureBasicObjects::active = false;
+
 
 void InputGestureBasicObjects::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
 {
-    if(!active) return;
+
     if( strcmp( addr, "/tuio/2Dobj" ) == 0 )
     {
 

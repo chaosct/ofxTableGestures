@@ -35,11 +35,9 @@
 namespace tuio
 {
 
-bool InputGestureBasicFingers::active = false;
 
 void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
 {
-    if(!active) return;
     if( strcmp( addr, "/tuio/2Dcur" ) == 0 )
     {
 

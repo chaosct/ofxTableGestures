@@ -70,13 +70,15 @@ class InputGestureDirectFingers : public InputGesture {
     std::map<int32,DirectFinger *> fingers;
     int32 currentFrame, lastFrame;
     public:
-        static bool active;
         InputGestureDirectFingers():currentFrame(0),lastFrame(0){}
         virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
 };
 
+
+
+
 template <class Base>
-class CanDirectFingers : public Base
+class CanDirectFingers : public  Base
 {
     public:
     //Interface redefined by ofApp
@@ -102,7 +104,7 @@ class CanDirectFingers : public Base
     {
         TRegistraCallback(event_dfinger_remove);
         TRegistraCallback(event_dfinger_new);
-        InputGestureDirectFingers::active = true;
+        registerMeToInputGestureManager(new InputGestureDirectFingers());
     }
 
     //allways needed
