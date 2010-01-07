@@ -290,7 +290,7 @@
 		<Unit filename="lib/tuio/h/InputGestureClasses.h">
 			<Option virtualFolder="libs/tuio/gestures/" />
 		</Unit>
-		<Unit filename="lib/tuio/h/InputGestureDirectFingers.cpp">
+		<Unit filename="lib/tuio/c/InputGestureDirectFingers.cpp">
 			<Option virtualFolder="libs/tuio/gestures/" />
 		</Unit>
 		<Unit filename="lib/tuio/h/InputGestureDirectFingers.h">
@@ -311,7 +311,7 @@
 			<Option target="Linux-Debug" />
 			<Option target="Linux-Release" />
 		</Unit>
-		<Unit filename="lib/tuio/h/tuioApp.cpp">
+		<Unit filename="lib/tuio/c/tuioApp.cpp">
 			<Option virtualFolder="libs/tuio/" />
 		</Unit>
 		<Unit filename="lib/tuio/h/tuioApp.h">
