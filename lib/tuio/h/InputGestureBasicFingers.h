@@ -36,6 +36,7 @@
 #include "TEvent.h"
 #include <set>
 #include "tuioApp.h"
+
 using namespace osc;
 
 namespace tuio {
