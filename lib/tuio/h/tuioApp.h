@@ -73,7 +73,7 @@ public:
     tuioApp()
     {
         //TODO: fora magic number o fer servir map
-        eventprocessors.resize(10,NULL);
+        eventprocessors.resize(100,NULL);
     }
 
     void processTevents()
@@ -81,12 +81,18 @@ public:
         TEvent * te;
         while((te = equeue->pop())!= NULL)
         {
-            if (eventprocessors[te->name])
-                eventprocessors[te->name]->run(te);
-            else
-                std::cout << "Ouch" << std::endl;
-            delete te;
+           processTevent(te);
+           delete te;
         }
+    }
+
+    void processTevent(TEvent * te)
+    {
+        if (eventprocessors[te->name])
+            eventprocessors[te->name]->run(te);
+//        else
+//            std::cout << "Event "<< te->name << "Ignored" << std::endl;
+
     }
 
     eventprocessorsType & getEP()

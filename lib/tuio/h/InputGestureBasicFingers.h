@@ -107,7 +107,7 @@ class CanBasicFingers : public Base
         TRegistraCallback(event_finger_remove);
         TRegistraCallback(event_finger_new);
         TRegistraCallback(event_finger_move);
-        registerMeToInputGestureManager(new InputGestureBasicFingers());
+        registerMeToInputGestureManager(Singleton<InputGestureBasicFingers>::get());
     }
 
     //allways needed

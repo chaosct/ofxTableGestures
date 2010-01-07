@@ -56,6 +56,11 @@ void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArg
         {
             queue->push(*it);
         }
+
+    }
+    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); it++)
+    {
+        i = *it;
         i->events.clear();
     }
 

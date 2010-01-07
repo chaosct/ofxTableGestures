@@ -11,12 +11,13 @@
 
 using namespace tuio;
 
-class testApp : public CanBasicObjects< CanDirectFingers<tuioApp <ofBaseApp> > >
+class testApp : public CanDirectObjects< CanDirectFingers<tuioApp <ofBaseApp> > >
 {
 private:
 
     double dx, dy;
     DirectFinger * mydf;
+    DirectObject* mdo;
 
 public:
 
@@ -28,6 +29,9 @@ public:
 
     void newCursor(int32 id, DirectFinger * df);
     void removeCursor(int32 id);
+
+    void newObject(int32 s_id, int32 f_id, DirectObject *);
+    void removeObject(int32 s_id, int32 f_id);
 
     void keyPressed  (int key);
     void keyReleased(int key);

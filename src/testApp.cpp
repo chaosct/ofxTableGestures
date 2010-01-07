@@ -31,6 +31,17 @@ void testApp::removeCursor(int32 id)
 
 }
 
+void testApp::newObject(int32 s_id, int32 f_id, DirectObject * dob)
+{
+    mdo = dob;
+}
+void testApp::removeObject(int32 s_id, int32 f_id)
+{
+    if(mdo && (mdo->s_id == s_id))
+        mdo = NULL;
+}
+
+
 //--------------------------------------------------------------
 void testApp::update(){
 
@@ -46,6 +57,16 @@ void testApp::draw(){
         ofSetColor(0xFF0000);
     ofFill();
     ofCircle(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,20);
+    }
+    if(mdo)
+    {
+        dx = mdo->xpos;
+        dy = mdo->ypos;
+        float r = mdo->angle;
+        ofSetColor(0xFF0000);
+    ofFill();
+    ofRotateZ(r);
+    ofRect(dx*WINDOW_WIDTH,dy*WINDOW_HEIGHT,40,40);
     }
 
 }
