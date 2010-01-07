@@ -27,31 +27,59 @@
 	CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#include "ip/NetworkingUtils.h"
 
-#include <netdb.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <string.h>
-#include <stdio.h>
-
+/*
+    OscDump prints incoming Osc packets. Unlike the Berkeley dumposc program
+    OscDump uses a different printing format which indicates the type of each
+    message argument.
+*/
 
 
-NetworkInitializer::NetworkInitializer() {}
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
 
-NetworkInitializer::~NetworkInitializer() {}
+#include "osc/OscReceivedElements.h"
+#include "osc/OscPrintReceivedElements.h"
+
+#include "ip/UdpSocket.h"
+#include "ip/PacketListener.h"
 
 
-unsigned long GetHostByName( const char *name )
+class OscDumpPacketListener : public PacketListener{
+public:
+	virtual void ProcessPacket( const char *data, int size,
+			const IpEndpointName& remoteEndpoint )
+	{
+		std::cout << osc::ReceivedPacket( data, size );
+	}
+};
+
+int main(int argc, char* argv[])
 {
-    unsigned long result = 0;
-
-    struct hostent *h = gethostbyname( name );
-    if( h ){
-        struct in_addr a;
-        memcpy( &a, h->h_addr_list[0], h->h_length );
-        result = ntohl(a.s_addr);
+	if( argc >= 2 && strcmp( argv[1], "-h" ) == 0 ){
+        std::cout << "usage: OscDump [port]\n";
+        return 0;
     }
 
-    return result;
+	int port = 7000;
+
+	if( argc >= 2 )
+		port = atoi( argv[1] );
+
+	OscDumpPacketListener listener;
+    UdpListeningReceiveSocket s(
+            IpEndpointName( IpEndpointName::ANY_ADDRESS, port ),
+            &listener );
+
+	std::cout << "listening for input on port " << port << "...\n";
+	std::cout << "press ctrl-c to end\n";
+
+	s.RunUntilSigInt();
+
+	std::cout << "finishing.\n";
+
+    return 0;
 }
+
+

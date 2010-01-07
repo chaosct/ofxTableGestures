@@ -27,6 +27,8 @@
 	CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+#ifdef TARGET_WIN32
 #include "ip/UdpSocket.h"
 
 #include <winsock2.h>   // this must come first to prevent errors with MSVC7
@@ -52,7 +54,7 @@ static void SockaddrFromIpEndpointName( struct sockaddr_in& sockAddr, const IpEn
     memset( (char *)&sockAddr, 0, sizeof(sockAddr ) );
     sockAddr.sin_family = AF_INET;
 
-	sockAddr.sin_addr.s_addr = 
+	sockAddr.sin_addr.s_addr =
 		(endpoint.address == IpEndpointName::ANY_ADDRESS)
 		? INADDR_ANY
 		: htonl( endpoint.address );
@@ -66,9 +68,9 @@ static void SockaddrFromIpEndpointName( struct sockaddr_in& sockAddr, const IpEn
 
 static IpEndpointName IpEndpointNameFromSockaddr( const struct sockaddr_in& sockAddr )
 {
-	return IpEndpointName( 
-		(sockAddr.sin_addr.s_addr == INADDR_ANY) 
-			? IpEndpointName::ANY_ADDRESS 
+	return IpEndpointName(
+		(sockAddr.sin_addr.s_addr == INADDR_ANY)
+			? IpEndpointName::ANY_ADDRESS
 			: ntohl( sockAddr.sin_addr.s_addr ),
 		(sockAddr.sin_port == 0)
 			? IpEndpointName::ANY_PORT
@@ -112,10 +114,10 @@ public:
 		assert( isBound_ );
 
 		// first connect the socket to the remote server
-        
+
         struct sockaddr_in connectSockAddr;
 		SockaddrFromIpEndpointName( connectSockAddr, remoteEndpoint );
-       
+
         if (connect(socket_, (struct sockaddr *)&connectSockAddr, sizeof(connectSockAddr)) < 0) {
             throw std::runtime_error("unable to connect udp socket\n");
         }
@@ -128,21 +130,21 @@ public:
         if (getsockname(socket_, (struct sockaddr *)&sockAddr, &length) < 0) {
             throw std::runtime_error("unable to getsockname\n");
         }
-        
+
 		if( isConnected_ ){
 			// reconnect to the connected address
-			
+
 			if (connect(socket_, (struct sockaddr *)&connectedAddr_, sizeof(connectedAddr_)) < 0) {
 				throw std::runtime_error("unable to connect udp socket\n");
 			}
 
 		}else{
 			// unconnect from the remote address
-		
+
 			struct sockaddr_in unconnectSockAddr;
 			SockaddrFromIpEndpointName( unconnectSockAddr, IpEndpointName() );
 
-			if( connect(socket_, (struct sockaddr *)&unconnectSockAddr, sizeof(unconnectSockAddr)) < 0 
+			if( connect(socket_, (struct sockaddr *)&unconnectSockAddr, sizeof(unconnectSockAddr)) < 0
 					&& WSAGetLastError() != WSAEADDRNOTAVAIL ){
 				throw std::runtime_error("unable to un-connect udp socket\n");
 			}
@@ -154,7 +156,7 @@ public:
 	void Connect( const IpEndpointName& remoteEndpoint )
 	{
 		SockaddrFromIpEndpointName( connectedAddr_, remoteEndpoint );
-       
+
         if (connect(socket_, (struct sockaddr *)&connectedAddr_, sizeof(connectedAddr_)) < 0) {
             throw std::runtime_error("unable to connect udp socket\n");
         }
@@ -197,7 +199,7 @@ public:
 
 		struct sockaddr_in fromAddr;
         socklen_t fromAddrLen = sizeof(fromAddr);
-             	 
+
         int result = recvfrom(socket_, data, size, 0,
                     (struct sockaddr *) &fromAddr, (socklen_t*)&fromAddrLen);
 		if( result < 0 )
@@ -269,7 +271,7 @@ struct AttachedTimerListener{
 };
 
 
-static bool CompareScheduledTimerCalls( 
+static bool CompareScheduledTimerCalls(
 		const std::pair< double, AttachedTimerListener > & lhs, const std::pair< double, AttachedTimerListener > & rhs )
 {
 	return lhs.first < rhs.first;
@@ -320,7 +322,7 @@ public:
 
     void DetachSocketListener( UdpSocket *socket, PacketListener *listener )
 	{
-		std::vector< std::pair< PacketListener*, UdpSocket* > >::iterator i = 
+		std::vector< std::pair< PacketListener*, UdpSocket* > >::iterator i =
 				std::find( socketListeners_.begin(), socketListeners_.end(), std::make_pair(listener, socket) );
 		assert( i != socketListeners_.end() );
 
@@ -356,7 +358,7 @@ public:
 		break_ = false;
 
 		// prepare the window events which we use to wake up on incoming data
-		// we use this instead of select() primarily to support the AsyncBreak() 
+		// we use this instead of select() primarily to support the AsyncBreak()
 		// mechanism.
 
 		std::vector<HANDLE> events( socketListeners_.size() + 1, 0 );
@@ -372,7 +374,7 @@ public:
 
 		events[ socketListeners_.size() ] = breakEvent_; // last event in the collection is the break event
 
-		
+
 		// configure the timer queue
 		double currentTimeMs = GetCurrentTimeMs();
 
@@ -465,7 +467,7 @@ SocketReceiveMultiplexer::SocketReceiveMultiplexer()
 }
 
 SocketReceiveMultiplexer::~SocketReceiveMultiplexer()
-{	
+{
 	delete impl_;
 }
 
@@ -518,4 +520,4 @@ void SocketReceiveMultiplexer::AsynchronousBreak()
 {
 	impl_->AsynchronousBreak();
 }
-
+#endif

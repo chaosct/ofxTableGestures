@@ -27,6 +27,8 @@
 	CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+#ifdef TARGET_WIN32
+
 #include "ip/NetworkingUtils.h"
 
 #include <winsock2.h>   // this must come first to prevent errors with MSVC7
@@ -42,10 +44,10 @@ NetworkInitializer::NetworkInitializer()
 {
     if( InterlockedIncrement( &initCount_ ) == 1 ){
         // there is a race condition here if one thread tries to access
-        // the library while another is still initializing it. 
+        // the library while another is still initializing it.
         // i can't think of an easy way to fix it so i'm telling you here
         // incase you need to init the library from two threads at once.
-        // this is why the header file advises to instantiate one of these 
+        // this is why the header file advises to instantiate one of these
         // in main() so that the initialization happens globally
 
         // initialize winsock
@@ -86,3 +88,4 @@ unsigned long GetHostByName( const char *name )
 
     return result;
 }
+#endif

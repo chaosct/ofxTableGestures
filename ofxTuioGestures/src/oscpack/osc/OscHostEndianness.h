@@ -61,7 +61,9 @@
 
 #else
 
-#error please edit OSCHostEndianness.h to configure endianness
+// assume taht all other devices will use little endian
+#define OSC_HOST_LITTLE_ENDIAN 1
+#undef OSC_HOST_BIG_ENDIAN
 
 #endif
 
