@@ -32,8 +32,6 @@
 #include "EventQueue.h"
 #include "osc/OscReceivedElements.h"
 
-#include "InputGestureClasses.h"
-
 namespace tuio
 {
 
@@ -43,19 +41,6 @@ inputGestureManager::inputGestureManager()
 {
     queue = new EventQueue();
     instance = this;
-    //InputGesture * i;
-
-    //per a cada tipus de inputgesture, l'afegim a la llista:
-    //i = new Exemple_de_imputgesture();
-    //gestures.push_back(i);
-
-    //  i = new InputGestureBasicFingers();
-    //  gestures.push_back(i);
-    //  i = new InputGestureDirectFingers();
-    //  gestures.push_back(i);
-    //  i = new InputGestureBasicObjects();
-    //  gestures.push_back(i);
-
 }
 
 void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
