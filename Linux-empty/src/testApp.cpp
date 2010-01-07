@@ -1,7 +1,4 @@
 #include "testApp.h"
-#include "TEvent.h"
-#include "tuioinput.h"
-
 
 
 //--------------------------------------------------------------
@@ -16,7 +13,7 @@ void testApp::Update(){
 
 //--------------------------------------------------------------
 void testApp::Draw(){
-    //Do not remove me!
+    //processem els gestos
     processTevents();
 
 }
