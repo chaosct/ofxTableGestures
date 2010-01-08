@@ -28,7 +28,7 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef TARGET_WIN32
+#ifndef WIN32
 
 #include "ip/UdpSocket.h"
 

@@ -28,7 +28,7 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifdef TARGET_WIN32
+#ifdef WIN32
 #include "ip/UdpSocket.h"
 
 #include <winsock2.h>   // this must come first to prevent errors with MSVC7
