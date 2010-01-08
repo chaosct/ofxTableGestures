@@ -193,16 +193,7 @@ void TableApp::keyReleased(int key){
     switch(key)
     {
         case 'f':
-            #ifdef TARGET_WIN32
-                if(!full){
-                    ofBeginCustomFullscreen(0,0,2048, 768);
-                }else{
-                    ofEndCustomFullscreen();
-                }
-                full = !full;
-            #else
                 ofToggleFullscreen();
-            #endif
 		break;
 		case 'c':
             if(calibration_enabled)SaveDistortion();
