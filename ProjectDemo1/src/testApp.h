@@ -12,6 +12,9 @@
 #include "InputGestureClasses.h"
 using namespace tuio;
 
+
+#include <map>
+
 //La nostra classe principal Derivarà de tuioApp<TableApp>. Si no volguéssiu gestos podrieu
 //derivar directament de TableApp.
 //Per tal de rebre ghestos heu de definir les capacitats de tuioApp, per exemple, per a rebre
@@ -28,8 +31,13 @@ using namespace tuio;
 //- CanDirectObjects
 //Seguiu la capçalera InputGestureClasses.h per a trobar l'especificació dels gestos corresponents
 
-class testApp : public tuioApp <TableApp>
+class testApp : public CanDirectObjects< CanDirectFingers <tuioApp <TableApp> > >
 {
+private:
+    typedef std::map<int32,DirectFinger *> Tcursors;
+    typedef std::map<int32,DirectObject *> Tobjects;
+    Tcursors cursors;
+    Tobjects objects;
 public:
 
     //aquest mètode es crida un cop a l'iniciar l'aplicació
@@ -40,11 +48,17 @@ public:
     void Draw();
     //si heu de fer alguna cosa després de redimensionar la finestra, feu-ho aquí
     void WindowResized(int w, int h);
-    
+
     //afegiu aquí sota els mètodes heretats de les capacitats dels gestos
     //-------------------------------------------------------------------------------------------
-    
 
+    //CanDirectFingers
+    void newCursor(int32 id, DirectFinger *);
+    void removeCursor(int32 id);
+
+    //CanDirectObjects
+    void newObject(int32 s_id, int32 f_id, DirectObject *);
+    void removeObject(int32 s_id, int32 f_id);
 };
 
 #endif
