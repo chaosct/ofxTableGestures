@@ -1,8 +1,8 @@
 <install>
-    <name>TableDistortion</name>
+    <name>TuioGestures</name>
 	
 	<version>0.01</version>
-	<author>Carles Fernàndez</author>
+	<author>Carles F. Julià</author>
 	<url></url>
 	
 	<add>	
