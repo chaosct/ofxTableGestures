@@ -3,17 +3,17 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="TSIframework" />
+		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/TuioGestures/tuio/;addons/ofxOsc/src/;" />
+		<Option virtualFolders="addons\;src\;addons\TableDistortion\;addons\TuioGestures\tuio\;addons\ofxOsc\src\;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
-				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj/Debug/" />
-				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworksDebug.a;" />
-
+				<Option object_output="obj\Debug\" />
+				<Option external_deps="..\..\..\libs\openFrameworksCompiled\lib\linux\libopenFrameworksDebug.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -21,30 +21,30 @@
 					<Add option="-g" />
 					<Add option="-MMD" />
 					<Add option="-fexceptions" />
-					<Add directory="../../../addons/" />
-					<Add directory="../../../libs/openFrameworks/" />
-					<Add directory="../../../libs/openFrameworks/events" />
-					<Add directory="../../../libs/openFrameworks/app" />
-					<Add directory="../../../libs/openFrameworks/communication" />
-					<Add directory="../../../libs/openFrameworks/graphics" />
-					<Add directory="../../../libs/openFrameworks/video" />
-					<Add directory="../../../libs/openFrameworks/utils" />
-					<Add directory="../../../libs/openFrameworks/sound" />
-					<Add directory="../../../libs/rtAudio" />
-					<Add directory="../../../libs/fmodex/include" />
-					<Add directory="../../../libs/glee/include" />
-					<Add directory="../../../libs/FreeImage/include" />
-					<Add directory="../../../libs/freetype/include" />
-					<Add directory="../../../libs/freetype/include/freetype2" />
-					<Add directory="../../../libs/unicap/include" />
-					<Add directory="../../../libs/gstappsink/include" />
-					<Add directory="../../../addons" />
-					<Add directory="../../../libs/poco/include" />
-					<Add directory="../../../addons/ofxTableDistortion/src/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
-					<Add directory="../../../addons/ofxOsc/src" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
+					<Add directory="..\..\..\addons\" />
+					<Add directory="..\..\..\libs\openFrameworks\" />
+					<Add directory="..\..\..\libs\openFrameworks\events" />
+					<Add directory="..\..\..\libs\openFrameworks\app" />
+					<Add directory="..\..\..\libs\openFrameworks\communication" />
+					<Add directory="..\..\..\libs\openFrameworks\graphics" />
+					<Add directory="..\..\..\libs\openFrameworks\video" />
+					<Add directory="..\..\..\libs\openFrameworks\utils" />
+					<Add directory="..\..\..\libs\openFrameworks\sound" />
+					<Add directory="..\..\..\libs\rtAudio" />
+					<Add directory="..\..\..\libs\fmodex\include" />
+					<Add directory="..\..\..\libs\glee\include" />
+					<Add directory="..\..\..\libs\FreeImage\include" />
+					<Add directory="..\..\..\libs\freetype\include" />
+					<Add directory="..\..\..\libs\freetype\include\freetype2" />
+					<Add directory="..\..\..\libs\unicap\include" />
+					<Add directory="..\..\..\libs\gstappsink\include" />
+					<Add directory="..\..\..\addons" />
+					<Add directory="..\..\..\libs\poco\include" />
+					<Add directory="..\..\..\addons\ofxTableDistortion\src\" />
+					<Add directory="..\..\..\addons\ofxTuioGestures\src\tuio\h\" />
+					<Add directory="..\..\..\addons\ofxOsc\src" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\ip" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\osc" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -63,16 +63,16 @@
 					<Add library="RtAudio" />
 					<Add library="GLee" />
 					<Add library="oFappsink" />
-					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
-					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
-					<Add directory="../../../libs/freetype/lib/linux" />
-					<Add directory="../../../libs/FreeImage/lib/linux" />
-					<Add directory="../../../libs/rtAudio/lib/linux" />
-					<Add directory="../../../libs/glee/lib/linux" />
-					<Add directory="../../../libs/gstappsink/lib/linux" />
-					<Add directory="../../../libs/fmodex/lib/linux" />
-					<Add directory="../../../libs/unicap/lib/linux" />
-					<Add directory="../../../libs/poco/lib/linux" />
+					<Add library="..\..\..\addons\ofxOsc\libs\oscpack\lib\linux\liboscpack.a" />
+					<Add directory="..\..\..\libs\openFrameworksCompiled\lib\linux" />
+					<Add directory="..\..\..\libs\freetype\lib\linux" />
+					<Add directory="..\..\..\libs\FreeImage\lib\linux" />
+					<Add directory="..\..\..\libs\rtAudio\lib\linux" />
+					<Add directory="..\..\..\libs\glee\lib\linux" />
+					<Add directory="..\..\..\libs\gstappsink\lib\linux" />
+					<Add directory="..\..\..\libs\fmodex\lib\linux" />
+					<Add directory="..\..\..\libs\unicap\lib\linux" />
+					<Add directory="..\..\..\libs\poco\lib\linux" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="#" />
@@ -94,47 +94,47 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="target" value="TSIframework" />
 					<Variable name="nautilusOnBuild" value="false" />
 					<Variable name="runOnBuild" value="false" />
+					<Variable name="target" value="TSIframework" />
 				</Environment>
 			</Target>
 			<Target title="Windows_debug">
 				<Option platforms="Windows;" />
-				<Option output="bin/$(PROJECT_NAME)_DEBUG" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\$(PROJECT_NAME)_DEBUG" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj/debug/" />
-				<Option external_deps="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworksDebug.lib;" />
+				<Option object_output="obj\debug\" />
+				<Option external_deps="..\..\..\libs\openFrameworksCompiled\lib\win_cb\openFrameworksDebug.lib;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-Wno-multichar" />
-					<Add directory="../../../libs/glu/include" />
-					<Add directory="../../../libs/freetype/include" />
-					<Add directory="../../../libs/freetype/include/freetype2" />
-					<Add directory="../../../libs/FreeImage/include" />
-					<Add directory="../../../libs/quicktime/include" />
-					<Add directory="../../../libs/rtAudio/include" />
-					<Add directory="../../../libs/fmodex/include" />
-					<Add directory="../../../libs/videoInput/include" />
-					<Add directory="../../../libs/glee/include" />
-					<Add directory="../../../libs/glut/include" />
-					<Add directory="../../../libs/openFrameworks" />
-					<Add directory="../../../libs/openFrameworks/app" />
-					<Add directory="../../../libs/openFrameworks/events" />
-					<Add directory="../../../libs/openFrameworks/graphics" />
-					<Add directory="../../../libs/openFrameworks/utils" />
-					<Add directory="../../../libs/openFrameworks/sound" />
-					<Add directory="../../../libs/openFrameworks/video" />
-					<Add directory="../../../libs/openFrameworks/communication" />
-					<Add directory="../../../libs/poco/include" />
-					<Add directory="../../../addons/ofxTableDistortion/src/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
-					<Add directory="../../../addons/ofxOsc/src" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
+					<Add directory="..\..\..\libs\glu\include" />
+					<Add directory="..\..\..\libs\freetype\include" />
+					<Add directory="..\..\..\libs\freetype\include\freetype2" />
+					<Add directory="..\..\..\libs\FreeImage\include" />
+					<Add directory="..\..\..\libs\quicktime\include" />
+					<Add directory="..\..\..\libs\rtAudio\include" />
+					<Add directory="..\..\..\libs\fmodex\include" />
+					<Add directory="..\..\..\libs\videoInput\include" />
+					<Add directory="..\..\..\libs\glee\include" />
+					<Add directory="..\..\..\libs\glut\include" />
+					<Add directory="..\..\..\libs\openFrameworks" />
+					<Add directory="..\..\..\libs\openFrameworks\app" />
+					<Add directory="..\..\..\libs\openFrameworks\events" />
+					<Add directory="..\..\..\libs\openFrameworks\graphics" />
+					<Add directory="..\..\..\libs\openFrameworks\utils" />
+					<Add directory="..\..\..\libs\openFrameworks\sound" />
+					<Add directory="..\..\..\libs\openFrameworks\video" />
+					<Add directory="..\..\..\libs\openFrameworks\communication" />
+					<Add directory="..\..\..\libs\poco\include" />
+					<Add directory="..\..\..\addons\ofxTableDistortion\src\" />
+					<Add directory="..\..\..\addons\ofxTuioGestures\src\tuio\h\" />
+					<Add directory="..\..\..\addons\ofxOsc\src" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\ip" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\osc" />
 				</Compiler>
 				<Linker>
 					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworksDebug.lib" />
@@ -151,6 +151,7 @@
 					<Add option="../../../libs/poco/lib/win_cb/libPocoUtilmt.a" />
 					<Add option="../../../libs/poco/lib/win_cb/libPocoXMLmt.a" />
 					<Add option="../../../libs/poco/lib/win_cb/libPocoFoundationmt.a" />
+					<Add option="../../../addons/ofxOsc/libs/oscpack/lib/win_cb/oscpack.a" />
 					<Add option="-lopengl32" />
 					<Add option="-lglu32" />
 					<Add option="-ldsound" />
@@ -166,6 +167,7 @@
 					<Add option="-lwsock32" />
 					<Add option="-lws2_32" />
 					<Add option="-lIphlpapi" />
+					<Add library="..\..\..\addons\ofxOsc\libs\oscpack\lib\win_cb\oscpack.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after='xcopy /e /i /y &quot;$(PROJECT_DIR)..\..\..\export\win_cb\*.dll&quot;  &quot;$(PROJECT_DIR)bin&quot;' />
@@ -175,10 +177,10 @@
 			</Target>
 			<Target title="Linux_Release">
 				<Option platforms="Unix;" />
-				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj/Release/" />
-				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
+				<Option object_output="obj\Release\" />
+				<Option external_deps="..\..\..\libs\openFrameworksCompiled\lib\linux\libopenFrameworks.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
@@ -187,30 +189,30 @@
 					<Add option="-O3" />
 					<Add option="-MMD" />
 					<Add option="-fexceptions" />
-					<Add directory="../../../addons/" />
-					<Add directory="../../../libs/openFrameworks/" />
-					<Add directory="../../../libs/openFrameworks/events" />
-					<Add directory="../../../libs/openFrameworks/app" />
-					<Add directory="../../../libs/openFrameworks/communication" />
-					<Add directory="../../../libs/openFrameworks/graphics" />
-					<Add directory="../../../libs/openFrameworks/video" />
-					<Add directory="../../../libs/openFrameworks/utils" />
-					<Add directory="../../../libs/openFrameworks/sound" />
-					<Add directory="../../../libs/rtAudio" />
-					<Add directory="../../../libs/fmodex/include" />
-					<Add directory="../../../libs/glee/include" />
-					<Add directory="../../../libs/FreeImage/include" />
-					<Add directory="../../../libs/freetype/include" />
-					<Add directory="../../../libs/freetype/include/freetype2" />
-					<Add directory="../../../libs/unicap/include" />
-					<Add directory="../../../libs/gstappsink/include" />
-					<Add directory="../../../addons" />
-					<Add directory="../../../libs/poco/include" />
-					<Add directory="../../../addons/ofxTableDistortion/src/" />
-					<Add directory="../../../addons/ofxOsc/src" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
-					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
+					<Add directory="..\..\..\addons\" />
+					<Add directory="..\..\..\libs\openFrameworks\" />
+					<Add directory="..\..\..\libs\openFrameworks\events" />
+					<Add directory="..\..\..\libs\openFrameworks\app" />
+					<Add directory="..\..\..\libs\openFrameworks\communication" />
+					<Add directory="..\..\..\libs\openFrameworks\graphics" />
+					<Add directory="..\..\..\libs\openFrameworks\video" />
+					<Add directory="..\..\..\libs\openFrameworks\utils" />
+					<Add directory="..\..\..\libs\openFrameworks\sound" />
+					<Add directory="..\..\..\libs\rtAudio" />
+					<Add directory="..\..\..\libs\fmodex\include" />
+					<Add directory="..\..\..\libs\glee\include" />
+					<Add directory="..\..\..\libs\FreeImage\include" />
+					<Add directory="..\..\..\libs\freetype\include" />
+					<Add directory="..\..\..\libs\freetype\include\freetype2" />
+					<Add directory="..\..\..\libs\unicap\include" />
+					<Add directory="..\..\..\libs\gstappsink\include" />
+					<Add directory="..\..\..\addons" />
+					<Add directory="..\..\..\libs\poco\include" />
+					<Add directory="..\..\..\addons\ofxTableDistortion\src\" />
+					<Add directory="..\..\..\addons\ofxOsc\src" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\ip" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\osc" />
+					<Add directory="..\..\..\addons\ofxTuioGestures\src\tuio\h\" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -229,16 +231,16 @@
 					<Add library="RtAudio" />
 					<Add library="GLee" />
 					<Add library="oFappsink" />
-					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
-					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
-					<Add directory="../../../libs/freetype/lib/linux" />
-					<Add directory="../../../libs/FreeImage/lib/linux" />
-					<Add directory="../../../libs/rtAudio/lib/linux" />
-					<Add directory="../../../libs/glee/lib/linux" />
-					<Add directory="../../../libs/gstappsink/lib/linux" />
-					<Add directory="../../../libs/fmodex/lib/linux" />
-					<Add directory="../../../libs/unicap/lib/linux" />
-					<Add directory="../../../libs/poco/lib/linux" />
+					<Add library="..\..\..\addons\ofxOsc\libs\oscpack\lib\linux\liboscpack.a" />
+					<Add directory="..\..\..\libs\openFrameworksCompiled\lib\linux" />
+					<Add directory="..\..\..\libs\freetype\lib\linux" />
+					<Add directory="..\..\..\libs\FreeImage\lib\linux" />
+					<Add directory="..\..\..\libs\rtAudio\lib\linux" />
+					<Add directory="..\..\..\libs\glee\lib\linux" />
+					<Add directory="..\..\..\libs\gstappsink\lib\linux" />
+					<Add directory="..\..\..\libs\fmodex\lib\linux" />
+					<Add directory="..\..\..\libs\unicap\lib\linux" />
+					<Add directory="..\..\..\libs\poco\lib\linux" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="#" />
@@ -260,47 +262,47 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="target" value="TSIframework" />
 					<Variable name="nautilusOnBuild" value="false" />
 					<Variable name="runOnBuild" value="false" />
+					<Variable name="target" value="TSIframework" />
 				</Environment>
 			</Target>
 			<Target title="Windows_release">
 				<Option platforms="Windows;" />
-				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj/release" />
-				<Option external_deps="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworks.lib;" />
+				<Option object_output="obj\release" />
+				<Option external_deps="..\..\..\libs\openFrameworksCompiled\lib\win_cb\openFrameworks.lib;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wno-multichar" />
-					<Add directory="../../../libs/glu/include" />
-					<Add directory="../../../libs/freetype/include" />
-					<Add directory="../../../libs/freetype/include/freetype2" />
-					<Add directory="../../../libs/FreeImage/include" />
-					<Add directory="../../../libs/quicktime/include" />
-					<Add directory="../../../libs/rtAudio/include" />
-					<Add directory="../../../libs/fmodex/include" />
-					<Add directory="../../../libs/videoInput/include" />
-					<Add directory="../../../libs/glee/include" />
-					<Add directory="../../../libs/glut/include" />
-					<Add directory="../../../libs/openFrameworks" />
-					<Add directory="../../../libs/openFrameworks/app" />
-					<Add directory="../../../libs/openFrameworks/events" />
-					<Add directory="../../../libs/openFrameworks/graphics" />
-					<Add directory="../../../libs/openFrameworks/utils" />
-					<Add directory="../../../libs/openFrameworks/sound" />
-					<Add directory="../../../libs/openFrameworks/video" />
-					<Add directory="../../../libs/openFrameworks/communication" />
-					<Add directory="../../../libs/poco/include" />
-					<Add directory="../../../addons/ofxTableDistortion/src/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
-					<Add directory="../../../addons/ofxOsc/src" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
+					<Add directory="..\..\..\libs\glu\include" />
+					<Add directory="..\..\..\libs\freetype\include" />
+					<Add directory="..\..\..\libs\freetype\include\freetype2" />
+					<Add directory="..\..\..\libs\FreeImage\include" />
+					<Add directory="..\..\..\libs\quicktime\include" />
+					<Add directory="..\..\..\libs\rtAudio\include" />
+					<Add directory="..\..\..\libs\fmodex\include" />
+					<Add directory="..\..\..\libs\videoInput\include" />
+					<Add directory="..\..\..\libs\glee\include" />
+					<Add directory="..\..\..\libs\glut\include" />
+					<Add directory="..\..\..\libs\openFrameworks" />
+					<Add directory="..\..\..\libs\openFrameworks\app" />
+					<Add directory="..\..\..\libs\openFrameworks\events" />
+					<Add directory="..\..\..\libs\openFrameworks\graphics" />
+					<Add directory="..\..\..\libs\openFrameworks\utils" />
+					<Add directory="..\..\..\libs\openFrameworks\sound" />
+					<Add directory="..\..\..\libs\openFrameworks\video" />
+					<Add directory="..\..\..\libs\openFrameworks\communication" />
+					<Add directory="..\..\..\libs\poco\include" />
+					<Add directory="..\..\..\addons\ofxTableDistortion\src\" />
+					<Add directory="..\..\..\addons\ofxTuioGestures\src\tuio\h\" />
+					<Add directory="..\..\..\addons\ofxOsc\src" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\ip" />
+					<Add directory="..\..\..\addons\ofxOsc\libs\oscpack\include\osc" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -318,6 +320,7 @@
 					<Add option="../../../libs/poco/lib/win_cb/libPocoUtilmt.a" />
 					<Add option="../../../libs/poco/lib/win_cb/libPocoXMLmt.a" />
 					<Add option="../../../libs/poco/lib/win_cb/libPocoFoundationmt.a" />
+					<Add option="../../../addons/ofxOsc/libs/oscpack/lib/win_cb/oscpack.a" />
 					<Add option="-lopengl32" />
 					<Add option="-lglu32" />
 					<Add option="-ldsound" />
@@ -333,6 +336,7 @@
 					<Add option="-lwsock32" />
 					<Add option="-lws2_32" />
 					<Add option="-lIphlpapi" />
+					<Add library="..\..\..\addons\ofxOsc\libs\oscpack\lib\win_cb\oscpack.a" />
 				</Linker>
 				<ExtraCommands>
 					<Add after='xcopy /e /i /y &quot;$(PROJECT_DIR)..\..\..\export\win_cb\*.dll&quot;  &quot;$(PROJECT_DIR)bin&quot;' />
@@ -344,131 +348,131 @@
 		<Compiler>
 			<Add option="-DSIMULATOR" />
 		</Compiler>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOsc.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscArg.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.cpp">
-			<Option virtualFolder="addons/TableDistortion" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.hpp">
-			<Option virtualFolder="addons/TableDistortion" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/Simulator.cpp">
-			<Option virtualFolder="addons/TableDistortion/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/Simulator.hpp">
-			<Option virtualFolder="addons/TableDistortion/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.cpp">
-			<Option virtualFolder="addons/TableDistortion" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.hpp">
-			<Option virtualFolder="addons/TableDistortion" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableDistortion/src/container.hpp">
-			<Option virtualFolder="addons/TableDistortion/" />
+		<Unit filename="..\..\..\addons\ofxOsc\src\ofxOscSender.h">
+			<Option virtualFolder="addons\ofxOsc\src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\Grid.cpp">
+			<Option virtualFolder="addons\TableDistortion" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\Grid.hpp">
+			<Option virtualFolder="addons\TableDistortion" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\Simulator.cpp">
+			<Option virtualFolder="addons\TableDistortion\" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\Simulator.hpp">
+			<Option virtualFolder="addons\TableDistortion\" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\TableApp.cpp">
+			<Option virtualFolder="addons\TableDistortion" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\TableApp.hpp">
+			<Option virtualFolder="addons\TableDistortion" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTableDistortion\src\container.hpp">
+			<Option virtualFolder="addons\TableDistortion\" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\EventQueue.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\InputGesture.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\InputGestureBasicFingers.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\InputGestureBasicObjects.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\InputGestureDirectFingers.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicFingers.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\InputGestureDirectObjects.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicObjects.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\OSCListener.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectFingers.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\inputGestureManager.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\tuioApp.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/OSCListener.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\c\tuioinput.cpp">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\EventQueue.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioApp.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGesture.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioinput.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGestureBasicFingers.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/EventQueue.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGestureBasicObjects.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGesture.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGestureClasses.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicFingers.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGestureDirectFingers.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicObjects.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\InputGestureDirectObjects.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureClasses.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\OSCListener.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectFingers.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\TEvent.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\inputGestureManager.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/OSCListener.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\tuioApp.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/TEvent.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="..\..\..\addons\ofxTuioGestures\src\tuio\h\tuioinput.h">
+			<Option virtualFolder="addons\TuioGestures\tuio" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/inputGestureManager.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="src\main.cpp">
+			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/tuioApp.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="src\testApp.cpp">
+			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+		<Unit filename="src\testApp.h">
+			<Option virtualFolder="src\" />
 		</Unit>
 		<Extensions>
 			<lib_finder>
