@@ -83,19 +83,19 @@ class CanBasicObjects : public Base
     virtual void removeTuioObject(int32 id){}
 
     //processing events callbacks
-    TCallBack(CanBasicObjects,event_object_remove);
+
     TEventHandler(event_object_remove)
     {
         TeventBasicObjectsRemoveObject * e = static_cast<TeventBasicObjectsRemoveObject *>(evt);
         removeTuioObject(e->s_id);
     }
-    TCallBack(CanBasicObjects,event_object_new);
+
     TEventHandler(event_object_new)
     {
         TeventBasicObjectsNewObject * e = static_cast<TeventBasicObjectsNewObject *>(evt);
         addTuioObject(e->s_id, e->f_id, e->xpos, e->ypos, e->angle, e->xspeed, e->yspeed, e->rspeed, e->maccel, e->raccel);
     }
-    TCallBack(CanBasicObjects,event_object_move);
+
     TEventHandler(event_object_move)
     {
         TeventBasicObjectsMoveObject * e = static_cast<TeventBasicObjectsMoveObject *>(evt);
@@ -105,9 +105,9 @@ class CanBasicObjects : public Base
     //registering
     CanBasicObjects()
     {
-        TRegistraCallback(event_object_remove);
-        TRegistraCallback(event_object_new);
-        TRegistraCallback(event_object_move);
+        TRegistraCallback(CanBasicObjects,event_object_remove);
+        TRegistraCallback(CanBasicObjects,event_object_new);
+        TRegistraCallback(CanBasicObjects,event_object_move);
         registerMeToInputGestureManager(Singleton<InputGestureBasicObjects>::get());
     }
 

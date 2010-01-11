@@ -85,13 +85,11 @@ class CanDirectObjects : public  Base
     virtual void removeObject(int32 s_id, int32 f_id){}
 
     //processing events callbacks
-    TCallBack(CanDirectObjects,event_dobject_remove);
     TEventHandler(event_dobject_remove)
     {
         TeventDirectObjectsRemoveObject * e = static_cast<TeventDirectObjectsRemoveObject *>(evt);
         removeObject(e->s_id, e->f_id);
     }
-    TCallBack(CanDirectObjects,event_dobject_new);
     TEventHandler(event_dobject_new)
     {
         TeventDirectObjectsNewObject * e = static_cast<TeventDirectObjectsNewObject *>(evt);
@@ -101,8 +99,8 @@ class CanDirectObjects : public  Base
     //registering
     CanDirectObjects()
     {
-        TRegistraCallback(event_dobject_remove);
-        TRegistraCallback(event_dobject_new);
+        TRegistraCallback(CanDirectObjects,event_dobject_remove);
+        TRegistraCallback(CanDirectObjects,event_dobject_new);
         registerMeToInputGestureManager(Singleton<InputGestureDirectObjects>::get());
     }
 

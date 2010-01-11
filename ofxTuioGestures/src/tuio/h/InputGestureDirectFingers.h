@@ -86,13 +86,12 @@ class CanDirectFingers : public  Base
     virtual void removeCursor(int32 id){}
 
     //processing events callbacks
-    TCallBack(CanDirectFingers,event_dfinger_remove);
+
     TEventHandler(event_dfinger_remove)
     {
         TeventDirectFingersRemoveFinger * e = static_cast<TeventDirectFingersRemoveFinger *>(evt);
         removeCursor(e->s_id);
     }
-    TCallBack(CanDirectFingers,event_dfinger_new);
     TEventHandler(event_dfinger_new)
     {
         TeventDirectFingersNewFinger * e = static_cast<TeventDirectFingersNewFinger *>(evt);
@@ -102,8 +101,8 @@ class CanDirectFingers : public  Base
     //registering
     CanDirectFingers()
     {
-        TRegistraCallback(event_dfinger_remove);
-        TRegistraCallback(event_dfinger_new);
+        TRegistraCallback(CanDirectFingers,event_dfinger_remove);
+        TRegistraCallback(CanDirectFingers,event_dfinger_new);
         registerMeToInputGestureManager(Singleton<InputGestureDirectFingers>::get());
     }
 

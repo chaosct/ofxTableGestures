@@ -5,12 +5,10 @@ namespace tuio
 
 void InputGestureDirectObjects::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
 {
-    //basicobjects->ReceiveCall(addr,argList);
-    for (std::list<TEvent *>::iterator it = basicobjects->events.begin() ; it != basicobjects->events.end() ; it++)
+    for (std::list<TEvent *>::iterator it = basicobjects->events.begin() ; it != basicobjects->events.end() ; ++it)
     {
         processTevent(*it);
     }
-    //basicobjects->events.clear();
 }
 
 void InputGestureDirectObjects::addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)

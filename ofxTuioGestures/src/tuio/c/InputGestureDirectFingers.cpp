@@ -105,7 +105,7 @@ void InputGestureDirectFingers::ReceiveCall(const char * addr, osc::ReceivedMess
                 }
             }
             args >> EndMessage;
-            for (std::map<int32,DirectFinger *>::iterator it = fingers.begin(); it != fingers.end(); it++)
+            for (std::map<int32,DirectFinger *>::iterator it = fingers.begin(); it != fingers.end(); ++it)
             {
                 TeventDirectFingersRemoveFinger * evt = new TeventDirectFingersRemoveFinger();
                 evt->s_id = it->first;

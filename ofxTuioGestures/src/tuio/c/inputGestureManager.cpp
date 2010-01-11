@@ -45,26 +45,25 @@ inputGestureManager::inputGestureManager()
 
 void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
 {
-    // Bouml preserved body begin 0002872A
+
 
     InputGesture * i;
-    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); it++)
+    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
         i->ReceiveCall(addr, argList.getCopy());
-        for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); it++)
+        for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); ++it)
         {
             queue->push(*it);
         }
 
     }
-    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); it++)
+    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
         i->events.clear();
     }
 
-    // Bouml preserved body end 0002872A
 }
 
 

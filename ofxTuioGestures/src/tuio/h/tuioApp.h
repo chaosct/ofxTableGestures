@@ -30,22 +30,7 @@
 #ifndef TUIOAPP_H_INCLUDED
 #define TUIOAPP_H_INCLUDED
 
-#define TCallBack(T,m) class Callback_##m: public GenericCallback \
-{ \
-    public: \
-    Callback_##m (T * i) \
-    { \
-        instance = i; \
-    } \
-    T * instance ; \
-    void run(TEvent * evt) \
-    { \
-       instance->EP_##m (evt); \
-    } \
-}
-
-#define TRegistraCallback(en) Base::getEP()[en] = new Callback_##en(this)
-
+#define TRegistraCallback(T,m) Base::getEP()[m] = new Callback<T>(this,&T::EP_##m )
 #define TEventHandler(en) void EP_##en (TEvent * evt)
 
 
@@ -61,6 +46,28 @@ class GenericCallback
 public:
     virtual void run(TEvent * )=0;
 };
+
+
+//from http://stackoverflow.com/questions/1284014/callback-in-c-template-member#answer-1284047
+template<typename C>
+class Callback : public GenericCallback
+{
+      public:
+  // constructs a callback to a method in the context of a given object
+  Callback(C* object, void (C::*method)(TEvent *))
+    : o(object),m(method) {}
+  // calls the method
+  void run(TEvent * te) {
+    (o ->* m) (te);
+  }
+  private:
+  // container for the pointer to method
+    C* o;
+    void (C::*m)(TEvent *);
+};
+
+
+
 
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
@@ -85,8 +92,8 @@ public:
         TEvent * te;
         while((te = equeue->pop())!= NULL)
         {
-           processTevent(te);
-           delete te;
+            processTevent(te);
+            delete te;
         }
     }
 
@@ -94,9 +101,6 @@ public:
     {
         if (eventprocessors[te->name])
             eventprocessors[te->name]->run(te);
-//        else
-//            std::cout << "Event "<< te->name << "Ignored" << std::endl;
-
     }
 
     eventprocessorsType & getEP()

@@ -82,19 +82,19 @@ class CanBasicFingers : public Base
     virtual void removeTuioCursor(int32 id){}
 
     //processing events callbacks
-    TCallBack(CanBasicFingers,event_finger_remove);
+
     TEventHandler(event_finger_remove)
     {
         TeventBasicFingersRemoveFinger * e = static_cast<TeventBasicFingersRemoveFinger *>(evt);
         removeTuioCursor(e->s_id);
     }
-    TCallBack(CanBasicFingers,event_finger_new);
+
     TEventHandler(event_finger_new)
     {
         TeventBasicFingersNewFinger * e = static_cast<TeventBasicFingersNewFinger *>(evt);
         addTuioCursor(e->s_id,e->xpos, e->ypos, e->xspeed, e->yspeed, e->maccel);
     }
-    TCallBack(CanBasicFingers,event_finger_move);
+
     TEventHandler(event_finger_move)
     {
         TeventBasicFingersMoveFinger * e = static_cast<TeventBasicFingersMoveFinger *>(evt);
@@ -104,9 +104,9 @@ class CanBasicFingers : public Base
     //registering
     CanBasicFingers()
     {
-        TRegistraCallback(event_finger_remove);
-        TRegistraCallback(event_finger_new);
-        TRegistraCallback(event_finger_move);
+        TRegistraCallback(CanBasicFingers,event_finger_remove);
+        TRegistraCallback(CanBasicFingers,event_finger_new);
+        TRegistraCallback(CanBasicFingers,event_finger_move);
         registerMeToInputGestureManager(Singleton<InputGestureBasicFingers>::get());
     }
 

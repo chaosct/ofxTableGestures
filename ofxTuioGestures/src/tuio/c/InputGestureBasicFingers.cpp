@@ -98,7 +98,7 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
                 t.erase(s_id);
             }
             args >> EndMessage;
-            for (std::set<int32>::iterator it = t.begin(); it != t.end(); it++)
+            for (std::set<int32>::iterator it = t.begin(); it != t.end(); ++it)
             {
                 s_id = *it;
                 s_ids.erase(s_id);
