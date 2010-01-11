@@ -1,7 +1,7 @@
 <install>
     <name>TableDistortion</name>
 	
-	<version>0.01</version>
+	<version>0.02</version>
 	<author>Daniel Gallardo</author>
 	<url></url>
 	
@@ -16,6 +16,9 @@
 				<file>../../../addons/ofxTableDistortion/src/Grid.cpp</file>
 				<file>../../../addons/ofxTableDistortion/src/TableApp.hpp</file>
 				<file>../../../addons/ofxTableDistortion/src/TableApp.cpp</file>
+				<file>../../../addons/ofxTableDistortion/src/container.hpp</file>
+				<file>../../../addons/ofxTableDistortion/src/Simulator.cpp</file>
+				<file>../../../addons/ofxTableDistortion/src/Simulator.hpp</file>
 			</folder>
 		</src>
 		

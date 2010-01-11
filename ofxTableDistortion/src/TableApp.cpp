@@ -4,6 +4,35 @@
 * Universitat Pompeu Fabra
 * Music Technology Group
 */
+/*
+
+    TSIframework . Framework for Taller de Sistemes Interactius I
+    Universitat Pompeu Fabra
+
+    Copyright (c) 2009 Daniel Gallardo Grassot <dgallardo@iua.upf.edu>
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+
+*/
 
 #include <fstream>
 #include "TableApp.hpp"
@@ -27,8 +56,24 @@ TableApp::TableApp():
     angle(0),
     DistortionPath(DISTORTION_PATH),
     hide_cursor(true)
+    #ifdef SIMULATOR
+    ,simulator(new simulator::Simulator()),
+    is_simulating(false)
+    #endif
 {
     LoadDistortion();
+}
+
+TableApp::~TableApp(){
+    #ifdef SIMULATOR
+    delete simulator;
+    #endif
+    delete grid;
+}
+
+int TableApp::GetSquareSide(){
+    if(ofGetWidth() > ofGetHeight())return ofGetHeight();
+    else return ofGetWidth();
 }
 
 //--------------------------------------------------------------
@@ -147,12 +192,23 @@ void TableApp::DrawHelp()
         msg << "  l - load calibration file." << std::endl;
         msg << "  return  - toggle calibration parameter." << std::endl;
         msg << "  cursors - Changes the selected parameter." << std::endl;
+        #ifdef SIMULATOR
+        msg << "s - enable simulator." << std::endl;
+        msg << "Under simulator mode:" << std::endl;
+        msg << "  r - reset." << std::endl;
+        msg << "  a - hold." << std::endl;
+        msg << "  z - select." << std::endl;
+        #endif
         ofDrawBitmapString(msg.str(), 0, 0);
         glPopMatrix();
     }
 }
 
 void TableApp::draw(){
+    ofPushMatrix();
+    #ifdef SIMULATOR
+    if(is_simulating) ofScale(0.9f,0.9f,1.0f);
+    #endif
     StartDistortion();
     grid->Draw(calibration_enabled,calibration_mode);
     Draw();
@@ -160,6 +216,10 @@ void TableApp::draw(){
     ///Draws Info & help
     DrawInfo();
     DrawHelp();
+    ofPopMatrix();
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->Draw();
+    #endif
 }
 
 void TableApp::StartDistortion()
@@ -185,13 +245,31 @@ void TableApp::EndDistortion()
 }
 //--------------------------------------------------------------
 void TableApp::keyPressed(int key){
-
+    #ifdef SIMULATOR
+    switch(key)
+    {
+        case 'a':
+            simulator->Hold(true);
+        break;
+        case 'z':
+            simulator->Select(true);
+        break;
+    }
+    #endif
 }
 
 //--------------------------------------------------------------
 void TableApp::keyReleased(int key){
     switch(key)
     {
+        #ifdef SIMULATOR
+        case 'a':
+            simulator->Hold(false);
+        break;
+        case 'z':
+            simulator->Select(false);
+        break;
+        #endif
         case 'f':
                 ofToggleFullscreen();
 		break;
@@ -200,10 +278,16 @@ void TableApp::keyReleased(int key){
             calibration_enabled = !calibration_enabled;
         break;
         case OF_KEY_RETURN:
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled) calibration_mode ++;
             if(calibration_mode > 3) calibration_mode = 0;
         break;
         case OF_KEY_UP:
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled)
             {
                 switch(calibration_mode)
@@ -216,6 +300,9 @@ void TableApp::keyReleased(int key){
             }
         break;
         case OF_KEY_DOWN:
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled)
             {
                 switch(calibration_mode)
@@ -228,6 +315,9 @@ void TableApp::keyReleased(int key){
             }
         break;
         case OF_KEY_RIGHT:
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled)
             {
                 switch(calibration_mode)
@@ -240,6 +330,9 @@ void TableApp::keyReleased(int key){
             }
         break;
         case OF_KEY_LEFT:
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled)
             {
                 switch(calibration_mode)
@@ -275,8 +368,15 @@ void TableApp::keyReleased(int key){
                 angle_w=0;
                 angle=0;
             }
+            #ifdef SIMULATOR
+                if(is_simulating)
+                    simulator->Reset();
+            #endif
         break;
         case 'l':
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             if(calibration_enabled)
                 LoadDistortion();
         break;
@@ -284,7 +384,33 @@ void TableApp::keyReleased(int key){
             show_help = !show_help;
         break;
         case 'd':
+            #ifdef SIMULATOR
+            if(!is_simulating)
+            #endif
             distortion_enabled = !distortion_enabled;
+        break;
+        case 's':
+            #ifdef SIMULATOR
+                if(is_simulating){
+                    ///restore distorsion
+                    ///restore cursor
+                    distortion_enabled = was_distorsion_enabled;
+                    if(was_cursor_hide){
+                        hide_cursor=true;
+                        ofHideCursor();
+                    }
+                    is_simulating=false;
+                    simulator->Reset();
+                }
+                else{
+                    was_distorsion_enabled = distortion_enabled;
+                    was_cursor_hide = hide_cursor;
+                    distortion_enabled = false;
+                    hide_cursor=false;
+                    ofShowCursor();
+                    is_simulating=true;
+                }
+            #endif
         break;
     }
 }
@@ -300,22 +426,27 @@ void TableApp::windowResized(int w, int h){
 ///################################################################
 //--------------------------------------------------------------
 void TableApp::mouseMoved(int x, int y ){
-
 }
 
 //--------------------------------------------------------------
 void TableApp::mouseDragged(int x, int y, int button){
-
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->mouseDragged(x,y,button);
+    #endif
 }
 
 //--------------------------------------------------------------
 void TableApp::mousePressed(int x, int y, int button){
-
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->mousePressed(x,y,button);
+    #endif
 }
 
 //--------------------------------------------------------------
 void TableApp::mouseReleased(int x, int y, int button){
-
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->mouseReleased(x,y,button);
+    #endif
 }
 
 
