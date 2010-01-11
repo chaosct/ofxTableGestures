@@ -345,6 +345,11 @@ namespace simulator
             delete (*it);
         }
         cursors.clear();
+
+        cursors_escene.clear();
+        objects_escene.clear();
+        removeTuioCursor(NULL);
+        removeTuioObject(NULL);
     }
 
     cursor_list::iterator Simulator::IsAtCursorList(cursor* c){

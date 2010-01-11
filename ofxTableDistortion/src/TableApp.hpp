@@ -43,7 +43,7 @@
 #ifdef SIMULATOR
     #include "Simulator.hpp"
 #else
-    #warning Simulator not enable, if you need it, define SIMULATOR at project defines
+    #warning Simulator not enabled, if you need it, define SIMULATOR at project defines
 #endif
 
 class TableApp : public ofBaseApp{
