@@ -5,7 +5,7 @@
 		<Option title="TSIframework" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/TuioGestures/oscpack/ip/;addons/TuioGestures/oscpack/ip/posix/;addons/TuioGestures/oscpack/ip/win32/;addons/TuioGestures/oscpack/osc/;addons/TuioGestures/tuio/;" />
+		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/TuioGestures/oscpack/ip/;addons/TuioGestures/oscpack/ip/posix/;addons/TuioGestures/oscpack/ip/win32/;addons/TuioGestures/oscpack/osc/;addons/TuioGestures/tuio/;addons/TuioGestures/ofxosc/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -41,10 +41,8 @@
 					<Add directory="../../../libs/poco/include" />
 					<Add directory="../../../addons/ofxTableDistortion/src/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/oscpack/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/posix/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/win32/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
+					<Add directory="../../../addons/ofxTuioGestures/src/ofxosc" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -131,10 +129,8 @@
 					<Add directory="../../../libs/poco/include" />
 					<Add directory="../../../addons/ofxTableDistortion/src/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/oscpack/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/posix/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/win32/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
+					<Add directory="../../../addons/ofxTuioGestures/src/ofxosc" />
 				</Compiler>
 				<Linker>
 					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworksDebug.lib" />
@@ -208,9 +204,7 @@
 					<Add directory="../../../libs/poco/include" />
 					<Add directory="../../../addons/ofxTableDistortion/src/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/oscpack/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/posix/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/win32/" />
+					<Add directory="../../../addons/ofxTuioGestures/src/ofxosc" />
 					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
 				</Compiler>
 				<Linker>
@@ -298,9 +292,7 @@
 					<Add directory="../../../libs/poco/include" />
 					<Add directory="../../../addons/ofxTableDistortion/src/" />
 					<Add directory="../../../addons/ofxTuioGestures/src/oscpack/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/posix/" />
-					<Add directory="../../../addons/ofxTuioGestures/src/ip/win32/" />
+					<Add directory="../../../addons/ofxTuioGestures/src/ofxosc" />
 					<Add directory="../../../addons/ofxTuioGestures/src/tuio/h/" />
 				</Compiler>
 				<Linker>
@@ -342,17 +334,68 @@
 				</ExtraCommands>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add option="-DSIMULATOR" />
+		</Compiler>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.cpp">
 			<Option virtualFolder="addons/TableDistortion" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.hpp">
 			<Option virtualFolder="addons/TableDistortion" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/Simulator.cpp">
+			<Option virtualFolder="addons/TableDistortion/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/Simulator.hpp">
+			<Option virtualFolder="addons/TableDistortion/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.cpp">
 			<Option virtualFolder="addons/TableDistortion" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.hpp">
 			<Option virtualFolder="addons/TableDistortion" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/container.hpp">
+			<Option virtualFolder="addons/TableDistortion/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOsc.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscArg.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscBundle.cpp">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscBundle.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscMessage.cpp">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscMessage.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscReceiver.cpp">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscReceiver.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscSender.cpp">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/ofxosc/ofxOscSender.h">
+			<Option virtualFolder="addons/TuioGestures/ofxosc/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/oscpack/ip/IpEndpointName.cpp">
 			<Option virtualFolder="addons/TuioGestures/oscpack/ip" />
@@ -485,15 +528,6 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h">
 			<Option virtualFolder="addons/TuioGestures/tuio" />
-		</Unit>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>
