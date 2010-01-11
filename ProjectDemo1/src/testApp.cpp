@@ -15,7 +15,7 @@ void testApp::Update(){
 void testApp::Draw(){
     //processem els gestos
     processTevents();
-    for (Tcursors::iterator it = cursors.begin(); it != cursors.end(); it++)
+    for (Tcursors::iterator it = cursors.begin(); it != cursors.end(); ++it)
     {
         DirectFinger * df = it->second;
         if(df)
@@ -28,7 +28,7 @@ void testApp::Draw(){
         }
     }
 
-    for (Tobjects::iterator it = objects.begin(); it != objects.end(); it++)
+    for (Tobjects::iterator it = objects.begin(); it != objects.end(); ++it)
     {
         DirectObject * dob = it->second;
         if(dob)
