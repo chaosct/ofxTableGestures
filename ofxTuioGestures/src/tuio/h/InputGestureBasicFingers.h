@@ -31,7 +31,7 @@
 #ifndef TUIO_INPUTGESTUREBASICFINGERS_H
 #define TUIO_INPUTGESTUREBASICFINGERS_H
 
-#include "osc/OscReceivedElements.h"
+#include "OscReceivedElements.h"
 #include "InputGesture.h"
 #include "TEvent.h"
 #include <set>

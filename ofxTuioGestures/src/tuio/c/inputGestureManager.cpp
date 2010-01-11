@@ -30,7 +30,7 @@
 #include "inputGestureManager.h"
 #include "InputGesture.h"
 #include "EventQueue.h"
-#include "osc/OscReceivedElements.h"
+#include "OscReceivedElements.h"
 
 namespace tuio
 {
@@ -51,7 +51,8 @@ void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArg
     for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
-        i->ReceiveCall(addr, argList.getCopy());
+        osc::ReceivedMessageArgumentStream as  = argList;
+        i->ReceiveCall(addr, as);
         for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); ++it)
         {
             queue->push(*it);

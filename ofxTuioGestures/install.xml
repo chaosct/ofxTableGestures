@@ -4,6 +4,7 @@
 	<version>0.01</version>
 	<author>Carles F. Julià</author>
 	<url></url>
+	<requires>ofxOsc</requires>
 	
 	<add>	
 		<!-- 	=====================================================================	-->
@@ -11,36 +12,6 @@
 		<!-- 	=====================================================================	-->
 	
 		<src>
-			<folder name="addons/TuioGestures/oscpack/ip">
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/IpEndpointName.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/IpEndpointName.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/NetworkingUtils.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/PacketListener.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/TimerListener.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/UdpSocket.h</file>
-			</folder>
-			<folder name="addons/TuioGestures/oscpack/ip/posix">
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/posix/NetworkingUtils.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/posix/UdpSocket.cpp</file>
-			</folder>
-			<folder name="addons/TuioGestures/oscpack/ip/win32">
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/win32/NetworkingUtils.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/ip/win32/UdpSocket.cpp</file>
-			</folder>
-			<folder name="addons/TuioGestures/oscpack/osc">
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/MessageMappingOscPacketListener.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscException.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscHostEndianness.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscOutboundPacketStream.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscOutboundPacketStream.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscPacketListener.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscPrintReceivedElements.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscPrintReceivedElements.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscReceivedElements.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscReceivedElements.h</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscTypes.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/oscpack/osc/OscTypes.h</file>
-			</folder>
 			<folder name="addons/TuioGestures/tuio">
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp</file>
@@ -66,13 +37,6 @@
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h</file>
 			</folder>
 		</src>
-		<include>
-			<path>../../../addons/ofxTuioGestures/src/oscpack/</path>
-			<path>../../../addons/ofxTuioGestures/src/ip/</path>
-			<path>../../../addons/ofxTuioGestures/src/ip/posix/</path>
-			<path>../../../addons/ofxTuioGestures/src/ip/win32/</path>
-			<path>../../../addons/ofxTuioGestures/src/tuio/h/</path>
-		</include>
 		
 	</add>
 	 

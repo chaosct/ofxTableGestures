@@ -38,7 +38,7 @@
 #include <windows.h>
 #endif
 
-#include "ip/UdpSocket.h"
+#include "UdpSocket.h"
 
 namespace tuio { class inputGestureManager; }
 namespace tuio { class EventQueue; }

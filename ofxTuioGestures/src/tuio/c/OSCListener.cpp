@@ -28,8 +28,8 @@
 
 */
 #include "OSCListener.h"
-#include "osc/OscReceivedElements.h"
-#include "ip/IpEndpointName.h"
+#include "OscReceivedElements.h"
+#include "IpEndpointName.h"
 
 namespace tuio {
 

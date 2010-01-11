@@ -31,7 +31,7 @@
 #ifndef TUIO_INPUTGESTUREBASICOBJECTS_H
 #define TUIO_INPUTGESTUREBASICOBJECTS_H
 
-#include "osc/OscReceivedElements.h"
+#include "OscReceivedElements.h"
 #include "InputGesture.h"
 #include <set>
 #include "TEvent.h"

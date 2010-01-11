@@ -33,7 +33,7 @@
 
 
 
-#include "osc/OscPacketListener.h"
+#include "OscPacketListener.h"
 
 //namespace osc { class ReceivedMessageArgumentStream; }
 //namespace osc { class ReceivedMessage; class IpEndpointName;}
