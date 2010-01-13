@@ -9,7 +9,7 @@
     TSIframework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2009 Daniel Gallardo Grassot <dgallardo@iua.upf.edu>
+    Copyright (c) 2009 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
