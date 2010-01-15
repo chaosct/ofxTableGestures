@@ -32,6 +32,7 @@
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/inputGestureManager.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/OSCListener.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/Singleton.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/TEvent.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioApp.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h</file>
