@@ -73,7 +73,7 @@ class TTEvent : public TEvent
         if (!ins)
         {
             uniquename = EventTypes::Instance().getNumber();
-            std::cout << "registered eventtype " << uniquename <<std::endl;
+            //std::cout << "registered eventtype " << uniquename <<std::endl;
             ins = true;
         }
         name = uniquename;
