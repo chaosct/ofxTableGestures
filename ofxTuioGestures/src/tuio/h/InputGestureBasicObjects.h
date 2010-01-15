@@ -41,25 +41,22 @@ using namespace osc;
 
 namespace tuio {
 
-class TeventBasicObjectsRemoveObject : public TEvent
+class TeventBasicObjectsRemoveObject : public TTEvent< TeventBasicObjectsRemoveObject >
 {
     public:
-    TeventBasicObjectsRemoveObject():TEvent(event_object_remove){}
     int32 s_id;
 };
 
-class TeventBasicObjectsNewObject : public TEvent
+class TeventBasicObjectsNewObject : public TTEvent<TeventBasicObjectsNewObject>
 {
     public:
-    TeventBasicObjectsNewObject():TEvent(event_object_new){}
     int32 s_id, f_id;
     float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
 
-class TeventBasicObjectsMoveObject : public TEvent
+class TeventBasicObjectsMoveObject : public TTEvent <TeventBasicObjectsMoveObject>
 {
     public:
-    TeventBasicObjectsMoveObject():TEvent(event_object_move){}
     int32 s_id, f_id;
     float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
@@ -84,19 +81,19 @@ class CanBasicObjects : public Base
 
     //processing events callbacks
 
-    TEventHandler(event_object_remove)
+    TEventHandler(TeventBasicObjectsRemoveObject)
     {
         TeventBasicObjectsRemoveObject * e = static_cast<TeventBasicObjectsRemoveObject *>(evt);
         removeTuioObject(e->s_id);
     }
 
-    TEventHandler(event_object_new)
+    TEventHandler(TeventBasicObjectsNewObject)
     {
         TeventBasicObjectsNewObject * e = static_cast<TeventBasicObjectsNewObject *>(evt);
         addTuioObject(e->s_id, e->f_id, e->xpos, e->ypos, e->angle, e->xspeed, e->yspeed, e->rspeed, e->maccel, e->raccel);
     }
 
-    TEventHandler(event_object_move)
+    TEventHandler(TeventBasicObjectsMoveObject)
     {
         TeventBasicObjectsMoveObject * e = static_cast<TeventBasicObjectsMoveObject *>(evt);
         updateTuioObject(e->s_id, e->f_id, e->xpos, e->ypos, e->angle, e->xspeed, e->yspeed, e->rspeed, e->maccel, e->raccel);
@@ -105,9 +102,9 @@ class CanBasicObjects : public Base
     //registering
     CanBasicObjects()
     {
-        TRegistraCallback(CanBasicObjects,event_object_remove);
-        TRegistraCallback(CanBasicObjects,event_object_new);
-        TRegistraCallback(CanBasicObjects,event_object_move);
+        TRegistraCallback(CanBasicObjects,TeventBasicObjectsRemoveObject);
+        TRegistraCallback(CanBasicObjects,TeventBasicObjectsNewObject);
+        TRegistraCallback(CanBasicObjects,TeventBasicObjectsMoveObject);
         registerMeToInputGestureManager(Singleton<InputGestureBasicObjects>::get());
     }
 

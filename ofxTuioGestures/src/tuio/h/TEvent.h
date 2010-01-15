@@ -35,29 +35,51 @@
 
 #include <vector>
 #include <iostream>
-
+#include "Singleton.h"
 
 namespace tuio {
 
-enum EventType {
-    //InputGestureBasicFingers
-    event_finger_remove, event_finger_move, event_finger_new,
-    //InputGestureDirectFingers
-    event_dfinger_remove, event_dfinger_new,
-    //InputGestureBasicObjects
-    event_object_remove, event_object_move, event_object_new,
-    //InputGestureDirectObjects
-    event_dobject_remove, event_dobject_new,
+
+class EventTypes : public Singleton<EventTypes>
+{
+    private:
+    unsigned int n;
+    public:
+    EventTypes():n(0){}
+    unsigned int getNumber()
+    {
+        return n++;
+    }
 };
+
 
 //Els destructors s'usen a través d'herencia
 class TEvent {
   public:
-     EventType name;
-
-    TEvent(EventType n):name(n){}
+      unsigned int name;
+//    virtual unsigned int getName(){return name;}
+    TEvent(){}
 
 };
+
+template <typename TE>
+class TTEvent : public TEvent
+{
+    public:
+    TTEvent()
+    {
+        static bool ins = false;
+        static unsigned int uniquename;
+        if (!ins)
+        {
+            uniquename = EventTypes::Instance().getNumber();
+            std::cout << "registered eventtype " << uniquename <<std::endl;
+            ins = true;
+        }
+        name = uniquename;
+    }
+};
+
 
 } // namespace tuio
 

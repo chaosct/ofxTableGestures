@@ -30,7 +30,7 @@
 #ifndef TUIOAPP_H_INCLUDED
 #define TUIOAPP_H_INCLUDED
 
-#define TRegistraCallback(T,m) Base::getEP()[m] = new Callback<T>(this,&T::EP_##m )
+#define TRegistraCallback(T,TE) Base::getEP()[Singleton<TE>::Instance().name] = new Callback<T>(this,&T::EP_##TE )
 #define TEventHandler(en) void EP_##en (TEvent * evt)
 
 

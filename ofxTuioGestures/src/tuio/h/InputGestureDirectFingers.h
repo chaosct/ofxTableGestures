@@ -49,17 +49,15 @@ class DirectFinger
     float xpos, ypos, xspeed, yspeed, maccel;
 };
 
-class TeventDirectFingersRemoveFinger : public TEvent
+class TeventDirectFingersRemoveFinger : public TTEvent<TeventDirectFingersRemoveFinger>
 {
     public:
-    TeventDirectFingersRemoveFinger():TEvent(event_dfinger_remove){}
     int32 s_id;
 };
 
-class TeventDirectFingersNewFinger : public TEvent
+class TeventDirectFingersNewFinger : public TTEvent<TeventDirectFingersNewFinger>
 {
     public:
-    TeventDirectFingersNewFinger():TEvent(event_dfinger_new){}
     int32 s_id;
     DirectFinger * df;
 };
@@ -87,12 +85,12 @@ class CanDirectFingers : public  Base
 
     //processing events callbacks
 
-    TEventHandler(event_dfinger_remove)
+    TEventHandler(TeventDirectFingersRemoveFinger)
     {
         TeventDirectFingersRemoveFinger * e = static_cast<TeventDirectFingersRemoveFinger *>(evt);
         removeCursor(e->s_id);
     }
-    TEventHandler(event_dfinger_new)
+    TEventHandler(TeventDirectFingersNewFinger)
     {
         TeventDirectFingersNewFinger * e = static_cast<TeventDirectFingersNewFinger *>(evt);
         newCursor(e->s_id,e->df);
@@ -101,8 +99,8 @@ class CanDirectFingers : public  Base
     //registering
     CanDirectFingers()
     {
-        TRegistraCallback(CanDirectFingers,event_dfinger_remove);
-        TRegistraCallback(CanDirectFingers,event_dfinger_new);
+        TRegistraCallback(CanDirectFingers,TeventDirectFingersRemoveFinger);
+        TRegistraCallback(CanDirectFingers,TeventDirectFingersNewFinger);
         registerMeToInputGestureManager(Singleton<InputGestureDirectFingers>::get());
     }
 

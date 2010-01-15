@@ -50,17 +50,15 @@ class DirectObject
 
 // Events definitions
 
-class TeventDirectObjectsRemoveObject : public TEvent
+class TeventDirectObjectsRemoveObject : public TTEvent <TeventDirectObjectsRemoveObject>
 {
     public:
-    TeventDirectObjectsRemoveObject():TEvent(event_dobject_remove){}
     int32 s_id, f_id;
 };
 
-class TeventDirectObjectsNewObject : public TEvent
+class TeventDirectObjectsNewObject : public TTEvent<TeventDirectObjectsNewObject>
 {
     public:
-    TeventDirectObjectsNewObject():TEvent(event_dobject_new){}
     int32 s_id, f_id;
     DirectObject * dob;
 };
@@ -85,12 +83,12 @@ class CanDirectObjects : public  Base
     virtual void removeObject(int32 s_id, int32 f_id){}
 
     //processing events callbacks
-    TEventHandler(event_dobject_remove)
+    TEventHandler(TeventDirectObjectsRemoveObject)
     {
         TeventDirectObjectsRemoveObject * e = static_cast<TeventDirectObjectsRemoveObject *>(evt);
         removeObject(e->s_id, e->f_id);
     }
-    TEventHandler(event_dobject_new)
+    TEventHandler(TeventDirectObjectsNewObject)
     {
         TeventDirectObjectsNewObject * e = static_cast<TeventDirectObjectsNewObject *>(evt);
         newObject(e->s_id,e->f_id, e->dob);
@@ -99,8 +97,8 @@ class CanDirectObjects : public  Base
     //registering
     CanDirectObjects()
     {
-        TRegistraCallback(CanDirectObjects,event_dobject_remove);
-        TRegistraCallback(CanDirectObjects,event_dobject_new);
+        TRegistraCallback(CanDirectObjects,TeventDirectObjectsRemoveObject);
+        TRegistraCallback(CanDirectObjects,TeventDirectObjectsNewObject);
         registerMeToInputGestureManager(Singleton<InputGestureDirectObjects>::get());
     }
 

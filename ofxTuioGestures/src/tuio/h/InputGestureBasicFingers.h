@@ -41,25 +41,22 @@ using namespace osc;
 
 namespace tuio {
 
-class TeventBasicFingersRemoveFinger : public TEvent
+class TeventBasicFingersRemoveFinger : public TTEvent<TeventBasicFingersRemoveFinger>
 {
     public:
-    TeventBasicFingersRemoveFinger():TEvent(event_finger_remove){}
     int32 s_id;
 };
 
-class TeventBasicFingersNewFinger : public TEvent
+class TeventBasicFingersNewFinger : public TTEvent< TeventBasicFingersNewFinger>
 {
     public:
-    TeventBasicFingersNewFinger():TEvent(event_finger_new){}
     int32 s_id;
     float xpos, ypos, xspeed, yspeed, maccel;
 };
 
-class TeventBasicFingersMoveFinger : public TEvent
+class TeventBasicFingersMoveFinger : public TTEvent<TeventBasicFingersMoveFinger>
 {
     public:
-    TeventBasicFingersMoveFinger():TEvent(event_finger_move){}
     int32 s_id;
     float xpos, ypos, xspeed, yspeed, maccel;
 };
@@ -83,19 +80,19 @@ class CanBasicFingers : public Base
 
     //processing events callbacks
 
-    TEventHandler(event_finger_remove)
+    TEventHandler(TeventBasicFingersRemoveFinger)
     {
         TeventBasicFingersRemoveFinger * e = static_cast<TeventBasicFingersRemoveFinger *>(evt);
         removeTuioCursor(e->s_id);
     }
 
-    TEventHandler(event_finger_new)
+    TEventHandler(TeventBasicFingersNewFinger)
     {
         TeventBasicFingersNewFinger * e = static_cast<TeventBasicFingersNewFinger *>(evt);
         addTuioCursor(e->s_id,e->xpos, e->ypos, e->xspeed, e->yspeed, e->maccel);
     }
 
-    TEventHandler(event_finger_move)
+    TEventHandler(TeventBasicFingersMoveFinger)
     {
         TeventBasicFingersMoveFinger * e = static_cast<TeventBasicFingersMoveFinger *>(evt);
         updateTuioCursor(e->s_id,e->xpos, e->ypos, e->xspeed, e->yspeed, e->maccel);
@@ -104,9 +101,9 @@ class CanBasicFingers : public Base
     //registering
     CanBasicFingers()
     {
-        TRegistraCallback(CanBasicFingers,event_finger_remove);
-        TRegistraCallback(CanBasicFingers,event_finger_new);
-        TRegistraCallback(CanBasicFingers,event_finger_move);
+        TRegistraCallback(CanBasicFingers,TeventBasicFingersRemoveFinger);
+        TRegistraCallback(CanBasicFingers,TeventBasicFingersNewFinger);
+        TRegistraCallback(CanBasicFingers,TeventBasicFingersMoveFinger);
         registerMeToInputGestureManager(Singleton<InputGestureBasicFingers>::get());
     }
 
