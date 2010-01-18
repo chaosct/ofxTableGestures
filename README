@@ -1,0 +1,13 @@
+OF TangibleFramework is a collection of addons to be used with OpenFrameworks to support rich interaction using tabletop and tangible interfaces via the TUIO protocol.
+
+At the moment it includes:
+* An embedded simulator.
+* Distortion correction for projection.
+* A general framework to create gesture recognizers directly or through composition.
+* A lock-free thread-safe event queue.
+
+Authors:
+ Carles F. Julià <carles.fernandez@upf.edu>
+ Daniel Gallardo <daniel.gallardo@upf.edu>
+
+This project is released under the MIT license.
