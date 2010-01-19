@@ -88,7 +88,7 @@ void testApp::removeObject(int32 s_id, int32 f_id)
     objects[s_id]=NULL;
 }
 
-void testApp::click(float x, float y)
+void testApp::tab(float x, float y)
 {
     rings.push_back(new Ring(x*ofGetWidth(),y*ofGetHeight()));
 }

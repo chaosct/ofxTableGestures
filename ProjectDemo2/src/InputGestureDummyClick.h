@@ -8,13 +8,13 @@
 namespace tuio
 {
 
-class clickcursor
+class tabcursor
 {
     public:
     float tstamp;
     float x,y;
     float maxx, maxy, minx, miny;
-    clickcursor(float _x,float _y,float t):tstamp(t),x(_x),y(_y),maxx(x),maxy(y),minx(x),miny(y){}
+    tabcursor(float _x,float _y,float t):tstamp(t),x(_x),y(_y),maxx(x),maxy(y),minx(x),miny(y){}
     void update(float _x,float _y)
     {
         maxx = max(maxx,_x);
@@ -22,7 +22,7 @@ class clickcursor
         minx = min(minx,_x);
         miny = min(miny,_y);
     }
-    bool isclick()
+    bool istab()
     {
         float now = ofGetElapsedTimef();
         float dt = now - tstamp;
@@ -32,19 +32,19 @@ class clickcursor
     }
 };
 
-class TeventDummyClickClicked : public TTEvent <TeventDummyClickClicked>
+class TeventDummyTabTabed : public TTEvent <TeventDummyTabTabed>
 {
 public:
     float duration;
     float x,y;
 };
 
-class InputGestureDummyClick : public CanBasicFingers < tuioApp <InputGesture> >
+class InputGestureDummyTab : public CanBasicFingers < tuioApp <InputGesture> >
 {
-    std::map<int32,clickcursor *> tstamps;
+    std::map<int32,tabcursor *> tstamps;
     InputGestureBasicFingers * basicfingers;
 public:
-    InputGestureDummyClick()
+    InputGestureDummyTab()
     {
         basicfingers = Singleton< InputGestureBasicFingers>::get();
     }
@@ -58,7 +58,7 @@ public:
     //From CanBasicFingers
     void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
     {
-        tstamps[id] = new clickcursor(xpos,ypos,ofGetElapsedTimef());
+        tstamps[id] = new tabcursor(xpos,ypos,ofGetElapsedTimef());
     }
     void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
     {
@@ -66,9 +66,9 @@ public:
     }
     void removeTuioCursor(int32 id)
     {
-        if (tstamps[id]->isclick())
+        if (tstamps[id]->istab())
         {
-            TeventDummyClickClicked * evt = new TeventDummyClickClicked();
+            TeventDummyTabTabed * evt = new TeventDummyTabTabed();
             evt->x = tstamps[id]->x;
             evt->y = tstamps[id]->y;
             events.push_back(evt);
@@ -77,24 +77,24 @@ public:
 };
 
 template <class Base>
-class CanDummyClick : public  Base
+class CanDummyTab : public  Base
 {
 public:
     //Interface redefined by ofApp
-    virtual void click(float x, float y) {}
+    virtual void tab(float x, float y) {}
 
     //processing events callbacks
-    TEventHandler(TeventDummyClickClicked)
+    TEventHandler(TeventDummyTabTabed)
     {
-        TeventDummyClickClicked * e = static_cast<TeventDummyClickClicked *>(evt);
-        click(e->x,e->y);
+        TeventDummyTabTabed * e = static_cast<TeventDummyTabTabed *>(evt);
+        tab(e->x,e->y);
     }
 
     //registering
-    CanDummyClick()
+    CanDummyTab()
     {
-        TRegistraCallback(CanDummyClick,TeventDummyClickClicked);
-        registerMeToInputGestureManager(Singleton<InputGestureDummyClick>::get());
+        TRegistraCallback(CanDummyTab,TeventDummyTabTabed);
+        registerMeToInputGestureManager(Singleton<InputGestureDummyTab>::get());
     }
 
     //allways needed
