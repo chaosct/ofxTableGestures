@@ -33,6 +33,7 @@
 
 
 #include <list>
+#include <algorithm>
 #include "OSCListener.h"
 
 namespace tuio { class InputGesture; }
@@ -49,7 +50,8 @@ class inputGestureManager : public OSCListener {
   public:
     static void addGesture(InputGesture *IG)
     {
-        instance->gestures.push_back(IG);
+        if (std::find (instance->gestures.begin(), instance->gestures.end(), IG) == instance->gestures.end())
+            instance->gestures.push_back(IG);
     }
     inputGestureManager();
     EventQueue * queue;
