@@ -10,7 +10,7 @@
 //Necessari pel reconeixement de gestos
 #include "tuioApp.h"
 #include "InputGestureClasses.h"
-#include "InputGestureDummyClick.h"
+#include "InputGestureDummyTab.h"
 using namespace tuio;
 
 
