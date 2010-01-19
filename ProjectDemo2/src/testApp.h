@@ -10,7 +10,7 @@
 //Necessari pel reconeixement de gestos
 #include "tuioApp.h"
 #include "InputGestureClasses.h"
-#include "InputGestureDummyClick.h"
+#include "InputGestureDummyTab.h"
 using namespace tuio;
 
 
@@ -76,7 +76,7 @@ class Ring
     }
 };
 
-class testApp : public CanDummyClick <CanDirectObjects< CanDirectFingers <tuioApp <TableApp> > > >
+class testApp : public CanDummyTab <CanDirectObjects< CanDirectFingers <tuioApp <TableApp> > > >
 {
 private:
     typedef std::map<int32,DirectFinger *> Tcursors;
@@ -106,8 +106,8 @@ public:
     void newObject(int32 s_id, int32 f_id, DirectObject *);
     void removeObject(int32 s_id, int32 f_id);
 
-    //DummyClick
-    void click(float x,float y);
+    //DummyTab
+    void tab(float x,float y);
 };
 
 #endif
