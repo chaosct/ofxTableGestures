@@ -12,30 +12,33 @@
 		<!-- 	=====================================================================	-->
 	
 		<src>
-			<folder name="addons/TuioGestures/tuio">
+			<folder name="addons/TuioGestures/">
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicFingers.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicObjects.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectFingers.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/OSCListener.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/tuioApp.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/tuioinput.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/EventQueue.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGesture.h</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicFingers.h</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicObjects.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureClasses.h</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectFingers.h</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/inputGestureManager.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/OSCListener.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/Singleton.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/TEvent.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioApp.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h</file>
+			</folder>
+			<folder name="addons/TuioGestures/Gestures">
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/DirectPoint.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicFingers.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicObjects.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectFingers.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicFingers.cpp</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicObjects.cpp</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectFingers.cpp</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp</file>
 			</folder>
 		</src>
 		
