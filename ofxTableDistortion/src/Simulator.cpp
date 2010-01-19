@@ -33,6 +33,7 @@
 
 #define INC_STEP 20
 #define CONFIGPATH "simulator.config"
+#define M_2PI M_PI*2
 
 namespace simulator
 {
@@ -210,6 +211,8 @@ namespace simulator
             for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
                 if((*it)->mouse_on){
                     (*it)->angle += (2*PI*increment)/100;
+                    if((*it)->angle >= M_2PI)(*it)->angle = (*it)->angle-M_2PI;
+                    if((*it)->angle < 0)(*it)->angle = (*it)->angle+M_2PI;
                     if(!(*it)->isUp)objectUpdated(*it);
                 }
             }
@@ -453,7 +456,7 @@ namespace simulator
             message_set.addIntArg(o->fid);
             message_set.addFloatArg( (((float)o->xpos)/ofGetWidth())*1.1f );
             message_set.addFloatArg( (((float)o->ypos)/ofGetHeight())*1.1f );
-            message_set.addFloatArg(o->angle);
+            message_set.addFloatArg( o->angle );
             message_set.addFloatArg(o->xspeed);
             message_set.addFloatArg(o->yspeed);
             message_set.addFloatArg(o->rspeed);
