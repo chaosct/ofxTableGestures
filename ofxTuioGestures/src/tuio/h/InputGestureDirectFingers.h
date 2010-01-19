@@ -34,6 +34,7 @@
 #include "InputGesture.h"
 #include "TEvent.h"
 #include "tuioApp.h"
+#include "DirectPoint.h"
 #include <map>
 
 using namespace osc;
@@ -42,11 +43,11 @@ namespace tuio
 {
 
 
-class DirectFinger
+class DirectFinger: public DirectPoint
 {
     public:
     int32 s_id;
-    float xpos, ypos, xspeed, yspeed, maccel;
+    float xspeed, yspeed, maccel;
 };
 
 class TeventDirectFingersRemoveFinger : public TTEvent<TeventDirectFingersRemoveFinger>

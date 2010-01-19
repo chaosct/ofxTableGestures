@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/TuioGestures/tuio/;addons/ofxOsc/src/;" />
+		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/ofxOsc/src/;addons/TuioGestures/;addons/TuioGestures/Gestures/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -381,6 +381,9 @@
 		<Unit filename="src/InputGestureDummyClick.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/InputGestureFingerObject.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -412,70 +415,73 @@
 			<Option virtualFolder="addons/TableDistortion/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicFingers.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureBasicObjects.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectFingers.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/OSCListener.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioApp.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioinput.cpp">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/DirectPoint.h">
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/EventQueue.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGesture.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicFingers.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureBasicObjects.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureClasses.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectFingers.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/OSCListener.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/TEvent.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/inputGestureManager.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/tuioApp.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h">
-			<Option virtualFolder="addons/TuioGestures/tuio" />
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

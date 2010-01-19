@@ -33,6 +33,7 @@
 
 #include "InputGestureBasicObjects.h"
 #include "TEvent.h"
+#include "DirectPoint.h"
 #include <map>
 
 using namespace osc;
@@ -41,11 +42,11 @@ namespace tuio
 {
 
 
-class DirectObject
+class DirectObject:public DirectPoint
 {
     public:
     int32 s_id, f_id;
-    float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
+    float angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
 
 // Events definitions
