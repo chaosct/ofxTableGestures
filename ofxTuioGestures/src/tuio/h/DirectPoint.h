@@ -24,6 +24,11 @@ class DirectPoint{
             float dy = point.ypos -ypos;
             return sqrt( dx*dx + dy*dy);
         }
+        float getDistance(float x, float y){
+            float dx = x -xpos;
+            float dy = y -ypos;
+            return sqrt( dx*dx + dy*dy);
+        }
         ///getAngle-reurns the angle between this and point
         ///angle = atan( |y2-y1| / |x2-x1| )
         float getAngle(const DirectPoint& point){

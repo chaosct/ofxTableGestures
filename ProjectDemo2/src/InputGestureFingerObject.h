@@ -1,7 +1,7 @@
 #ifndef INPUTGESTUREFINGEROBJECT_H_INCLUDED
 #define INPUTGESTUREFINGEROBJECT_H_INCLUDED
 
-#include "InputGestureDummyClick.h"
+#include "InputGestureDummyTab.h"
 #include "InputGestureDirectFingers.h"
 #include "InputGestureBasicFingers.h"
 #include "InputGestureDirectObjects.h"
@@ -30,6 +30,10 @@ class objectfinger
     ///distance object-finger
     float distance (DirectFinger* finger){
         return object->getDistance(*finger);
+    }
+    ///distance object-(x,y)
+    float distance (float x, float y){
+        return object->getDistance(x,y);
     }
     ///relates finger with the object
     void fingerAdd(DirectFinger* finger){
@@ -69,15 +73,15 @@ public:
     DirectObject* object;
     DirectFinger* finger;
 };
-/*/// TeventObjectFingerTap -> reports a 'Tap' gesture of a finger
+/// TeventObjectFingerTap -> reports a 'Tap' gesture of a finger
 class TeventObjectFingerTap : public TTEvent <TeventObjectFingerTap>
 {
 public:
     DirectObject* object;
-    DirectFinger* finger;
-};*/
+    float x,y;
+};
 
-class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectObjects < tuioApp <InputGesture> > > >
+class InputObjectFinger : public CanDummyTab < CanBasicFingers < CanDirectFingers < CanDirectObjects < tuioApp <InputGesture> > > > >
 {
     private:
         std::map<int32,objectfinger*> objects;
@@ -85,11 +89,13 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
         InputGestureBasicFingers * basicfingers;
         InputGestureDirectFingers * directfingers;
         InputGestureDirectObjects * directobjects;
+        InputGestureDummyTab *dummytab;
     public:
         InputObjectFinger(){
             basicfingers = Singleton < InputGestureBasicFingers >::get();
             directfingers = Singleton < InputGestureDirectFingers >::get();
             directobjects = Singleton < InputGestureDirectObjects >::get();
+            dummytab = Singleton <InputGestureDummyTab>::get();
         }
         virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
         {
@@ -98,6 +104,8 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
             for (std::list<TEvent *>::iterator it = directfingers->events.begin() ; it != directfingers->events.end() ; ++it)
                 processTevent(*it);
             for (std::list<TEvent *>::iterator it = directobjects->events.begin() ; it != directobjects->events.end() ; ++it)
+                processTevent(*it);
+            for (std::list<TEvent *>::iterator it = dummytab->events.begin() ; it != dummytab->events.end() ; ++it)
                 processTevent(*it);
         }
         ///FromCanDirectObjects
@@ -109,12 +117,12 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
             objects.erase(s_id);
             for (std::map<int32, DirectFinger*>::iterator it = obfi->fingers.begin(); it != obfi->fingers.end(); it++){
                 orphan_fingers[it->first] = it->second;
-                /// event object finger removed
+                /// object finger removed
                 TeventObjectFingerRelease * evt = new TeventObjectFingerRelease();
                 evt->object = obfi->object;
                 evt->finger = it->second;
                 events.push_back(evt);
-                /// event object finger removed
+                /// object finger removed
             }
             delete obfi;
         }
@@ -131,12 +139,12 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
             }
             if(distance <= GESTURE_DISTANCE){
                 tmp->fingerAdd(dfi);
-                /// crear event object fingeradd
+                /// event object fingeradd
                 TeventObjectFingerAdd * evt = new TeventObjectFingerAdd();
                 evt->object = tmp->object;
                 evt->finger = dfi;
                 events.push_back(evt);
-                /// crear event object fingeradd
+                /// event object fingeradd
             }else{
                 orphan_fingers[dfi->s_id]=dfi;
             }
@@ -170,12 +178,12 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
             bool found = false;
             for(std::map<int32,objectfinger*>::iterator it = objects.begin(); it != objects.end(); it++ ){
                 if(it->second->containsFinger(id)){
-                    /// crear event object finger updated
+                    /// event object finger updated
                     TeventObjectFingerUpdate * evt = new TeventObjectFingerUpdate();
                     evt->object = it->second->object;
                     evt->finger = it->second->fingers[id];
                     events.push_back(evt);
-                    /// crear event object finger updated
+                    /// event object finger updated
                     found = true;
                 }
             }
@@ -185,6 +193,20 @@ class InputObjectFinger : public CanBasicFingers < CanDirectFingers < CanDirectO
                     newCursor(id, it->second);
                 }else{
                     std::cout << "objectfinger: unexpected error updating finger" << std::endl;
+                }
+            }
+        }
+        ///From CanDummyTab
+        virtual void tab(float x, float y) {
+            for(std::map<int32,objectfinger*>::iterator it = objects.begin(); it != objects.end(); it++ ){
+                if(it->second->distance(x,y) <= GESTURE_DISTANCE){
+                    /// event object finger tab
+                    TeventObjectFingerTap * evt = new TeventObjectFingerTap();
+                    evt->object = it->second->object;
+                    evt->x = x;
+                    evt->y = y;
+                    events.push_back(evt);
+                    /// event object finger tab
                 }
             }
         }
@@ -198,6 +220,7 @@ public:
     virtual void objectFingerAdd(DirectObject* obj, DirectFinger* finger) {}
     virtual void objectFingerUpdate(DirectObject* obj, DirectFinger* finger) {}
     virtual void objectFingerRemove(DirectObject* obj, DirectFinger* finger) {}
+    virtual void objectFingerTap(DirectObject* obj, float x, float y) {}
 
     //processing events callbacks
     TEventHandler(TeventObjectFingerAdd)
@@ -215,6 +238,11 @@ public:
         TeventObjectFingerRelease * e = static_cast<TeventObjectFingerRelease *>(evt);
         objectFingerRemove(e->object,e->finger);
     }
+    TEventHandler(TeventObjectFingerTap)
+    {
+        TeventObjectFingerTap * e = static_cast<TeventObjectFingerTap *>(evt);
+        objectFingerTap(e->object,e->x,e->y);
+    }
 
     //registering
     CanObjectFinger()
@@ -222,6 +250,7 @@ public:
         TRegistraCallback(CanObjectFinger,TeventObjectFingerAdd);
         TRegistraCallback(CanObjectFinger,TeventObjectFingerUpdate);
         TRegistraCallback(CanObjectFinger,TeventObjectFingerRelease);
+        TRegistraCallback(CanObjectFinger,TeventObjectFingerTap);
         registerMeToInputGestureManager(Singleton<InputObjectFinger>::get());
     }
 

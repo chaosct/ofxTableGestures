@@ -10,7 +10,7 @@
 //Necessari pel reconeixement de gestos
 #include "tuioApp.h"
 #include "InputGestureClasses.h"
-#include "InputGestureDummyTab.h"
+//#include "InputGestureDummyTab.h"
 using namespace tuio;
 #include "InputGestureFingerObject.h"
 
@@ -33,57 +33,9 @@ using namespace tuio;
 //- CanDirectObjects
 //Seguiu la capçalera InputGestureClasses.h per a trobar l'especificació dels gestos corresponents
 
-class MyTimer : public Singleton<MyTimer>
+class testApp : public CanObjectFinger < tuioApp <TableApp> >
 {
-    float lasttime;
-    float elapsedtime;
-    public:
-    MyTimer():elapsedtime(0)
-    {
-        lasttime = ofGetElapsedTimef();
-    }
-    void step()
-    {
-        float now = ofGetElapsedTimef();
-        elapsedtime = now -lasttime;
-        lasttime = now;
-        //std::cout << "Time elapsed " << elapsedtime << std::endl;
-    }
-    float getStep()
-    {
-        return elapsedtime;
-    }
-};
 
-class Ring
-{
-    public:
-    double x,y,complete;
-    Ring(double X,double Y):x(X),y(Y),complete(0){}
-    void Draw()
-    {
-        if(canremove())return;
-        ofSetColor(0,0,255);
-        ofNoFill();
-        ofCircle(x,y,complete);
-        ofFill();
-        complete+= MyTimer::Instance().getStep()*100;
-        //std::cout << "Complete =  " << complete << std::endl;
-    }
-    bool canremove()
-    {
-        return complete >= 100;
-    }
-};
-
-class testApp : public CanObjectFinger < /*CanDummyTab <CanDirectObjects< CanDirectFingers <*/tuioApp <TableApp> /*> > >*/ >
-{
-private:
-    typedef std::map<int32,DirectFinger *> Tcursors;
-    typedef std::map<int32,DirectObject *> Tobjects;
-    Tcursors cursors;
-    Tobjects objects;
-    std::list<Ring *> rings;
 public:
 
     //aquest mètode es crida un cop a l'iniciar l'aplicació
@@ -97,18 +49,6 @@ public:
 
     //afegiu aquí sota els mètodes heretats de les capacitats dels gestos
     //-------------------------------------------------------------------------------------------
-
-    //CanDirectFingers
-    void newCursor(int32 id, DirectFinger *);
-    void removeCursor(int32 id);
-
-    //CanDirectObjects
-    void newObject(int32 s_id, int32 f_id, DirectObject *);
-    void removeObject(int32 s_id, int32 f_id);
-
-    //DummyTab
-    void tab(float x,float y);
-
     virtual void objectFingerAdd(DirectObject* obj, DirectFinger* finger) {std::cout << "add" << std::endl;}
     virtual void objectFingerUpdate(DirectObject* obj, DirectFinger* finger) {std::cout << "update" << std::endl;}
     virtual void objectFingerRemove(DirectObject* obj, DirectFinger* finger) {std::cout << "remove" << std::endl;}

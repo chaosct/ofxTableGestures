@@ -1,0 +1,1469 @@
+# depslib dependency file v1.0
+1262279916 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscBundle.cpp
+	"ofxOscBundle.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscBundle.h
+	<vector>
+	"ofxOscMessage.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscMessage.h
+	"ofxOscArg.h"
+	<vector>
+	<string>
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscArg.h
+	"ofConstants.h"
+	<string>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/utils/ofConstants.h
+	<TargetConditionals.h>
+	<windows.h>
+	"GLee.h"
+	"glu.h"
+	<unistd.h>
+	"GLee.h"
+	<OpenGL/glu.h>
+	<ApplicationServices/ApplicationServices.h>
+	<unistd.h>
+	"GLee.h"
+	<GL/glu.h>
+	<stdio.h>
+	<stdarg.h>
+	<math.h>
+	<time.h>
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<vector>
+	<string>
+	<sstream>
+	<iomanip>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/glee/include/GLee.h
+	<windows.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+	<GL/glx.h>
+	<stddef.h>
+
+1262279916 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscMessage.cpp
+	"ofxOscMessage.h"
+	<iostream>
+	<assert.h>
+
+1262279916 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscReceiver.cpp
+	"ofxOscReceiver.h"
+	<pthread.h>
+	<iostream>
+	<assert.h>
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscReceiver.h
+	<deque>
+	"ofMain.h"
+	<windows.h>
+	<pthread.h>
+	"OscTypes.h"
+	"OscPacketListener.h"
+	"UdpSocket.h"
+	"ofxOscMessage.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks//ofMain.h
+	"ofConstants.h"
+	"ofMath.h"
+	"ofUtils.h"
+	"ofTypes.h"
+	"ofSerial.h"
+	"ofArduino.h"
+	"ofTexture.h"
+	"ofTrueTypeFont.h"
+	"ofGraphics.h"
+	"ofImage.h"
+	"ofBaseApp.h"
+	"ofAppRunner.h"
+	"ofSoundStream.h"
+	"ofSoundPlayer.h"
+	"ofVideoGrabber.h"
+	"ofVideoPlayer.h"
+	"ofEvents.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/utils/ofMath.h
+	"ofConstants.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/utils/ofUtils.h
+	"ofConstants.h"
+	<shellapi.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/utils/ofTypes.h
+	"ofConstants.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/communication/ofSerial.h
+	"ofConstants.h"
+	<termios.h>
+	<sys/ioctl.h>
+	<getopt.h>
+	<dirent.h>
+	<winbase.h>
+	<tchar.h>
+	<iostream>
+	<string.h>
+	<setupapi.h>
+	<regstr.h>
+	<winioctl.h>
+	<initguid.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<fcntl.h>
+	<errno.h>
+	<ctype.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/communication/ofArduino.h
+	<list>
+	<vector>
+	<string>
+	<iostream>
+	"ofEvents.h"
+	"ofSerial.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/events/ofEvents.h
+	"ofConstants.h"
+	"ofEventUtils.h"
+	"ofxEventUtils.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/events/ofEventUtils.h
+	"ofConstants.h"
+	"Poco/FIFOEvent.h"
+	"Poco/Delegate.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/FIFOEvent.h
+	"Poco/AbstractEvent.h"
+	"Poco/FIFOStrategy.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/CompareFunctions.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/AbstractEvent.h
+	"Poco/Foundation.h"
+	"Poco/SingletonHolder.h"
+	"Poco/SharedPtr.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveMethod.h"
+	"Poco/Mutex.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Foundation.h
+	"Poco/Config.h"
+	"Poco/Platform.h"
+	"Poco/Platform_WIN32.h"
+	"Poco/Platform_VMS.h"
+	"Poco/Platform_POSIX.h"
+	"Poco/Bugcheck.h"
+	"Poco/Types.h"
+	<string>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Config.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Platform.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Platform_WIN32.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Platform_VMS.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Platform_POSIX.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Bugcheck.h
+	"Poco/Foundation.h"
+	<string>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Types.h
+	"Poco/Foundation.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/SingletonHolder.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Mutex.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/ScopedLock.h"
+	"Poco/Mutex_WIN32.h"
+	"Poco/Mutex_POSIX.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Exception.h
+	"Poco/Foundation.h"
+	<stdexcept>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ScopedLock.h
+	"Poco/Foundation.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Mutex_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/UnWindows.h
+	<windows.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Mutex_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/SharedPtr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Mutex.h"
+	<algorithm>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ActiveResult.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Event.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Event_WIN32.h"
+	"Poco/Event_POSIX.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Event_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Event_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/RefCountedObject.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ActiveMethod.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveRunnable.h"
+	"Poco/ActiveStarter.h"
+	"Poco/AutoPtr.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ActiveRunnable.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/Runnable.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	"Poco/Exception.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Runnable.h
+	"Poco/Foundation.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/AutoPtr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ActiveStarter.h
+	"Poco/Foundation.h"
+	"Poco/ThreadPool.h"
+	"Poco/ActiveRunnable.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/ThreadPool.h
+	"Poco/Foundation.h"
+	"Poco/Thread.h"
+	"Poco/Mutex.h"
+	<vector>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Thread.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Thread_WIN32.h"
+	"Poco/Thread_POSIX.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Thread_WIN32.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/UnWindows.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Thread_POSIX.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/SignalHandler.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	<pthread.h>
+	<sys/select.h>
+	<errno.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/SignalHandler.h
+	"Poco/Foundation.h"
+	<vector>
+	<setjmp.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/FIFOStrategy.h
+	"Poco/NotificationStrategy.h"
+	<map>
+	<list>
+	<memory>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/NotificationStrategy.h
+	"Poco/Foundation.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/AbstractDelegate.h
+	"Poco/Foundation.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/CompareFunctions.h
+	"Poco/Foundation.h"
+	<functional>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Delegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/FunctionDelegate.h"
+	"Poco/Expire.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/FunctionDelegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Expire.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/Timestamp.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/poco/include/Poco/Timestamp.h
+	"Poco/Foundation.h"
+	<ctime>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/graphics/ofTexture.h
+	"ofConstants.h"
+	"ofGraphics.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/graphics/ofGraphics.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/graphics/ofTrueTypeFont.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	"ofUtils.h"
+	"ofTypes.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/graphics/ofImage.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofAppRunner.h"
+	"FreeImage.h"
+	"ofUtils.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/app/ofAppRunner.h
+	"ofMain.h"
+	"ofBaseApp.h"
+	"ofAppBaseWindow.h"
+	"ofAppGlutWindow.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/app/ofBaseApp.h
+	"ofTypes.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/app/ofAppBaseWindow.h
+	"ofTypes.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/app/ofAppGlutWindow.h
+	"ofConstants.h"
+	"ofAppBaseWindow.h"
+	"glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
+1262279917 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/FreeImage/include/FreeImage.h
+	<wchar.h>
+	<inttypes.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/sound/ofSoundStream.h
+	"ofConstants.h"
+	"ofBaseApp.h"
+	"ofEvents.h"
+	"ofMath.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/sound/ofSoundPlayer.h
+	"ofConstants.h"
+	"fmod.h"
+	"fmod_errors.h"
+
+1262279918 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/fmodex/include/fmod.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_memoryinfo.h"
+
+1262279918 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/fmodex/include/fmod_codec.h
+
+1262279918 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/fmodex/include/fmod_dsp.h
+
+1262279918 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/fmodex/include/fmod_memoryinfo.h
+
+1262279918 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/fmodex/include/fmod_errors.h
+	"fmod.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/video/ofVideoGrabber.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofTypes.h"
+	"ofQtUtils.h"
+	"videoInput.h"
+	"ofUCUtils.h"
+	"ofGstUtils.h"
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/video/ofQtUtils.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	<QuickTime/QuickTime.h>
+	<CoreServices/CoreServices.h>
+	<ApplicationServices/ApplicationServices.h>
+	<QTML.h>
+	<FixMath.h>
+	<QuickTimeComponents.h>
+	<TextUtils.h>
+	<MediaHandlers.h>
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/video/ofUCUtils.h
+	"ofConstants.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<unicap.h>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+
+1262279923 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/unicap/include/unicap.h
+	<sys/types.h>
+	<sys/time.h>
+	<unistd.h>
+	<unicap_status.h>
+	<unicap_version.h>
+
+1262279923 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/unicap/include/unicap_status.h
+
+1262279923 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/unicap/include/unicap_version.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/video/ofGstUtils.h
+	<gst/gst.h>
+	<pthread.h>
+	"ofConstants.h"
+
+1254924117 /usr/include/gstreamer-0.10/gst/gst.h
+	<glib.h>
+	<gst/glib-compat.h>
+	<gst/gstenumtypes.h>
+	<gst/gstversion.h>
+	<gst/gstbin.h>
+	<gst/gstbuffer.h>
+	<gst/gstbufferlist.h>
+	<gst/gstcaps.h>
+	<gst/gstchildproxy.h>
+	<gst/gstclock.h>
+	<gst/gstdebugutils.h>
+	<gst/gstelement.h>
+	<gst/gsterror.h>
+	<gst/gstevent.h>
+	<gst/gstghostpad.h>
+	<gst/gstindex.h>
+	<gst/gstindexfactory.h>
+	<gst/gstinfo.h>
+	<gst/gstinterface.h>
+	<gst/gstiterator.h>
+	<gst/gstmarshal.h>
+	<gst/gstmessage.h>
+	<gst/gstminiobject.h>
+	<gst/gstobject.h>
+	<gst/gstpad.h>
+	<gst/gstparamspecs.h>
+	<gst/gstpipeline.h>
+	<gst/gstplugin.h>
+	<gst/gstpoll.h>
+	<gst/gstpreset.h>
+	<gst/gstquery.h>
+	<gst/gstregistry.h>
+	<gst/gstsegment.h>
+	<gst/gststructure.h>
+	<gst/gstsystemclock.h>
+	<gst/gsttaglist.h>
+	<gst/gsttagsetter.h>
+	<gst/gsttask.h>
+	<gst/gsttaskpool.h>
+	<gst/gsttrace.h>
+	<gst/gsttypefind.h>
+	<gst/gsttypefindfactory.h>
+	<gst/gsturi.h>
+	<gst/gstutils.h>
+	<gst/gstvalue.h>
+	<gst/gstxml.h>
+	<gst/gstparse.h>
+	<gst/gstcompat.h>
+
+1259848449 /usr/include/glib-2.0/glib.h
+	<glib/galloca.h>
+	<glib/garray.h>
+	<glib/gasyncqueue.h>
+	<glib/gatomic.h>
+	<glib/gbacktrace.h>
+	<glib/gbase64.h>
+	<glib/gbookmarkfile.h>
+	<glib/gcache.h>
+	<glib/gchecksum.h>
+	<glib/gcompletion.h>
+	<glib/gconvert.h>
+	<glib/gdataset.h>
+	<glib/gdate.h>
+	<glib/gdir.h>
+	<glib/gerror.h>
+	<glib/gfileutils.h>
+	<glib/ghash.h>
+	<glib/ghook.h>
+	<glib/ghostutils.h>
+	<glib/giochannel.h>
+	<glib/gkeyfile.h>
+	<glib/glist.h>
+	<glib/gmacros.h>
+	<glib/gmain.h>
+	<glib/gmappedfile.h>
+	<glib/gmarkup.h>
+	<glib/gmem.h>
+	<glib/gmessages.h>
+	<glib/gnode.h>
+	<glib/goption.h>
+	<glib/gpattern.h>
+	<glib/gpoll.h>
+	<glib/gprimes.h>
+	<glib/gqsort.h>
+	<glib/gquark.h>
+	<glib/gqueue.h>
+	<glib/grand.h>
+	<glib/grel.h>
+	<glib/gregex.h>
+	<glib/gscanner.h>
+	<glib/gsequence.h>
+	<glib/gshell.h>
+	<glib/gslice.h>
+	<glib/gslist.h>
+	<glib/gspawn.h>
+	<glib/gstrfuncs.h>
+	<glib/gstring.h>
+	<glib/gtestutils.h>
+	<glib/gthread.h>
+	<glib/gthreadpool.h>
+	<glib/gtimer.h>
+	<glib/gtree.h>
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gurifuncs.h>
+	<glib/gutils.h>
+	<glib/gwin32.h>
+
+1259848449 /usr/include/glib-2.0/glib/galloca.h
+	<glib/gtypes.h>
+	<alloca.h>
+	<malloc.h>
+
+1259848449 /usr/include/glib-2.0/glib/gtypes.h
+	<glibconfig.h>
+	<glib/gmacros.h>
+
+1259848448 /usr/lib/glib-2.0/include/glibconfig.h
+	<glib/gmacros.h>
+	<limits.h>
+	<float.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmacros.h
+	<stddef.h>
+
+1259848449 /usr/include/glib-2.0/glib/garray.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gasyncqueue.h
+	<glib/gthread.h>
+
+1259848449 /usr/include/glib-2.0/glib/gthread.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+	<glib/gutils.h>
+	<glib/gatomic.h>
+
+1259848449 /usr/include/glib-2.0/glib/gerror.h
+	<stdarg.h>
+	<glib/gquark.h>
+
+1259848449 /usr/include/glib-2.0/glib/gquark.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gutils.h
+	<glib/gtypes.h>
+	<stdarg.h>
+
+1259848449 /usr/include/glib-2.0/glib/gatomic.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gbacktrace.h
+	<glib/gtypes.h>
+	<signal.h>
+
+1259848449 /usr/include/glib-2.0/glib/gbase64.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gbookmarkfile.h
+	<glib/gerror.h>
+	<time.h>
+
+1259848449 /usr/include/glib-2.0/glib/gcache.h
+	<glib/glist.h>
+
+1259848449 /usr/include/glib-2.0/glib/glist.h
+	<glib/gmem.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmem.h
+	<glib/gslice.h>
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gslice.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gchecksum.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gcompletion.h
+	<glib/glist.h>
+
+1259848449 /usr/include/glib-2.0/glib/gconvert.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gdataset.h
+	<glib/gquark.h>
+
+1259848449 /usr/include/glib-2.0/glib/gdate.h
+	<time.h>
+	<glib/gtypes.h>
+	<glib/gquark.h>
+
+1259848449 /usr/include/glib-2.0/glib/gdir.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gfileutils.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/ghash.h
+	<glib/gtypes.h>
+	<glib/glist.h>
+
+1259848449 /usr/include/glib-2.0/glib/ghook.h
+	<glib/gmem.h>
+
+1259848449 /usr/include/glib-2.0/glib/ghostutils.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/giochannel.h
+	<glib/gconvert.h>
+	<glib/gmain.h>
+	<glib/gstring.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmain.h
+	<glib/gpoll.h>
+	<glib/gslist.h>
+	<glib/gthread.h>
+
+1259848449 /usr/include/glib-2.0/glib/gpoll.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gslist.h
+	<glib/gmem.h>
+
+1259848449 /usr/include/glib-2.0/glib/gstring.h
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gutils.h>
+
+1259848449 /usr/include/glib-2.0/glib/gunicode.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gkeyfile.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmappedfile.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmarkup.h
+	<stdarg.h>
+	<glib/gerror.h>
+	<glib/gslist.h>
+
+1259848449 /usr/include/glib-2.0/glib/gmessages.h
+	<stdarg.h>
+	<glib/gtypes.h>
+	<glib/gmacros.h>
+
+1259848449 /usr/include/glib-2.0/glib/gnode.h
+	<glib/gmem.h>
+
+1259848449 /usr/include/glib-2.0/glib/goption.h
+	<glib/gerror.h>
+	<glib/gquark.h>
+
+1259848449 /usr/include/glib-2.0/glib/gpattern.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gprimes.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gqsort.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gqueue.h
+	<glib/glist.h>
+
+1259848449 /usr/include/glib-2.0/glib/grand.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/grel.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gregex.h
+	<glib/gerror.h>
+	<glib/gstring.h>
+
+1259848449 /usr/include/glib-2.0/glib/gscanner.h
+	<glib/gdataset.h>
+	<glib/ghash.h>
+
+1259848449 /usr/include/glib-2.0/glib/gsequence.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gshell.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gspawn.h
+	<glib/gerror.h>
+
+1259848449 /usr/include/glib-2.0/glib/gstrfuncs.h
+	<stdarg.h>
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gtestutils.h
+	<glib.h>
+
+1259848449 /usr/include/glib-2.0/glib/gthreadpool.h
+	<glib/gthread.h>
+
+1259848449 /usr/include/glib-2.0/glib/gtimer.h
+	<glib/gtypes.h>
+
+1259848449 /usr/include/glib-2.0/glib/gtree.h
+	<glib/gnode.h>
+
+1259848449 /usr/include/glib-2.0/glib/gurifuncs.h
+	<glib.h>
+
+1259848449 /usr/include/glib-2.0/glib/gwin32.h
+	<glib/gtypes.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/glib-compat.h
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstenumtypes.h
+	<glib-object.h>
+
+1259848449 /usr/include/glib-2.0/glib-object.h
+	<gobject/gboxed.h>
+	<gobject/genums.h>
+	<gobject/gobject.h>
+	<gobject/gparam.h>
+	<gobject/gparamspecs.h>
+	<gobject/gsignal.h>
+	<gobject/gsourceclosure.h>
+	<gobject/gtype.h>
+	<gobject/gtypemodule.h>
+	<gobject/gtypeplugin.h>
+	<gobject/gvalue.h>
+	<gobject/gvaluearray.h>
+	<gobject/gvaluetypes.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gboxed.h
+	<gobject/gtype.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gtype.h
+	<glib.h>
+
+1259848452 /usr/include/glib-2.0/gobject/genums.h
+	<gobject/gtype.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gobject.h
+	<gobject/gtype.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gclosure.h>
+	<gobject/gsignal.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gvalue.h
+	<gobject/gtype.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gparam.h
+	<gobject/gvalue.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gclosure.h
+	<gobject/gtype.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gsignal.h
+	<gobject/gclosure.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gmarshal.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gmarshal.h
+
+1259848452 /usr/include/glib-2.0/gobject/gparamspecs.h
+	<gobject/gvalue.h>
+	<gobject/genums.h>
+	<gobject/gboxed.h>
+	<gobject/gobject.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gsourceclosure.h
+	<gobject/gclosure.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gtypemodule.h
+	<gobject/gobject.h>
+	<gobject/genums.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gtypeplugin.h
+	<gobject/gtype.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gvaluearray.h
+	<gobject/gvalue.h>
+
+1259848452 /usr/include/glib-2.0/gobject/gvaluetypes.h
+	<gobject/gvalue.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstversion.h
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstbin.h
+	<gst/gstelement.h>
+	<gst/gstiterator.h>
+	<gst/gstbus.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstelement.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstpad.h>
+	<gst/gstbus.h>
+	<gst/gstclock.h>
+	<gst/gstelementfactory.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gstindex.h>
+	<gst/gstindexfactory.h>
+	<gst/gstiterator.h>
+	<gst/gstmessage.h>
+	<gst/gsttaglist.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstconfig.h
+	<libxml/parser.h>
+
+1263120311 /usr/include/libxml2/libxml/parser.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+	<libxml/hash.h>
+	<libxml/valid.h>
+	<libxml/entities.h>
+	<libxml/xmlerror.h>
+	<libxml/xmlstring.h>
+	<libxml/encoding.h>
+	<libxml/xmlIO.h>
+	<libxml/globals.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlversion.h
+	<libxml/xmlexports.h>
+	<ansidecl.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlexports.h
+
+1263120311 /usr/include/libxml2/libxml/tree.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/xmlstring.h>
+	<libxml/xmlregexp.h>
+	<libxml/xmlmemory.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlstring.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlregexp.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+
+1263120311 /usr/include/libxml2/libxml/dict.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlmemory.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/threads.h>
+	<libxml/globals.h>
+
+1263120311 /usr/include/libxml2/libxml/threads.h
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+
+1263120311 /usr/include/libxml2/libxml/globals.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xmlerror.h>
+	<libxml/SAX.h>
+	<libxml/SAX2.h>
+	<libxml/xmlmemory.h>
+	<libxml/threads.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlerror.h
+	<libxml/parser.h>
+
+1263120311 /usr/include/libxml2/libxml/SAX.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1263120311 /usr/include/libxml2/libxml/xlink.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1263120311 /usr/include/libxml2/libxml/SAX2.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1263120311 /usr/include/libxml2/libxml/hash.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/dict.h>
+
+1263120311 /usr/include/libxml2/libxml/valid.h
+	<libxml/xmlversion.h>
+	<libxml/xmlerror.h>
+	<libxml/tree.h>
+	<libxml/list.h>
+	<libxml/xmlautomata.h>
+	<libxml/xmlregexp.h>
+
+1263120311 /usr/include/libxml2/libxml/list.h
+	<libxml/xmlversion.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlautomata.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/xmlregexp.h>
+
+1263120311 /usr/include/libxml2/libxml/entities.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1263120311 /usr/include/libxml2/libxml/encoding.h
+	<libxml/xmlversion.h>
+	<iconv.h>
+	<libxml/tree.h>
+
+1263120311 /usr/include/libxml2/libxml/xmlIO.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+	<libxml/tree.h>
+	<libxml/parser.h>
+	<libxml/encoding.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstobject.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpad.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstbuffer.h>
+	<gst/gstbufferlist.h>
+	<gst/gstcaps.h>
+	<gst/gstevent.h>
+	<gst/gstquery.h>
+	<gst/gsttask.h>
+	<gst/gstpadtemplate.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstbuffer.h
+	<gst/gstminiobject.h>
+	<gst/gstclock.h>
+	<gst/gstcaps.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstminiobject.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstclock.h
+	<gst/gstobject.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstcaps.h
+	<gst/gstconfig.h>
+	<gst/gststructure.h>
+	<gst/glib-compat.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gststructure.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+	<gst/gstclock.h>
+	<gst/glib-compat.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstbufferlist.h
+	<gst/gstbuffer.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstevent.h
+	<gst/gstminiobject.h>
+	<gst/gstformat.h>
+	<gst/gstobject.h>
+	<gst/gstclock.h>
+	<gst/gststructure.h>
+	<gst/gsttaglist.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstformat.h
+	<glib.h>
+	<gst/gstiterator.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstiterator.h
+	<glib-object.h>
+	<gst/gstconfig.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttaglist.h
+	<gst/gstbuffer.h>
+	<gst/gststructure.h>
+	<gst/glib-compat.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstquery.h
+	<glib.h>
+	<gst/gstiterator.h>
+	<gst/gstminiobject.h>
+	<gst/gststructure.h>
+	<gst/gstformat.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttask.h
+	<gst/gstobject.h>
+	<gst/gsttaskpool.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttaskpool.h
+	<gst/gstobject.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpadtemplate.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstbuffer.h>
+	<gst/gstcaps.h>
+	<gst/gstevent.h>
+	<gst/gstquery.h>
+	<gst/gsttask.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstbus.h
+	<gst/gstmessage.h>
+	<gst/gstclock.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstmessage.h
+	<gst/gstminiobject.h>
+	<gst/gstobject.h>
+	<gst/gstelement.h>
+	<gst/gsttaglist.h>
+	<gst/gststructure.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstelementfactory.h
+	<gst/gstconfig.h>
+	<gst/gstelement.h>
+	<gst/gstobject.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gstiterator.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstplugin.h
+	<gst/gstconfig.h>
+	<time.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<gmodule.h>
+	<gst/gstobject.h>
+	<gst/gstmacros.h>
+	<gst/gststructure.h>
+
+1259848450 /usr/include/glib-2.0/gmodule.h
+	<glib.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstmacros.h
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpluginfeature.h
+	<glib-object.h>
+	<gst/gstobject.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstindex.h
+	<gst/gstobject.h>
+	<gst/gstformat.h>
+	<gst/gstpluginfeature.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstindexfactory.h
+	<gst/gstobject.h>
+	<gst/gstformat.h>
+	<gst/gstpluginfeature.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstchildproxy.h
+	<glib-object.h>
+	<gst/gst.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstdebugutils.h
+	<glib.h>
+	<glib-object.h>
+	<gst/gstconfig.h>
+	<gst/gstbin.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsterror.h
+	<glib.h>
+	<glib-object.h>
+	<errno.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstghostpad.h
+	<gst/gstpad.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstinfo.h
+	<glib.h>
+	<glib-object.h>
+	<gst/gstconfig.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstinterface.h
+	<gst/gstelement.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstmarshal.h
+	<glib-object.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstparamspecs.h
+	<gst/gstvalue.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstvalue.h
+	<gst/gstconfig.h>
+	<gst/gstcaps.h>
+	<gst/gststructure.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpipeline.h
+	<gst/gstbin.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpoll.h
+	<glib.h>
+	<glib-object.h>
+	<gst/gstclock.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstpreset.h
+	<glib-object.h>
+	<gst/gst.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstregistry.h
+	<stdio.h>
+	<gst/gstconfig.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstsegment.h
+	<gst/gstevent.h>
+	<gst/gstformat.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstsystemclock.h
+	<gst/gstclock.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttagsetter.h
+	<gst/gst.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttrace.h
+	<glib.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttypefind.h
+	<gst/gstcaps.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsttypefindfactory.h
+	<gst/gstcaps.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gsttypefind.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gsturi.h
+	<glib.h>
+	<gst/gstelement.h>
+	<gst/gstpluginfeature.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstutils.h
+	<glib.h>
+	<gst/gstbin.h>
+	<gst/gstparse.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstparse.h
+	<gst/gstelement.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstxml.h
+	<gst/gstconfig.h>
+	<gst/gstelement.h>
+
+1254924117 /usr/include/gstreamer-0.10/gst/gstcompat.h
+
+1262279919 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/libs/openFrameworks/video/ofVideoPlayer.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGstUtils.h"
+	"ofQtUtils.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/osc/OscTypes.h
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/osc/OscPacketListener.h
+	"OscReceivedElements.h"
+	"../ip/PacketListener.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/osc/OscReceivedElements.h
+	"OscTypes.h"
+	"OscException.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/osc/OscException.h
+	<exception>
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/ip/PacketListener.h
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/ip/UdpSocket.h
+	"NetworkingUtils.h"
+	"IpEndpointName.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/ip/NetworkingUtils.h
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/ip/IpEndpointName.h
+
+1262279916 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscSender.cpp
+	"ofxOscSender.h"
+	"UdpSocket.h"
+	<assert.h>
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscSender.h
+	<string>
+	"OscTypes.h"
+	"OscOutboundPacketStream.h"
+	"ofxOscBundle.h"
+	"ofxOscMessage.h"
+
+1262279916 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxOsc/libs/oscpack/include/osc/OscOutboundPacketStream.h
+	"OscTypes.h"
+	"OscException.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/main.cpp
+	"ofMain.h"
+	"testApp.h"
+	"ofAppGlutWindow.h"
+
+1263950836 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.h
+	"ofMain.h"
+	"TableApp.hpp"
+	"tuioApp.h"
+	"InputGestureClasses.h"
+	"InputGestureFingerObject.h"
+	<map>
+	<list>
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//TableApp.hpp
+	"ofMain.h"
+	"Grid.hpp"
+	"Simulator.hpp"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//Grid.hpp
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//Simulator.hpp
+	"ofMain.h"
+	"container.hpp"
+	<vector>
+	"ofxOscSender.h"
+	"ofxOscMessage.h"
+	"ofxOscBundle.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//container.hpp
+	"ofMain.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//tuioApp.h
+	"EventQueue.h"
+	"tuioinput.h"
+	"InputGesture.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//EventQueue.h
+	"TEvent.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//TEvent.h
+	<vector>
+	<iostream>
+	"Singleton.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//Singleton.h
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//tuioinput.h
+	<pthread.h>
+	<sys/time.h>
+	<windows.h>
+	"UdpSocket.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGesture.h
+	"OSCListener.h"
+	<list>
+	<iostream>
+	"TEvent.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//OSCListener.h
+	"OscPacketListener.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGestureClasses.h
+	"InputGestureBasicFingers.h"
+	"InputGestureDirectFingers.h"
+	"InputGestureBasicObjects.h"
+	"InputGestureDirectObjects.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGestureBasicFingers.h
+	"OscReceivedElements.h"
+	"InputGesture.h"
+	"TEvent.h"
+	<set>
+	"tuioApp.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGestureDirectFingers.h
+	"InputGesture.h"
+	"TEvent.h"
+	"tuioApp.h"
+	"DirectPoint.h"
+	<map>
+
+1263938430 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//DirectPoint.h
+	<math.h>
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGestureBasicObjects.h
+	"OscReceivedElements.h"
+	"InputGesture.h"
+	<set>
+	"TEvent.h"
+	"tuioApp.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//InputGestureDirectObjects.h
+	"InputGestureBasicObjects.h"
+	"TEvent.h"
+	"DirectPoint.h"
+	<map>
+
+1263950982 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.h
+	"TEvent.h"
+	"InputGestureDirectFingers.h"
+	"InputGestureBasicFingers.h"
+	"InputGestureDirectObjects.h"
+	"InputGestureTap.h"
+	<map>
+	<list>
+
+1263948763 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureTap.h
+	"ofMain.h"
+	"InputGestureBasicFingers.h"
+	"TEvent.h"
+	<map>
+
+1263950836 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.cpp
+	"testApp.h"
+	<algorithm>
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Grid.cpp
+	"Grid.hpp"
+	"ofMain.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Grid.hpp
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Simulator.cpp
+	"Simulator.hpp"
+	<fstream>
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Simulator.hpp
+	"ofMain.h"
+	"container.hpp"
+	<vector>
+	"ofxOscSender.h"
+	"ofxOscMessage.h"
+	"ofxOscBundle.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/container.hpp
+	"ofMain.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/TableApp.cpp
+	<fstream>
+	"TableApp.hpp"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/TableApp.hpp
+	"ofMain.h"
+	"Grid.hpp"
+	"Simulator.hpp"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/EventQueue.cpp
+	"EventQueue.h"
+	"TEvent.h"
+	<iostream>
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/InputGesture.cpp
+	"InputGesture.h"
+	"TEvent.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/InputGestureBasicFingers.cpp
+	"InputGestureBasicFingers.h"
+	<iostream>
+	<cstring>
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/InputGestureBasicObjects.cpp
+	"InputGestureBasicObjects.h"
+	<iostream>
+	<cstring>
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/InputGestureDirectFingers.cpp
+	"InputGestureDirectFingers.h"
+	<cstring>
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp
+	"InputGestureDirectObjects.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/OSCListener.cpp
+	"OSCListener.h"
+	"OscReceivedElements.h"
+	"IpEndpointName.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp
+	"inputGestureManager.h"
+	"InputGesture.h"
+	"EventQueue.h"
+	"OscReceivedElements.h"
+
+1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//inputGestureManager.h
+	<list>
+	<algorithm>
+	"OSCListener.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/tuioApp.cpp
+	"tuioApp.h"
+	"inputGestureManager.h"
+
+1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTuioGestures/src/tuio/c/tuioinput.cpp
+	"tuioinput.h"
+	"inputGestureManager.h"
+	"EventQueue.h"
+
+1263950719 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.cpp
+	"InputGestureFingerObject.h"
+
