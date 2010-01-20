@@ -106,12 +106,6 @@ class CanBasicFingers : public Base
         TRegistraCallback(CanBasicFingers,TeventBasicFingersMoveFinger);
         registerMeToInputGestureManager(Singleton<InputGestureBasicFingers>::get());
     }
-
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 } // namespace tuio

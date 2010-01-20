@@ -105,11 +105,6 @@ class CanDirectFingers : public  Base
         registerMeToInputGestureManager(Singleton<InputGestureDirectFingers>::get());
     }
 
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 

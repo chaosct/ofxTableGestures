@@ -103,11 +103,6 @@ class CanDirectObjects : public  Base
         registerMeToInputGestureManager(Singleton<InputGestureDirectObjects>::get());
     }
 
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 
