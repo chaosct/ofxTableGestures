@@ -378,6 +378,10 @@
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
+		<Unit filename="src/Dispatcher.cpp" />
+		<Unit filename="src/Dispatcher.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/InputGestureFingerObject.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -385,6 +389,12 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/InputGestureTap.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/InputListener.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/InputListener.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
