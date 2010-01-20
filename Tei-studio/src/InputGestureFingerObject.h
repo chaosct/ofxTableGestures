@@ -192,11 +192,6 @@ public:
         registerMeToInputGestureManager(Singleton<InputObjectFinger>::get());
     }
 
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 

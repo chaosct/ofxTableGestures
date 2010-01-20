@@ -99,11 +99,6 @@ public:
         registerMeToInputGestureManager(Singleton<InputGestureTap>::get());
     }
 
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 }
