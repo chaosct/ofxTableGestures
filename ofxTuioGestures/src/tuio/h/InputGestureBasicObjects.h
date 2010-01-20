@@ -108,11 +108,6 @@ class CanBasicObjects : public Base
         registerMeToInputGestureManager(Singleton<InputGestureBasicObjects>::get());
     }
 
-    //allways needed
-    eventprocessorsType & getEP()
-    {
-        return Base::getEP();
-    }
 };
 
 } // namespace tuio
