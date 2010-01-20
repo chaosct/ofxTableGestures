@@ -378,7 +378,9 @@
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
-		<Unit filename="src/Dispatcher.cpp" />
+		<Unit filename="src/Dispatcher.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/Dispatcher.h">
 			<Option virtualFolder="src/" />
 		</Unit>
