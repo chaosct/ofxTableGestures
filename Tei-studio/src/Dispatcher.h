@@ -9,7 +9,8 @@ namespace tuio
     class Listener;
 
     ///This class stores an instance of all Listenenrs and distribute the generated events
-    class Dispatcher{
+    class Dispatcher :public Singleton< Dispatcher >
+    {
         private:
             ///List where all Listeners will be stored
             std::list<Listener*> listeners_list;
@@ -21,14 +22,6 @@ namespace tuio
             Dispatcher(){
                 Singleton<tuio::tuioinput>::Instance().init();
                 equeue = Singleton<tuio::tuioinput>::Instance().getQueue();
-            }
-            ///static Dispatcher& Instance()
-            ///outputs:
-            ///     Dispatcher& -> a unique instance of a Dispatcher
-            ///inputs: none
-            ///Desc: Singleton access to dispatcher
-            static Dispatcher& Instance(){
-                return Singleton<Dispatcher>::Instance();
             }
             ///void AddListener(Listener* listener)
             ///outputs:none

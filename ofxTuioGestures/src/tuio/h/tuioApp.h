@@ -77,24 +77,11 @@ class tuioApp : public Base
 private:
     eventprocessorsType eventprocessors;
 public:
-    EventQueue * equeue;
 
     tuioApp()
     {
-        Singleton<tuio::tuioinput>::Instance().init();
-        equeue = Singleton<tuio::tuioinput>::Instance().getQueue();
-        //TODO: fora magic number o fer servir map
+        ///TODO: better sizing
         eventprocessors.resize(100,NULL);
-    }
-
-    void processTevents()
-    {
-        TEvent * te;
-        while((te = equeue->pop())!= NULL)
-        {
-            processTevent(te);
-            delete te;
-        }
     }
 
     void processTevent(TEvent * te)
@@ -108,6 +95,10 @@ public:
         return eventprocessors;
     }
 };
+
+class VoidClass{};
+typedef tuioApp<VoidClass> tuioAppBase;
+
 
 class InputGesture;
 

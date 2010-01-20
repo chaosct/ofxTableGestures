@@ -10,9 +10,8 @@ namespace tuio
 
     ///Listener -> This class is attached automatically to "Dispatcher" and detached at destuction
     /// it is the base class for all capabilities that will be used.
-    class Listener{
-        ///eventprocessors -> map of all event processors capabilities added to Listener
-        eventprocessorsType eventprocessors;
+    class Listener : public tuioAppBase
+    {
         public:
             ///Listener()
             ///inputs: none
@@ -21,17 +20,6 @@ namespace tuio
             ///virtual ~Listener()=0;
             ///destructor detaches itself from Dispatcher
             virtual ~Listener()=0;
-            ///void processTevent(TEvent * te)
-            ///outputs: none
-            ///inputs:
-            ///     TEvent * te -> the event to be processed
-            ///Desc: Processes the event (or not, it checks the if the event processor exists before)
-            virtual void processTevent(TEvent * te);
-            ///eventprocessorsType & getEP()
-            ///outputs:
-            ///     eventprocessorsType ->
-            ///Needed for adding new capabilities.
-            eventprocessorsType & getEP();
     };
 }
 
