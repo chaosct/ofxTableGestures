@@ -19,6 +19,8 @@ using namespace tuio;
 
 #include "InputListener.h"
 
+#include "CursorFeedback.h"
+
 //La nostra classe principal Derivarà de tuioApp<TableApp>. Si no volguéssiu gestos podrieu
 //derivar directament de TableApp.
 //Per tal de rebre ghestos heu de definir les capacitats de tuioApp, per exemple, per a rebre
@@ -59,6 +61,7 @@ class testApp : public TableApp
 public:
     dummylistener* listener;
     dummylistener2* listener2;
+    CursorFeedback* cursorfeedback;
     //aquest mètode es crida un cop a l'iniciar l'aplicació
     void Setup();
     //aquest mètode es crida abans de pintar

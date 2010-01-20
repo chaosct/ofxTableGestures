@@ -2007,7 +2007,7 @@
 1263899707 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//OSCListener.h
 	"OscPacketListener.h"
 
-1264001934 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//tuioApp.h
+1264005352 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//tuioApp.h
 	"EventQueue.h"
 	"tuioinput.h"
 	"InputGesture.h"
@@ -2055,7 +2055,7 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1264004526 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.h
+1264010610 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.h
 	"ofMain.h"
 	"TableApp.hpp"
 	"tuioApp.h"
@@ -2064,6 +2064,7 @@
 	<map>
 	<list>
 	"InputListener.h"
+	"CursorFeedback.h"
 
 1263899707 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//TableApp.hpp
 	"ofMain.h"
@@ -2089,7 +2090,7 @@
 	"InputGestureBasicObjects.h"
 	"InputGestureDirectObjects.h"
 
-1264004599 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.cpp
+1264010610 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.cpp
 	"testApp.h"
 	<algorithm>
 	"tuioApp.h"
@@ -2115,7 +2116,7 @@
 1263899707 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/container.hpp
 	"ofMain.h"
 
-1263899707 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/TableApp.cpp
+1264005366 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/TableApp.cpp
 	<fstream>
 	"TableApp.hpp"
 
@@ -2175,17 +2176,28 @@
 	"inputGestureManager.h"
 	"EventQueue.h"
 
-1264003800 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.h
+1264007921 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.h
 	"tuioApp.h"
 	"Dispatcher.h"
 
-1264003359 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/Dispatcher.h
+1264007543 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/Dispatcher.h
 	"tuioApp.h"
 	"InputListener.h"
 
 1264003359 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/Dispatcher.cpp
 	"Dispatcher.h"
 
-1264003800 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.cpp
+1264006772 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.cpp
 	"InputListener.h"
+
+1264012093 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/CursorFeedback.cpp
+	"CursorFeedback.h"
+
+1264012358 /home/daniel/Projects/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/CursorFeedback.h
+	"ofMain.h"
+	"tuioApp.h"
+	"InputGestureClasses.h"
+	"InputListener.h"
+	<map>
+	<list>
 
