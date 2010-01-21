@@ -872,7 +872,7 @@
 1254924117 /usr/include/gstreamer-0.10/gst/gstconfig.h
 	<libxml/parser.h>
 
-1255002551 /usr/include/libxml2/libxml/parser.h
+1263120311 /usr/include/libxml2/libxml/parser.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
@@ -886,43 +886,43 @@
 	<libxml/xmlIO.h>
 	<libxml/globals.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlversion.h
+1263120311 /usr/include/libxml2/libxml/xmlversion.h
 	<libxml/xmlexports.h>
 	<ansidecl.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlexports.h
+1263120311 /usr/include/libxml2/libxml/xmlexports.h
 
-1255002551 /usr/include/libxml2/libxml/tree.h
+1263120311 /usr/include/libxml2/libxml/tree.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/xmlstring.h>
 	<libxml/xmlregexp.h>
 	<libxml/xmlmemory.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlstring.h
+1263120311 /usr/include/libxml2/libxml/xmlstring.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlregexp.h
+1263120311 /usr/include/libxml2/libxml/xmlregexp.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/dict.h>
 
-1255002551 /usr/include/libxml2/libxml/dict.h
+1263120311 /usr/include/libxml2/libxml/dict.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlmemory.h
+1263120311 /usr/include/libxml2/libxml/xmlmemory.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/threads.h>
 	<libxml/globals.h>
 
-1255002551 /usr/include/libxml2/libxml/threads.h
+1263120311 /usr/include/libxml2/libxml/threads.h
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
 
-1255002551 /usr/include/libxml2/libxml/globals.h
+1263120311 /usr/include/libxml2/libxml/globals.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xmlerror.h>
@@ -931,33 +931,33 @@
 	<libxml/xmlmemory.h>
 	<libxml/threads.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlerror.h
+1263120311 /usr/include/libxml2/libxml/xmlerror.h
 	<libxml/parser.h>
 
-1255002551 /usr/include/libxml2/libxml/SAX.h
+1263120311 /usr/include/libxml2/libxml/SAX.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1255002551 /usr/include/libxml2/libxml/xlink.h
+1263120311 /usr/include/libxml2/libxml/xlink.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1255002551 /usr/include/libxml2/libxml/SAX2.h
+1263120311 /usr/include/libxml2/libxml/SAX2.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1255002551 /usr/include/libxml2/libxml/hash.h
+1263120311 /usr/include/libxml2/libxml/hash.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/dict.h>
 
-1255002551 /usr/include/libxml2/libxml/valid.h
+1263120311 /usr/include/libxml2/libxml/valid.h
 	<libxml/xmlversion.h>
 	<libxml/xmlerror.h>
 	<libxml/tree.h>
@@ -965,24 +965,24 @@
 	<libxml/xmlautomata.h>
 	<libxml/xmlregexp.h>
 
-1255002551 /usr/include/libxml2/libxml/list.h
+1263120311 /usr/include/libxml2/libxml/list.h
 	<libxml/xmlversion.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlautomata.h
+1263120311 /usr/include/libxml2/libxml/xmlautomata.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/xmlregexp.h>
 
-1255002551 /usr/include/libxml2/libxml/entities.h
+1263120311 /usr/include/libxml2/libxml/entities.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1255002551 /usr/include/libxml2/libxml/encoding.h
+1263120311 /usr/include/libxml2/libxml/encoding.h
 	<libxml/xmlversion.h>
 	<iconv.h>
 	<libxml/tree.h>
 
-1255002551 /usr/include/libxml2/libxml/xmlIO.h
+1263120311 /usr/include/libxml2/libxml/xmlIO.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
@@ -1271,7 +1271,7 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1263950836 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.h
+1264024247 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.h
 	"ofMain.h"
 	"TableApp.hpp"
 	"tuioApp.h"
@@ -1279,6 +1279,8 @@
 	"InputGestureFingerObject.h"
 	<map>
 	<list>
+	"InputListener.h"
+	"CursorFeedback.h"
 
 1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//TableApp.hpp
 	"ofMain.h"
@@ -1295,8 +1297,9 @@
 	"ofxOscMessage.h"
 	"ofxOscBundle.h"
 
-1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//container.hpp
+1264038516 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//container.hpp
 	"ofMain.h"
+	"Shapes.hpp"
 
 1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTuioGestures/src/tuio/h//tuioApp.h
 	"EventQueue.h"
@@ -1364,13 +1367,14 @@
 	"DirectPoint.h"
 	<map>
 
-1263950982 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.h
+1264024247 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.h
 	"TEvent.h"
 	"InputGestureDirectFingers.h"
 	"InputGestureBasicFingers.h"
 	"InputGestureDirectObjects.h"
 	"InputGestureTap.h"
 	<map>
+	<list>
 	<list>
 
 1263948763 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureTap.h
@@ -1379,9 +1383,11 @@
 	"TEvent.h"
 	<map>
 
-1263950836 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.cpp
+1264039437 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/testApp.cpp
 	"testApp.h"
 	<algorithm>
+	"tuioApp.h"
+	"Shapes.hpp"
 
 1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Grid.cpp
 	"Grid.hpp"
@@ -1389,9 +1395,10 @@
 
 1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Grid.hpp
 
-1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Simulator.cpp
+1264038935 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Simulator.cpp
 	"Simulator.hpp"
 	<fstream>
+	"Shapes.hpp"
 
 1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Simulator.hpp
 	"ofMain.h"
@@ -1401,8 +1408,9 @@
 	"ofxOscMessage.h"
 	"ofxOscBundle.h"
 
-1263934302 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/container.hpp
+1264038516 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/container.hpp
 	"ofMain.h"
+	"Shapes.hpp"
 
 1263934302 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/TableApp.cpp
 	<fstream>
@@ -1464,7 +1472,7 @@
 	"inputGestureManager.h"
 	"EventQueue.h"
 
-1263950719 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.cpp
+1263950982 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputGestureFingerObject.cpp
 	"InputGestureFingerObject.h"
 
 1262281131 source:/home/daniel/Projects/of_preRelease_v0061_linux_FAT/addons/ofxOsc/src/ofxOscBundle.cpp
@@ -2200,4 +2208,57 @@
 	"InputListener.h"
 	<map>
 	<list>
+
+1264024247 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.h
+	"tuioApp.h"
+	"Dispatcher.h"
+
+1264024247 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/Dispatcher.h
+	"tuioApp.h"
+	"InputListener.h"
+
+1264027350 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/CursorFeedback.h
+	"ofMain.h"
+	"tuioApp.h"
+	"InputGestureClasses.h"
+	"InputListener.h"
+	<map>
+	<list>
+
+1264024247 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/CursorFeedback.cpp
+	"CursorFeedback.h"
+
+1264024247 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/Dispatcher.cpp
+	"Dispatcher.h"
+
+1264024247 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/InputListener.cpp
+	"InputListener.h"
+
+1264037438 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/FigureFeedback.cpp
+
+1264037438 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/Tei-studio/src/FigureFeedback.h
+	"ofMain.h"
+	"tuioApp.h"
+	"InputGestureClasses.h"
+	"InputListener.h"
+	<map>
+
+1264038665 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/addons/ofxTableDistortion/src//Shapes.hpp
+	"ofMain.h"
+	"container.hpp"
+	<map>
+	<list>
+
+1264039377 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Shapes.cpp
+	"Shapes.hpp"
+	<fstream>
+
+1264038665 /home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/Shapes.hpp
+	"ofMain.h"
+	"container.hpp"
+	<map>
+	<list>
+
+1264039477 source:/home/daniel/Projectes/of_preRelease_v0061_linux_FAT/apps/OF-TangibleFramework/ofxTableDistortion/src/container.cpp
+	"container.hpp"
 

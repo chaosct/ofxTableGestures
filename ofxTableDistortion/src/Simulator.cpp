@@ -30,6 +30,7 @@
 
 #include "Simulator.hpp"
 #include <fstream>
+#include "Shapes.hpp"
 
 #define INC_STEP 20
 #define CONFIGPATH "simulator.config"
@@ -50,6 +51,16 @@ namespace simulator
                 objects.push_back(tmp);
             }
         }else std::cout << "Simulator: " << CONFIGPATH << " loaded." << std::endl;
+        if(!load_default){
+            std::list<int> ids = Figure_shape::Instance().GetFiducialIds();
+            int i = 0;
+            for(std::list<int>::iterator it = ids.begin(); it!= ids.end(); it++ ){
+                object* tmp = new object(-1,(*it),0,0,0,0,0,0,0,0,i);
+                SortObject(tmp);
+                objects.push_back(tmp);
+                i++;
+            }
+        }
         sender = new ofxOscSender();
         sender->setup(address,port);
         #endif
@@ -62,7 +73,7 @@ namespace simulator
             ofs << "#Simulator config file." << std::endl;
             ofs << "#p -> port" << std::endl;
             ofs << "#a -> address" << std::endl;
-            ofs << "#o -> object = fid shape red green blue alpha [sjape = circle, square, star]" << std::endl;
+            ofs << "#o -> object = fid shape red green blue alpha [shape = circle, square, star, roundcircle, pentagon, dodecahedron]" << std::endl;
             ofs << "#d -> load default figures" << std::endl;
             ofs << "p " << DEFAULT_PORT << std::endl;
             ofs << "a " << DEFAULT_ADDR << std::endl;
@@ -97,6 +108,8 @@ namespace simulator
                 }
                 getline(infile,tmp);
             }
+            infile.close();
+            //Figure_shape::Instance();
             return true;
         }
         return false;
