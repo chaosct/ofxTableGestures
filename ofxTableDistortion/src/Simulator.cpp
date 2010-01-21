@@ -33,8 +33,9 @@
 #include "Shapes.hpp"
 
 #define INC_STEP 20
-#define CONFIGPATH "simulator.config"
+#define CONFIGPATH "../simulator.config"
 #define M_2PI M_PI*2
+using namespace shapes;
 
 namespace simulator
 {

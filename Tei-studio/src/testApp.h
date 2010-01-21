@@ -10,33 +10,14 @@
 //Necessari pel reconeixement de gestos
 #include "tuioApp.h"
 #include "InputGestureClasses.h"
-//#include "InputGestureDummyTab.h"
-using namespace tuio;
 #include "InputGestureFingerObject.h"
 
 #include <map>
 #include <list>
-
-#include "InputListener.h"
-
 #include "CursorFeedback.h"
+#include "FigureFeedback.h"
 
-//La nostra classe principal Derivarà de tuioApp<TableApp>. Si no volguéssiu gestos podrieu
-//derivar directament de TableApp.
-//Per tal de rebre ghestos heu de definir les capacitats de tuioApp, per exemple, per a rebre
-//gestos simples de cursors haurieu de aplicar la capacitat CanBasicFingers de la següent manera:
-// class testApp : public CanBasicFingers <tuioApp <TableApp> >
-//Si volguéssim afegir-hi una altra capacitat addicional, posem per cas CanDirectObjects, només
-//ho hauriem d'encadenar:
-// class testApp : public CanDirectObjects < CanBasicFingers <tuioApp <TableApp> > >
-//                                     Fixeu-vos sobretot en separar els ">" -----^
-//Les capacitats implementades actualment són:
-//- CanBasicFingers
-//- CanBasicObjects
-//- CanDirectFingers
-//- CanDirectObjects
-//Seguiu la capçalera InputGestureClasses.h per a trobar l'especificació dels gestos corresponents
-
+namespace tuio{
 class dummylistener: public CanObjectFinger<Listener>
 {
     public:
@@ -54,14 +35,16 @@ class dummylistener2: public CanDirectObjects < CanDirectFingers <Listener> >
     virtual void newObject(int32 s_id, int32 f_id, DirectObject *){std::cout << "direct obj" << std::endl;}
     virtual void removeObject(int32 s_id, int32 f_id){std::cout << "update direct obj" << std::endl;}
 };
+}
 
 class testApp : public TableApp
 {
 
 public:
-    dummylistener* listener;
-    dummylistener2* listener2;
+    tuio::dummylistener* listener;
+    tuio::dummylistener2* listener2;
     CursorFeedback* cursorfeedback;
+    FigureFeedback* figureFeedback;
     //aquest mètode es crida un cop a l'iniciar l'aplicació
     void Setup();
     //aquest mètode es crida abans de pintar

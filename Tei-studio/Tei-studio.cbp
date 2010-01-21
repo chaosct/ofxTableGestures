@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/ofxOsc/src/;addons/TuioGestures/;addons/TuioGestures/Gestures/;" />
+		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/ofxOsc/src/;addons/TuioGestures/;addons/TuioGestures/Gestures/;src/Graphics/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -379,22 +379,28 @@
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
 		<Unit filename="src/CursorFeedback.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src/Graphics/" />
 		</Unit>
 		<Unit filename="src/CursorFeedback.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Dispatcher.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/Dispatcher.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src/Graphics/" />
 		</Unit>
 		<Unit filename="src/FigureFeedback.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src/Graphics/" />
 		</Unit>
 		<Unit filename="src/FigureFeedback.h">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src/Graphics/" />
+		</Unit>
+		<Unit filename="src/Graphic.cpp">
+			<Option virtualFolder="src/Graphics/" />
+		</Unit>
+		<Unit filename="src/Graphic.hpp">
+			<Option virtualFolder="src/Graphics/" />
+		</Unit>
+		<Unit filename="src/GraphicDispatcher.cpp">
+			<Option virtualFolder="src/Graphics/" />
+		</Unit>
+		<Unit filename="src/GraphicDispatcher.hpp">
+			<Option virtualFolder="src/Graphics/" />
 		</Unit>
 		<Unit filename="src/InputGestureFingerObject.cpp">
 			<Option virtualFolder="src/" />
@@ -403,12 +409,6 @@
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/InputGestureTap.h">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/InputListener.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/InputListener.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
@@ -450,6 +450,9 @@
 		<Unit filename="../../../addons/ofxTableDistortion/src/container.hpp">
 			<Option virtualFolder="addons/TableDistortion/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/Dispatcher.cpp">
+			<Option virtualFolder="addons/TuioGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp">
 			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
@@ -468,6 +471,9 @@
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGestureDirectObjects.cpp">
 			<Option virtualFolder="addons/TuioGestures/Gestures/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/Listener.cpp">
+			<Option virtualFolder="addons/TuioGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/OSCListener.cpp">
 			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
@@ -482,6 +488,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/DirectPoint.h">
 			<Option virtualFolder="addons/TuioGestures/Gestures/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/Dispatcher.h">
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/EventQueue.h">
 			<Option virtualFolder="addons/TuioGestures/" />
@@ -503,6 +512,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/InputGestureDirectObjects.h">
 			<Option virtualFolder="addons/TuioGestures/Gestures/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/Listener.h">
+			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/h/OSCListener.h">
 			<Option virtualFolder="addons/TuioGestures/" />

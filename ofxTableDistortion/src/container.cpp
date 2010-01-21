@@ -1,5 +1,7 @@
 #include "container.hpp"
+#include "Shapes.hpp"
 
+using namespace shapes;
 using namespace simulator;
 
 void object::Draw(){

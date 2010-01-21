@@ -1,31 +1,32 @@
 #include "testApp.h"
 #include <algorithm>
 #include "tuioApp.h"
+#include "GraphicDispatcher.hpp"
 
-#include "Shapes.hpp"
 //--------------------------------------------------------------
 void testApp::Setup(){
     //Singleton<Dispatcher>::Instance().AddListener((Listener*)this);
-    listener = new dummylistener();
-    listener2 = new dummylistener2();
+    listener = new tuio::dummylistener();
+    listener2 = new tuio::dummylistener2();
     cursorfeedback = new CursorFeedback();
+    figureFeedback = new FigureFeedback();
 }
 
 //--------------------------------------------------------------
 void testApp::Update(){
     //processem els gestos
-    Dispatcher::Instance().processTevents();
-    cursorfeedback->Update();
+    GraphicDispatcher::Instance().Update();
+    tuio::Dispatcher::Instance().processTevents();
 }
 
 //--------------------------------------------------------------
 void testApp::Draw(){
-    cursorfeedback->Draw();
+    GraphicDispatcher::Instance().Draw();
 }
 
 //--------------------------------------------------------------
 void testApp::WindowResized(int w, int h){
-
+    GraphicDispatcher::Instance().Resize(w,h);
 }
 
 //--------------------------------------------------------------

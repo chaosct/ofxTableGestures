@@ -28,37 +28,18 @@
 
 */
 
-#include "CursorFeedback.h"
+#ifndef _GRAPHIC
+#define _GRAPHIC
 
-CursorFeedback::CursorFeedback(){
-}
+#include "Listener.h"
 
-CursorFeedback::~CursorFeedback(){
-}
+class Graphic:public tuio::Listener{
+    public:
+        Graphic();
+        virtual ~Graphic()=0;
+        virtual void draw(){}
+        virtual void update(){}
+        virtual void resize(int w, int h){}
+};
 
-void CursorFeedback::update(){
-    float seconds = ofGetElapsedTimef();
-    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
-        it->second->Update(seconds);
-    }
-}
-
-void CursorFeedback::draw(){
-    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
-       it->second->Draw();
-    }
-}
-
-void CursorFeedback::addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]=new HistoryPoint(id,xpos,ypos);
-}
-
-void CursorFeedback::updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]->SetPoint(xpos,ypos);
-}
-
-void CursorFeedback::removeTuioCursor(int32 id){
-    HistoryPoint*tmp = finger_map[id];
-    finger_map.erase(id);
-    delete tmp;
-}
+#endif //_GRAPHICDISPATCHER

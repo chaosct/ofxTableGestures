@@ -32,11 +32,9 @@
 #define _CONTAINER
 
 #include "ofMain.h"
-#include "Shapes.hpp"
 
 #define CURSOR_RADIUS 0.01
 #define OBJECT_RADIUS 0.07
-class Figure_shape;
 
 namespace simulator{
     class container{
