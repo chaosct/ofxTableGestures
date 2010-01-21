@@ -10,7 +10,7 @@ using namespace tuio;
 #include <map>
 #include <list>
 
-#define MAX_SECONDS 2.0f
+#define MAX_SECONDS 0.5f
 class time_point{
     public:
         time_point(float _time, DirectPoint p):time(_time),point(p){}
@@ -38,13 +38,17 @@ class HistoryPoint: private DirectPoint{
         void Draw(){
             ///Draws cursor
             ofSetColor(255,0,0);
-            ofCircle(xpos*ofGetWidth(),ypos*ofGetHeight(),10);
+            ofCircle(xpos*ofGetWidth(),ypos*ofGetHeight(),15);
             ///Draws trace
+            float actual_time = ofGetElapsedTimef();
+            ofEnableAlphaBlending();
             glBegin(GL_LINE_STRIP);
             for (std::list<time_point>::iterator it = points.begin(); it != points.end(); it++){
+                ofSetColor(255,0,0,255-255*(actual_time-it->time)/MAX_SECONDS);
                 glVertex2f(it->point.xpos*ofGetWidth(),it->point.ypos*ofGetHeight());
             }
             glEnd();
+            ofDisableAlphaBlending();
         }
 };
 

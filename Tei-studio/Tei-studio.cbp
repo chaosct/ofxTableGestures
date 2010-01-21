@@ -390,6 +390,12 @@
 		<Unit filename="src/Dispatcher.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/FigureFeedback.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/FigureFeedback.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/InputGestureFingerObject.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -420,6 +426,12 @@
 		<Unit filename="../../../addons/ofxTableDistortion/src/Grid.hpp">
 			<Option virtualFolder="addons/TableDistortion" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/Shapes.cpp">
+			<Option virtualFolder="addons/TableDistortion/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableDistortion/src/Shapes.hpp">
+			<Option virtualFolder="addons/TableDistortion/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/Simulator.cpp">
 			<Option virtualFolder="addons/TableDistortion/" />
 		</Unit>
@@ -431,6 +443,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/TableApp.hpp">
 			<Option virtualFolder="addons/TableDistortion" />
+		</Unit>
+		<Unit filename="../ofxTableDistortion/src/container.cpp">
+			<Option virtualFolder="addons/TableDistortion/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableDistortion/src/container.hpp">
 			<Option virtualFolder="addons/TableDistortion/" />

@@ -19,6 +19,8 @@
 				<file>../../../addons/ofxTableDistortion/src/container.hpp</file>
 				<file>../../../addons/ofxTableDistortion/src/Simulator.cpp</file>
 				<file>../../../addons/ofxTableDistortion/src/Simulator.hpp</file>
+				<file>../../../addons/ofxTableDistortion/src/Shapes.hpp</file>
+				<file>../../../addons/ofxTableDistortion/src/Shapes.cpp</file>
 			</folder>
 		</src>
 		

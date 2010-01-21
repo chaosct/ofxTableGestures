@@ -32,9 +32,11 @@
 #define _CONTAINER
 
 #include "ofMain.h"
+#include "Shapes.hpp"
 
 #define CURSOR_RADIUS 0.01
 #define OBJECT_RADIUS 0.07
+class Figure_shape;
 
 namespace simulator{
     class container{
@@ -120,35 +122,7 @@ namespace simulator{
         public:
             object(unsigned int _sid,unsigned int _fid, int _xpos,int _ypos,float _angle,float _xspeed,float _yspeed,float _rspeed,float _maccel,float _raccel,int _trayNumber=0):
                 container(_sid,_xpos,_ypos,_xspeed,_yspeed,maccel),fid(_fid),angle(_angle),rspeed(_rspeed),raccel(_raccel),tray_number(_trayNumber),isUp(false){}
-            void Draw(){
-                ofPushMatrix();
-                ofTranslate(xpos,ypos);
-                //Stroke
-                if(!isUp){
-                    ofNoFill();
-                    ofSetColor(80,80,80);
-                    ofCircle(0,0,OBJECT_RADIUS*ofGetHeight()/2);
-                    ofFill();
-                }
-                ofEnableAlphaBlending();
-                ofSetColor(100,100,200,200);
-
-                //body
-                ofCircle(0,0,OBJECT_RADIUS*ofGetHeight()/2);
-                ofSetColor(255,0,0);
-                //rotation line
-                ofPushMatrix();
-                ofRotateZ(angle*180/PI);
-                ofLine(0,0,0,OBJECT_RADIUS*ofGetHeight()/2);
-                ofPopMatrix();
-                ofDisableAlphaBlending();
-                ofSetColor(0xFFFFFF);
-                std::stringstream msg;
-                msg << fid;
-                //text
-                ofDrawBitmapString(msg.str(), 0, 0);
-                ofPopMatrix();
-            }
+            void Draw();
             bool Collide(int x, int y){
                 if(GetDistance(x,y)<= OBJECT_RADIUS*ofGetHeight()/2) return true;
                 return false;

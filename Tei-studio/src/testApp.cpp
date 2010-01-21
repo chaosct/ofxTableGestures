@@ -2,13 +2,13 @@
 #include <algorithm>
 #include "tuioApp.h"
 
+#include "Shapes.hpp"
 //--------------------------------------------------------------
 void testApp::Setup(){
     //Singleton<Dispatcher>::Instance().AddListener((Listener*)this);
     listener = new dummylistener();
     listener2 = new dummylistener2();
     cursorfeedback = new CursorFeedback();
-    Dispatcher::Instance().tostring();
 }
 
 //--------------------------------------------------------------
