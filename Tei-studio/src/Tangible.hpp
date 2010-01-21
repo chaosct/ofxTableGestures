@@ -34,26 +34,23 @@
 #include "Shapes.hpp"
 #include "tuioApp.h"
 #include "InputGestureBasicObjects.h"
+#include "InputGestureDirectObjects.h"
+#include "InputGestureObjectFinger.h"
 
-class Tangible:public tuio::CanBasicObjects < Graphic >
+class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < Graphic > >
 {
     private:
-        int fid;
-        float angle;
-        DirectPoint p;
+        tuio::DirectObject data;
         bool enable;
     public:
-        Tangible(int _fid):fid(_fid),angle(0),enable(false){}
-        virtual ~Tangible(){}
-        DirectPoint& GetPoint(){return p;}
-        float GetAngle(){return angle;}
-        void Set(float x, float y, float _angle){
-            angle = _angle;
-            p.xpos = x;
-            p.ypos = y;
+        Tangible(int _fid):enable(false){
+            data.f_id = _fid;
         }
+        virtual ~Tangible(){}
+        tuio::DirectObject& GetPoint(){return data;}
     protected:
         void Enable(bool flag = true){enable = flag;}
+        ///Graphic methods
         virtual void draw(){
             ///not needed, it is drawn by FigureFeedback
 //            ofPushMatrix();
@@ -64,6 +61,21 @@ class Tangible:public tuio::CanBasicObjects < Graphic >
         }
         virtual void update(){}
         virtual void resize(int x, int y){}
+        ///DirectObjects methods
+        virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject *object ){
+            data = tuio::DirectObject(*object);
+            Enable(true);
+        }
+        virtual void removeObject(int32 s_id, int32 f_id){
+            if(f_id == data.f_id){
+                Enable(false);
+            }
+        }
+        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+            if( data.f_id == f_id){
+                data = tuio::DirectObject( id,  f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
+            }
+        }
 };
 
 #endif // TANGIBLE_HPP_INCLUDED

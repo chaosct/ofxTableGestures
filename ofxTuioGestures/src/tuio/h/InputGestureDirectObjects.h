@@ -45,8 +45,16 @@ namespace tuio
 class DirectObject:public DirectPoint
 {
     public:
-    int32 s_id, f_id;
-    float angle, xspeed, yspeed, rspeed, maccel, raccel;
+        DirectObject(int32 _s_id, int32 _f_id, float _xpos, float _ypos,float _angle,float _xspeed,float _yspeed,float _rspeed,float _maccel,float _raccel):
+            DirectPoint(_xpos,_ypos), s_id(_s_id), f_id(_f_id), angle(_angle), xspeed(_xspeed), yspeed(_yspeed), rspeed(_rspeed), maccel(_maccel), raccel(_raccel)
+        {}
+        DirectObject():DirectPoint(), s_id(-1), f_id(0), angle(0), xspeed(0), yspeed(0), rspeed(0), maccel(0), raccel(0){}
+        DirectObject(const DirectObject& cpyobject): DirectPoint(cpyobject.xpos,cpyobject.ypos),s_id(cpyobject.s_id), f_id(cpyobject.f_id),
+                                                    angle(cpyobject.angle), xspeed(cpyobject.xspeed), yspeed(cpyobject.yspeed),
+                                                    rspeed(cpyobject.rspeed), maccel(cpyobject.maccel), raccel(cpyobject.raccel){
+                                                    }
+        int32 s_id, f_id;
+        float angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
 
 // Events definitions

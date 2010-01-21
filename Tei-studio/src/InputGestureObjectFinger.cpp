@@ -28,7 +28,7 @@
 
 */
 
-#include "InputGestureFingerObject.h"
+#include "InputGestureObjectFinger.h"
 
 using namespace tuio;
 

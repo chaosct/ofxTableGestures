@@ -5,27 +5,31 @@
 
 //--------------------------------------------------------------
 void testApp::Setup(){
-    //Singleton<Dispatcher>::Instance().AddListener((Listener*)this);
-    listener = new tuio::dummylistener();
-    listener2 = new tuio::dummylistener2();
+    ///Init all aplication data
+    //listener = new dummylistener();
+    //dummygraphic = new dummyGraphic();
+    //dummylistenergraphic = new dummyListenerGraphic();
     cursorfeedback = new CursorFeedback();
     figureFeedback = new FigureFeedback();
 }
 
 //--------------------------------------------------------------
 void testApp::Update(){
-    //processem els gestos
+    ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
+    ///Update input events, it says to all input gestures to process the gesture stack.
     tuio::Dispatcher::Instance().processTevents();
 }
 
 //--------------------------------------------------------------
 void testApp::Draw(){
+    ///Draws all 'Graphics'
     GraphicDispatcher::Instance().Draw();
 }
 
 //--------------------------------------------------------------
 void testApp::WindowResized(int w, int h){
+    ///calls resize method of all 'Graphics' when nedded.
     GraphicDispatcher::Instance().Resize(w,h);
 }
 

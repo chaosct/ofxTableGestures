@@ -402,10 +402,10 @@
 		<Unit filename="src/GraphicDispatcher.hpp">
 			<Option virtualFolder="src/Graphics/" />
 		</Unit>
-		<Unit filename="src/InputGestureFingerObject.cpp">
+		<Unit filename="src/InputGestureObjectFinger.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/InputGestureFingerObject.h">
+		<Unit filename="src/InputGestureObjectFinger.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/InputGestureTap.h">
