@@ -1,7 +1,6 @@
 bin
 obj
 *~
-TSIframework.depend
-TSIframework.layout
+*.depend
 .svn
 *.layout
