@@ -31,12 +31,15 @@
 #ifndef _GRAPHIC
 #define _GRAPHIC
 
+#include "GraphicDispatcher.hpp"
 #include "Listener.h"
 
 class Graphic:public tuio::Listener{
     public:
         Graphic();
         virtual ~Graphic()=0;
+    protected:
+        friend class GraphicDispatcher;
         virtual void draw(){}
         virtual void update(){}
         virtual void resize(int w, int h){}

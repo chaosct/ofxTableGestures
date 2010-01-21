@@ -17,6 +17,8 @@
 #include "CursorFeedback.h"
 #include "FigureFeedback.h"
 
+#include "Tangible.hpp"
+
 namespace tuio{
 class dummylistener: public CanObjectFinger<Listener>
 {

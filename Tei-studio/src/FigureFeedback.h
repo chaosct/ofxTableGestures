@@ -87,11 +87,12 @@ class FigureFeedback: public tuio::CanBasicObjects < Graphic > {
     public:
         FigureFeedback();
         ~FigureFeedback();
-        void draw();
-        void update();
         virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         virtual void removeTuioObject(int32 id);
+    protected:
+        void draw();
+        void update();
 };
 
 #endif // FIGUREFEEDBACK_H_INCLUDED

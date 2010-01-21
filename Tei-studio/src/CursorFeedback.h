@@ -87,11 +87,12 @@ class CursorFeedback: public tuio::CanBasicFingers < Graphic > {
     public:
         CursorFeedback();
         ~CursorFeedback();
-        void update();
-        void draw();
         virtual void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
         virtual void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
         virtual void removeTuioCursor(int32 id);
+    protected:
+        void update();
+        void draw();
 };
 
 #endif // CURSORFEEDBACK_H_INCLUDED

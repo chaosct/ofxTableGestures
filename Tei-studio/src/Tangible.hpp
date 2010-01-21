@@ -27,26 +27,43 @@
 
 */
 
-#ifndef _GRAPHICDISPATCHER
-#define _GRAPHICDISPATCHER
-#include <list>
+#ifndef TANGIBLE_HPP_INCLUDED
+#define TANGIBLE_HPP_INCLUDED
 #include "Graphic.hpp"
+#include "DirectPoint.h"
+#include "Shapes.hpp"
+#include "tuioApp.h"
+#include "InputGestureBasicObjects.h"
 
-class Graphic;
-
-class GraphicDispatcher{
+class Tangible:public tuio::CanBasicObjects < Graphic >
+{
     private:
-        std::list<Graphic*> graphics;
-        static GraphicDispatcher* pinstance;
-        GraphicDispatcher();
+        int fid;
+        float angle;
+        DirectPoint p;
+        bool enable;
     public:
-        static GraphicDispatcher& Instance();
-        ~GraphicDispatcher();
-        void Draw();
-        void Update();
-        void Resize(int w, int h);
-        void AddGraphic(Graphic* graphic);
-        void RemoveGraphic(Graphic* graphic);
+        Tangible(int _fid):fid(_fid),angle(0),enable(false){}
+        virtual ~Tangible(){}
+        DirectPoint& GetPoint(){return p;}
+        float GetAngle(){return angle;}
+        void Set(float x, float y, float _angle){
+            angle = _angle;
+            p.xpos = x;
+            p.ypos = y;
+        }
+    protected:
+        void Enable(bool flag = true){enable = flag;}
+        virtual void draw(){
+            ///not needed, it is drawn by FigureFeedback
+//            ofPushMatrix();
+//            ofTranslate(p.xpos,p.ypos);
+//            ofRotate(angle*180/M_PI);
+//            shapes::Figure_shape::Instance().drawShape(fid);
+//            ofPopMatrix();
+        }
+        virtual void update(){}
+        virtual void resize(int x, int y){}
 };
 
-#endif //_GRAPHICDISPATCHER
+#endif // TANGIBLE_HPP_INCLUDED
