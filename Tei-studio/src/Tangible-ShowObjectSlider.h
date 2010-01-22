@@ -31,6 +31,32 @@
 #ifndef TANGIBLE_SHOWOBJECTSLIDER_H_INCLUDED
 #define TANGIBLE_SHOWOBJECTSLIDER_H_INCLUDED
 
+/**
+// Summary
+template <class Base>
+class ShowObjectSlider : public Base
+{
+public:
+
+    ///Interface to implement
+    virtual void sliderValueUpdated(double newvalue){}
+
+    //accessor to slider value
+    double getSliderValue();
+
+    ShowObjectSlider();
+
+    //reimplements Tangible
+    virtual void objectFingerAdd(tuio::DirectObject* obj, tuio::DirectFinger* finger);
+    virtual void objectFingerRemove(tuio::DirectObject* obj, tuio::DirectFinger* finger);
+    virtual void objectFingerUpdate(tuio::DirectObject* obj, tuio::DirectFinger* finger);
+    protected:
+    virtual void draw();
+};
+
+*/
+
+
 template <class Base>
 class ShowObjectSlider : public Base
 {
@@ -49,11 +75,18 @@ class ShowObjectSlider : public Base
         if(currentAngle < 0) currentAngle += 2*PI;
         if(currentAngle > 0 && currentAngle < PI)
         {
+            double oldvalue = sliderValue;
             sliderValue = currentAngle / PI;
+            if(oldvalue != sliderValue)
+                sliderValueUpdated(sliderValue); //Calling the interface
         }
     }
 
     public:
+
+    ///Interface to implement
+    virtual void sliderValueUpdated(double newvalue){}
+
     ShowObjectSlider():color(0x0010EE),linewidth(5),radius(50),df(NULL),sliderValue(0)
     {
         DirectPoint p;
