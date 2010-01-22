@@ -111,7 +111,7 @@ class InputObjectFinger : public CanTap < CanBasicFingers < CanDirectFingers < C
     ///Input gesture data
         ///basicfingers -> cursor input
         InputGestureBasicFingers * basicfingers;
-        ///Directfingers -> cursor input with encapsulated data
+        ///directfingers -> cursor input with encapsulated data
         InputGestureDirectFingers * directfingers;
         ///directobjects -> object input with encapsulated fata
         InputGestureDirectObjects * directobjects;
