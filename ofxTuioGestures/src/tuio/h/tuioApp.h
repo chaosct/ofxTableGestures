@@ -30,13 +30,14 @@
 #ifndef TUIOAPP_H_INCLUDED
 #define TUIOAPP_H_INCLUDED
 
-#define TRegistraCallback(T,TE) Base::getEP()[Singleton<TE>::Instance().name] = new Callback<T>(this,&T::EP_##TE )
+#define TRegistraCallback(T,TE) Base::registerCallback(Singleton<TE>::Instance().name,new Callback<T>(this,&T::EP_##TE ))
 #define TEventHandler(en) void EP_##en (TEvent * evt)
 
 
 #include "EventQueue.h"
 #include "tuioinput.h"
 #include "InputGesture.h"
+#include <iostream>
 
 namespace tuio
 {
@@ -90,10 +91,15 @@ public:
             eventprocessors[te->name]->run(te);
     }
 
-    eventprocessorsType & getEP()
+    void registerCallback(unsigned int n, GenericCallback * callback)
     {
-        return eventprocessors;
+        if(eventprocessors.size() <= n)
+        {
+            std::cout << "tuioApp: Fatal! register number out of range!" << std::endl;
+        }
+        eventprocessors[n]=callback;
     }
+
 };
 
 class InputGesture;
