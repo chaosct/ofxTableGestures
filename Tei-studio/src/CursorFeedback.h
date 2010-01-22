@@ -67,8 +67,9 @@ class HistoryPoint: private DirectPoint{
         void Draw(){
             ///Draws cursor
             ofSetColor(255,0,0);
-            ofCircle(xpos*ofGetWidth(),ypos*ofGetHeight(),15);
+            ofCircle(xpos*ofGetWidth(),ypos*ofGetHeight(),7);
             ///Draws trace
+            ofSetLineWidth(3);
             float actual_time = ofGetElapsedTimef();
             ofEnableAlphaBlending();
             glBegin(GL_LINE_STRIP);
