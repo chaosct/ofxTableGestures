@@ -44,8 +44,10 @@ class EventTypes : public Singleton<EventTypes>
 {
     private:
     unsigned int n;
-    public:
+    protected:
+    friend class Singleton<EventTypes>;
     EventTypes():n(0){}
+    public:
     unsigned int getNumber()
     {
         return n++;

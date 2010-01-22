@@ -46,13 +46,15 @@ namespace tuio
             std::list<Listener*> listeners_list;
             ///queue of generated events
             EventQueue * equeue;
-        public:
+        protected:
+            friend class Singleton< Dispatcher >;
             ///Dispatcher()
             ///Constructor, it starts the tuioinput thread (if not started) and recuperates the eventqueue
             Dispatcher(){
                 Singleton<tuio::tuioinput>::Instance().init();
                 equeue = Singleton<tuio::tuioinput>::Instance().getQueue();
             }
+        public:
             ///void AddListener(Listener* listener)
             ///outputs:none
             ///inputs:
