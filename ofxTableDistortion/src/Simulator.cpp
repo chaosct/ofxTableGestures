@@ -37,6 +37,8 @@
 #define M_2PI M_PI*2
 using namespace shapes;
 
+#define SCALE_FACTOR 0.91f
+
 namespace simulator
 {
     Simulator::Simulator():sessionGenerator(0),fseqGenerator(0),hold(false),select(false),move_selecteds(false),ytray(0){
@@ -468,8 +470,8 @@ namespace simulator
             message_set.addStringArg("set");
             message_set.addIntArg(o->sid);
             message_set.addIntArg(o->fid);
-            message_set.addFloatArg( (((float)o->xpos)/ofGetWidth())*1.1f );
-            message_set.addFloatArg( (((float)o->ypos)/ofGetHeight())*1.1f );
+            message_set.addFloatArg( Transformx(o->xpos) );
+            message_set.addFloatArg( Transformy(o->ypos) );
             message_set.addFloatArg( o->angle );
             message_set.addFloatArg(o->xspeed);
             message_set.addFloatArg(o->yspeed);
@@ -508,8 +510,8 @@ namespace simulator
             message_set.addStringArg("set");
             message_set.addIntArg(o->sid);
             message_set.addIntArg(o->fid);
-            message_set.addFloatArg( (((float)o->xpos)/ofGetWidth())*1.1f );
-            message_set.addFloatArg( (((float)o->ypos)/ofGetHeight())*1.1f );
+            message_set.addFloatArg( Transformx(o->xpos) );
+            message_set.addFloatArg( Transformy(o->ypos));
             message_set.addFloatArg(o->angle);
             message_set.addFloatArg(o->xspeed);
             message_set.addFloatArg(o->yspeed);
@@ -569,8 +571,8 @@ namespace simulator
             message_set.setAddress("/tuio/2Dcur");
             message_set.addStringArg("set");
             message_set.addIntArg(c->sid);
-            message_set.addFloatArg( (((float)c->xpos)/ofGetWidth())*1.1f );
-            message_set.addFloatArg( (((float)c->ypos)/ofGetHeight())*1.1f );
+            message_set.addFloatArg( Transformx(c->xpos) );
+            message_set.addFloatArg( Transformy(c->ypos) );
             message_set.addFloatArg(c->xspeed);
             message_set.addFloatArg(c->yspeed);
             message_set.addFloatArg(c->maccel);
@@ -605,8 +607,8 @@ namespace simulator
             message_set.setAddress("/tuio/2Dcur");
             message_set.addStringArg("set");
             message_set.addIntArg(c->sid);
-            message_set.addFloatArg( (((float)c->xpos)/ofGetWidth())*1.1f );
-            message_set.addFloatArg( (((float)c->ypos)/ofGetHeight())*1.1f );
+            message_set.addFloatArg( Transformx(c->xpos) );
+            message_set.addFloatArg( Transformy(c->ypos) );
             message_set.addFloatArg(c->xspeed);
             message_set.addFloatArg(c->yspeed);
             message_set.addFloatArg(c->maccel);
@@ -649,5 +651,13 @@ namespace simulator
     }
 
     ///missatge cada segon?
+
+    float Simulator::Transformx(float to_transform){
+        return to_transform/(ofGetWidth()*0.91f);
+    }
+
+    float Simulator::Transformy(float to_transform){
+        return to_transform/(ofGetHeight()*0.91f);
+    }
 
 }

@@ -67,21 +67,19 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < tuio::CanD
     public:
         ///CanDirectObjects methods
         virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject * object){
-            if( data.f_id == figure_id){
+            if( data.f_id == f_id){
                 data = tuio::DirectObject(*object);
                 Enable(true);
-                std::cout << "enabled" << std::endl;
             }
         }
-        virtual void removeObject(int32 s_id, int32 _f_id){
-            if(_f_id == data.f_id){
+        virtual void removeObject(int32 s_id, int32 f_id){
+            if( data.f_id == f_id ){
                 Enable(false);
-                std::cout << "disabled" << std::endl;
             }
         }
-        virtual void updateTuioObject(int32 id, int32 _f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
-            if( data.f_id == figure_id){
-                data = tuio::DirectObject( id,  _f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
+        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+            if( data.f_id == f_id){
+                data = tuio::DirectObject( id,  f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
             }
         }
         ///CanObjectFinger methods

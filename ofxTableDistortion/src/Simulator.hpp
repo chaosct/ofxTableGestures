@@ -95,6 +95,9 @@ namespace simulator{
             void updateTuioCursor(cursor* c);
             void removeTuioCursor(cursor* c);
 
+            float Transformx(float to_transform);
+            float Transformy(float to_transform);
+
             bool LoadConfigFile(std::string path);
     };
 }

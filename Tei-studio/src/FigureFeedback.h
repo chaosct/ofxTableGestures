@@ -74,7 +74,7 @@ class HistoryFigure: private DirectPoint{
         void draw(){
             ofPushMatrix();
             ofTranslate(xpos*ofGetWidth(),ypos*ofGetHeight());
-            ofRotate(angle*180/TWO_PI);
+            ofRotate(angle*180/M_PI);
             ofScale(scale_factor,scale_factor,1);
             shapes::Figure_shape::Instance().drawShape(fid);
             ofPopMatrix();

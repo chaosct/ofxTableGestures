@@ -207,7 +207,7 @@ void TableApp::DrawHelp()
 void TableApp::draw(){
     ofPushMatrix();
     #ifdef SIMULATOR
-    if(is_simulating) ofScale(0.9f,0.9f,1.0f);
+    if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
     StartDistortion();
     grid->Draw(calibration_enabled,calibration_mode);

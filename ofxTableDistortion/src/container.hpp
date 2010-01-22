@@ -97,8 +97,8 @@ namespace simulator{
             void Draw(){
                 ofPushMatrix();
                 ofEnableAlphaBlending();
-                if(isSelected)ofSetColor(50,150,50,100);
-                else ofSetColor(100,100,100,100);
+                if(isSelected)ofSetColor(50,150,50,80);
+                else ofSetColor(100,100,100,80);
                 ofTranslate(xpos,ypos);
                 //bug when windows is not a screen rectangle
                 ofCircle(0,0,CURSOR_RADIUS*ofGetHeight());
