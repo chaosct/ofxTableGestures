@@ -30,14 +30,14 @@
 
 #include "Shapes.hpp"
 
-#define SQUARE_RADIUS 50
-#define SQAURE_BOUND 12.5f
+#define SQUARE_RADIUS 60
+#define SQAURE_BOUND 22.5f
 #define SQUARE_VERTEX 2
 
-#define CIRCLE_RADIUS 25
+#define CIRCLE_RADIUS 35
 
-#define STAR_OUTER_RADIUS 25
-#define STAR_INNER_RADIUS 20
+#define STAR_OUTER_RADIUS 35
+#define STAR_INNER_RADIUS 30
 #define STAR_EDGES 24
 
 #define CONFIGPATH "../simulator.config"
