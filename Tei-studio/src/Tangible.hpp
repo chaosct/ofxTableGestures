@@ -45,7 +45,7 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic >
         tuio::DirectObject * data;
         bool enable;
     public:
-        Tangible():enable(false){
+        Tangible():enable(false),data(NULL){
         }
         virtual ~Tangible(){}
         virtual tuio::DirectObject& GetPoint(){return *data;}
@@ -66,14 +66,14 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic >
     public:
         ///CanDirectObjects methods
         virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject * object){
-            if( figure_id == f_id){
+            if( !data && figure_id == f_id){
                 data = object;
                 Enable(true);
             }
         }
         virtual void removeObject(int32 s_id, int32 f_id){
-            if( figure_id == f_id ){
-                //data = NULL //???
+            if( data && figure_id == f_id ){
+                data = NULL;
                 Enable(false);
             }
         }
