@@ -36,25 +36,47 @@
 
 #define QUEUE_SIZE 1024
 
-namespace tuio {
+namespace tuio
+{
 
-class EventQueue {
-  private:
-    TEvent * events[QUEUE_SIZE];
+template <typename T,int size>
+class blocklessQueue
+{
+private:
+    T * events[size];
 
     unsigned int reader;
-
     unsigned int writer;
 
+public:
+    blocklessQueue():reader(0),writer(0) {}
+    void push(T * evt)
+    {
+        if( (writer +1)%QUEUE_SIZE ==  reader)
+        {
+            //discard messages when full
+            std::cout << "Event Queue Full: discarding event :" << evt->name << std::endl;
+            delete evt;
+            return;
+        }
+        events[writer]=evt;
+        writer = (writer + 1)%QUEUE_SIZE;
+    }
 
-  public:
-    EventQueue();
-
-    void push(TEvent * evt);
-
-    TEvent * pop();
+    T * pop()
+    {
+        if( reader ==  writer)
+        {
+            return NULL; // return NULL when empty
+        }
+        TEvent * evt = events[reader];
+        reader = (reader + 1)%QUEUE_SIZE;
+        return evt;
+    }
 
 };
+
+typedef blocklessQueue<TEvent,QUEUE_SIZE> EventQueue;
 
 } // namespace tuio
 #endif

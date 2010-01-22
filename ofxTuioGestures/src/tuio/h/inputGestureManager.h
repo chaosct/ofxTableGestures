@@ -35,9 +35,9 @@
 #include <list>
 #include <algorithm>
 #include "OSCListener.h"
+#include "EventQueue.h"
 
 namespace tuio { class InputGesture; }
-namespace tuio { class EventQueue; }
 namespace osc { class ReceivedMessageArgumentStream; }
 
 namespace tuio {
