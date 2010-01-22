@@ -39,17 +39,16 @@
 
 
 template< int figure_id>
-class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < tuio::CanDirectObjects < Graphic > > >
+class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic > >
 {
     private:
-        tuio::DirectObject data;
+        tuio::DirectObject * data;
         bool enable;
     public:
         Tangible():enable(false){
-            data.f_id = figure_id;
         }
         virtual ~Tangible(){}
-        virtual tuio::DirectObject& GetPoint(){return data;}
+        virtual tuio::DirectObject& GetPoint(){return *data;}
         virtual bool IsEnabled(){return enable;}
     protected:
         void Enable(bool flag = true){enable = flag;}
@@ -67,19 +66,15 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < tuio::CanD
     public:
         ///CanDirectObjects methods
         virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject * object){
-            if( data.f_id == f_id){
-                data = tuio::DirectObject(*object);
+            if( figure_id == f_id){
+                data = object;
                 Enable(true);
             }
         }
         virtual void removeObject(int32 s_id, int32 f_id){
-            if( data.f_id == f_id ){
+            if( figure_id == f_id ){
+                //data = NULL //???
                 Enable(false);
-            }
-        }
-        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
-            if( data.f_id == f_id){
-                data = tuio::DirectObject( id,  f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
             }
         }
         ///CanObjectFinger methods
@@ -109,5 +104,7 @@ class ShowAngleArrow:public Base
         }
     }
 };
+
+#include "Tangible-ShowObjectSlider.h"
 
 #endif // TANGIBLE_HPP_INCLUDED
