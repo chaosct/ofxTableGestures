@@ -34,13 +34,13 @@
 
 class Graphic;
 
-class GraphicDispatcher{
+class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
         std::list<Graphic*> graphics;
-        static GraphicDispatcher* pinstance;
+    protected:
+        friend class Singleton<GraphicDispatcher>;
         GraphicDispatcher();
     public:
-        static GraphicDispatcher& Instance();
         ~GraphicDispatcher();
         void Draw();
         void Update();

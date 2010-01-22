@@ -29,18 +29,10 @@
 
 #include "GraphicDispatcher.hpp"
 
-GraphicDispatcher* GraphicDispatcher::pinstance=NULL;
-
 GraphicDispatcher::GraphicDispatcher(){
 }
 
 GraphicDispatcher::~GraphicDispatcher(){
-}
-
-GraphicDispatcher& GraphicDispatcher::Instance(){
-    if(pinstance == NULL)
-        pinstance = new GraphicDispatcher();
-    return *pinstance;
 }
 
 void GraphicDispatcher::Draw(){
