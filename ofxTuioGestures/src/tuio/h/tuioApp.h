@@ -67,11 +67,11 @@ class Callback : public GenericCallback
 };
 
 
-
+class VoidClass{};
 
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
-template< class Base >
+template< class Base = VoidClass>
 class tuioApp : public Base
 {
 private:
@@ -95,10 +95,6 @@ public:
         return eventprocessors;
     }
 };
-
-class VoidClass{};
-typedef tuioApp<VoidClass> tuioAppBase;
-
 
 class InputGesture;
 

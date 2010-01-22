@@ -40,7 +40,7 @@ namespace tuio
 
     ///Listener -> This class is attached automatically to "Dispatcher" and detached at destuction
     /// it is the base class for all capabilities that will be used.
-    class Listener : public tuioAppBase
+    class Listener : public tuioApp<>
     {
         public:
             ///Listener()
