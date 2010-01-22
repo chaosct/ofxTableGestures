@@ -28,6 +28,10 @@
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/TEvent.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioApp.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/tuioinput.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/Dispatcher.cpp</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/Dispatcher.h</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/c/Listener.cpp</file>
+				<file>../../../addons/ofxTuioGestures/src/tuio/h/Listener.h</file>
 			</folder>
 			<folder name="addons/TuioGestures/Gestures">
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/DirectPoint.h</file>
