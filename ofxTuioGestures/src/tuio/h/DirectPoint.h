@@ -46,6 +46,9 @@ class DirectPoint{
             else if ( dy < 0 && dx > 0 )return (2*M_PI)-angle;
             return angle;
         }
+        float getAngle(const DirectPoint* point){
+            return getAngle(*point);
+        }
     /// Setters
         void setX(float x){xpos = x;}
         void setY(float y){ypos = y;}

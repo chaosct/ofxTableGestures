@@ -411,6 +411,9 @@
 		<Unit filename="src/InputGestureTap.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/Tangible-ShowObjectSlider.h">
+			<Option virtualFolder="src/Graphics/" />
+		</Unit>
 		<Unit filename="src/Tangible.hpp">
 			<Option virtualFolder="src/Graphics/" />
 		</Unit>
@@ -454,9 +457,6 @@
 			<Option virtualFolder="addons/TableDistortion/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/Dispatcher.cpp">
-			<Option virtualFolder="addons/TuioGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/EventQueue.cpp">
 			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp">

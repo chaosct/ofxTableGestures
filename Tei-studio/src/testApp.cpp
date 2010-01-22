@@ -12,6 +12,7 @@ void testApp::Setup(){
     cursorfeedback = new CursorFeedback();
     figureFeedback = new FigureFeedback();
     tangible_with_a_white_arrow = new ShowAngleArrow< Tangible<3> , 25 >;
+    new ShowObjectSlider<Tangible<4> >;
 }
 
 //--------------------------------------------------------------
