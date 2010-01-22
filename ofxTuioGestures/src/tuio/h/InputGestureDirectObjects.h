@@ -88,7 +88,7 @@ class CanDirectObjects : public  Base
 {
     public:
     //Interface redefined by ofApp
-    virtual void newObject(int32 s_id, int32 f_id, DirectObject *){}
+    virtual void newObject(int32 s_id, int32 f_id, DirectObject * object){}
     virtual void removeObject(int32 s_id, int32 f_id){}
 
     //processing events callbacks

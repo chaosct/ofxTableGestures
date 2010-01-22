@@ -73,6 +73,7 @@ class testApp : public TableApp
     CursorFeedback* cursorfeedback;
     ///figureFeedback. It shows a 'shape' foreach object on the table
     FigureFeedback* figureFeedback;
+    ShowAngleArrow< Tangible<3> , 25 >* tangible_with_a_white_arrow;
 public:
     ///void Setup();
     ///inputs:none

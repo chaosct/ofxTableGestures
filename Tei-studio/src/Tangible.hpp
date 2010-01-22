@@ -37,17 +37,20 @@
 #include "InputGestureDirectObjects.h"
 #include "InputGestureObjectFinger.h"
 
-class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < Graphic > >
+
+template< int figure_id>
+class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < tuio::CanDirectObjects < Graphic > > >
 {
     private:
         tuio::DirectObject data;
         bool enable;
     public:
-        Tangible(int _fid):enable(false){
-            data.f_id = _fid;
+        Tangible():enable(false){
+            data.f_id = figure_id;
         }
         virtual ~Tangible(){}
-        tuio::DirectObject& GetPoint(){return data;}
+        virtual tuio::DirectObject& GetPoint(){return data;}
+        virtual bool IsEnabled(){return enable;}
     protected:
         void Enable(bool flag = true){enable = flag;}
         ///Graphic methods
@@ -61,21 +64,52 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanBasicObjects < Graphic > 
         }
         virtual void update(){}
         virtual void resize(int x, int y){}
-        ///DirectObjects methods
-        virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject *object ){
-            data = tuio::DirectObject(*object);
-            Enable(true);
+    public:
+        ///CanDirectObjects methods
+        virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject * object){
+            if( data.f_id == figure_id){
+                data = tuio::DirectObject(*object);
+                Enable(true);
+                std::cout << "enabled" << std::endl;
+            }
         }
-        virtual void removeObject(int32 s_id, int32 f_id){
-            if(f_id == data.f_id){
+        virtual void removeObject(int32 s_id, int32 _f_id){
+            if(_f_id == data.f_id){
                 Enable(false);
+                std::cout << "disabled" << std::endl;
             }
         }
-        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
-            if( data.f_id == f_id){
-                data = tuio::DirectObject( id,  f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
+        virtual void updateTuioObject(int32 id, int32 _f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+            if( data.f_id == figure_id){
+                data = tuio::DirectObject( id,  _f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel);
             }
         }
+        ///CanObjectFinger methods
+        virtual void objectFingerAdd(tuio::DirectObject* obj, tuio::DirectFinger* finger) {}
+        virtual void objectFingerUpdate(tuio::DirectObject* obj, tuio::DirectFinger* finger) {}
+        virtual void objectFingerRemove(tuio::DirectObject* obj, tuio::DirectFinger* finger) {}
+        virtual void objectFingerTap(tuio::DirectObject* obj, float x, float y) {}
+};
+
+template <class Base, int triangle_distance>
+class ShowAngleArrow:public Base
+{
+    public:
+    virtual tuio::DirectObject& GetPoint(){return Base::GetPoint();}
+    virtual bool IsEnabled(){return Base::IsEnabled();}
+    protected:
+    virtual void draw(){
+        if(IsEnabled()){
+            ofPushMatrix();
+            ofTranslate(GetPoint().xpos*ofGetWidth(), GetPoint().ypos*ofGetHeight());
+            ofRotate(GetPoint().angle*180/M_PI);
+            ofTranslate(0,triangle_distance);
+            ofSetColor(0xFFFFFF);
+            ofTriangle(-7,5,0,0,7,5);
+            ofPopMatrix();
+            Base::draw();
+        }
+    }
 };
 
 #endif // TANGIBLE_HPP_INCLUDED
