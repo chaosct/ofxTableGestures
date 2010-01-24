@@ -77,6 +77,9 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic >
                 Enable(false);
             }
         }
+        float getAngleDegrees(){
+            return GetPoint().angle*180/M_PI;
+        }
         ///CanObjectFinger methods
         virtual void objectFingerAdd(tuio::DirectObject* obj, tuio::DirectFinger* finger) {}
         virtual void objectFingerUpdate(tuio::DirectObject* obj, tuio::DirectFinger* finger) {}
@@ -84,6 +87,48 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic >
         virtual void objectFingerTap(tuio::DirectObject* obj, float x, float y) {}
 };
 
+template <class Base , int spins=0, int min_degrees= -1 ,int max_degrees=-1>
+class SpinsPerAngle: public tuio::CanBasicObjects < Base >{
+    private:
+        float angle;
+        float previous_angle;
+        float _spins;
+        int min, max;
+        bool loop;
+        void resetMinMax(){min =0;max=360;loop=true;}
+    public:
+        SpinsPerAngle():angle(0),previous_angle(0),_spins(spins),min(min_degrees),max(max_degrees),loop(false){
+            if (min == -1 || max == -1 || min == max) resetMinMax();
+            else if(min > max){
+                int tmp=min;
+                min = max;
+                max = tmp;
+            }
+            if (_spins <= 0) _spins = 1;
+        }
+        virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float _angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+            previous_angle = _angle;
+        }
+        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float _angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+            float increment = previous_angle-_angle;
+            if(increment >= M_PI) increment = increment - TWO_PI;
+            else if (increment < -M_PI) increment = increment + TWO_PI;
+            angle -= increment;
+            //if(angle >= TWO_PI) angle -= TWO_PI;
+            //else if (angle < 0) angle += TWO_PI;
+            previous_angle = _angle;
+        }
+        float getAngleDegrees(){
+            float tmp_angle = (angle/_spins);
+            float toreturn = tmp_angle*180/M_PI;
+            if(!loop){
+                if (toreturn > max) return max;
+                else if(toreturn < min) return min;
+            }
+            return toreturn;
+        }
+};
+//Show limited angle arrow template class from, to
 template <class Base, int triangle_distance>
 class ShowAngleArrow:public Base
 {
@@ -95,7 +140,7 @@ class ShowAngleArrow:public Base
         if(IsEnabled()){
             ofPushMatrix();
             ofTranslate(GetPoint().xpos*ofGetWidth(), GetPoint().ypos*ofGetHeight());
-            ofRotate(GetPoint().angle*180/M_PI);
+            ofRotate(getAngleDegrees());
             ofTranslate(0,triangle_distance);
             ofSetColor(0xFFFFFF);
             ofTriangle(-7,5,0,0,7,5);
@@ -103,6 +148,16 @@ class ShowAngleArrow:public Base
             Base::draw();
         }
     }
+    virtual float getAngleDegrees(){
+        return Base::getAngleDegrees();
+    }
+};
+
+template <class Base>
+class ShowAngleArrowWithMarks: public ShowAngleArrow < Base , 50 >
+{
+    protected:
+
 };
 
 #include "Tangible-ShowObjectSlider.h"

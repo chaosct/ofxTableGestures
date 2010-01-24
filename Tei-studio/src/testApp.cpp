@@ -11,7 +11,7 @@ void testApp::Setup(){
     //dummylistenergraphic = new dummyListenerGraphic();
     cursorfeedback = new CursorFeedback();
     figureFeedback = new FigureFeedback();
-    tangible_with_a_white_arrow = new ShowAngleArrow< Tangible<3> , 25 >;
+    tangible_with_a_white_arrow = new ShowAngleArrow< SpinsPerAngle < Tangible<3> , 2 > , 25 >;
     new ShowObjectSlider<Tangible<4> >;
 }
 
