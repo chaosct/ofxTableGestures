@@ -2,6 +2,24 @@
 #include <algorithm>
 #include "tuioApp.h"
 #include "GraphicDispatcher.hpp"
+#include "ofxOscSender.h"
+
+class oscNote : public ShowObjectSlider<Tangible<4> >
+{
+    public:
+    ofxOscSender sender;
+    oscNote()
+    {
+        sender.setup("127.0.0.1",9999);
+    }
+    void sliderValueUpdated(double n)
+    {
+        ofxOscMessage message;
+        message.setAddress("/freq");
+        message.addFloatArg(n*440.0 + 440.0);
+        sender.sendMessage(message);
+    }
+};
 
 //--------------------------------------------------------------
 void testApp::Setup(){
@@ -11,8 +29,8 @@ void testApp::Setup(){
     //dummylistenergraphic = new dummyListenerGraphic();
     cursorfeedback = new CursorFeedback();
     figureFeedback = new FigureFeedback();
-    tangible_with_a_white_arrow = new ShowAngleArrow< SpinsPerAngle < Tangible<3> , 2 > , 25 >;
-    new ShowObjectSlider<Tangible<4> >;
+    tangible_with_a_white_arrow = new ShowAngleArrow< Tangible<3> , 25 >;
+    new oscNote();
 }
 
 //--------------------------------------------------------------
