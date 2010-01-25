@@ -1,4 +1,4 @@
-OF TangibleFramework is a collection of addons to be used with OpenFrameworks to support rich interaction using tabletop and tangible interfaces via the TUIO protocol.
+OF-TangibleFramework is a collection of addons to be used with OpenFrameworks to support rich interaction using tabletop and tangible interfaces via the TUIO protocol.
 
 At the moment it includes:
 * An embedded simulator.

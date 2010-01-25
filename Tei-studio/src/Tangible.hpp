@@ -1,5 +1,5 @@
 /*
-    TSIframework . Framework for Taller de Sistemes Interactius I
+    OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
     Copyright (c) 2009 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
