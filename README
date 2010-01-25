@@ -5,6 +5,14 @@ At the moment it includes:
 * Distortion correction for projection.
 * A general framework to create gesture recognizers directly or through composition.
 * A lock-free thread-safe event queue.
+* Base classes for autonomous objects, with updating, drawing and event notification, with automatic subscription.
+* Some basic examples on how to use the code.
+
+Warning:
+This project is currently under heavy development. The underlying code as well as the specific interfaces of
+its different parts may change in the future, leaving your project unable to compile unless you keep
+the framework in its original state.
+Please read future READMEs and CHANGELOGs for backwards compatibility issues.
 
 Authors:
  Carles F. Julià <carles.fernandez@upf.edu>
