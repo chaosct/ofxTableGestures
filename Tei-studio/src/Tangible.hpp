@@ -51,7 +51,7 @@ class Tangible:public tuio::CanObjectFinger < tuio::CanDirectObjects < Graphic >
         virtual tuio::DirectObject& GetPoint(){return *data;}
         virtual bool IsEnabled(){return enable;}
     protected:
-        void Enable(bool flag = true){enable = flag;}
+        virtual void Enable(bool flag = true){enable = flag;}
         ///Graphic methods
         virtual void draw(){
             ///not needed, it is drawn by FigureFeedback
@@ -98,6 +98,12 @@ class SpinsPerAngle: public tuio::CanBasicObjects < Base >{
         void resetMinMax(){min =0;max=360;loop=true;}
     public:
         SpinsPerAngle():angle(0),previous_angle(0),_spins(spins),min(min_degrees),max(max_degrees),loop(false){
+            SetSpinParameters(_spins,min,max);
+        }
+        void SetSpinParameters(int sp=0, int min_deg=-1, int max_deg=-1){
+            _spins = sp;
+            min = min_deg;
+            max = max_deg;
             if (min == -1 || max == -1 || min == max) resetMinMax();
             else if(min > max){
                 int tmp=min;
@@ -127,14 +133,17 @@ class SpinsPerAngle: public tuio::CanBasicObjects < Base >{
             }
             return toreturn;
         }
+       virtual int getMaxValue(){return max;}
+       virtual int getMinValue(){return min;}
 };
 //Show limited angle arrow template class from, to
 template <class Base, int triangle_distance>
-class ShowAngleArrow:public Base
+class ShowAngleArrow:public /*SpinsPerAngle <*/ Base /*>*/
 {
     public:
     virtual tuio::DirectObject& GetPoint(){return Base::GetPoint();}
     virtual bool IsEnabled(){return Base::IsEnabled();}
+    virtual float getAngleDegrees(){return Base::getAngleDegrees();}
     protected:
     virtual void draw(){
         if(IsEnabled()){
@@ -148,16 +157,60 @@ class ShowAngleArrow:public Base
             Base::draw();
         }
     }
-    virtual float getAngleDegrees(){
-        return Base::getAngleDegrees();
-    }
 };
 
-template <class Base>
-class ShowAngleArrowWithMarks: public ShowAngleArrow < Base , 50 >
+template <class Base, int from=-1, int to=-1>
+class ShowAngleArrowWithMarks: public /*ShowAngleArrow <*/ Base /*, 50 >*/
 {
-    protected:
+    public:
+        ShowAngleArrowWithMarks(){
+        }
+        virtual bool IsEnabled(){return Base::IsEnabled();}
+        virtual tuio::DirectObject& GetPoint(){return Base::GetPoint();}
+        virtual float getAngleDegrees(){return Base::getAngleDegrees();}
+        virtual int getMaxValue(){return Base::getMaxValue();}
+        virtual int getMinValue(){return Base::getMinValue();}
+        virtual void draw(){
+            if(IsEnabled()){
+                ofPushMatrix();
+                ofTranslate(GetPoint().xpos*ofGetWidth(), GetPoint().ypos*ofGetHeight());
+                ofPushMatrix();
+                ofRotate(getAngleDegrees());
+                ofTranslate(0,50);
+                ofSetColor(0xFFFFFF);
+                ofTriangle(-7,5,0,0,7,5);
+                ofPopMatrix();
+                ofPushMatrix();
+                double step = PI/20.0;
+                float radius = 50;
+                ofSetLineWidth(1);
+                ofRotate(90);
+                glBegin(GL_LINE_STRIP);
+                for (double i = (float)getMinValue()*M_PI/180.0f; i <= (float)getMaxValue()*M_PI/180.0f; i+=step)
+                {
+                    glVertex2f(radius*cos(i),radius*sin(i));
+                }
+                glEnd();
+                ofPopMatrix();
 
+                ofPushMatrix();
+                ofSetColor(255,0,0);
+                ofRotate((float)getMinValue());
+                ofTranslate(0,50);
+                ofRect(0,0,3,5);
+                ofPopMatrix();
+
+                ofPushMatrix();
+                ofSetColor(0,255,0);
+                ofRotate((float)getMaxValue());
+                ofTranslate(0,50);
+                ofRect(0,0,3,5);
+                ofPopMatrix();
+
+                ofPopMatrix();
+                Base::draw();
+            }
+        }
 };
 
 #include "Tangible-ShowObjectSlider.h"

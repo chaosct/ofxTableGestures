@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/TableDistortion/;addons/ofxOsc/src/;addons/TuioGestures/;addons/TuioGestures/Gestures/;src/Graphics/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/TableDistortion/;addons/TuioGestures/;addons/TuioGestures/Gestures/;src/Graphics/;addons/ofxOsc/src/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -349,34 +349,34 @@
 			<Add option="-DSIMULATOR" />
 		</Compiler>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
+			<Option virtualFolder="addons/ofxOsc/src/" />
 		</Unit>
 		<Unit filename="src/CursorFeedback.cpp">
 			<Option virtualFolder="src/Graphics/" />

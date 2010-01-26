@@ -18,7 +18,6 @@
 ///Some figure graphics and gestures
 #include "Tangible.hpp"
 
-
 ///Example of a class that receives events from direct objects and direct fingers
 ///inheritance: dummylistener-->CanDirectObjects-->CanDirectFingers-->Listener
 //class dummylistener: public tuio::CanDirectObjects < tuio::CanDirectFingers < tuio::Listener > >
@@ -60,10 +59,39 @@
 //        }
 //};
 
+///Example of a class that listens the fiducial 4, draws an slider arount it and sends the slider
+///value using an osc message. It needs the header :
+#include "ofxOscSender.h"
+class oscNote : public ShowObjectSlider<Tangible<4> >
+{
+    public:
+    ofxOscSender sender;
+    oscNote(){
+        sender.setup("127.0.0.1",9999);
+    }
+    ~oscNote(){Enable(false);}
+    void sliderValueUpdated(double n)
+    {
+        ofxOscMessage message;
+        message.setAddress("/sine/freq");
+        message.addFloatArg(n*440.0 + 440.0);
+        sender.sendMessage(message);
+    }
+    virtual void Enable(bool flag = true){
+        ofxOscMessage message;
+        message.setAddress("/sine/volume");
+        if(!flag)message.addFloatArg(0);
+        else message.addFloatArg(0.1f);
+        sender.sendMessage(message);
+        Tangible<4>::Enable(flag);
+    }
+};
+
 ///Defining our app. It inherites from TableApp a base class that applies an interface for running applications
 ///on the table: distortion, load/save configuration files, an integrated table simulator, ...
 class testApp : public TableApp
 {
+    typedef ShowAngleArrowWithMarks< SpinsPerAngle < Tangible<1>, 1, 0, 180 > > proto1;
     ///Objects used in this example:
     // ///dummylistener, it prints at the stdoutput the events from direct cursors and direct fingers
     //dummylistener* listener;
@@ -73,8 +101,13 @@ class testApp : public TableApp
     CursorFeedback* cursorfeedback;
     ///figureFeedback. It shows a 'shape' foreach object on the table
     FigureFeedback* figureFeedback;
-    ShowAngleArrow< SpinsPerAngle < Tangible<3> , 2 > , 25 >* tangible_with_a_white_arrow;
+    //ShowAngleArrow< SpinsPerAngle < Tangible<3> , 2 > , 25 >* tangible_with_a_white_arrow;
+    ShowAngleArrow< Tangible<3> , 25 >* tangible_with_a_white_arrow;
+    proto1* angle_arrow_marked;
+    oscNote* sine;
+
 public:
+    ~testApp();
     ///void Setup();
     ///inputs:none
     ///outputs:none
