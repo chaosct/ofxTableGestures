@@ -17,7 +17,6 @@
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/InputGesture.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/OSCListener.cpp</file>
-				<file>../../../addons/ofxTuioGestures/src/tuio/c/tuioApp.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/c/tuioinput.cpp</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/EventQueue.h</file>
 				<file>../../../addons/ofxTuioGestures/src/tuio/h/InputGesture.h</file>

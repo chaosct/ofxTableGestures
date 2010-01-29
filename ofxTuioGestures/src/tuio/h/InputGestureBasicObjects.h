@@ -105,7 +105,7 @@ class CanBasicObjects : public Base
         TRegistraCallback(CanBasicObjects,TeventBasicObjectsRemoveObject);
         TRegistraCallback(CanBasicObjects,TeventBasicObjectsNewObject);
         TRegistraCallback(CanBasicObjects,TeventBasicObjectsMoveObject);
-        registerMeToInputGestureManager(Singleton<InputGestureBasicObjects>::get());
+        Base::registerInputGesture(Singleton<InputGestureBasicObjects>::get());
     }
 
 };

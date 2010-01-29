@@ -108,7 +108,7 @@ class CanDirectObjects : public  Base
     {
         TRegistraCallback(CanDirectObjects,TeventDirectObjectsRemoveObject);
         TRegistraCallback(CanDirectObjects,TeventDirectObjectsNewObject);
-        registerMeToInputGestureManager(Singleton<InputGestureDirectObjects>::get());
+        Base::registerInputGesture(Singleton<InputGestureDirectObjects>::get());
     }
 
 };

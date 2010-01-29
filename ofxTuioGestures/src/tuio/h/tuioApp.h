@@ -37,6 +37,7 @@
 #include "EventQueue.h"
 #include "tuioinput.h"
 #include "InputGesture.h"
+#include "inputGestureManager.h"
 #include <iostream>
 
 namespace tuio
@@ -66,6 +67,7 @@ class Callback : public GenericCallback
     C* o;
     void (C::*m)(TEvent *);
 };
+
 
 
 class VoidClass{};
@@ -100,11 +102,14 @@ public:
         eventprocessors[n]=callback;
     }
 
+    void registerInputGesture(InputGesture * IG)
+    {
+        inputGestureManager::addGesture(IG);
+    }
+
 };
 
-class InputGesture;
 
-void registerMeToInputGestureManager(InputGesture * IG);
 
 }
 #endif // TUIOAPP_H_INCLUDED

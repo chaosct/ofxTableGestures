@@ -96,7 +96,7 @@ public:
     CanTap()
     {
         TRegistraCallback(CanTap,TeventTap);
-        registerMeToInputGestureManager(Singleton<InputGestureTap>::get());
+        Base::registerInputGesture(Singleton<InputGestureTap>::get());
     }
 
 };

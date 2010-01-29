@@ -189,7 +189,7 @@ public:
         TRegistraCallback(CanObjectFinger,TeventObjectFingerUpdate);
         TRegistraCallback(CanObjectFinger,TeventObjectFingerRelease);
         TRegistraCallback(CanObjectFinger,TeventObjectFingerTap);
-        registerMeToInputGestureManager(Singleton<InputObjectFinger>::get());
+        Base::registerInputGesture(Singleton<InputObjectFinger>::get());
     }
 
 };

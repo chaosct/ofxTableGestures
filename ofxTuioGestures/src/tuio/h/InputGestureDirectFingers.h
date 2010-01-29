@@ -102,7 +102,7 @@ class CanDirectFingers : public  Base
     {
         TRegistraCallback(CanDirectFingers,TeventDirectFingersRemoveFinger);
         TRegistraCallback(CanDirectFingers,TeventDirectFingersNewFinger);
-        registerMeToInputGestureManager(Singleton<InputGestureDirectFingers>::get());
+        Base::registerInputGesture(Singleton<InputGestureDirectFingers>::get());
     }
 
 };

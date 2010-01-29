@@ -483,9 +483,6 @@
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/inputGestureManager.cpp">
 			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioApp.cpp">
-			<Option virtualFolder="addons/TuioGestures/" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTuioGestures/src/tuio/c/tuioinput.cpp">
 			<Option virtualFolder="addons/TuioGestures/" />
 		</Unit>
