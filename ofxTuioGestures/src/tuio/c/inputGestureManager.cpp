@@ -48,17 +48,26 @@ void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArg
 
 
     InputGesture * i;
+    ///First we compute the packet for every InputGesture
     for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
         osc::ReceivedMessageArgumentStream as  = argList;
         i->ReceiveCall(addr, as);
+    }
+    ///Then we send the events through the queue. We whait until all inputgestures have finished
+    ///because some of them can be using events of the previous ones. We don't want to share
+    ///events between threads!
+    for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
+    {
+        i = *it;
         for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); ++it)
         {
             queue->push(*it);
         }
 
     }
+    ///Now we can empty our local copies of Events (now in use in the other thread)
     for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
