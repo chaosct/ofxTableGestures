@@ -55,7 +55,7 @@ public:
         if( (writer +1)%QUEUE_SIZE ==  reader)
         {
             //discard messages when full
-            std::cout << "Event Queue Full: discarding event :" << evt->name << std::endl;
+            std::cout << "WARNING: Queue Full: discarding element." << std::endl;
             delete evt;
             return;
         }
@@ -69,7 +69,7 @@ public:
         {
             return NULL; // return NULL when empty
         }
-        TEvent * evt = events[reader];
+        T * evt = events[reader];
         reader = (reader + 1)%QUEUE_SIZE;
         return evt;
     }
