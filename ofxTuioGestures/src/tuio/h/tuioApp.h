@@ -129,7 +129,6 @@ class CompositeGesture : public tuioApp< InputGesture >
     {
         tuioApp< InputGesture >::registerInputGesture(IG);
         feeders.push_back(IG);
-        std::cout << "hey" << std::endl;
     }
 };
 
