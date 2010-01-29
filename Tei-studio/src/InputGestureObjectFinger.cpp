@@ -67,26 +67,8 @@ bool objectfinger::containsFinger(int32 id){
 * INPUTOBJECTFINGER METHODS
 **/
 InputObjectFinger::InputObjectFinger(){
-    basicfingers = Singleton < InputGestureBasicFingers >::get();
-    directfingers = Singleton < InputGestureDirectFingers >::get();
-    directobjects = Singleton < InputGestureDirectObjects >::get();
-    inputTap = Singleton <InputGestureTap>::get();
 }
 
-void InputObjectFinger::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList){
-    ///basic fingers
-    for (std::list<TEvent *>::iterator it = basicfingers->events.begin() ; it != basicfingers->events.end() ; ++it)
-        processTevent(*it);
-    ///direct fingers
-    for (std::list<TEvent *>::iterator it = directfingers->events.begin() ; it != directfingers->events.end() ; ++it)
-        processTevent(*it);
-    ///direct objects
-    for (std::list<TEvent *>::iterator it = directobjects->events.begin() ; it != directobjects->events.end() ; ++it)
-        processTevent(*it);
-    ///taps
-    for (std::list<TEvent *>::iterator it = inputTap->events.begin() ; it != inputTap->events.end() ; ++it)
-        processTevent(*it);
-}
 
 void InputObjectFinger::newObject(int32 s_id, int32 f_id, DirectObject * obj){
     /// add the object to tne map

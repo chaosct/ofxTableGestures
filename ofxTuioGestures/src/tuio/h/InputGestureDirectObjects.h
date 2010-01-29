@@ -72,12 +72,10 @@ class TeventDirectObjectsNewObject : public TTEvent<TeventDirectObjectsNewObject
     DirectObject * dob;
 };
 
-class InputGestureDirectObjects : public CanBasicObjects < tuioApp <InputGesture> > {
+class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture > {
     std::map<int32,DirectObject *> objects;
-    InputGestureBasicObjects * basicobjects;
     public:
-        InputGestureDirectObjects(){basicobjects = Singleton< InputGestureBasicObjects>::get();}
-        virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
+        InputGestureDirectObjects(){}
         void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         void removeTuioObject(int32 id);

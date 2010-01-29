@@ -109,7 +109,29 @@ public:
 
 };
 
-
+class CompositeGesture : public tuioApp< InputGesture >
+{
+    std::list<InputGesture *> feeders;
+    public:
+    virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
+    {
+        for (std::list<InputGesture *>::iterator it = feeders.begin();
+                it != feeders.end(); ++it)
+        {
+            InputGesture * ig = *it;
+            for (std::list<TEvent *>::iterator it = ig->events.begin() ; it != ig->events.end() ; ++it)
+            {
+                processTevent(*it);
+            }
+        }
+    }
+    void registerInputGesture(InputGesture * IG)
+    {
+        tuioApp< InputGesture >::registerInputGesture(IG);
+        feeders.push_back(IG);
+        std::cout << "hey" << std::endl;
+    }
+};
 
 }
 #endif // TUIOAPP_H_INCLUDED

@@ -101,28 +101,17 @@ public:
 };
 
 
-class InputObjectFinger : public CanTap < CanBasicFingers < CanDirectFingers < CanDirectObjects < tuioApp <InputGesture> > > > >
+class InputObjectFinger : public CanTap < CanBasicFingers < CanDirectFingers < CanDirectObjects < CompositeGesture > > > >
 {
     private:
         ///objects -> where all object related data wil be stored
         std::map<int32,objectfinger*> objects;
         ///orphan_fingers -> fingers not related with objects
         std::map<int32,DirectFinger*> orphan_fingers;
-    ///Input gesture data
-        ///basicfingers -> cursor input
-        InputGestureBasicFingers * basicfingers;
-        ///directfingers -> cursor input with encapsulated data
-        InputGestureDirectFingers * directfingers;
-        ///directobjects -> object input with encapsulated fata
-        InputGestureDirectObjects * directobjects;
-        ///inputTap -> tap input
-        InputGestureTap *inputTap;
     public:
     ///Constructor
         ///Initializes the input data
         InputObjectFinger();
-        ///Process all data fom each input gesture
-        virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
     ///FromCanDirectObjects:
         ///newObject: report a new instance of an object, data:
             ///s_id -> fiducial session identifyer

@@ -40,23 +40,12 @@ public:
     float x,y;
 };
 
-class InputGestureTap : public CanBasicFingers < tuioApp <InputGesture> >
+class InputGestureTap : public CanBasicFingers < CompositeGesture >
 {
     std::map<int32,tapData *> tstamps;
-    InputGestureBasicFingers * basicfingers;
-public:
-    InputGestureTap()
-    {
-        basicfingers = Singleton< InputGestureBasicFingers>::get();
-    }
 
-    virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
-    {
-        for (std::list<TEvent *>::iterator it = basicfingers->events.begin() ; it != basicfingers->events.end() ; ++it)
-        {
-            processTevent(*it);
-        }
-    }
+public:
+
     //From CanBasicFingers
     void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
     {
