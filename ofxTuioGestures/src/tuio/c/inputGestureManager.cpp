@@ -46,6 +46,8 @@ inputGestureManager::inputGestureManager()
 void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
 {
 
+    ///First of all: add pending InputGestures
+    addPendingGestures();
 
     InputGesture * i;
     ///First we compute the packet for every InputGesture

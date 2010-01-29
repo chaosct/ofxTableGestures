@@ -36,8 +36,8 @@
 #include <algorithm>
 #include "OSCListener.h"
 #include "EventQueue.h"
+#include "InputGesture.h"
 
-namespace tuio { class InputGesture; }
 namespace osc { class ReceivedMessageArgumentStream; }
 
 namespace tuio {
@@ -46,15 +46,23 @@ class inputGestureManager : public OSCListener {
   private:
     std::list<InputGesture *> gestures;
     static inputGestureManager * instance;
-
+    blocklessQueue<InputGesture ,1024> gesturesToAdd;
+    static void addPendingGestures()
+    {
+        InputGesture *IG;
+        while((IG = instance->gesturesToAdd.pop())!= NULL){
+            if (std::find (instance->gestures.begin(), instance->gestures.end(), IG) == instance->gestures.end())
+                instance->gestures.push_back(IG);
+        }
+    }
   public:
+    EventQueue * queue;
+
     static void addGesture(InputGesture *IG)
     {
-        if (std::find (instance->gestures.begin(), instance->gestures.end(), IG) == instance->gestures.end())
-            instance->gestures.push_back(IG);
+        instance->gesturesToAdd.push(IG);
     }
     inputGestureManager();
-    EventQueue * queue;
     virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
 
 };
