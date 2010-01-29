@@ -24,6 +24,7 @@ void testApp::Setup(){
     tangible_with_a_white_arrow = new ShowAngleArrow< Tangible<3> , 25 >;
     angle_arrow_marked = new proto1;
     sine = new oscNote();
+    new runtimeGenerator();
 }
 
 //--------------------------------------------------------------

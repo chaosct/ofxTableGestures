@@ -87,6 +87,26 @@ class oscNote : public ShowObjectSlider<Tangible<4> >
     }
 };
 
+///Testing capacity of creating new listening objects in real time
+class runtimeGenerator : public tuio::CanTap<tuio::Listener>
+{
+    public:
+    ShowObjectSlider< Tangible<5> > * s;
+    runtimeGenerator():s(NULL){}
+    void tap(float x, float y)
+    {
+        if(!s)
+            s = new ShowObjectSlider< Tangible<5> >;
+        else
+        {
+            delete s;
+            s = NULL;
+        }
+
+    }
+};
+
+
 ///Defining our app. It inherites from TableApp a base class that applies an interface for running applications
 ///on the table: distortion, load/save configuration files, an integrated table simulator, ...
 class testApp : public TableApp
