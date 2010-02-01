@@ -33,13 +33,12 @@
 
 
 #include "TEvent.h"
-
 #define QUEUE_SIZE 1024
 
 namespace tuio
 {
 
-template <typename T,int size>
+template <typename T,int size, bool discardDuplicates = true>
 class blocklessQueue
 {
 private:
@@ -49,18 +48,37 @@ private:
     unsigned int writer;
 
 public:
-    blocklessQueue():reader(0),writer(0) {}
+    blocklessQueue():reader(0),writer(0)
+    {
+        ///Filling queue with NULL
+        for (int i = 0; i < size; ++i)
+            events[i]=NULL;
+    }
     void push(T * evt)
     {
-        if( (writer +1)%QUEUE_SIZE ==  reader)
+        if(evt == NULL)
         {
-            //discard messages when full
+            std::cout << "WARNING: Queue discarding NULL item." << std::endl;
+            return;
+        }
+        if(discardDuplicates)
+        {
+            for (int i = reader; i != writer; i = (i + 1)%size)
+                if(events[i]==evt)
+                {
+                    //std::cout << "WARNING: Queue discarding duplicated item." << std::endl;
+                    return;
+                }
+        }
+        if( (writer +1)%size ==  reader)
+        {
+            ///discard messages when full
             std::cout << "WARNING: Queue Full: discarding element." << std::endl;
             delete evt;
             return;
         }
         events[writer]=evt;
-        writer = (writer + 1)%QUEUE_SIZE;
+        writer = (writer + 1)%size;
     }
 
     T * pop()
@@ -70,13 +88,14 @@ public:
             return NULL; // return NULL when empty
         }
         T * evt = events[reader];
-        reader = (reader + 1)%QUEUE_SIZE;
+        reader = (reader + 1)%size;
         return evt;
     }
 
 };
 
-typedef blocklessQueue<TEvent,QUEUE_SIZE> EventQueue;
+///We do not need to check for duplicate items in the event queue.
+typedef blocklessQueue<TEvent,QUEUE_SIZE,false> EventQueue;
 
 } // namespace tuio
 #endif
