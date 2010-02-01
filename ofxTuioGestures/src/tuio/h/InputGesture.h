@@ -44,7 +44,12 @@ namespace tuio {
 
 class InputGesture : public OSCListener {
   public:
+    ///List of events to be processed
     std::list<TEvent *> events;
+    ///Number of non-Gesture listeners
+    int nonGestureListeners;
+
+    InputGesture():nonGestureListeners(0){}
 
 };
 

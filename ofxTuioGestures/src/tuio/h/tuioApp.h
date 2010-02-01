@@ -79,12 +79,26 @@ class tuioApp : public Base
 {
 private:
     eventprocessorsType eventprocessors;
+    ///To know if we are in the osc thread or in the app's one. Gestures only live in osc thread.
+    bool isGestureListener;
+protected:
+    ///List of IG that create events we can process
+    std::list<InputGesture *> feeders;
 public:
-
-    tuioApp()
+    tuioApp( bool _isGestureListener = false):isGestureListener(_isGestureListener)
     {
         ///TODO: better sizing
         eventprocessors.resize(100,NULL);
+    }
+
+    ~tuioApp()
+    {
+        for (std::list<InputGesture *>::iterator it = feeders.begin();
+                it != feeders.end(); ++it)
+                {
+                    InputGesture * ig = *it;
+                    ig->nonGestureListeners--;
+                }
     }
 
     void processTevent(TEvent * te)
@@ -105,14 +119,19 @@ public:
     void registerInputGesture(InputGesture * IG)
     {
         inputGestureManager::addGesture(IG);
+        feeders.push_back(IG);
+        if(!isGestureListener)
+        {
+            IG->nonGestureListeners++;
+        }
     }
 
 };
 
 class CompositeGesture : public tuioApp< InputGesture >
 {
-    std::list<InputGesture *> feeders;
     public:
+    CompositeGesture():tuioApp< InputGesture >(true){}
     virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
     {
         for (std::list<InputGesture *>::iterator it = feeders.begin();
@@ -124,11 +143,6 @@ class CompositeGesture : public tuioApp< InputGesture >
                 processTevent(*it);
             }
         }
-    }
-    void registerInputGesture(InputGesture * IG)
-    {
-        tuioApp< InputGesture >::registerInputGesture(IG);
-        feeders.push_back(IG);
     }
 };
 
