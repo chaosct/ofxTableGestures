@@ -73,6 +73,14 @@ void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArg
                 queue->push(*it);
             }
         }
+        else
+        {
+            ///We try to delete end of life TEvents
+            for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); ++it)
+            {
+                delete (*it);
+            }
+        }
 
     }
     ///Now we can empty our local copies of Events (now in use in the other thread)
