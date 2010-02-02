@@ -40,8 +40,8 @@
 
 #include "UdpSocket.h"
 #include "EventQueue.h"
+#include "inputGestureManager.h"
 
-namespace tuio { class inputGestureManager; }
 
 namespace tuio {
 

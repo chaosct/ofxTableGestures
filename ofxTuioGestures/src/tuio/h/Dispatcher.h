@@ -36,7 +36,6 @@
 
 namespace tuio
 {
-    class Listener;
 
     ///This class stores an instance of all Listenenrs and distribute the generated events
     class Dispatcher :public Singleton< Dispatcher >

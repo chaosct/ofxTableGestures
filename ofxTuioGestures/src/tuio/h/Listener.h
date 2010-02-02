@@ -32,11 +32,9 @@
 #define INPUTLISTENER_H_INCLUDED
 
 #include "tuioApp.h"
-#include "Dispatcher.h"
 
 namespace tuio
 {
-    class Dispatcher;
 
     ///Listener -> This class is attached automatically to "Dispatcher" and detached at destuction
     /// it is the base class for all capabilities that will be used.

@@ -29,6 +29,7 @@
 */
 
 #include "Listener.h"
+#include "Dispatcher.h"
 
 using namespace tuio;
 

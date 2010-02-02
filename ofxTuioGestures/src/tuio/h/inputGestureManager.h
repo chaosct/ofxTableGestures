@@ -38,7 +38,6 @@
 #include "EventQueue.h"
 #include "InputGesture.h"
 
-namespace osc { class ReceivedMessageArgumentStream; }
 
 namespace tuio {
 

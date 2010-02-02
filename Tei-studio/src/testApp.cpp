@@ -1,6 +1,7 @@
 #include "testApp.h"
 #include <algorithm>
 #include "tuioApp.h"
+#include "Dispatcher.h"
 #include "GraphicDispatcher.hpp"
 #include "ofxOscSender.h"
 
@@ -16,9 +17,6 @@ testApp::~testApp(){
 //--------------------------------------------------------------
 void testApp::Setup(){
     ///Init all aplication data
-    //listener = new dummylistener();
-    //dummygraphic = new dummyGraphic();
-    //dummylistenergraphic = new dummyListenerGraphic();
     cursorfeedback = new CursorFeedback();
     figureFeedback = new FigureFeedback();
     tangible_with_a_white_arrow = new ShowAngleArrow< Tangible<3> , 25 >;
