@@ -227,15 +227,13 @@ void TableApp::StartDistortion()
     if(distortion_enabled)
     {
         glPushMatrix();
-
+        glTranslated(center_x,center_y,0);
         glTranslatef((ofGetWidth())/2,(ofGetHeight())/2,0);
+        glRotated(angle,0,0,1);
         glRotated(angle_h,1,0,0);
         glRotated(angle_w,0,1,0);
-        glRotated(angle,0,0,1);
         glScaled(width_offset,height_offset,1);
         glTranslatef(-(ofGetWidth())/2,-(ofGetHeight())/2,0);
-
-        glTranslated(center_x,center_y,0);
     }
 }
 
