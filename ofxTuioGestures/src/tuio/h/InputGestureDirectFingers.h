@@ -35,6 +35,7 @@
 #include "TEvent.h"
 #include "tuioApp.h"
 #include "DirectPoint.h"
+#include "InputGestureBasicFingers.h"
 #include <map>
 
 using namespace osc;
@@ -64,13 +65,42 @@ class TeventDirectFingersNewFinger : public TTEvent<TeventDirectFingersNewFinger
 };
 
 
-
-class InputGestureDirectFingers : public InputGesture {
+class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
+{
     std::map<int32,DirectFinger *> fingers;
-    int32 currentFrame, lastFrame;
     public:
-        InputGestureDirectFingers():currentFrame(0),lastFrame(0){}
-        virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
+        InputGestureDirectFingers(){}
+        void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+        {
+            DirectFinger * e = new DirectFinger();
+            e->s_id = id;
+            e->xpos = xpos;
+            e->ypos = ypos;
+            e->xspeed = xspeed;
+            e->yspeed = yspeed;
+            e->maccel = maccel;
+            fingers[id]=e;
+            TeventDirectFingersNewFinger * evt = new TeventDirectFingersNewFinger();
+            evt->s_id = id;
+            evt->df = e;
+            events.push_back(evt);
+        }
+        void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+        {
+             DirectFinger * e = fingers[id];
+            e->s_id = id;
+            e->xpos = xpos;
+            e->ypos = ypos;
+            e->xspeed = xspeed;
+            e->yspeed = yspeed;
+            e->maccel = maccel;
+        }
+        void removeTuioCursor(int32 id)
+        {
+             TeventDirectFingersRemoveFinger * evt = new TeventDirectFingersRemoveFinger();
+             evt->s_id = id;
+             events.push_back(evt);
+        }
 };
 
 
