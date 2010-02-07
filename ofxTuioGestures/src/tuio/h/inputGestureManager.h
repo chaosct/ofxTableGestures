@@ -62,8 +62,7 @@ class inputGestureManager : public OSCListener {
         instance->gesturesToAdd.push(IG);
     }
     inputGestureManager();
-    virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
-
+    virtual void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint );
 };
 
 } // namespace tuio

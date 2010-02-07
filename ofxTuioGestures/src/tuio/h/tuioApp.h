@@ -132,7 +132,7 @@ class CompositeGesture : public tuioApp< InputGesture >
 {
     public:
     CompositeGesture():tuioApp< InputGesture >(true){}
-    virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
+    virtual void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
     {
         for (std::list<InputGesture *>::iterator it = feeders.begin();
                 it != feeders.end(); ++it)

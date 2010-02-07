@@ -43,7 +43,7 @@ inputGestureManager::inputGestureManager()
     instance = this;
 }
 
-void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList)
+void inputGestureManager::ProcessBundle(const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint)
 {
 
     ///First of all: add pending InputGestures
@@ -54,8 +54,7 @@ void inputGestureManager::ReceiveCall(const char * addr, osc::ReceivedMessageArg
     for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
-        osc::ReceivedMessageArgumentStream as  = argList;
-        i->ReceiveCall(addr, as);
+        i->ProcessBundle(b,remoteEndpoint);
     }
     ///Then we send the events through the queue. We whait until all inputgestures have finished
     ///because some of them can be using events of the previous ones. We don't want to share
