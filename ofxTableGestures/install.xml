@@ -1,0 +1,76 @@
+<install>
+    <name>TableGestures</name>
+	
+	<version>0.1</version>
+	<author>Daniel Gallardo and Carles F. Julià</author>
+	<url></url>
+	
+	<add>	
+		<!-- 	=====================================================================	-->
+		<!--	========================== add per project using this addon =========	-->
+		<!-- 	=====================================================================	-->
+		<src>
+			<folder name="addons/TableGestures">
+				<file>../../../addons/ofxTableGestures/src/TableApp.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/TableApp.hpp</file>
+			</folder>
+			<folder name="addons/TableGestures/Graphics">
+				<file>../../../addons/ofxTableGestures/src/Graphics/container.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/container.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Grid.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Grid.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Shapes.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Shapes.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Simulator.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Simulator.hpp</file>
+			</folder>
+			<folder name="addons/TableGestures/oscGestures">
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Dispatcher.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGesture.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Listener.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/OSCListener.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuioinput.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/DirectPoint.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Dispatcher.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGestureClasses.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGesture.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Listener.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/OSCListener.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Singleton.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/TEvent.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuioApp.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuioinput.hpp</file>
+			</folder>
+			<folder name="addons/TableGestures/oscGestures/Gestures">
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectObjects.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicFingers.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicObjects.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectFingers.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectObjects.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureTuio1.1.hpp</file>
+			</folder>
+			<folder name="addons/TableGestures/oscGestures/Gestures/Tuio1.1">
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12.5D.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12D.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.13D.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12.5D.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12D.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.13D.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.1fseq.hpp</file>
+			</folder>
+		</src>
+		
+		<include>
+			<path>../../../addons/ofxTableGestures/src/</path>
+			<path>../../../addons/ofxTableGestures/src/Graphics/</path>
+			<path>../../../addons/ofxTableGestures/src/oscGestures/</path>
+			<path>../../../addons/ofxTableGestures/src/oscGestures/Gestures/</path>
+			<path>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/</path>
+		</include>
+		
+	</add>
+	 
+</install>
