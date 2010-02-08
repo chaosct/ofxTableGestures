@@ -7,6 +7,7 @@ At the moment it includes:
 * A lock-free thread-safe event queue.
 * Base classes for autonomous objects, with updating, drawing and event notification, with automatic subscription.
 * Some basic examples on how to use the code.
+* A partial implementation of tuio 1.1 (no 3D blobs or multiple sources at the moment)
 
 Warning:
 This project is currently under heavy development. The underlying code as well as the specific interfaces of
