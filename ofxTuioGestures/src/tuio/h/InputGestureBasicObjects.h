@@ -36,48 +36,84 @@
 #include <set>
 #include "TEvent.h"
 #include "tuioApp.h"
+#include "InputGestureTuio1.1.h"
 
 using namespace osc;
 
-namespace tuio {
+namespace tuio
+{
 
 class TeventBasicObjectsRemoveObject : public TTEvent< TeventBasicObjectsRemoveObject >
 {
-    public:
+public:
     int32 s_id;
 };
 
 class TeventBasicObjectsNewObject : public TTEvent<TeventBasicObjectsNewObject>
 {
-    public:
+public:
     int32 s_id, f_id;
     float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
 
 class TeventBasicObjectsMoveObject : public TTEvent <TeventBasicObjectsMoveObject>
 {
-    public:
+public:
     int32 s_id, f_id;
     float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
 };
 
 
-class InputGestureBasicObjects : public InputGesture {
-    std::set<int32> s_ids;
-    int32 currentFrame, lastFrame;
-    public:
-        InputGestureBasicObjects():currentFrame(0),lastFrame(0){}
-        virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
+class InputGestureBasicObjects : public CanTuio112D < CompositeGesture >
+{
+public:
+    InputGestureBasicObjects() {}
+    void addTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
+    {
+        TeventBasicObjectsNewObject * e = new TeventBasicObjectsNewObject();
+        e->s_id = id;
+        e->f_id = f_id;
+        e->xpos = xpos;
+        e->ypos = ypos;
+        e->angle = angle;
+        e->xspeed = xspeed;
+        e->yspeed = yspeed;
+        e->rspeed = rspeed;
+        e->maccel = maccel;
+        e->raccel = raccel;
+        events.push_back(e);
+    }
+    void updateTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
+    {
+        TeventBasicObjectsMoveObject * e = new TeventBasicObjectsMoveObject();
+        e->s_id = id;
+        e->f_id = f_id;
+        e->xpos = xpos;
+        e->ypos = ypos;
+        e->angle = angle;
+        e->xspeed = xspeed;
+        e->yspeed = yspeed;
+        e->rspeed = rspeed;
+        e->maccel = maccel;
+        e->raccel = raccel;
+        events.push_back(e);
+    }
+    void removeTuioObject2D(int32 id)
+    {
+        TeventBasicObjectsRemoveObject * e = new TeventBasicObjectsRemoveObject();
+        e->s_id = id;
+        events.push_back(e);
+    }
 };
 
 template <class Base>
 class CanBasicObjects : public Base
 {
-    public:
+public:
     //Interface redefined by ofApp
-    virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){}
-    virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){}
-    virtual void removeTuioObject(int32 id){}
+    virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
+    virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
+    virtual void removeTuioObject(int32 id) {}
 
     //processing events callbacks
 

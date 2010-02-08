@@ -27,15 +27,13 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "InputGestureBasicObjects.h"
 
-#include <iostream>
-#include <cstring>
+#ifndef INPUTGESTURETUIO1_1_H_INCLUDED
+#define INPUTGESTURETUIO1_1_H_INCLUDED
 
-namespace tuio {
+#include "tuio1.1/InputGestureTuio1.1fseq.h"
+#include "tuio1.1/InputGestureTuio1.12D.h"
+#include "tuio1.1/InputGestureTuio1.12.5D.h"
+#include "tuio1.1/InputGestureTuio1.13D.h"
 
-
-
-
-
-} // namespace tuio
+#endif // INPUTGESTURETUIO1_1_H_INCLUDED

@@ -143,6 +143,7 @@ class CompositeGesture : public tuioApp< InputGesture >
                 processTevent(*it);
             }
         }
+        InputGesture::ProcessBundle(b,remoteEndpoint);
     }
 };
 

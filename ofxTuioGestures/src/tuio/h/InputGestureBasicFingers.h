@@ -36,8 +36,10 @@
 #include "TEvent.h"
 #include <set>
 #include "tuioApp.h"
+#include "InputGestureTuio1.1.h"
 
-using namespace osc;
+//using namespace osc;
+using osc::int32;
 
 namespace tuio {
 
@@ -61,12 +63,39 @@ class TeventBasicFingersMoveFinger : public TTEvent<TeventBasicFingersMoveFinger
     float xpos, ypos, xspeed, yspeed, maccel;
 };
 
-class InputGestureBasicFingers : public InputGesture {
-    std::set<int32> s_ids;
-    int32 currentFrame, lastFrame;
+class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
+{
     public:
-        InputGestureBasicFingers():currentFrame(0),lastFrame(0){}
-        virtual void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
+        InputGestureBasicFingers(){}
+        void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+        {
+            TeventBasicFingersNewFinger * e = new TeventBasicFingersNewFinger();
+            e->s_id = id;
+            e->xpos = xpos;
+            e->ypos = ypos;
+            e->xspeed = xspeed;
+            e->yspeed = yspeed;
+            e->maccel = maccel;
+            events.push_back(e);
+        }
+        void updateTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+        {
+            TeventBasicFingersMoveFinger * e = new TeventBasicFingersMoveFinger();
+            e->s_id = id;
+            e->xpos = xpos;
+            e->ypos = ypos;
+            e->xspeed = xspeed;
+            e->yspeed = yspeed;
+            e->maccel = maccel;
+            events.push_back(e);
+        }
+        void removeTuioCursor2D(int32 id)
+        {
+            TeventBasicFingersRemoveFinger * e = new TeventBasicFingersRemoveFinger();
+            e->s_id = id;
+            events.push_back(e);
+        }
+
 };
 
 template <class Base>
