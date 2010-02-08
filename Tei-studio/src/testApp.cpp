@@ -23,6 +23,7 @@ void testApp::Setup(){
     angle_arrow_marked = new proto1;
     sine = new oscNote();
     new runtimeGenerator();
+    //new xivato();
 }
 
 //--------------------------------------------------------------

@@ -18,6 +18,8 @@
 ///Some figure graphics and gestures
 #include "Tangible.hpp"
 
+#include "InputGestureTuio1.1.h"
+
 ///Example of a class that receives events from direct objects and direct fingers
 ///inheritance: dummylistener-->CanDirectObjects-->CanDirectFingers-->Listener
 //class dummylistener: public tuio::CanDirectObjects < tuio::CanDirectFingers < tuio::Listener > >
@@ -28,6 +30,20 @@
 //    virtual void newObject(int32 s_id, int32 f_id, tuio::DirectObject *){std::cout << "added direct obj" << std::endl;}
 //    virtual void removeObject(int32 s_id, int32 f_id){std::cout << "removed direct obj" << std::endl;}
 //};
+
+
+class xivato : public tuio::CanTuio112D < tuio::Listener >
+{
+  public:
+      //Interface redefined by ofApp
+    virtual void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+    {
+        std::cout << "addTuioCursor2D " << id << std::endl;
+    }
+    virtual void removeTuioCursor2D(int32 id){}
+    virtual void addTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){}
+    virtual void removeTuioObject2D(int32 id){}
+};
 
 ///Example of a class that draws a circle at the middle of the screen
 /// it rewrites all methods from 'graphic': draw, update and resize
