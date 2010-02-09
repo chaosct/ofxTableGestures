@@ -27,9 +27,9 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "inputGestureManager.h"
-#include "InputGesture.h"
-#include "EventQueue.h"
+#include "inputGestureManager.hpp"
+#include "InputGesture.hpp"
+#include "EventQueue.hpp"
 #include "OscReceivedElements.h"
 
 namespace tuio

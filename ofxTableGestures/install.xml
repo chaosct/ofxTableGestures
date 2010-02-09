@@ -23,21 +23,25 @@
 				<file>../../../addons/ofxTableGestures/src/Graphics/Shapes.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/Graphics/Simulator.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/Graphics/Simulator.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Graphic.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/Graphic.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.cpp</file>
 			</folder>
 			<folder name="addons/TableGestures/oscGestures">
-				<file>../../../addons/ofxTableGestures/src/oscGestures/Dispatcher.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGesture.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.cpp</file>
-				<file>../../../addons/ofxTableGestures/src/oscGestures/Listener.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureListener.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/OSCListener.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/tuioinput.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/DirectPoint.hpp</file>
-				<file>../../../addons/ofxTableGestures/src/oscGestures/Dispatcher.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGestureClasses.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGesture.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.hpp</file>
-				<file>../../../addons/ofxTableGestures/src/oscGestures/Listener.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureListener.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/OSCListener.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/Singleton.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/TEvent.hpp</file>

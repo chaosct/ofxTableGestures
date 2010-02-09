@@ -32,11 +32,11 @@
 #define TUIO_INPUTGESTURE_H
 
 
-#include "OSCListener.h"
+#include "OSCListener.hpp"
 #include <list>
 #include <iostream>
 
-#include "TEvent.h"
+#include "TEvent.hpp"
 
 
 

@@ -1,10 +1,4 @@
 /*
-* Daniel Gallardo Grassot
-* daniel.gallardo@upf.edu
-* Universitat Pompeu Fabra
-* Music Technology Group
-*/
-/*
 
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
@@ -40,34 +34,49 @@
 #include "ofMain.h"
 #include "Grid.hpp"
 
+///By defining the global "SIMULATOR", it enables the integrated simulator.
+///When it is enabled, it can be activated by tapping the 's' key.
 #ifdef SIMULATOR
     #include "Simulator.hpp"
 #else
     #warning Simulator not enabled, if you need it, define SIMULATOR at project defines
 #endif
 
+///Table App is an interface class to deal with all table calibration processes, simulator mode and
+///abstractize the dispatchers from the main aplication of this project
 class TableApp : public ofBaseApp{
+    ///The data contained by this class is private and it is mainly used for distortionate the output,
+    ///draws the calibration grid and draws the simulator scene.
     private:
+        ///Grid: used for drawing the calibration grid on the screen.
         Grid* grid;
-        /// Full/windowed screen
+        /// Full/windowed screen flag
         bool full;
-        /// Enable/disable calibration
+        /// Enable/disable calibration flag
         bool calibration_enabled;
         /// selector of calibration parameter
+        /// translate, rotate, scale, rotate x and y axes,...
         int calibration_mode;
-        ///Show/hide help content
+        ///Show/hide help content flag
         bool show_help;
-        ///Show/hide information
+        ///Show/hide information flag
         bool show_info;
-        ///Enable/disable distortion
+        ///Enable/disable distortion flag
         bool distortion_enabled;
-        ///Calibration data
+        ///Calibration data:
+            ///height scale factor
         double height_offset;
+            ///width scale factor
 		double width_offset;
+            ///x position
 		double center_x;
+            ///y position
 		double center_y;
+            ///y rotation angle
 		double angle_h;
+            ///x rotation angle
 		double angle_w;
+            ///z rotation angle
 		double angle;
 		///Distortion path file
 		std::string DistortionPath;
@@ -76,24 +85,39 @@ class TableApp : public ofBaseApp{
 		///Simulator
 		#ifdef SIMULATOR
             simulator::Simulator* simulator;
+            ///Simulator enabled flag
             bool is_simulating;
+            ///distortion status before enable simulator.
             bool was_distorsion_enabled;
+            ///cursor status before enable simulator.
             bool was_cursor_hide;
         #endif
     public:
+        ///Constructor, here is initialized all data
+        ///and loaded distortion parameters from file.
         TableApp();
+        ///Destructor
         ~TableApp();
+        /// pure virtual methods to be rewrited
         virtual void Setup()=0;
         virtual void Update()=0;
         virtual void Draw()=0;
         virtual void WindowResized(int w, int h)=0;
+        /// Saves the distortion parameters into a text file
         void SaveDistortion();
+        /// Loads the distortion parameter from a text file or load default values
+        /// if not found
         void LoadDistortion();
+        /// Draws text screen information
         void DrawInfo();
+        /// Draws text help content
         void DrawHelp();
+        ///returns the biggest side of the screen
         static int GetSquareSide();
-	protected:
+	private:
+        /// Sets up all opengl tranformation if it is enabled
         void StartDistortion();
+        /// Disables all opengl tranformations
         void EndDistortion();
         /// ofBaseApp methods..
 		void setup();

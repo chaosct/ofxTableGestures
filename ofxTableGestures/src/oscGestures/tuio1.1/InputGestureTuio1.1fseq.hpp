@@ -2,9 +2,9 @@
 #define INPUTGESTURETUIO1_1FSEQ_H_INCLUDED
 
 #include "OscReceivedElements.h"
-#include "InputGesture.h"
-#include "TEvent.h"
-#include "tuioApp.h"
+#include "InputGesture.hpp"
+#include "TEvent.hpp"
+#include "tuioApp.hpp"
 #include <cstring>
 
 using osc::int32;

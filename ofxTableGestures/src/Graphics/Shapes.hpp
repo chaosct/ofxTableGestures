@@ -82,8 +82,8 @@ class shapePentagon:public Shape{
 class shape_color{
     public:
         shape_color(int _shapeid, int _r, int _g, int _b);
-        int r,g,b;
         int shapeid;
+        int r,g,b;
         void draw(bool draw_color = true);
 };
 

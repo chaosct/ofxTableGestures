@@ -1,5 +1,4 @@
 /*
-
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 

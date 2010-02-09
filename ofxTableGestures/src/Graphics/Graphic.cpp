@@ -28,16 +28,12 @@
 
 */
 
-#include "Listener.h"
-#include "Dispatcher.h"
+#include "GraphicDispatcher.hpp"
 
-using namespace tuio;
-
-Listener::Listener(){
-    Dispatcher::Instance().AddListener(this);
+Graphic::Graphic(){
+    GraphicDispatcher::Instance().AddGraphic(this);
 }
 
-Listener::~Listener(){
-    Dispatcher::Instance().RemoveListener(this);
+Graphic::~Graphic(){
+    GraphicDispatcher::Instance().RemoveGraphic(this);
 }
-

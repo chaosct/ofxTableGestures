@@ -31,9 +31,9 @@
 #ifndef INPUTGESTURETUIO1_1_H_INCLUDED
 #define INPUTGESTURETUIO1_1_H_INCLUDED
 
-#include "tuio1.1/InputGestureTuio1.1fseq.h"
-#include "tuio1.1/InputGestureTuio1.12D.h"
-#include "tuio1.1/InputGestureTuio1.12.5D.h"
-#include "tuio1.1/InputGestureTuio1.13D.h"
+#include "tuio1.1/InputGestureTuio1.1fseq.hpp"
+#include "tuio1.1/InputGestureTuio1.12D.hpp"
+#include "tuio1.1/InputGestureTuio1.12.5D.hpp"
+#include "tuio1.1/InputGestureTuio1.13D.hpp"
 
 #endif // INPUTGESTURETUIO1_1_H_INCLUDED

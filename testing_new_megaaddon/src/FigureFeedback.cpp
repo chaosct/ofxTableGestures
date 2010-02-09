@@ -1,4 +1,5 @@
 /*
+
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
@@ -27,41 +28,44 @@
 
 */
 
-#include "container.hpp"
-#include "Shapes.hpp"
+#include "FigureFeedback.h"
 
-using namespace shapes;
-using namespace simulator;
+FigureFeedback::FigureFeedback(){
+}
 
-void object::Draw(){
-    ofSetLineWidth(0.2f);
-    ofPushMatrix();
-    ofTranslate(xpos,ypos);
-    ofRotateZ(angle*180/PI);
-    //Stroke
-    ofPushMatrix();
-    ofScale(0.91f,0.91f,1.0f);
-    if(!isUp){
-        ofNoFill();
-        ofSetColor(80,80,80,90);
-        Figure_shape::Instance().drawShape(fid,false);
-        ofFill();
+FigureFeedback::~FigureFeedback(){
+}
+
+void FigureFeedback::update(){
+    std::list<HistoryFigure*>::iterator it = to_delete.begin();
+    float time = ofGetElapsedTimef();
+    while (it != to_delete.end()){
+        (*it)->Update(time);
+        if((*it)->CanDelete()){
+            std::list<HistoryFigure*>::iterator tmp = it;
+            it++;
+            objects.erase((*tmp)->sid);
+            to_delete.erase(tmp);
+        }
+        else it++;
     }
-    ofEnableAlphaBlending();
-    ofSetColor(100,100,200,90);
-    //body
-    Figure_shape::Instance().drawShape(fid,false);
-    ofPopMatrix();
-    ofSetColor(255,0,0);
-    //rotation line
-    ofPushMatrix();
-    ofLine(0,0,0,OBJECT_RADIUS*ofGetHeight()/2);
-    ofPopMatrix();
-    ofDisableAlphaBlending();
-    ofSetColor(0xFFFFFF);
-    std::stringstream msg;
-    msg << fid;
-    //text
-    ofDrawBitmapString(msg.str(), 0, 0);
-    ofPopMatrix();
+}
+
+void FigureFeedback::draw(){
+    for (std::map<int32,HistoryFigure*>::iterator it = objects.begin(); it != objects.end(); it++){
+        it->second->draw();
+    }
+}
+
+void FigureFeedback::addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+    objects[id]= new HistoryFigure(id,f_id,xpos,ypos,angle);
+}
+
+void FigureFeedback::updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+    objects[id]->SetFigure(xpos,ypos,angle);
+}
+
+void FigureFeedback::removeTuioObject(int32 id){
+    objects[id]->Release(ofGetElapsedTimef());
+    to_delete.push_back(objects[id]);
 }

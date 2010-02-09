@@ -32,7 +32,7 @@
 #define TUIO_EVENTQUEUE_H
 
 
-#include "TEvent.h"
+#include "TEvent.hpp"
 #define QUEUE_SIZE 1024
 
 namespace tuio
@@ -63,7 +63,7 @@ public:
         }
         if(discardDuplicates)
         {
-            for (int i = reader; i != writer; i = (i + 1)%size)
+            for (unsigned int i = reader; i != writer; i = (i + 1)%size)
                 if(events[i]==evt)
                 {
                     //std::cout << "WARNING: Queue discarding duplicated item." << std::endl;

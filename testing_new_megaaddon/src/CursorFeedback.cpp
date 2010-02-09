@@ -28,27 +28,37 @@
 
 */
 
-#ifndef INPUTLISTENER_H_INCLUDED
-#define INPUTLISTENER_H_INCLUDED
+#include "CursorFeedback.h"
 
-#include "tuioApp.h"
-
-namespace tuio
-{
-
-    ///Listener -> This class is attached automatically to "Dispatcher" and detached at destuction
-    /// it is the base class for all capabilities that will be used.
-    class Listener : public tuioApp<>
-    {
-        public:
-            ///Listener()
-            ///inputs: none
-            ///constructor attaches automatically itself to Dispatcher
-            Listener();
-            ///virtual ~Listener()=0;
-            ///destructor detaches itself from Dispatcher
-            virtual ~Listener()=0;
-    };
+CursorFeedback::CursorFeedback(){
 }
 
-#endif // INPUTLISTENER_H_INCLUDED
+CursorFeedback::~CursorFeedback(){
+}
+
+void CursorFeedback::update(){
+    float seconds = ofGetElapsedTimef();
+    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
+        it->second->Update(seconds);
+    }
+}
+
+void CursorFeedback::draw(){
+    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
+       it->second->Draw();
+    }
+}
+
+void CursorFeedback::addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
+    finger_map[id]=new HistoryPoint(id,xpos,ypos);
+}
+
+void CursorFeedback::updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
+    finger_map[id]->SetPoint(xpos,ypos);
+}
+
+void CursorFeedback::removeTuioCursor(int32 id){
+    HistoryPoint*tmp = finger_map[id];
+    finger_map.erase(id);
+    delete tmp;
+}

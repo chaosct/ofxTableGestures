@@ -39,8 +39,8 @@
 #endif
 
 #include "UdpSocket.h"
-#include "EventQueue.h"
-#include "inputGestureManager.h"
+#include "EventQueue.hpp"
+#include "inputGestureManager.hpp"
 
 
 namespace tuio {

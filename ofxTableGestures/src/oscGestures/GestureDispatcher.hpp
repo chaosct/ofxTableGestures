@@ -31,25 +31,25 @@
 #ifndef DISPATCHER_H_INCLUDED
 #define DISPATCHER_H_INCLUDED
 
-#include "tuioApp.h"
-#include "Listener.h"
+#include "tuioApp.hpp"
+#include "GestureListener.hpp"
 
 namespace tuio
 {
 
     ///This class stores an instance of all Listenenrs and distribute the generated events
-    class Dispatcher :public Singleton< Dispatcher >
+    class GestureDispatcher :public Singleton< GestureDispatcher >
     {
         private:
             ///List where all Listeners will be stored
-            std::list<Listener*> listeners_list;
+            std::list<GestureListener*> listeners_list;
             ///queue of generated events
             EventQueue * equeue;
         protected:
-            friend class Singleton< Dispatcher >;
+            friend class Singleton< GestureDispatcher >;
             ///Dispatcher()
             ///Constructor, it starts the tuioinput thread (if not started) and recuperates the eventqueue
-            Dispatcher(){
+            GestureDispatcher(){
                 Singleton<tuio::tuioinput>::Instance().init();
                 equeue = Singleton<tuio::tuioinput>::Instance().getQueue();
             }
@@ -59,7 +59,7 @@ namespace tuio
             ///inputs:
             ///     Listener* listener -> pointer to a listener.
             ///Desc: Adds a listener to listeners_list
-            void AddListener(Listener* listener){
+            void AddListener(GestureListener* listener){
                 listeners_list.push_back(listener);
             }
             ///void RemoveListener(Listener* listener)
@@ -67,7 +67,7 @@ namespace tuio
             ///inputs:
             ///     Listener* listener -> pointer to a listener.
             ///Desc: Removes a Listener from listeners_list
-            void RemoveListener(Listener* listener){
+            void RemoveListener(GestureListener* listener){
                 listeners_list.remove(listener);
             }
             ///void processTevents();

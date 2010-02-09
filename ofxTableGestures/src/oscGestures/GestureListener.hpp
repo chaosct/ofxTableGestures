@@ -3,7 +3,7 @@
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2009 Carles F. Julià <carles.fernandez@upf.edu>
+    Copyright (c) 2009 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
@@ -27,57 +27,28 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "tuioinput.hpp"
-#include "inputGestureManager.hpp"
-#include "EventQueue.hpp"
 
+#ifndef INPUTLISTENER_H_INCLUDED
+#define INPUTLISTENER_H_INCLUDED
 
-#define PORT 3333
+#include "tuioApp.hpp"
 
-
-#ifndef WIN32
-static void* ThreadFunc( void* obj )
-#else
-static DWORD WINAPI ThreadFunc( LPVOID obj )
-#endif
+namespace tuio
 {
-	static_cast<tuio::tuioinput*>(obj)->s->Run();
-	return 0;
-};
 
-
-
-namespace tuio {
-
-void tuioinput::init() {
-
-    //Only init once
-    if(running)
-        return;
-    running = true;
-
-    s = new UdpListeningReceiveSocket(
-            IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
-            gesturemanager );
-    #ifndef WIN32
-    pthread_create(&thread , NULL, ThreadFunc, this);
-    #else
-    DWORD threadId;
-    thread = CreateThread( 0, 0, ThreadFunc, this, 0, &threadId );
-    #endif
-
+    ///Listener -> This class is attached automatically to "Dispatcher" and detached at destuction
+    /// it is the base class for all capabilities that will be used.
+    class GestureListener : public tuioApp<>
+    {
+        public:
+            ///Listener()
+            ///inputs: none
+            ///constructor attaches automatically itself to Dispatcher
+            GestureListener();
+            ///virtual ~Listener()=0;
+            ///destructor detaches itself from Dispatcher
+            virtual ~GestureListener()=0;
+    };
 }
 
-EventQueue  * tuioinput::getQueue() {
-  // Bouml preserved body begin 0002862A
-  return gesturemanager->queue;
-  // Bouml preserved body end 0002862A
-}
-
-tuioinput::tuioinput():running(false){
-
-    gesturemanager = new inputGestureManager();
-
-}
-
-} // namespace tuio
+#endif // INPUTLISTENER_H_INCLUDED

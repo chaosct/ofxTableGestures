@@ -4,7 +4,7 @@
 
 
 #include <set>
-#include "tuio1.1/InputGestureTuio1.1fseq.h"
+#include "tuio1.1/InputGestureTuio1.1fseq.hpp"
 using osc::int32;
 
 namespace tuio {

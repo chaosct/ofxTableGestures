@@ -34,9 +34,9 @@
 
 #include <list>
 #include <algorithm>
-#include "OSCListener.h"
-#include "EventQueue.h"
-#include "InputGesture.h"
+#include "OSCListener.hpp"
+#include "EventQueue.hpp"
+#include "InputGesture.hpp"
 
 
 namespace tuio {

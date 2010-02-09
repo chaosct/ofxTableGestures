@@ -1,4 +1,4 @@
-#include "tuio1.1/InputGestureTuio1.12.5D.h"
+#include "tuio1.1/InputGestureTuio1.12.5D.hpp"
 #include <cstring>
 
 using namespace osc;

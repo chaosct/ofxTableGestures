@@ -1,10 +1,4 @@
 /*
-* Daniel Gallardo Grassot
-* daniel.gallardo@upf.edu
-* Universitat Pompeu Fabra
-* Music Technology Group
-*/
-/*
 
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
@@ -36,6 +30,8 @@
 
 #include <fstream>
 #include "TableApp.hpp"
+#include "GestureDispatcher.hpp"
+#include "GraphicDispatcher.hpp"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
@@ -89,8 +85,10 @@ void TableApp::setup(){
 
 //--------------------------------------------------------------
 void TableApp::update(){
-    //float framerate = ofGetFrameRate();
-    //std::cout << "FPS: " << framerate << std::endl;
+    ///Update input events, it says to all input gestures to process the gesture stack.
+    tuio::GestureDispatcher::Instance().processTevents();
+    ///Update graphic data, with this command all update methods from all 'Graphics' are launched
+    GraphicDispatcher::Instance().Update();
     Update();
 }
 
@@ -211,6 +209,10 @@ void TableApp::draw(){
     #endif
     StartDistortion();
     grid->Draw(calibration_enabled,calibration_mode);
+    ///Draws all 'Graphics'
+    ofPushMatrix();
+    GraphicDispatcher::Instance().Draw();
+    ofPopMatrix();
     Draw();
     EndDistortion();
     ///Draws Info & help
@@ -416,12 +418,10 @@ void TableApp::keyReleased(int key){
 //--------------------------------------------------------------
 void TableApp::windowResized(int w, int h){
     grid->Resize();
+    ///calls resize method of all 'Graphics' when nedded.
+    GraphicDispatcher::Instance().Resize(w,h);
 }
 
-///################################################################
-/// TODO
-///En un futur, implementar una espècie de tuioSimulator embeded...
-///################################################################
 //--------------------------------------------------------------
 void TableApp::mouseMoved(int x, int y ){
 }

@@ -34,10 +34,10 @@
 #define TEventHandler(en) void EP_##en (TEvent * evt)
 
 
-#include "EventQueue.h"
-#include "tuioinput.h"
-#include "InputGesture.h"
-#include "inputGestureManager.h"
+#include "EventQueue.hpp"
+#include "tuioinput.hpp"
+#include "InputGesture.hpp"
+#include "inputGestureManager.hpp"
 #include <iostream>
 
 namespace tuio

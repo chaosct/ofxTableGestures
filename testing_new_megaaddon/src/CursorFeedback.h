@@ -33,8 +33,8 @@
 
 #include "ofMain.h"
 #include "tuioApp.hpp"
-#include "InputGestureClasses.h"
-#include "Listener.h"
+#include "InputGestureClasses.hpp"
+#include "GestureListener.hpp"
 #include "Graphic.hpp"
 #include <map>
 #include <list>

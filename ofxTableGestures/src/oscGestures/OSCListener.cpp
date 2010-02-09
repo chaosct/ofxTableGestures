@@ -27,7 +27,7 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "OSCListener.h"
+#include "OSCListener.hpp"
 #include "OscReceivedElements.h"
 #include "IpEndpointName.h"
 

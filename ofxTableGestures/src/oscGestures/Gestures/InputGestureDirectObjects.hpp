@@ -31,9 +31,9 @@
 #ifndef INPUTGESTUREDIRECTOBJECTS_H_INCLUDED
 #define INPUTGESTUREDIRECTOBJECTS_H_INCLUDED
 
-#include "InputGestureBasicObjects.h"
-#include "TEvent.h"
-#include "DirectPoint.h"
+#include "InputGestureBasicObjects.hpp"
+#include "TEvent.hpp"
+#include "DirectPoint.hpp"
 #include <map>
 
 using namespace osc;

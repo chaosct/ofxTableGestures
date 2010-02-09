@@ -31,11 +31,11 @@
 #ifndef INPUTGESTUREDIRECTFINGERS_H_INCLUDED
 #define INPUTGESTUREDIRECTFINGERS_H_INCLUDED
 
-#include "InputGesture.h"
-#include "TEvent.h"
-#include "tuioApp.h"
-#include "DirectPoint.h"
-#include "InputGestureBasicFingers.h"
+#include "InputGesture.hpp"
+#include "TEvent.hpp"
+#include "tuioApp.hpp"
+#include "DirectPoint.hpp"
+#include "InputGestureBasicFingers.hpp"
 #include <map>
 
 using namespace osc;

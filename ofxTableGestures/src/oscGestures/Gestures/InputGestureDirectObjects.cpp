@@ -1,4 +1,4 @@
-#include "InputGestureDirectObjects.h"
+#include "InputGestureDirectObjects.hpp"
 
 namespace tuio
 {

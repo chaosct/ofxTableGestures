@@ -32,11 +32,11 @@
 #define TUIO_INPUTGESTUREBASICOBJECTS_H
 
 #include "OscReceivedElements.h"
-#include "InputGesture.h"
+#include "InputGesture.hpp"
 #include <set>
-#include "TEvent.h"
-#include "tuioApp.h"
-#include "InputGestureTuio1.1.h"
+#include "TEvent.hpp"
+#include "tuioApp.hpp"
+#include "InputGestureTuio1.1.hpp"
 
 using namespace osc;
 

@@ -1,9 +1,8 @@
 /*
-
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2009 Carles F. Julià <carles.fernandez@upf.edu>
+    Copyright (c) 2009 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
@@ -27,57 +26,27 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "tuioinput.hpp"
-#include "inputGestureManager.hpp"
-#include "EventQueue.hpp"
 
+#ifndef _GRAPHICDISPATCHER
+#define _GRAPHICDISPATCHER
+#include <list>
+#include "Graphic.hpp"
 
-#define PORT 3333
+class Graphic;
 
-
-#ifndef WIN32
-static void* ThreadFunc( void* obj )
-#else
-static DWORD WINAPI ThreadFunc( LPVOID obj )
-#endif
-{
-	static_cast<tuio::tuioinput*>(obj)->s->Run();
-	return 0;
+class GraphicDispatcher : public Singleton<GraphicDispatcher>{
+    private:
+        std::list<Graphic*> graphics;
+    protected:
+        friend class Singleton<GraphicDispatcher>;
+        GraphicDispatcher();
+    public:
+        ~GraphicDispatcher();
+        void Draw();
+        void Update();
+        void Resize(int w, int h);
+        void AddGraphic(Graphic* graphic);
+        void RemoveGraphic(Graphic* graphic);
 };
 
-
-
-namespace tuio {
-
-void tuioinput::init() {
-
-    //Only init once
-    if(running)
-        return;
-    running = true;
-
-    s = new UdpListeningReceiveSocket(
-            IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
-            gesturemanager );
-    #ifndef WIN32
-    pthread_create(&thread , NULL, ThreadFunc, this);
-    #else
-    DWORD threadId;
-    thread = CreateThread( 0, 0, ThreadFunc, this, 0, &threadId );
-    #endif
-
-}
-
-EventQueue  * tuioinput::getQueue() {
-  // Bouml preserved body begin 0002862A
-  return gesturemanager->queue;
-  // Bouml preserved body end 0002862A
-}
-
-tuioinput::tuioinput():running(false){
-
-    gesturemanager = new inputGestureManager();
-
-}
-
-} // namespace tuio
+#endif //_GRAPHICDISPATCHER

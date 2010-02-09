@@ -27,8 +27,8 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-#include "InputGesture.h"
-#include "TEvent.h"
+#include "InputGesture.hpp"
+#include "TEvent.hpp"
 
 namespace tuio {
 

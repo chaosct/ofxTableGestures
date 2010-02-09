@@ -35,7 +35,7 @@
 
 #include <vector>
 #include <iostream>
-#include "Singleton.h"
+#include "Singleton.hpp"
 
 namespace tuio {
 

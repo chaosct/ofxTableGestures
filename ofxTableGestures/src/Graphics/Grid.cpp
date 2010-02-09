@@ -1,10 +1,4 @@
 /*
-* Daniel Gallardo Grassot
-* daniel.gallardo@upf.edu
-* Universitat Pompeu Fabra
-* Music Technology Group
-*/
-/*
 
     OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra

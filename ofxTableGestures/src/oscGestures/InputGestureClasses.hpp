@@ -32,9 +32,9 @@
 #define INPUTGESTURECLASSES_H_INCLUDED
 
 
-#include "InputGestureBasicFingers.h"
-#include "InputGestureDirectFingers.h"
-#include "InputGestureBasicObjects.h"
-#include "InputGestureDirectObjects.h"
+#include "InputGestureBasicFingers.hpp"
+#include "InputGestureDirectFingers.hpp"
+#include "InputGestureBasicObjects.hpp"
+#include "InputGestureDirectObjects.hpp"
 
 #endif // INPUTGESTURECLASSES_H_INCLUDED
