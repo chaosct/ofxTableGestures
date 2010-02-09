@@ -6,11 +6,10 @@
 int main( ){
 
     ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024,700, OF_WINDOW);			// <-------- setup the GL context
-
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
+    ofSetupOpenGL(&window, 1024 ,768, OF_WINDOW);			// <-------- setup the GL context
+	//for having 100% full screen you must change the previous
+	//declaration for this one:
+	//ofSetupOpenGL(&window, 1024 ,768, OF_GAME_MODE);
 	ofRunApp( new testApp());
 
 }

@@ -30,9 +30,9 @@
 
 #ifndef _GRAPHIC
 #define _GRAPHIC
-
-#include "GraphicDispatcher.hpp"
 #include "GestureListener.hpp"
+#include "GraphicDispatcher.hpp"
+
 
 class Graphic:public tuio::GestureListener{
     public:
