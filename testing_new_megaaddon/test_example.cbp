@@ -2,15 +2,16 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="testing_new_megaaddon" />
+		<Option title="test_example" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/TableGestures/Graphics/objects/;" />
 		<Build>
-			<Target title="Debug">
-				<Option output="bin/advancedEventsExample_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin" />
-				<Option object_output="obj/Debug/" />
+			<Target title="LinuxDebug">
+				<Option platforms="Unix;" />
+				<Option output="bin/test_example" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/LinuxDebug/" />
 				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworksDebug.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -21,12 +22,38 @@
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
+					<Add library="openFrameworks" />
+					<Add library="fmodex" />
+					<Add library="raw1394" />
+					<Add library="glut" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="Xxf86vm" />
+					<Add library="asound" />
+					<Add library="PocoFoundation" />
+					<Add library="unicap" />
+					<Add library="freetype" />
+					<Add library="freeimage" />
+					<Add library="RtAudio" />
+					<Add library="GLee" />
+					<Add library="oFappsink" />
+					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
+					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
+					<Add directory="../../../libs/freetype/lib/linux" />
+					<Add directory="../../../libs/FreeImage/lib/linux" />
+					<Add directory="../../../libs/rtAudio/lib/linux" />
+					<Add directory="../../../libs/glee/lib/linux" />
+					<Add directory="../../../libs/gstappsink/lib/linux" />
+					<Add directory="../../../libs/fmodex/lib/linux" />
+					<Add directory="../../../libs/unicap/lib/linux" />
+					<Add directory="../../../libs/poco/lib/linux" />
 				</Linker>
 			</Target>
-			<Target title="Release">
-				<Option output="bin/advancedEventsExample" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin" />
-				<Option object_output="obj/Release/" />
+			<Target title="LinuxRelease">
+				<Option platforms="Unix;" />
+				<Option output="bin/test_example" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/LinuxRelease/" />
 				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -39,6 +66,30 @@
 				<Linker>
 					<Add option="-s" />
 					<Add library="openFrameworks" />
+					<Add library="fmodex" />
+					<Add library="raw1394" />
+					<Add library="glut" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="Xxf86vm" />
+					<Add library="asound" />
+					<Add library="PocoFoundation" />
+					<Add library="unicap" />
+					<Add library="freetype" />
+					<Add library="freeimage" />
+					<Add library="RtAudio" />
+					<Add library="GLee" />
+					<Add library="oFappsink" />
+					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
+					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
+					<Add directory="../../../libs/freetype/lib/linux" />
+					<Add directory="../../../libs/FreeImage/lib/linux" />
+					<Add directory="../../../libs/rtAudio/lib/linux" />
+					<Add directory="../../../libs/glee/lib/linux" />
+					<Add directory="../../../libs/gstappsink/lib/linux" />
+					<Add directory="../../../libs/fmodex/lib/linux" />
+					<Add directory="../../../libs/unicap/lib/linux" />
+					<Add directory="../../../libs/poco/lib/linux" />
 				</Linker>
 			</Target>
 			<Environment>
@@ -49,7 +100,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-fexceptions " />
+			<Add option="-fexceptions" />
+			<Add option="-DSIMULATOR" />
 			<Add directory="../../../addons/" />
 			<Add directory="../../../libs/openFrameworks/" />
 			<Add directory="../../../libs/openFrameworks/events" />
@@ -77,34 +129,8 @@
 			<Add directory="../../../addons/ofxOsc/src" />
 			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
 			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
+			<Add directory="../../../addons/ofxTableGestures/src/Graphics/objects" />
 		</Compiler>
-		<Linker>
-			<Add library="openFrameworks" />
-			<Add library="fmodex" />
-			<Add library="raw1394" />
-			<Add library="glut" />
-			<Add library="GL" />
-			<Add library="GLU" />
-			<Add library="Xxf86vm" />
-			<Add library="asound" />
-			<Add library="PocoFoundation" />
-			<Add library="unicap" />
-			<Add library="freetype" />
-			<Add library="freeimage" />
-			<Add library="RtAudio" />
-			<Add library="GLee" />
-			<Add library="oFappsink" />
-			<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
-			<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
-			<Add directory="../../../libs/freetype/lib/linux" />
-			<Add directory="../../../libs/FreeImage/lib/linux" />
-			<Add directory="../../../libs/rtAudio/lib/linux" />
-			<Add directory="../../../libs/glee/lib/linux" />
-			<Add directory="../../../libs/gstappsink/lib/linux" />
-			<Add directory="../../../libs/fmodex/lib/linux" />
-			<Add directory="../../../libs/unicap/lib/linux" />
-			<Add directory="../../../libs/poco/lib/linux" />
-		</Linker>
 		<ExtraCommands>
 			<Add after="#" />
 			<Add after="#      copy libs and shell script to bin directory:" />
@@ -154,6 +180,18 @@
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/Graphic.cpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/Graphic.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.cpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/Grid.cpp">
 			<Option virtualFolder="addons/TableGestures/Graphics" />
 		</Unit>
@@ -177,6 +215,18 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/container.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.cpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/TableApp.cpp">
 			<Option virtualFolder="addons/TableGestures" />
