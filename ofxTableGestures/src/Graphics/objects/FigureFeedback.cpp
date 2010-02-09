@@ -28,37 +28,44 @@
 
 */
 
-#include "CursorFeedback.h"
+#include "FigureFeedback.hpp"
 
-CursorFeedback::CursorFeedback(){
+FigureFeedback::FigureFeedback(){
 }
 
-CursorFeedback::~CursorFeedback(){
+FigureFeedback::~FigureFeedback(){
 }
 
-void CursorFeedback::update(){
-    float seconds = ofGetElapsedTimef();
-    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
-        it->second->Update(seconds);
+void FigureFeedback::update(){
+    std::list<HistoryFigure*>::iterator it = to_delete.begin();
+    float time = ofGetElapsedTimef();
+    while (it != to_delete.end()){
+        (*it)->Update(time);
+        if((*it)->CanDelete()){
+            std::list<HistoryFigure*>::iterator tmp = it;
+            it++;
+            objects.erase((*tmp)->sid);
+            to_delete.erase(tmp);
+        }
+        else it++;
     }
 }
 
-void CursorFeedback::draw(){
-    for(std::map<int32,HistoryPoint*>::iterator it = finger_map.begin(); it != finger_map.end(); it++){
-       it->second->Draw();
+void FigureFeedback::draw(){
+    for (std::map<int32,HistoryFigure*>::iterator it = objects.begin(); it != objects.end(); it++){
+        it->second->draw();
     }
 }
 
-void CursorFeedback::addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]=new HistoryPoint(id,xpos,ypos);
+void FigureFeedback::addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+    objects[id]= new HistoryFigure(id,f_id,xpos,ypos,angle);
 }
 
-void CursorFeedback::updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]->SetPoint(xpos,ypos);
+void FigureFeedback::updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
+    objects[id]->SetFigure(xpos,ypos,angle);
 }
 
-void CursorFeedback::removeTuioCursor(int32 id){
-    HistoryPoint*tmp = finger_map[id];
-    finger_map.erase(id);
-    delete tmp;
+void FigureFeedback::removeTuioObject(int32 id){
+    objects[id]->Release(ofGetElapsedTimef());
+    to_delete.push_back(objects[id]);
 }

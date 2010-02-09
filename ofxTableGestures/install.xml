@@ -28,6 +28,12 @@
 				<file>../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/Graphics/GraphicDispatcher.cpp</file>
 			</folder>
+			<folder name="addons/TableGestures/Graphics/objects">
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp</file>
+			</folder>
 			<folder name="addons/TableGestures/oscGestures">
 				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/InputGesture.cpp</file>
@@ -70,6 +76,7 @@
 		<include>
 			<path>../../../addons/ofxTableGestures/src/</path>
 			<path>../../../addons/ofxTableGestures/src/Graphics/</path>
+			<path>../../../addons/ofxTableGestures/src/Graphics/objects/</path>
 			<path>../../../addons/ofxTableGestures/src/oscGestures/</path>
 			<path>../../../addons/ofxTableGestures/src/oscGestures/Gestures/</path>
 			<path>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/</path>

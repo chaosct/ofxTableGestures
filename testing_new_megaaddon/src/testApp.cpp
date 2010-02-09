@@ -1,6 +1,6 @@
 #include "testApp.h"
-#include "CursorFeedback.h"
-#include "FigureFeedback.h"
+#include "CursorFeedback.hpp"
+#include "FigureFeedback.hpp"
 
 //--------------------------------------------------------------
 void testApp::Setup(){
