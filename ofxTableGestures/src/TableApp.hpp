@@ -79,7 +79,7 @@ class TableApp : public ofBaseApp{
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
-        TableApp();
+        TableApp(bool use_render_to_texture = false);
         ///Destructor
         ~TableApp();
         /// pure virtual methods to be rewrited

@@ -52,6 +52,9 @@
 
 class testApp : public TableApp{
 	public:
+        testApp():TableApp(){}
+        ///To use render_to_texture, change the constructor for the following line:
+        //testApp():TableApp(true){}
 		void Setup();
 		void Update();
 		void Draw();

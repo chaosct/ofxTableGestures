@@ -39,7 +39,7 @@
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
 
-TableApp::TableApp():
+TableApp::TableApp(bool use_render_to_texture):
 //    calibration_enabled(false),
     calibration_mode(0),
     show_help(false),
@@ -50,8 +50,9 @@ TableApp::TableApp():
     is_simulating(false)
     #endif
 {
-    //renderer = new Renderer_plane();
-    renderer = new Renderer_to_texture();
+    if(use_render_to_texture) renderer = new Renderer_to_texture();
+    else renderer = new Renderer_plane();
+
     renderer->LoadDistortion();
     show_grid = renderer->IsEnabled();
 }
