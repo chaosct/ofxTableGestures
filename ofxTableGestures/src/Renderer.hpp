@@ -55,19 +55,31 @@ class Renderer{
         ///Enable/disable distortion flag
         bool distortion_enabled;
     protected:
+        ///To be rewritted:
+        ///Called before draw thing to be distortionate
         virtual void StartDistortion()=0;
+        ///Called after draw things to be distortionate
         virtual void EndDistortion()=0;
     public:
-        Renderer():distortion_enabled(false){}
+        Renderer();
         virtual ~Renderer()=0;
+        ///Loads distortion from configuration file
         virtual void LoadDistortion();
+        ///Saves distortion to configuration file
         virtual void SaveDistortion();
+        ///Called before draw thing to be distortionate
         void Start();
+        ///Called after draw things to be distortionate
         void End();
+        ///Enables distortion
         virtual void Enable();
+        ///Disables distortion
         virtual void Disable();
+        ///Returns true or fals depending on distortion
         virtual bool IsEnabled();
+        ///Returns distortion values into a string
         virtual std::string ToString();
+        ///Resets the distortion values
         void LoadDefaultValues();
 };
 

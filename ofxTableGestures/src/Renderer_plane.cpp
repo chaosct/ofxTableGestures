@@ -32,11 +32,7 @@
 #include "Renderer_plane.hpp"
 #include "ofMain.h"
 
-#define DISTORTION_PATH "calibration_paral.conf"
-
 Renderer_plane::Renderer_plane(){
-    DistortionPath=DISTORTION_PATH;
-    LoadDefaultValues();
 }
 
 Renderer_plane::~Renderer_plane(){

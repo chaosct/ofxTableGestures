@@ -32,6 +32,14 @@
 #include "ofMain.h"
 #include "Renderer.hpp"
 
+#define DISTORTION_PATH "calibration.conf"
+
+Renderer::Renderer():distortion_enabled(false){
+    DistortionPath=DISTORTION_PATH;
+    LoadDefaultValues();
+    distortion_enabled = false;
+}
+
 Renderer::~Renderer(){}
 
 void Renderer::LoadDistortion(){

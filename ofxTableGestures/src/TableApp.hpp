@@ -49,9 +49,12 @@ class TableApp : public ofBaseApp{
     ///The data contained by this class is private and it is mainly used for distortionate the output,
     ///draws the calibration grid and draws the simulator scene.
     private:
+        ///Renderer: used for distortionate the graphic output.
         Renderer *renderer;
         ///Grid: used for drawing the calibration grid on the screen.
         Grid* grid;
+        ///Show grid flag
+        bool show_grid;
         /// Full/windowed screen flag
         bool full;
         /// selector of calibration parameter

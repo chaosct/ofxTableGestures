@@ -33,6 +33,11 @@
 
 #include "Renderer.hpp"
 
+/**
+* Before draw images, it aplies translations, rotations
+* and sclaes to fit the image on the table.
+**/
+
 class Renderer_plane : public Renderer{
     public:
         Renderer_plane();

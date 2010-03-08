@@ -33,6 +33,7 @@
 #include "GestureDispatcher.hpp"
 #include "GraphicDispatcher.hpp"
 #include "Renderer_plane.hpp"
+#include "Renderer_to_texture.hpp"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
@@ -49,8 +50,10 @@ TableApp::TableApp():
     is_simulating(false)
     #endif
 {
-    renderer = new Renderer_plane();
+    //renderer = new Renderer_plane();
+    renderer = new Renderer_to_texture();
     renderer->LoadDistortion();
+    show_grid = renderer->IsEnabled();
 }
 
 TableApp::~TableApp(){
@@ -145,7 +148,7 @@ void TableApp::draw(){
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
     renderer->Start();
-    grid->Draw(renderer->IsEnabled(),calibration_mode);
+    grid->Draw(show_grid,calibration_mode);
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
@@ -194,23 +197,21 @@ void TableApp::keyReleased(int key){
 		case 'c':
             if(renderer->IsEnabled()){
                 renderer->SaveDistortion();
-                renderer->Disable();
-            }else{
-                renderer->Enable();
             }
+            show_grid = !show_grid;
         break;
         case OF_KEY_RETURN:
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled()) calibration_mode ++;
+            if(renderer->IsEnabled() && show_grid) calibration_mode ++;
             if(calibration_mode > 3) calibration_mode = 0;
         break;
         case OF_KEY_UP:
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
@@ -225,7 +226,7 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
@@ -240,7 +241,7 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
@@ -255,7 +256,7 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
@@ -280,7 +281,7 @@ void TableApp::keyReleased(int key){
             }
         break;
         case 'r':
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
                 renderer->LoadDefaultValues();
             #ifdef SIMULATOR
                 if(is_simulating)
@@ -291,7 +292,7 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(renderer->IsEnabled())
+            if(renderer->IsEnabled() && show_grid)
                 renderer->LoadDistortion();
         break;
         case 'h':

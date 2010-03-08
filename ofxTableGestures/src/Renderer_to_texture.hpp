@@ -31,9 +31,20 @@
 #ifndef _RENDERER_TO_TEXTURE
 #define _RENDERER_TO_TEXTURE
 
+#include "ofMain.h"
 #include "Renderer.hpp"
 
+/**
+* After Draw, it stores the output into a texture, aplies some
+* translations, rotations and scales to fit the image on the screen.
+* It allows draw 3D images without distortionate the ouput on the table.
+*/
 class Renderer_to_texture : public Renderer{
+    private:
+        ///Where the graphics output will be sotred
+        ofTexture   texScreen;
+        ///width and height of the screen.
+        int w,h;
     public:
         Renderer_to_texture();
         virtual ~Renderer_to_texture();
