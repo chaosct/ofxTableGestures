@@ -452,6 +452,24 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer.cpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer.hpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer_plane.cpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer_plane.hpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer_to_texture.cpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../ofxTableGestures/src/Renderer_to_texture.hpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/TableApp.cpp">
 			<Option virtualFolder="addons/TableGestures" />
 		</Unit>
