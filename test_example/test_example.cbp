@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;src/jukebox_gestures/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -568,6 +568,18 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/tuioinput.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
+		</Unit>
+		<Unit filename="src/Jkb_finger.cpp">
+			<Option virtualFolder="src/jukebox_gestures/" />
+		</Unit>
+		<Unit filename="src/Jkb_finger.h">
+			<Option virtualFolder="src/jukebox_gestures/" />
+		</Unit>
+		<Unit filename="src/Jkb_tap.cpp">
+			<Option virtualFolder="src/jukebox_gestures/" />
+		</Unit>
+		<Unit filename="src/Jkb_tap.h">
+			<Option virtualFolder="src/jukebox_gestures/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
