@@ -33,6 +33,7 @@
 
 #include "ofMain.h"
 #include "Grid.hpp"
+#include "Renderer.hpp"
 
 ///By defining the global "SIMULATOR", it enables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
@@ -48,12 +49,14 @@ class TableApp : public ofBaseApp{
     ///The data contained by this class is private and it is mainly used for distortionate the output,
     ///draws the calibration grid and draws the simulator scene.
     private:
+        ///Renderer: used for distortionate the graphic output.
+        Renderer *renderer;
         ///Grid: used for drawing the calibration grid on the screen.
         Grid* grid;
+        ///Show grid flag
+        bool show_grid;
         /// Full/windowed screen flag
         bool full;
-        /// Enable/disable calibration flag
-        bool calibration_enabled;
         /// selector of calibration parameter
         /// translate, rotate, scale, rotate x and y axes,...
         int calibration_mode;
@@ -61,25 +64,6 @@ class TableApp : public ofBaseApp{
         bool show_help;
         ///Show/hide information flag
         bool show_info;
-        ///Enable/disable distortion flag
-        bool distortion_enabled;
-        ///Calibration data:
-            ///height scale factor
-        double height_offset;
-            ///width scale factor
-		double width_offset;
-            ///x position
-		double center_x;
-            ///y position
-		double center_y;
-            ///y rotation angle
-		double angle_h;
-            ///x rotation angle
-		double angle_w;
-            ///z rotation angle
-		double angle;
-		///Distortion path file
-		std::string DistortionPath;
 		///Show/hide cursor flag
 		bool hide_cursor;
 		///Simulator
@@ -95,7 +79,7 @@ class TableApp : public ofBaseApp{
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
-        TableApp();
+        TableApp(bool use_render_to_texture = false);
         ///Destructor
         ~TableApp();
         /// pure virtual methods to be rewrited
@@ -103,11 +87,6 @@ class TableApp : public ofBaseApp{
         virtual void Update()=0;
         virtual void Draw()=0;
         virtual void WindowResized(int w, int h)=0;
-        /// Saves the distortion parameters into a text file
-        void SaveDistortion();
-        /// Loads the distortion parameter from a text file or load default values
-        /// if not found
-        void LoadDistortion();
         /// Draws text screen information
         void DrawInfo();
         /// Draws text help content
@@ -115,10 +94,6 @@ class TableApp : public ofBaseApp{
         ///returns the biggest side of the screen
         static int GetSquareSide();
 	private:
-        /// Sets up all opengl tranformation if it is enabled
-        void StartDistortion();
-        /// Disables all opengl tranformations
-        void EndDistortion();
         /// ofBaseApp methods..
 		void setup();
 		void update();

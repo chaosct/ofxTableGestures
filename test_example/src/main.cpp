@@ -11,5 +11,4 @@ int main( ){
 	//declaration for this one:
 	//ofSetupOpenGL(&window, 1024 ,768, OF_GAME_MODE);
 	ofRunApp( new testApp());
-
 }

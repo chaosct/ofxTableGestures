@@ -32,38 +32,36 @@
 #include "TableApp.hpp"
 #include "GestureDispatcher.hpp"
 #include "GraphicDispatcher.hpp"
+#include "Renderer_plane.hpp"
+#include "Renderer_to_texture.hpp"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
 
-TableApp::TableApp():
-    calibration_enabled(false),
+TableApp::TableApp(bool use_render_to_texture):
+//    calibration_enabled(false),
     calibration_mode(0),
     show_help(false),
     show_info(false),
-    distortion_enabled(false),
-    height_offset(1),
-    width_offset(1),
-    center_x(0),
-    center_y(0),
-    angle_h(0),
-    angle_w(0),
-    angle(0),
-    DistortionPath(DISTORTION_PATH),
     hide_cursor(true)
     #ifdef SIMULATOR
     ,simulator(new simulator::Simulator()),
     is_simulating(false)
     #endif
 {
-    LoadDistortion();
+    if(use_render_to_texture) renderer = new Renderer_to_texture();
+    else renderer = new Renderer_plane();
+
+    renderer->LoadDistortion();
+    show_grid = renderer->IsEnabled();
 }
 
 TableApp::~TableApp(){
     #ifdef SIMULATOR
     delete simulator;
     #endif
+    delete renderer;
     delete grid;
 }
 
@@ -94,56 +92,6 @@ void TableApp::update(){
 
 //--------------------------------------------------------------
 
-void TableApp::SaveDistortion()
-{
-    std::ofstream ofs(DistortionPath.c_str());
-    ofs << "#Calibration File for the tabletop framewok" << std::endl;
-    ofs << "#" << std::endl;
-    ofs << "# Distortion Enabled:" << std::endl;
-    ofs << distortion_enabled << std::endl;
-    ofs << "# X_offset:" << std::endl;
-    ofs << center_x << std::endl;
-    ofs << "# y_offset:" << std::endl;
-    ofs << center_y << std::endl;
-    ofs << "# height_offset:" << std::endl;
-    ofs << height_offset << std::endl;
-    ofs << "# width_offset:" << std::endl;
-    ofs << width_offset << std::endl;
-    ofs << "# angle:" << std::endl;
-    ofs << angle << std::endl;
-    ofs << "# angle_h:" << std::endl;
-    ofs << angle_h << std::endl;
-    ofs << "# angle_w:" << std::endl;
-    ofs << angle_w << std::endl;
-}
-
-void TableApp::LoadDistortion()
-{
-    std::ifstream infile(DistortionPath.c_str());
-    std::string tmp ("st");
-    if(infile.is_open())
-    {
-        getline(infile,tmp);
-        getline(infile,tmp);
-        getline(infile,tmp);
-        infile >> distortion_enabled;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> center_x;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> center_y;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> height_offset;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> width_offset;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> angle;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> angle_h;
-        getline(infile,tmp);getline(infile,tmp);
-        infile >> angle_w;
-    }
-}
-
 void TableApp::DrawInfo()
 {
     if(show_info)
@@ -153,19 +101,12 @@ void TableApp::DrawInfo()
         ofSetColor(0x00FF00);
         std::stringstream msg;
         msg << ofGetWidth() << "X" << ofGetHeight() << "@" <<  (int)ofGetFrameRate() << "fps" << std::endl;
-        if(distortion_enabled)
+        if(renderer->IsEnabled())
             msg << "Distortion enabled" << std::endl;
         else
             msg << "Distortion disabled" << std::endl;
         msg << "Calibration data:" << std::endl;
-        msg << "  x_position: " << center_x << std::endl;
-        msg << "  y_position: " << center_y << std::endl;
-        msg << "  height_offset: " << height_offset << std::endl;
-        msg << "  width_offset: " << width_offset << std::endl;
-        msg << "  angle: " << angle << std::endl;
-        msg << "  angle_h: " << angle_h << std::endl;
-        msg << "  angle_w: " << angle_w << std::endl;
-
+        msg << renderer->ToString();
         ofDrawBitmapString(msg.str(), 0, 0);
         glPopMatrix();
     }
@@ -207,14 +148,14 @@ void TableApp::draw(){
     #ifdef SIMULATOR
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
-    StartDistortion();
-    grid->Draw(calibration_enabled,calibration_mode);
+    renderer->Start();
+    grid->Draw(show_grid,calibration_mode);
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
     ofPopMatrix();
     Draw();
-    EndDistortion();
+    renderer->End();
     ///Draws Info & help
     DrawInfo();
     DrawHelp();
@@ -224,25 +165,6 @@ void TableApp::draw(){
     #endif
 }
 
-void TableApp::StartDistortion()
-{
-    if(distortion_enabled)
-    {
-        glPushMatrix();
-        glTranslated(center_x,center_y,0);
-        glTranslatef((ofGetWidth())/2,(ofGetHeight())/2,0);
-        glRotated(angle,0,0,1);
-        glRotated(angle_h,1,0,0);
-        glRotated(angle_w,0,1,0);
-        glScaled(width_offset,height_offset,1);
-        glTranslatef(-(ofGetWidth())/2,-(ofGetHeight())/2,0);
-    }
-}
-
-void TableApp::EndDistortion()
-{
-    glPopMatrix();
-}
 //--------------------------------------------------------------
 void TableApp::keyPressed(int key){
     #ifdef SIMULATOR
@@ -271,31 +193,33 @@ void TableApp::keyReleased(int key){
         break;
         #endif
         case 'f':
-                ofToggleFullscreen();
+            ofToggleFullscreen();
 		break;
 		case 'c':
-            if(calibration_enabled)SaveDistortion();
-            calibration_enabled = !calibration_enabled;
+            if(renderer->IsEnabled()){
+                renderer->SaveDistortion();
+            }
+            show_grid = !show_grid;
         break;
         case OF_KEY_RETURN:
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled) calibration_mode ++;
+            if(renderer->IsEnabled() && show_grid) calibration_mode ++;
             if(calibration_mode > 3) calibration_mode = 0;
         break;
         case OF_KEY_UP:
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled)
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
-                    case 0:center_y--;break;
-                    case 1:height_offset+=WIDTH_STEP;break;
-                    case 2:angle+=ANGLE_STEP;break;
-                    case 3:angle_h+=ANGLE_STEP;break;
+                    case 0:renderer->center_y--;break;
+                    case 1:renderer->height_offset+=WIDTH_STEP;break;
+                    case 2:renderer->angle+=ANGLE_STEP;break;
+                    case 3:renderer->angle_h+=ANGLE_STEP;break;
                 }
             }
         break;
@@ -303,14 +227,14 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled)
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
-                    case 0:center_y++;break;
-                    case 1:height_offset-=WIDTH_STEP;break;
-                    case 2:angle-=ANGLE_STEP;break;
-                    case 3:angle_h-=ANGLE_STEP;break;
+                    case 0:renderer->center_y++;break;
+                    case 1:renderer->height_offset-=WIDTH_STEP;break;
+                    case 2:renderer->angle-=ANGLE_STEP;break;
+                    case 3:renderer->angle_h-=ANGLE_STEP;break;
                 }
             }
         break;
@@ -318,14 +242,14 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled)
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
-                    case 0:center_x++;break;
-                    case 1:width_offset+=WIDTH_STEP;break;
-                    case 2:angle+=ANGLE_STEP;break;
-                    case 3:angle_w+=ANGLE_STEP;break;
+                    case 0:renderer->center_x++;break;
+                    case 1:renderer->width_offset+=WIDTH_STEP;break;
+                    case 2:renderer->angle+=ANGLE_STEP;break;
+                    case 3:renderer->angle_w+=ANGLE_STEP;break;
                 }
             }
         break;
@@ -333,14 +257,14 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled)
+            if(renderer->IsEnabled() && show_grid)
             {
                 switch(calibration_mode)
                 {
-                    case 0:center_x--;break;
-                    case 1:width_offset-=WIDTH_STEP;break;
-                    case 2:angle-=ANGLE_STEP;break;
-                    case 3:angle_w-=ANGLE_STEP;break;
+                    case 0:renderer->center_x--;break;
+                    case 1:renderer->width_offset-=WIDTH_STEP;break;
+                    case 2:renderer->angle-=ANGLE_STEP;break;
+                    case 3:renderer->angle_w-=ANGLE_STEP;break;
                 }
             }
         break;
@@ -358,16 +282,8 @@ void TableApp::keyReleased(int key){
             }
         break;
         case 'r':
-            if(calibration_enabled)
-            {
-                height_offset=1;
-                width_offset=1;
-                center_x=0;
-                center_y=0;
-                angle_h=0;
-                angle_w=0;
-                angle=0;
-            }
+            if(renderer->IsEnabled() && show_grid)
+                renderer->LoadDefaultValues();
             #ifdef SIMULATOR
                 if(is_simulating)
                     simulator->Reset();
@@ -377,8 +293,8 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            if(calibration_enabled)
-                LoadDistortion();
+            if(renderer->IsEnabled() && show_grid)
+                renderer->LoadDistortion();
         break;
         case 'h':
             show_help = !show_help;
@@ -387,14 +303,16 @@ void TableApp::keyReleased(int key){
             #ifdef SIMULATOR
             if(!is_simulating)
             #endif
-            distortion_enabled = !distortion_enabled;
+            if(renderer->IsEnabled()) renderer->Disable();
+            else renderer->Enable();
         break;
         case 's':
             #ifdef SIMULATOR
                 if(is_simulating){
                     ///restore distorsion
                     ///restore cursor
-                    distortion_enabled = was_distorsion_enabled;
+                    if(was_distorsion_enabled) renderer->Enable();
+                    else renderer->Disable();
                     if(was_cursor_hide){
                         hide_cursor=true;
                         ofHideCursor();
@@ -403,9 +321,9 @@ void TableApp::keyReleased(int key){
                     simulator->Reset();
                 }
                 else{
-                    was_distorsion_enabled = distortion_enabled;
+                    was_distorsion_enabled = renderer->IsEnabled();
                     was_cursor_hide = hide_cursor;
-                    distortion_enabled = false;
+                    renderer->Disable();
                     hide_cursor=false;
                     ofShowCursor();
                     is_simulating=true;
