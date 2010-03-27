@@ -31,9 +31,9 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 //Inspired by http://cc.byexamples.com/20080609/stl-singleton-template/
-
-template<typename T>
-class Singleton
+class VoidClass{};
+template<typename T, class Base=VoidClass>
+class Singleton : public Base
 {
     public:
         static T& Instance()
