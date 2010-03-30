@@ -40,6 +40,13 @@
 #include "inputGestureManager.hpp"
 #include <iostream>
 
+#define BOOST_FUSION_INVOKE_PROCEDURE_MAX_ARITY 10
+
+#include "boost/fusion/include/sequence.hpp"
+#include "boost/fusion/include/make_vector.hpp"
+#include "boost/fusion/include/push_front.hpp"
+#include "boost/fusion/include/invoke_procedure.hpp"
+
 namespace tuio
 {
 
@@ -68,9 +75,59 @@ class Callback : public GenericCallback
     void (C::*m)(TEvent *);
 };
 
+///This Callback doesn't need handlers, but it needs to use AEvent
+template<typename C, typename M, typename E>
+class AlternateCallback : public GenericCallback
+{
+      public:
+  // constructs a callback to a method in the context of a given object
+  AlternateCallback(C* object, M method)
+    : o(object),m(method) {}
+  // calls the method
+  void _run(TEvent * te)
+  {
+    E * e =  static_cast<E*>(te);
+    boost::fusion::invoke_procedure(m,boost::fusion::push_front(e->s, o));
+  }
+  void run(TEvent * te){_run(te);}
+  private:
+  // container for the pointer to method
+    C* o;
+    M m;
+};
+
+#define DeclareEvent(eventname,...) class eventname : \
+    public AEvent<eventname,boost::fusion::vector<__VA_ARGS__> >\
+        {   typedef boost::fusion::vector<__VA_ARGS__> SequenceType;\
+            public: eventname(SequenceType v = SequenceType()):AEvent<eventname,SequenceType>(v){}};
+
+#define makeEvent(classname,arguments) new classname(boost::fusion::make_vector arguments)
 
 
-class VoidClass{};
+template <typename E, typename Sequence>
+class AEvent : public TEvent
+{
+    public:
+    AEvent(Sequence S):s(S)
+    {
+        name = EventTypes::Instance().get_number<E>();
+    }
+    Sequence s;
+    template<typename C,typename M>
+    static AlternateCallback<C,M,AEvent> * makeCallback(C* object, M method)
+    {
+        return new AlternateCallback<C,M,AEvent>(object,method);
+    }
+    template<typename TA,typename M>
+    static void registerCallback(TA *ta,M m)
+    {
+        ta->registerCallback(EventTypes::Instance().get_number<E>(), makeCallback(ta,m));
+    }
+};
+
+
+
+class VoidClass {};
 
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
@@ -91,7 +148,7 @@ public:
         eventprocessors.resize(100,NULL);
     }
 
-    ~tuioApp()
+    virtual ~tuioApp()
     {
         for (std::list<InputGesture *>::iterator it = feeders.begin();
                 it != feeders.end(); ++it)
@@ -116,6 +173,7 @@ public:
         eventprocessors[n]=callback;
     }
 
+
     void registerInputGesture(InputGesture * IG)
     {
         inputGestureManager::addGesture(IG);
@@ -124,6 +182,13 @@ public:
         {
             IG->nonGestureListeners++;
         }
+    }
+
+
+    template< typename I>
+    void registerIG()
+    {
+        registerInputGesture(Singleton<I>::get());
     }
 
 };
