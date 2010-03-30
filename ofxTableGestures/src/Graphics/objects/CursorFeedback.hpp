@@ -33,9 +33,10 @@
 
 #include "ofMain.h"
 #include "tuioApp.hpp"
-#include "InputGestureClasses.hpp"
+#include "InputGestureBasicFingers.hpp"
 #include "GestureListener.hpp"
 #include "Graphic.hpp"
+#include "DirectPoint.hpp"
 #include <map>
 #include <list>
 
@@ -83,10 +84,13 @@ class HistoryPoint: private DirectPoint{
 };
 
 class CursorFeedback: public tuio::CanBasicFingers < Graphic > {
+
     private:
         std::map<int32,HistoryPoint*> finger_map;
+
     public:
         CursorFeedback();
+
         ~CursorFeedback();
         virtual void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
         virtual void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
@@ -94,6 +98,8 @@ class CursorFeedback: public tuio::CanBasicFingers < Graphic > {
     protected:
         void update();
         void draw();
+
 };
+
 
 #endif // CURSORFEEDBACK_H_INCLUDED

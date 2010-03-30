@@ -31,10 +31,10 @@
 #ifndef INPUTGESTURECLASSES_H_INCLUDED
 #define INPUTGESTURECLASSES_H_INCLUDED
 
-
+/*
 #include "InputGestureBasicFingers.hpp"
 #include "InputGestureDirectFingers.hpp"
 #include "InputGestureBasicObjects.hpp"
 #include "InputGestureDirectObjects.hpp"
-
+*/
 #endif // INPUTGESTURECLASSES_H_INCLUDED
