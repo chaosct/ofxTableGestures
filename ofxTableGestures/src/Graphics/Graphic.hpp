@@ -31,10 +31,11 @@
 #ifndef _GRAPHIC
 #define _GRAPHIC
 #include "GestureListener.hpp"
-#include "GraphicDispatcher.hpp"
+//#include "GraphicDispatcher.hpp"
 
+class GraphicDispatcher;
 
-class Graphic:public tuio::GestureListener{
+class Graphic :public tuio::GestureListener{
     public:
         Graphic();
         virtual ~Graphic()=0;
