@@ -50,10 +50,10 @@ class EventTypes : public Singleton<EventTypes>
     friend class Singleton<EventTypes>;
     EventTypes():n(0){}
     public:
-    unsigned int getNumber()
+    /*unsigned int getNumber()
     {
         return n++;
-    }
+    }*/
     template<typename T>
     unsigned int get_number()
     {
@@ -89,7 +89,7 @@ class TTEvent : public TEvent
         static unsigned int uniquename;
         if (!ins)
         {
-            uniquename = EventTypes::Instance().getNumber();
+            uniquename = EventTypes::Instance().get_number<TE>();
             ins = true;
         }
         name = uniquename;

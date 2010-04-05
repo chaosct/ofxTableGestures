@@ -46,6 +46,9 @@
 #include "boost/fusion/include/make_vector.hpp"
 #include "boost/fusion/include/push_front.hpp"
 #include "boost/fusion/include/invoke_procedure.hpp"
+#include "boost/static_assert.hpp"
+#include "boost/mpl/assert.hpp"
+#include "boost/type_traits/is_base_of.hpp"
 
 namespace tuio
 {
@@ -128,11 +131,12 @@ class AEvent : public TEvent
 
 
 class VoidClass {};
+class tuioAppBase {};
 
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
 template< class Base = VoidClass>
-class tuioApp : public Base
+class tuioApp : public Base, tuioAppBase
 {
 private:
     eventprocessorsType eventprocessors;
@@ -142,6 +146,9 @@ protected:
     ///List of IG that create events we can process
     std::list<InputGesture *> feeders;
 public:
+    ///Do not allow to use this template twice on the same class
+    BOOST_MPL_ASSERT_NOT(( boost::is_base_of<tuioAppBase,Base> ));
+
     tuioApp( bool _isGestureListener = false):isGestureListener(_isGestureListener)
     {
         ///TODO: better sizing
