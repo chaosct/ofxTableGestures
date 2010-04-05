@@ -74,8 +74,8 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
         {
             DirectFinger * e = new DirectFinger();
             e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
+            e->setX(xpos);
+            e->setY(ypos);
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;
@@ -89,8 +89,7 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
         {
              DirectFinger * e = fingers[id];
             e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
+            e->set(xpos,ypos);
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;

@@ -8,8 +8,8 @@ void InputGestureDirectObjects::addTuioObject(int32 id, int32 f_id ,float xpos,f
     DirectObject * dob = new DirectObject();
     dob->s_id = id;
     dob->f_id = f_id;
-    dob->xpos= xpos;
-    dob->ypos = ypos;
+    dob->setX( xpos);
+    dob->setY( ypos);
     dob->angle = angle;
     dob->xspeed = xspeed;
     dob->yspeed= yspeed;
@@ -29,8 +29,8 @@ void InputGestureDirectObjects::updateTuioObject(int32 id, int32 f_id ,float xpo
     DirectObject * dob = objects[id];
     dob->s_id = id;
     dob->f_id = f_id;
-    dob->xpos= xpos;
-    dob->ypos = ypos;
+    dob->setX( xpos);
+    dob->setY( ypos);
     dob->angle = angle;
     dob->xspeed = xspeed;
     dob->yspeed= yspeed;
