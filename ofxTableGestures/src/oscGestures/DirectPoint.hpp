@@ -48,6 +48,12 @@ class DirectPoint{
         void setY(float y){ypos = y;}
         void set(float x, float y){setX(x); setY(y);}
     /// operators
+        bool operator==(const DirectPoint& point){
+            return (getX()==point.getX())&&(getY()==point.getY());
+        }
+        bool operator!=(const DirectPoint& point){
+            return !(*this == point);
+        }
         DirectPoint& operator=(const DirectPoint& point){
             if(this == & point)return *this;
             setX(point.getX());
