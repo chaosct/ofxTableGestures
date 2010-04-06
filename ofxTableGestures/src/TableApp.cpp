@@ -39,6 +39,8 @@
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
 
+double * TableApp::calibration_matrix = NULL;
+
 TableApp::TableApp(bool use_render_to_texture):
 //    calibration_enabled(false),
     calibration_mode(0),
@@ -83,6 +85,7 @@ void TableApp::setup(){
 
 //--------------------------------------------------------------
 void TableApp::update(){
+    TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
     tuio::GestureDispatcher::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
