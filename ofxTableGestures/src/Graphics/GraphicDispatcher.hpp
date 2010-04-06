@@ -40,6 +40,8 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     protected:
         friend class Singleton<GraphicDispatcher>;
         GraphicDispatcher();
+        friend class Graphic;
+        void bring_top(Graphic* graphic);
     public:
         ~GraphicDispatcher();
         void Draw();

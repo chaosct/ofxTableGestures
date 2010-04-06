@@ -52,8 +52,20 @@ void GraphicDispatcher::Resize(int w, int h){
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
     graphics.push_back(graphic);
+    graphics.sort(CompareLayers);
 }
 
 void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
     graphics.remove(graphic);
+}
+
+void GraphicDispatcher::bring_top(Graphic* graphic){
+    for ( std::list<Graphic*>::iterator it=graphics.begin(); it!=graphics.end();it++){
+        if ( (*it) == graphic){
+            graphics.remove(*it);
+            break;
+        }
+    }
+    graphics.push_back(graphic);
+    graphics.sort(CompareLayers);
 }
