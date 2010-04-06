@@ -1,10 +1,10 @@
 #ifndef DIRECTPOINT_H_INCLUDED
 #define DIRECTPOINT_H_INCLUDED
 
-#include <math.h>
+#include <cmath>
 
 class DirectPoint{
-    public:
+    protected:
     //[this should be protected but are used at demos as public] protected:
         float xpos, ypos;
     public:
@@ -15,36 +15,30 @@ class DirectPoint{
     /// copy constructor
         DirectPoint(const DirectPoint& point):xpos(point.xpos),ypos(point.ypos){}
     /// Getters
-        float getX(){return xpos;}
-        float getY(){return ypos;}
+        virtual float getX()const{return xpos;}
+        virtual float getY()const{return ypos;}
         ///getDistance-returns the distance between this and point
         ///d = sqrt( (x2-x1)^2 + (y2-y1)^2 )
         float getDistance(const DirectPoint& point){
-            float dx = point.xpos -xpos;
-            float dy = point.ypos -ypos;
+            float dx = point.getX() - getX();
+            float dy = point.getY() - getY();
             return sqrt( dx*dx + dy*dy);
         }
+        float getDistance(const DirectPoint * point){return getDistance(*point);}
         float getDistance(float x, float y){
-            float dx = x -xpos;
-            float dy = y -ypos;
+            float dx = x -getX();
+            float dy = y -getY();
             return sqrt( dx*dx + dy*dy);
         }
         ///getAngle-reurns the angle between this and point
-        ///angle = atan( |y2-y1| / |x2-x1| )
-        float getAngle(const DirectPoint& point){
-            float dy = point.ypos-ypos;
-            float dx = point.xpos-xpos;
+        ///angle = atan2( y2-y1 / x2-x1 )
+        float getAngle(const DirectPoint& point) const {
+            float dx = point.getX() - getX();
+            float dy = point.getY() - getY();
             float angle;
             ///for avoiding divide by 0, when dx = 0 the angle is M_PI/2
-            if ( dx == 0 ) angle = M_PI/2;
-            ///calculates the angle
-            else angle= atan(fabs(dy)/fabs(dx));
-            ///sets the right quadrant
-            if ( dy >= 0 && dx >= 0)return angle;
-            else if ( dy >= 0 && dx < 0 )return M_PI-angle;
-            else if ( dy < 0 && dx <= 0 )return M_PI+angle;
-            else if ( dy < 0 && dx > 0 )return (2*M_PI)-angle;
-            return angle;
+            if ( dx == 0 ) return M_PI/2;
+            return atan2(dy,dx);
         }
         float getAngle(const DirectPoint* point){
             return getAngle(*point);
@@ -54,30 +48,36 @@ class DirectPoint{
         void setY(float y){ypos = y;}
         void set(float x, float y){setX(x); setY(y);}
     /// operators
+        bool operator==(const DirectPoint& point){
+            return (getX()==point.getX())&&(getY()==point.getY());
+        }
+        bool operator!=(const DirectPoint& point){
+            return !(*this == point);
+        }
         DirectPoint& operator=(const DirectPoint& point){
             if(this == & point)return *this;
-            xpos = point.xpos;
-            ypos = point.ypos;
+            setX(point.getX());
+            setY(point.getY());
             return *this;
         }
         DirectPoint& operator+=(const DirectPoint& point){
-            xpos += point.xpos;
-            ypos += point.ypos;
+            setX(getX()+point.getX());
+            setY(getY()+point.getY());
             return *this;
         }
         DirectPoint& operator-=(const DirectPoint& point){
-            xpos -= point.xpos;
-            ypos -= point.ypos;
+            setX(getX()-point.getX());
+            setY(getY()-point.getY());
             return *this;
         }
         DirectPoint& operator*=(float mult){
-            xpos = xpos*mult;
-            ypos = ypos*mult;
+            setX(getX()*mult);
+            setY(getY()*mult);
             return *this;
         }
         DirectPoint& operator/=(float div){
-            xpos = xpos*div;
-            ypos = ypos*div;
+            setX(getX()/div);
+            setY(getY()/div);
             return *this;
         }
         const DirectPoint& operator+(const DirectPoint& point)const{

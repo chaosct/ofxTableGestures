@@ -51,18 +51,9 @@ class DirectFinger: public DirectPoint
     float xspeed, yspeed, maccel;
 };
 
-class TeventDirectFingersRemoveFinger : public TTEvent<TeventDirectFingersRemoveFinger>
-{
-    public:
-    int32 s_id;
-};
-
-class TeventDirectFingersNewFinger : public TTEvent<TeventDirectFingersNewFinger>
-{
-    public:
-    int32 s_id;
-    DirectFinger * df;
-};
+DeclareEvent(TeventDirectFingersRemoveFinger,int32);
+DeclareEvent(TeventDirectFingersNewFinger,int32,DirectFinger *);
+DeclareEvent(TeventDirectFingersUpdateFinger,int32);
 
 
 class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
@@ -74,31 +65,28 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
         {
             DirectFinger * e = new DirectFinger();
             e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
+            e->setX(xpos);
+            e->setY(ypos);
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;
             fingers[id]=e;
-            TeventDirectFingersNewFinger * evt = new TeventDirectFingersNewFinger();
-            evt->s_id = id;
-            evt->df = e;
+            TeventDirectFingersNewFinger * evt = makeEvent(TeventDirectFingersNewFinger,(id,e));
             events.push_back(evt);
         }
         void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
              DirectFinger * e = fingers[id];
             e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
+            e->set(xpos,ypos);
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;
+            events.push_back(makeEvent(TeventDirectFingersUpdateFinger,(id)));
         }
         void removeTuioCursor(int32 id)
         {
-             TeventDirectFingersRemoveFinger * evt = new TeventDirectFingersRemoveFinger();
-             evt->s_id = id;
+             TeventDirectFingersRemoveFinger * evt = makeEvent(TeventDirectFingersRemoveFinger,(id));
              events.push_back(evt);
         }
 };
@@ -113,26 +101,15 @@ class CanDirectFingers : public  Base
     //Interface redefined by ofApp
     virtual void newCursor(int32 id, DirectFinger *){}
     virtual void removeCursor(int32 id){}
-
-    //processing events callbacks
-
-    TEventHandler(TeventDirectFingersRemoveFinger)
-    {
-        TeventDirectFingersRemoveFinger * e = static_cast<TeventDirectFingersRemoveFinger *>(evt);
-        removeCursor(e->s_id);
-    }
-    TEventHandler(TeventDirectFingersNewFinger)
-    {
-        TeventDirectFingersNewFinger * e = static_cast<TeventDirectFingersNewFinger *>(evt);
-        newCursor(e->s_id,e->df);
-    }
+    virtual void updateCursor(int32 id){}
 
     //registering
     CanDirectFingers()
     {
-        TRegistraCallback(CanDirectFingers,TeventDirectFingersRemoveFinger);
-        TRegistraCallback(CanDirectFingers,TeventDirectFingersNewFinger);
-        Base::registerInputGesture(Singleton<InputGestureDirectFingers>::get());
+        TeventDirectFingersRemoveFinger::registerCallback(this,&CanDirectFingers::removeCursor);
+        TeventDirectFingersNewFinger::registerCallback(this,&CanDirectFingers::newCursor);
+        TeventDirectFingersUpdateFinger::registerCallback(this,&CanDirectFingers::updateCursor);
+        Base::template registerIG<InputGestureDirectFingers>();
     }
 
 };

@@ -37,6 +37,8 @@
 #include <iostream>
 #include "Singleton.hpp"
 
+
+
 namespace tuio {
 
 ///This class assigns a single identifier to every TTEvent subclass
@@ -48,9 +50,21 @@ class EventTypes : public Singleton<EventTypes>
     friend class Singleton<EventTypes>;
     EventTypes():n(0){}
     public:
-    unsigned int getNumber()
+    /*unsigned int getNumber()
     {
         return n++;
+    }*/
+    template<typename T>
+    unsigned int get_number()
+    {
+        static bool ins = false;
+        static unsigned int uniquename;
+        if (!ins)
+        {
+            uniquename = n++;
+            ins = true;
+        }
+        return uniquename;
     }
 };
 
@@ -75,12 +89,13 @@ class TTEvent : public TEvent
         static unsigned int uniquename;
         if (!ins)
         {
-            uniquename = EventTypes::Instance().getNumber();
+            uniquename = EventTypes::Instance().get_number<TE>();
             ins = true;
         }
         name = uniquename;
     }
 };
+
 
 
 } // namespace tuio

@@ -31,13 +31,14 @@
 #ifndef _GRAPHIC
 #define _GRAPHIC
 #include "GestureListener.hpp"
-#include "GraphicDispatcher.hpp"
+//#include "GraphicDispatcher.hpp"
 
 #define BGR_LAYER 0
 #define APP_LAYER 100
 #define NOT_LAYER 200
+class GraphicDispatcher;
 
-class Graphic:public tuio::GestureListener{
+class Graphic :public tuio::GestureListener{
     public:
         Graphic();
         Graphic(int _layer);

@@ -33,12 +33,12 @@
 
 #include "ofMain.h"
 #include "tuioApp.hpp"
-#include "InputGestureClasses.hpp"
+#include "InputGestureBasicObjects.hpp"
 #include "GestureListener.hpp"
 #include <map>
 #include "Shapes.hpp"
 #include "Graphic.hpp"
-
+#include "DirectPoint.hpp"
 #define OBJECT_DISAPPEAR_TIME 0.25f
 
 class HistoryFigure: private DirectPoint{

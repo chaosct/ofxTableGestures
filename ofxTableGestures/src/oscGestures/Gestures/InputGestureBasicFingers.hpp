@@ -38,30 +38,16 @@
 #include "tuioApp.hpp"
 #include "InputGestureTuio1.1.hpp"
 
-//using namespace osc;
 using osc::int32;
 
 namespace tuio {
 
-class TeventBasicFingersRemoveFinger : public TTEvent<TeventBasicFingersRemoveFinger>
-{
-    public:
-    int32 s_id;
-};
+DeclareEvent(TeventBasicFingersRemoveFinger,int32);
 
-class TeventBasicFingersNewFinger : public TTEvent< TeventBasicFingersNewFinger>
-{
-    public:
-    int32 s_id;
-    float xpos, ypos, xspeed, yspeed, maccel;
-};
+DeclareEvent(TeventBasicFingersNewFinger,int32,float,float,float,float,float);
 
-class TeventBasicFingersMoveFinger : public TTEvent<TeventBasicFingersMoveFinger>
-{
-    public:
-    int32 s_id;
-    float xpos, ypos, xspeed, yspeed, maccel;
-};
+DeclareEvent(TeventBasicFingersMoveFinger,int32,float,float,float,float,float);
+
 
 class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
 {
@@ -69,30 +55,17 @@ class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
         InputGestureBasicFingers(){}
         void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            TeventBasicFingersNewFinger * e = new TeventBasicFingersNewFinger();
-            e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
+            TeventBasicFingersNewFinger * e = makeEvent(TeventBasicFingersNewFinger,(id,xpos,ypos,xspeed,yspeed,maccel));
             events.push_back(e);
         }
         void updateTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            TeventBasicFingersMoveFinger * e = new TeventBasicFingersMoveFinger();
-            e->s_id = id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
+            TeventBasicFingersMoveFinger * e = makeEvent(TeventBasicFingersMoveFinger,(id,xpos,ypos,xspeed,yspeed,maccel));
             events.push_back(e);
         }
         void removeTuioCursor2D(int32 id)
         {
-            TeventBasicFingersRemoveFinger * e = new TeventBasicFingersRemoveFinger();
-            e->s_id = id;
+            TeventBasicFingersRemoveFinger * e = makeEvent(TeventBasicFingersRemoveFinger,(id));
             events.push_back(e);
         }
 
@@ -107,33 +80,13 @@ class CanBasicFingers : public Base
     virtual void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){}
     virtual void removeTuioCursor(int32 id){}
 
-    //processing events callbacks
-
-    TEventHandler(TeventBasicFingersRemoveFinger)
-    {
-        TeventBasicFingersRemoveFinger * e = static_cast<TeventBasicFingersRemoveFinger *>(evt);
-        removeTuioCursor(e->s_id);
-    }
-
-    TEventHandler(TeventBasicFingersNewFinger)
-    {
-        TeventBasicFingersNewFinger * e = static_cast<TeventBasicFingersNewFinger *>(evt);
-        addTuioCursor(e->s_id,e->xpos, e->ypos, e->xspeed, e->yspeed, e->maccel);
-    }
-
-    TEventHandler(TeventBasicFingersMoveFinger)
-    {
-        TeventBasicFingersMoveFinger * e = static_cast<TeventBasicFingersMoveFinger *>(evt);
-        updateTuioCursor(e->s_id,e->xpos, e->ypos, e->xspeed, e->yspeed, e->maccel);
-    }
-
     //registering
     CanBasicFingers()
     {
-        TRegistraCallback(CanBasicFingers,TeventBasicFingersRemoveFinger);
-        TRegistraCallback(CanBasicFingers,TeventBasicFingersNewFinger);
-        TRegistraCallback(CanBasicFingers,TeventBasicFingersMoveFinger);
-        Base::registerInputGesture(Singleton<InputGestureBasicFingers>::get());
+        TeventBasicFingersNewFinger::registerCallback(this,&CanBasicFingers::addTuioCursor);
+        TeventBasicFingersRemoveFinger::registerCallback(this,&CanBasicFingers::removeTuioCursor);
+        TeventBasicFingersMoveFinger::registerCallback(this,&CanBasicFingers::updateTuioCursor);
+        Base::template registerIG<InputGestureBasicFingers>();
     }
 };
 

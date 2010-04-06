@@ -32,7 +32,6 @@
 #include <list>
 #include "Graphic.hpp"
 
-class Graphic;
 
 class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
