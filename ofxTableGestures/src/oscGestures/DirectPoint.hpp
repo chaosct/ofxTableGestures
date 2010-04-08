@@ -31,13 +31,9 @@ class DirectPoint{
             return sqrt( dx*dx + dy*dy);
         }
         ///getAngle-reurns the angle between this and point
-        ///angle = atan2( y2-y1 / x2-x1 )
         float getAngle(const DirectPoint& point) const {
             float dx = point.getX() - getX();
             float dy = point.getY() - getY();
-            float angle;
-            ///for avoiding divide by 0, when dx = 0 the angle is M_PI/2
-            if ( dx == 0 ) return M_PI/2;
             return atan2(dy,dx);
         }
         float getAngle(const DirectPoint* point){
