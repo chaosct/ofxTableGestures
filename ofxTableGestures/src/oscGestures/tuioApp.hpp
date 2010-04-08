@@ -99,12 +99,20 @@ class AlternateCallback : public GenericCallback
     M m;
 };
 
+#define _SimpleGetEventName(canclass,method) Event_##canclass##method
+
+#define SimpleDeclareEvent(canclass,method,...) DeclareEvent(_SimpleGetEventName(canclass,method),__VA_ARGS__)
+#define SimpleCallEvent(canclass,method,arguments) this->events.push_back(SimpleMakeEvent(canclass,method,arguments))
+#define SimpleMakeEvent(canclass,method,arguments) makeEvent(_SimpleGetEventName(canclass,method),arguments)
+#define SimpleRegisterEvent(canclass,method) _SimpleGetEventName(canclass,method)::registerCallback(this,&canclass::method);
+
 #define DeclareEvent(eventname,...) class eventname : \
     public AEvent<eventname,boost::fusion::vector<__VA_ARGS__> >\
         {   typedef boost::fusion::vector<__VA_ARGS__> SequenceType;\
             public: eventname(SequenceType v = SequenceType()):AEvent<eventname,SequenceType>(v){}};
 
 #define makeEvent(classname,arguments) new classname(boost::fusion::make_vector arguments)
+
 
 
 template <typename E, typename Sequence>
