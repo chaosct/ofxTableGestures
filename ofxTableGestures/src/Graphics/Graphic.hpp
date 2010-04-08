@@ -33,17 +33,26 @@
 #include "GestureListener.hpp"
 //#include "GraphicDispatcher.hpp"
 
+#define BGR_LAYER 0
+#define APP_LAYER 100
+#define NOT_LAYER 200
 class GraphicDispatcher;
 
 class Graphic :public tuio::GestureListener{
     public:
         Graphic();
+        Graphic(int _layer);
         virtual ~Graphic()=0;
+        int GetLayer();
+		void BringTop();
     protected:
+        int layer;
         friend class GraphicDispatcher;
         virtual void draw(){}
         virtual void update(){}
         virtual void resize(int w, int h){}
 };
+
+bool CompareLayers(Graphic* object1, Graphic* object2);
 
 #endif //_GRAPHICDISPATCHER

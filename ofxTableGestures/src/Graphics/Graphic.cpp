@@ -30,10 +30,29 @@
 
 #include "GraphicDispatcher.hpp"
 
-Graphic::Graphic(){
+Graphic::Graphic():layer(APP_LAYER){
     GraphicDispatcher::Instance().AddGraphic(this);
+}
+
+Graphic::Graphic(int _layer):layer(_layer){
+    GraphicDispatcher::Instance().AddGraphic(this);
+}
+
+int Graphic::GetLayer(){
+    return layer;
 }
 
 Graphic::~Graphic(){
     GraphicDispatcher::Instance().RemoveGraphic(this);
 }
+
+void Graphic::BringTop(){
+    GraphicDispatcher::Instance().bring_top(this);
+}
+
+bool CompareLayers(Graphic* object1, Graphic* object2){
+    if (object1->GetLayer() > object2->GetLayer()) return true;
+    return false;
+}
+
+

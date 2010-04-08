@@ -30,8 +30,8 @@
 #ifndef TUIOAPP_H_INCLUDED
 #define TUIOAPP_H_INCLUDED
 
-#define TRegistraCallback(T,TE) Base::registerCallback(Singleton<TE>::Instance().name,new Callback<T>(this,&T::EP_##TE ))
-#define TEventHandler(en) void EP_##en (TEvent * evt)
+#define TRegistraCallback(T,TE) Base::registerCallback(Singleton<TE>::Instance().name,new tuio::Callback<T>(this,&T::EP_##TE ))
+#define TEventHandler(en) void EP_##en (tuio::TEvent * evt)
 
 
 #include "EventQueue.hpp"
