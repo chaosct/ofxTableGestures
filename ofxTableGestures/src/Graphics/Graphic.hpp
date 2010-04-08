@@ -33,16 +33,16 @@
 #include "GestureListener.hpp"
 //#include "GraphicDispatcher.hpp"
 
-#define BGR_LAYER 0
+#define BGR_LAYER 200
 #define APP_LAYER 100
-#define NOT_LAYER 200
+#define NOT_LAYER 0
 class GraphicDispatcher;
 
 class Graphic :public tuio::GestureListener{
     public:
         Graphic();
         Graphic(int _layer);
-        virtual ~Graphic()=0;
+        virtual ~Graphic();
         int GetLayer();
 		void BringTop();
     protected:
@@ -52,6 +52,16 @@ class Graphic :public tuio::GestureListener{
         virtual void update(){}
         virtual void resize(int w, int h){}
 };
+
+template<int Layer>
+class TGraphic: public Graphic
+{
+    public:
+    TGraphic():Graphic(Layer){}
+};
+
+typedef TGraphic<NOT_LAYER> NotificationGraphic;
+typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
 bool CompareLayers(Graphic* object1, Graphic* object2);
 

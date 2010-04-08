@@ -81,7 +81,7 @@ class HistoryFigure: private DirectPoint{
         }
 };
 
-class FigureFeedback: public tuio::CanBasicObjects < Graphic > {
+class FigureFeedback: public tuio::CanBasicObjects < NotificationGraphic > {
         std::map<int32,HistoryFigure*> objects;
         std::list<HistoryFigure*> to_delete;
     public:

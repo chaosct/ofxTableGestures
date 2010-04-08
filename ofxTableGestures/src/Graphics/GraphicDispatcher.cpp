@@ -26,7 +26,7 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
-
+#include "ofMain.h"
 #include "GraphicDispatcher.hpp"
 
 GraphicDispatcher::GraphicDispatcher(){
@@ -36,8 +36,10 @@ GraphicDispatcher::~GraphicDispatcher(){
 }
 
 void GraphicDispatcher::Draw(){
+    glDisable(GL_DEPTH_TEST);
     for(std::list<Graphic*>::iterator it = graphics.begin(); it != graphics.end(); it++)
         (*it)->draw();
+    glEnable(GL_DEPTH_TEST);
 }
 
 void GraphicDispatcher::Update(){

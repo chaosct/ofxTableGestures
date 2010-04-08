@@ -142,6 +142,8 @@ namespace simulator
 
     void Simulator::Draw(){
         //Draw Object tray..
+        glDisable(GL_DEPTH_TEST);
+        ofFill();
         ofPushMatrix();
         ofSetColor(100,100,100);
         ofRect(ofGetWidth()-0.09*ofGetWidth(),0,0.09*ofGetWidth(),ofGetHeight());
@@ -157,6 +159,7 @@ namespace simulator
         for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
             (*it)->Draw();
         }
+        glEnable(GL_DEPTH_TEST);
     }
 
     container* Simulator::Collide(int x, int y,bool only_objects)

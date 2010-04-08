@@ -85,7 +85,7 @@ class HistoryPoint: private DirectPoint{
         }
 };
 
-class CursorFeedback: public tuio::CanBasicFingers < Graphic > {
+class CursorFeedback: public tuio::CanBasicFingers < NotificationGraphic > {
 
     private:
         std::map<int32,HistoryPoint*> finger_map;
