@@ -157,7 +157,9 @@ void TableApp::draw(){
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
     ofPopMatrix();
+    ofPushMatrix();
     Draw();
+    ofPopMatrix();
     renderer->End();
     ///Draws Info & help
     DrawInfo();
@@ -179,6 +181,9 @@ void TableApp::keyPressed(int key){
         case 'z':
             simulator->Select(true);
         break;
+        default:
+            KeyPressed(key);
+        break;
     }
     #endif
 }
@@ -187,6 +192,9 @@ void TableApp::keyPressed(int key){
 void TableApp::keyReleased(int key){
     switch(key)
     {
+        default:
+            KeyReleased(key);
+        break;
         #ifdef SIMULATOR
         case 'a':
             simulator->Hold(false);

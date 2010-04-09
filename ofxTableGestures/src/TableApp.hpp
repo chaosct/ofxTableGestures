@@ -95,6 +95,9 @@ class TableApp : public ofBaseApp{
         ///returns the biggest side of the screen
         static int GetSquareSide();
         static double* GetTransformationMatrix(){return calibration_matrix;}
+        ///Key funcs, they only repports the ones that are not used by the system
+        virtual void KeyPressed  (int key){}
+		virtual void KeyReleased (int key){}
 	private:
         /// ofBaseApp methods..
 		void setup();
