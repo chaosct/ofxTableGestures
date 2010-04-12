@@ -4,6 +4,8 @@
 
 #include <set>
 #include "tuio1.1/InputGestureTuio1.1fseq.hpp"
+#include "GlobalConfig.hpp"
+
 using osc::int32;
 
 namespace tuio {
@@ -75,8 +77,13 @@ class InputGestureTuio112D : public CanTuio11ValidBundle< CompositeGesture > {
     std::set<int32> o_s_ids;
     std::set<int32> b_s_ids;
     bool valid;
+    int & checkCursorLimits;
+    int & checkObjectLimits;
     public:
-        InputGestureTuio112D(){}
+        InputGestureTuio112D():
+        checkCursorLimits(GlobalConfig::getRef("TUIO112D:CUR:CheckLimits",0)),
+        checkObjectLimits(GlobalConfig::getRef("TUIO112D:OBJ:CheckLimits",0))
+        {}
         void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
         void tuio2Dcur(osc::ReceivedMessageArgumentStream & argList);
         void tuio2Dobj(osc::ReceivedMessageArgumentStream & argList);

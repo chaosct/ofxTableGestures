@@ -33,6 +33,18 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
 
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
+            if(checkCursorLimits)
+            {
+                float newxpos = (xpos -0.125f)*1.33f;
+                float dx = newxpos - 0.5;
+                float dy = ypos -0.5;
+                float d = sqrt(dx*dx+dy*dy);
+                if(d > 0.5)
+                {
+                    std::cout << "Ignoring finger in " << xpos << "," << ypos << std::endl;
+                    return;
+                }
+            }
 
             TeventTuio11NewFinger2D * e = new TeventTuio11NewFinger2D();
             e->s_id = s_id;
@@ -94,6 +106,18 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
 
             if(o_s_ids.find(s_id) == o_s_ids.end())
             {
+                if(checkObjectLimits)
+                {
+                    float newxpos = (xpos -0.125f)*1.33f;
+                    float dx = newxpos - 0.5;
+                    float dy = ypos -0.5;
+                    float d = sqrt(dx*dx+dy*dy);
+                    if(d > 0.5)
+                    {
+                        std::cout << "Ignoring object in " << xpos << "," << ypos << std::endl;
+                        return;
+                    }
+                }
 
                 TeventTuio11NewObject2D * e = new TeventTuio11NewObject2D();
                 e->s_id = s_id;
