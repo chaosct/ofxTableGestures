@@ -46,27 +46,13 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
                 }
             }
 
-            TeventTuio11NewFinger2D * e = new TeventTuio11NewFinger2D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio112D,addTuioCursor2D,(s_id, xpos,ypos,xspeed,yspeed,maccel ));
             c_s_ids.insert(s_id);
         }
         else
         {
 
-            TeventTuio11MoveFinger2D * e = new TeventTuio11MoveFinger2D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio112D,updateTuioCursor2D,(s_id, xpos,ypos,xspeed,yspeed,maccel ));
         }
 
     }
@@ -84,9 +70,7 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
         {
             s_id = *it;
             c_s_ids.erase(s_id);
-            TeventTuio11RemoveFinger2D * e = new TeventTuio11RemoveFinger2D();
-            e->s_id = s_id;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio112D,removeTuioCursor2D,(s_id));
         }
     }
 
@@ -119,35 +103,12 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
                     }
                 }
 
-                TeventTuio11NewObject2D * e = new TeventTuio11NewObject2D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->angle = angle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
                 o_s_ids.insert(s_id);
+                SimpleCallEvent(CanTuio112D,addTuioObject2D,( s_id, f_id ,xpos, ypos, angle, xspeed,yspeed, rspeed, maccel,  raccel));
             }
             else
             {
-
-                TeventTuio11MoveObject2D * e = new TeventTuio11MoveObject2D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->angle = angle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio112D,updateTuioObject2D,( s_id, f_id ,xpos, ypos, angle, xspeed,yspeed, rspeed, maccel,  raccel));
             }
 
         }
@@ -166,9 +127,7 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
             {
                 s_id = *it;
                 o_s_ids.erase(s_id);
-                TeventTuio11RemoveObject2D * e = new TeventTuio11RemoveObject2D();
-                e->s_id = s_id;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio112D,removeTuioObject2D,(s_id));
             }
         }
 
@@ -187,40 +146,12 @@ void InputGestureTuio112D::tuio2Dblb(ReceivedMessageArgumentStream & args)
 
             if(b_s_ids.find(s_id) == b_s_ids.end())
             {
-
-                TeventTuio11NewBlob2D * e = new TeventTuio11NewBlob2D();
-                e->s_id = s_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->angle = angle;
-                e->width = width;
-                e->height = height;
-                e->area = area;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio112D,addTuioBlob2D,(s_id, xpos, ypos,  angle,  width,  height,  area,  xspeed, yspeed, rspeed, maccel,  raccel));
                 b_s_ids.insert(s_id);
             }
             else
             {
-
-                TeventTuio11MoveBlob2D * e = new TeventTuio11MoveBlob2D();
-                e->s_id = s_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->angle = angle;
-                e->width = width;
-                e->height = height;
-                e->area = area;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio112D,updateTuioBlob2D,(s_id, xpos, ypos,  angle,  width,  height,  area,  xspeed, yspeed, rspeed, maccel,  raccel));
             }
 
         }
@@ -239,9 +170,7 @@ void InputGestureTuio112D::tuio2Dblb(ReceivedMessageArgumentStream & args)
             {
                 s_id = *it;
                 b_s_ids.erase(s_id);
-                TeventTuio11RemoveBlob2D * e = new TeventTuio11RemoveBlob2D();
-                e->s_id = s_id;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio112D,removeTuioBlob2D,(s_id));
             }
         }
 

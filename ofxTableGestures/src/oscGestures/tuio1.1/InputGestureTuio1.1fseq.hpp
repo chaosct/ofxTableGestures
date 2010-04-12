@@ -12,12 +12,7 @@ using osc::int32;
 namespace tuio
 {
 
-class TEventTuio11ValidBundle : public TTEvent<TEventTuio11ValidBundle>
-{
-public:
-    bool valid;
-    TEventTuio11ValidBundle(bool Valid = true):valid(Valid) {}
-};
+SimpleDeclareEvent(CanTuio11ValidBundle,isvalid,bool);
 
 class InputGestureTuio11ValidBundle : public InputGesture
 {
@@ -38,16 +33,16 @@ class InputGestureTuio11ValidBundle : public InputGesture
                 args >> frame  >> osc::EndMessage;
                 if(frame == -1 )
                 {
-                    events.push_back(new TEventTuio11ValidBundle(true));
+                    SimpleCallEvent(CanTuio11ValidBundle,isvalid,(true));
                     return;
                 }
                 if (frame < lastFrame)
                 {
-                    events.push_back(new TEventTuio11ValidBundle(false));
+                    SimpleCallEvent(CanTuio11ValidBundle,isvalid,(false));
                 }
                 else
                 {
-                    events.push_back(new TEventTuio11ValidBundle(true));
+                    SimpleCallEvent(CanTuio11ValidBundle,isvalid,(true));
                 }
                 lastFrame = frame;
             }
@@ -64,16 +59,10 @@ class CanTuio11ValidBundle : public Base
     //interface
     virtual void isvalid(bool v){}
 
-    TEventHandler(TEventTuio11ValidBundle)
-    {
-        TEventTuio11ValidBundle * e = static_cast<TEventTuio11ValidBundle *>(evt);
-        isvalid(e->valid);
-    }
-
     CanTuio11ValidBundle()
     {
-        TRegistraCallback(CanTuio11ValidBundle,TEventTuio11ValidBundle);
-        Base::registerInputGesture(Singleton<InputGestureTuio11ValidBundle>::get());
+        SimpleRegisterEvent(CanTuio11ValidBundle,isvalid);
+        Base::template registerIG<InputGestureTuio11ValidBundle>();
     }
 };
 

@@ -40,7 +40,8 @@
 #include "inputGestureManager.hpp"
 #include <iostream>
 
-#define BOOST_FUSION_INVOKE_PROCEDURE_MAX_ARITY 10
+#define BOOST_FUSION_INVOKE_PROCEDURE_MAX_ARITY 15
+#define FUSION_MAX_VECTOR_SIZE 15
 
 #include "boost/fusion/include/sequence.hpp"
 #include "boost/fusion/include/make_vector.hpp"
