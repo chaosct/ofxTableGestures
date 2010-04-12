@@ -38,6 +38,7 @@ Renderer::Renderer():distortion_enabled(false){
     DistortionPath=DISTORTION_PATH;
     LoadDefaultValues();
     distortion_enabled = false;
+    SetIdentity(matrix);
 }
 
 Renderer::~Renderer(){}
@@ -132,4 +133,16 @@ void Renderer::LoadDefaultValues(){
     angle_h=0;
     angle_w=0;
     angle=0;
+}
+
+//double matrix[16];
+
+void Renderer::SetIdentity(double* _matrix){
+    for (int i=0;i<4;i++)
+        for (int j=0;j<4;j++)
+            _matrix[(i*4)+j] = (i==j)?1:0;
+}
+
+double * Renderer::GetDistortionMatrix(){
+    return matrix;
 }

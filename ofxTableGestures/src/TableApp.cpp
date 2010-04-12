@@ -39,6 +39,8 @@
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
 
+double * TableApp::calibration_matrix = NULL;
+
 TableApp::TableApp(bool use_render_to_texture):
 //    calibration_enabled(false),
     calibration_mode(0),
@@ -83,6 +85,7 @@ void TableApp::setup(){
 
 //--------------------------------------------------------------
 void TableApp::update(){
+    TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
     tuio::GestureDispatcher::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
@@ -154,7 +157,9 @@ void TableApp::draw(){
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
     ofPopMatrix();
+    ofPushMatrix();
     Draw();
+    ofPopMatrix();
     renderer->End();
     ///Draws Info & help
     DrawInfo();
@@ -176,6 +181,9 @@ void TableApp::keyPressed(int key){
         case 'z':
             simulator->Select(true);
         break;
+        default:
+            KeyPressed(key);
+        break;
     }
     #endif
 }
@@ -184,6 +192,9 @@ void TableApp::keyPressed(int key){
 void TableApp::keyReleased(int key){
     switch(key)
     {
+        default:
+            KeyReleased(key);
+        break;
         #ifdef SIMULATOR
         case 'a':
             simulator->Hold(false);

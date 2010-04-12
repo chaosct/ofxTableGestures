@@ -47,6 +47,7 @@ void Renderer_plane::StartDistortion(){
     glRotated(angle_w,0,1,0);
     glScaled(width_offset,height_offset,1);
     glTranslatef(-(ofGetWidth())/2,-(ofGetHeight())/2,0);
+    glGetDoublev(GL_MODELVIEW_MATRIX,Renderer::matrix);
 }
 
 void Renderer_plane::EndDistortion(){
