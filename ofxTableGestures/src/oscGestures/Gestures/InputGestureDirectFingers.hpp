@@ -51,9 +51,9 @@ class DirectFinger: public DirectPoint
     float xspeed, yspeed, maccel;
 };
 
-DeclareEvent(TeventDirectFingersRemoveFinger,int32);
-DeclareEvent(TeventDirectFingersNewFinger,int32,DirectFinger *);
-DeclareEvent(TeventDirectFingersUpdateFinger,int32);
+SimpleDeclareEvent(CanDirectFingers,removeCursor,int32);
+SimpleDeclareEvent(CanDirectFingers,newCursor,int32,DirectFinger *);
+SimpleDeclareEvent(CanDirectFingers,updateCursor,int32);
 
 
 class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
@@ -71,23 +71,21 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
             e->yspeed = yspeed;
             e->maccel = maccel;
             fingers[id]=e;
-            TeventDirectFingersNewFinger * evt = makeEvent(TeventDirectFingersNewFinger,(id,e));
-            events.push_back(evt);
+            SimpleCallEvent(CanDirectFingers,newCursor,(id,e));
         }
         void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-             DirectFinger * e = fingers[id];
+            DirectFinger * e = fingers[id];
             e->s_id = id;
             e->set(xpos,ypos);
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;
-            events.push_back(makeEvent(TeventDirectFingersUpdateFinger,(id)));
+            SimpleCallEvent(CanDirectFingers,updateCursor,(id));
         }
         void removeTuioCursor(int32 id)
         {
-             TeventDirectFingersRemoveFinger * evt = makeEvent(TeventDirectFingersRemoveFinger,(id));
-             events.push_back(evt);
+             SimpleCallEvent(CanDirectFingers,removeCursor,(id));
         }
 };
 
@@ -106,9 +104,9 @@ class CanDirectFingers : public  Base
     //registering
     CanDirectFingers()
     {
-        TeventDirectFingersRemoveFinger::registerCallback(this,&CanDirectFingers::removeCursor);
-        TeventDirectFingersNewFinger::registerCallback(this,&CanDirectFingers::newCursor);
-        TeventDirectFingersUpdateFinger::registerCallback(this,&CanDirectFingers::updateCursor);
+        SimpleRegisterEvent(CanDirectFingers,newCursor);
+        SimpleRegisterEvent(CanDirectFingers,removeCursor);
+        SimpleRegisterEvent(CanDirectFingers,updateCursor);
         Base::template registerIG<InputGestureDirectFingers>();
     }
 

@@ -58,19 +58,8 @@ class DirectObject:public DirectPoint
 };
 
 // Events definitions
-
-class TeventDirectObjectsRemoveObject : public TTEvent <TeventDirectObjectsRemoveObject>
-{
-    public:
-    int32 s_id, f_id;
-};
-
-class TeventDirectObjectsNewObject : public TTEvent<TeventDirectObjectsNewObject>
-{
-    public:
-    int32 s_id, f_id;
-    DirectObject * dob;
-};
+SimpleDeclareEvent(CanDirectObjects,newObject,int32,int32,DirectObject *);
+SimpleDeclareEvent(CanDirectObjects,removeObject,int32,int32);
 
 class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture > {
     std::map<int32,DirectObject *> objects;
@@ -89,24 +78,12 @@ class CanDirectObjects : public  Base
     virtual void newObject(int32 s_id, int32 f_id, DirectObject * object){}
     virtual void removeObject(int32 s_id, int32 f_id){}
 
-    //processing events callbacks
-    TEventHandler(TeventDirectObjectsRemoveObject)
-    {
-        TeventDirectObjectsRemoveObject * e = static_cast<TeventDirectObjectsRemoveObject *>(evt);
-        removeObject(e->s_id, e->f_id);
-    }
-    TEventHandler(TeventDirectObjectsNewObject)
-    {
-        TeventDirectObjectsNewObject * e = static_cast<TeventDirectObjectsNewObject *>(evt);
-        newObject(e->s_id,e->f_id, e->dob);
-    }
-
     //registering
     CanDirectObjects()
     {
-        TRegistraCallback(CanDirectObjects,TeventDirectObjectsRemoveObject);
-        TRegistraCallback(CanDirectObjects,TeventDirectObjectsNewObject);
-        Base::registerInputGesture(Singleton<InputGestureDirectObjects>::get());
+        SimpleRegisterEvent(CanDirectObjects,newObject);
+        SimpleRegisterEvent(CanDirectObjects,removeObject);
+        Base::template registerIG<InputGestureDirectObjects>();
     }
 
 };

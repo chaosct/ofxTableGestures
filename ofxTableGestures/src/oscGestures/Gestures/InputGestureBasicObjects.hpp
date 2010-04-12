@@ -43,25 +43,9 @@ using namespace osc;
 namespace tuio
 {
 
-class TeventBasicObjectsRemoveObject : public TTEvent< TeventBasicObjectsRemoveObject >
-{
-public:
-    int32 s_id;
-};
-
-class TeventBasicObjectsNewObject : public TTEvent<TeventBasicObjectsNewObject>
-{
-public:
-    int32 s_id, f_id;
-    float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
-};
-
-class TeventBasicObjectsMoveObject : public TTEvent <TeventBasicObjectsMoveObject>
-{
-public:
-    int32 s_id, f_id;
-    float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
-};
+SimpleDeclareEvent(CanBasicObjects,removeTuioObject,    int32);
+SimpleDeclareEvent(CanBasicObjects,addTuioObject,       int32 , int32  ,float ,float , float , float ,float ,float ,float , float );
+SimpleDeclareEvent(CanBasicObjects,updateTuioObject,    int32 , int32  ,float ,float , float , float ,float ,float ,float , float );
 
 
 class InputGestureBasicObjects : public CanTuio112D < CompositeGesture >
@@ -70,39 +54,15 @@ public:
     InputGestureBasicObjects() {}
     void addTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
     {
-        TeventBasicObjectsNewObject * e = new TeventBasicObjectsNewObject();
-        e->s_id = id;
-        e->f_id = f_id;
-        e->xpos = xpos;
-        e->ypos = ypos;
-        e->angle = angle;
-        e->xspeed = xspeed;
-        e->yspeed = yspeed;
-        e->rspeed = rspeed;
-        e->maccel = maccel;
-        e->raccel = raccel;
-        events.push_back(e);
+        SimpleCallEvent(CanBasicObjects,addTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
     }
     void updateTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
     {
-        TeventBasicObjectsMoveObject * e = new TeventBasicObjectsMoveObject();
-        e->s_id = id;
-        e->f_id = f_id;
-        e->xpos = xpos;
-        e->ypos = ypos;
-        e->angle = angle;
-        e->xspeed = xspeed;
-        e->yspeed = yspeed;
-        e->rspeed = rspeed;
-        e->maccel = maccel;
-        e->raccel = raccel;
-        events.push_back(e);
+        SimpleCallEvent(CanBasicObjects,updateTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
     }
     void removeTuioObject2D(int32 id)
     {
-        TeventBasicObjectsRemoveObject * e = new TeventBasicObjectsRemoveObject();
-        e->s_id = id;
-        events.push_back(e);
+        SimpleCallEvent(CanBasicObjects,removeTuioObject,(id));
     }
 };
 
@@ -115,33 +75,14 @@ public:
     virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
     virtual void removeTuioObject(int32 id) {}
 
-    //processing events callbacks
-
-    TEventHandler(TeventBasicObjectsRemoveObject)
-    {
-        TeventBasicObjectsRemoveObject * e = static_cast<TeventBasicObjectsRemoveObject *>(evt);
-        removeTuioObject(e->s_id);
-    }
-
-    TEventHandler(TeventBasicObjectsNewObject)
-    {
-        TeventBasicObjectsNewObject * e = static_cast<TeventBasicObjectsNewObject *>(evt);
-        addTuioObject(e->s_id, e->f_id, e->xpos, e->ypos, e->angle, e->xspeed, e->yspeed, e->rspeed, e->maccel, e->raccel);
-    }
-
-    TEventHandler(TeventBasicObjectsMoveObject)
-    {
-        TeventBasicObjectsMoveObject * e = static_cast<TeventBasicObjectsMoveObject *>(evt);
-        updateTuioObject(e->s_id, e->f_id, e->xpos, e->ypos, e->angle, e->xspeed, e->yspeed, e->rspeed, e->maccel, e->raccel);
-    }
-
     //registering
     CanBasicObjects()
     {
-        TRegistraCallback(CanBasicObjects,TeventBasicObjectsRemoveObject);
-        TRegistraCallback(CanBasicObjects,TeventBasicObjectsNewObject);
-        TRegistraCallback(CanBasicObjects,TeventBasicObjectsMoveObject);
-        Base::registerInputGesture(Singleton<InputGestureBasicObjects>::get());
+        SimpleRegisterEvent(CanBasicObjects,addTuioObject);
+        SimpleRegisterEvent(CanBasicObjects,updateTuioObject);
+        SimpleRegisterEvent(CanBasicObjects,removeTuioObject);
+
+        Base::template registerIG<InputGestureBasicObjects>();
     }
 
 };
