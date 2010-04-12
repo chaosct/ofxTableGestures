@@ -76,6 +76,7 @@ class TableApp : public ofBaseApp{
             ///cursor status before enable simulator.
             bool was_cursor_hide;
         #endif
+        static double* calibration_matrix;
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
@@ -93,6 +94,10 @@ class TableApp : public ofBaseApp{
         void DrawHelp();
         ///returns the biggest side of the screen
         static int GetSquareSide();
+        static double* GetTransformationMatrix(){return calibration_matrix;}
+        ///Key funcs, they only repports the ones that are not used by the system
+        virtual void KeyPressed  (int key){}
+		virtual void KeyReleased (int key){}
 	private:
         /// ofBaseApp methods..
 		void setup();
