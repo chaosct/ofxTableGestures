@@ -31,6 +31,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cmath>
 
 namespace tuio
 {
@@ -58,6 +59,18 @@ void InputGestureBasicFingers::ReceiveCall(const char * addr, osc::ReceivedMessa
 
             if(s_ids.find(s_id) == s_ids.end())
             {
+
+                #ifdef CHECK_FINGER_LIMITS
+                float newxpos = (xpos -0.125f)*1.33f;
+                float dx = newxpos - 0.5;
+                float dy = ypos -0.5;
+                float d = sqrt(dx*dx+dy*dy);
+                if(d > 0.5)
+                {
+                    std::cout << "Ignoring finger in " << xpos << "," << ypos << std::endl;
+                    return;
+                }
+                #endif
 
                 TeventBasicFingersNewFinger * e = new TeventBasicFingersNewFinger();
                 e->s_id = s_id;

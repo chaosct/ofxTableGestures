@@ -57,6 +57,18 @@ void InputGestureDirectFingers::ReceiveCall(const char * addr, osc::ReceivedMess
             if(fingers.find(s_id) == fingers.end())
             {
 
+                #ifdef CHECK_FINGER_LIMITS
+                float newxpos = (xpos -0.125f)*1.33f;
+                float dx = newxpos - 0.5;
+                float dy = ypos -0.5;
+                float d = sqrt(dx*dx+dy*dy);
+                if(d > 0.5)
+                {
+                    std::cout << "Ignoring finger in " << xpos << "," << ypos << std::endl;
+                    return;
+                }
+                #endif
+
                 DirectFinger * e = new DirectFinger();
                 e->s_id = s_id;
                 e->xpos = xpos;
