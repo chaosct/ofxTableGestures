@@ -15,8 +15,8 @@ class DirectPoint{
     /// copy constructor
         DirectPoint(const DirectPoint& point):xpos(point.xpos),ypos(point.ypos){}
     /// Getters
-        virtual float getX()const{return xpos;}
-        virtual float getY()const{return ypos;}
+        float getX()const{return xpos;}
+        float getY()const{return ypos;}
         ///getDistance-returns the distance between this and point
         ///d = sqrt( (x2-x1)^2 + (y2-y1)^2 )
         float getDistance(const DirectPoint& point){
