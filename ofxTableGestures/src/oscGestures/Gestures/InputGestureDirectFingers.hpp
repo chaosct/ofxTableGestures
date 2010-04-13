@@ -51,9 +51,9 @@ class DirectFinger: public DirectPoint
     float xspeed, yspeed, maccel;
 };
 
-SimpleDeclareEvent(CanDirectFingers,removeCursor,int32);
-SimpleDeclareEvent(CanDirectFingers,newCursor,int32,DirectFinger *);
-SimpleDeclareEvent(CanDirectFingers,updateCursor,int32);
+SimpleDeclareEvent(CanDirectFingers,removeCursor,DirectFinger *);
+SimpleDeclareEvent(CanDirectFingers,newCursor,DirectFinger *);
+SimpleDeclareEvent(CanDirectFingers,updateCursor,DirectFinger *);
 
 
 class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
@@ -71,7 +71,7 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
             e->yspeed = yspeed;
             e->maccel = maccel;
             fingers[id]=e;
-            SimpleCallEvent(CanDirectFingers,newCursor,(id,e));
+            SimpleCallEvent(CanDirectFingers,newCursor,(e));
         }
         void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
@@ -81,11 +81,12 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
             e->xspeed = xspeed;
             e->yspeed = yspeed;
             e->maccel = maccel;
-            SimpleCallEvent(CanDirectFingers,updateCursor,(id));
+            SimpleCallEvent(CanDirectFingers,updateCursor,(e));
         }
         void removeTuioCursor(int32 id)
         {
-             SimpleCallEvent(CanDirectFingers,removeCursor,(id));
+            DirectFinger * e = fingers[id];
+            SimpleCallEvent(CanDirectFingers,removeCursor,(e));
         }
 };
 
@@ -97,9 +98,9 @@ class CanDirectFingers : public  Base
 {
     public:
     //Interface redefined by ofApp
-    virtual void newCursor(int32 id, DirectFinger *){}
-    virtual void removeCursor(int32 id){}
-    virtual void updateCursor(int32 id){}
+    virtual void newCursor(DirectFinger *){}
+    virtual void removeCursor(DirectFinger *){}
+    virtual void updateCursor(DirectFinger *){}
 
     //registering
     CanDirectFingers()

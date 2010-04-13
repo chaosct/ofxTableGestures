@@ -58,8 +58,9 @@ class DirectObject:public DirectPoint
 };
 
 // Events definitions
-SimpleDeclareEvent(CanDirectObjects,newObject,int32,int32,DirectObject *);
-SimpleDeclareEvent(CanDirectObjects,removeObject,int32,int32);
+SimpleDeclareEvent(CanDirectObjects,newObject,DirectObject *);
+SimpleDeclareEvent(CanDirectObjects,removeObject,DirectObject *);
+SimpleDeclareEvent(CanDirectObjects,updateObject,DirectObject *);
 
 class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture > {
     std::map<int32,DirectObject *> objects;
@@ -75,14 +76,16 @@ class CanDirectObjects : public  Base
 {
     public:
     //Interface redefined by ofApp
-    virtual void newObject(int32 s_id, int32 f_id, DirectObject * object){}
-    virtual void removeObject(int32 s_id, int32 f_id){}
+    virtual void newObject(DirectObject * object){}
+    virtual void removeObject(DirectObject * object){}
+    virtual void updateObject(DirectObject * object);
 
     //registering
     CanDirectObjects()
     {
         SimpleRegisterEvent(CanDirectObjects,newObject);
         SimpleRegisterEvent(CanDirectObjects,removeObject);
+        SimpleRegisterEvent(CanDirectObjects,updateObject);
         Base::template registerIG<InputGestureDirectObjects>();
     }
 

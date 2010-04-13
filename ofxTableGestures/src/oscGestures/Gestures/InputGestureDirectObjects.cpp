@@ -17,7 +17,7 @@ void InputGestureDirectObjects::addTuioObject(int32 id, int32 f_id ,float xpos,f
     dob->maccel = maccel;
     dob->raccel = raccel;
     objects[id]= dob;
-    SimpleCallEvent(CanDirectObjects,newObject,(id,f_id,dob));
+    SimpleCallEvent(CanDirectObjects,newObject,(dob));
 }
 
 void InputGestureDirectObjects::updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
@@ -33,11 +33,12 @@ void InputGestureDirectObjects::updateTuioObject(int32 id, int32 f_id ,float xpo
     dob->rspeed = rspeed;
     dob->maccel = maccel;
     dob->raccel = raccel;
+    SimpleCallEvent(CanDirectObjects,updateObject,(dob));
 }
 
 void InputGestureDirectObjects::removeTuioObject(int32 id)
 {
-    SimpleCallEvent(CanDirectObjects,removeObject,(id,objects[id]->f_id));
+    SimpleCallEvent(CanDirectObjects,removeObject,(objects[id]));
 }
 
 }
