@@ -33,32 +33,23 @@
 
 #include "ofMain.h"
 #include "tuioApp.hpp"
-#include "InputGestureBasicObjects.hpp"
+#include "InputGestureDirectObjects.hpp"
 #include "GestureListener.hpp"
 #include <map>
 #include "Shapes.hpp"
 #include "Graphic.hpp"
 #include "DirectPoint.hpp"
-#define OBJECT_DISAPPEAR_TIME 0.25f
 
-class HistoryFigure: private DirectPoint{
+class HistoryFigure{
     public:
-        int32 sid;
-        int32 fid;
+        tuio::DirectObject * dobj;
         float released_time;
         float scale_factor;
-        float angle;
-        HistoryFigure(int32 _sid, int32 _fid, float x, float y, float _angle):
-            sid(_sid),
-            fid(_fid),
-            scale_factor(1){
-            SetFigure(x,y,angle);
-        }
-        void SetFigure(float x, float y, float _angle){
-            xpos = x;
-            ypos = y;
-            angle = _angle;
-        }
+        float & OBJECT_DISAPPEAR_TIME;
+        HistoryFigure(tuio::DirectObject * obj):
+            dobj(obj),
+            OBJECT_DISAPPEAR_TIME(GlobalConfig::getRef("FIGUREFEEDBACK:DISAPPEAR",0.25f)),
+            scale_factor(1){}
         void Release(float time){
             released_time = time;
         }
@@ -73,23 +64,22 @@ class HistoryFigure: private DirectPoint{
         }
         void draw(){
             ofPushMatrix();
-            ofTranslate(xpos*ofGetWidth(),ypos*ofGetHeight());
-            ofRotate(angle*180/M_PI);
+            ofTranslate(dobj->getX()*ofGetWidth(),dobj->getY()*ofGetHeight());
+            ofRotate(dobj->angle*180/M_PI);
             ofScale(scale_factor,scale_factor,1);
-            shapes::Figure_shape::Instance().drawShape(fid);
+            shapes::Figure_shape::Instance().drawShape(dobj->f_id);
             ofPopMatrix();
         }
 };
 
-class FigureFeedback: public tuio::CanBasicObjects < NotificationGraphic > {
+class FigureFeedback: public tuio::CanDirectObjects < NotificationGraphic > {
         std::map<int32,HistoryFigure*> objects;
         std::list<HistoryFigure*> to_delete;
     public:
         FigureFeedback();
         ~FigureFeedback();
-        virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
-        virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
-        virtual void removeTuioObject(int32 id);
+        void newObject(tuio::DirectObject * object);
+        void removeObject(tuio::DirectObject * object);
     protected:
         void draw();
         void update();

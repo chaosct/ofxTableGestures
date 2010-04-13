@@ -44,7 +44,7 @@ void FigureFeedback::update(){
         if((*it)->CanDelete()){
             std::list<HistoryFigure*>::iterator tmp = it;
             it++;
-            objects.erase((*tmp)->sid);
+            objects.erase((*tmp)->dobj->s_id);
             to_delete.erase(tmp);
         }
         else it++;
@@ -57,15 +57,11 @@ void FigureFeedback::draw(){
     }
 }
 
-void FigureFeedback::addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
-    objects[id]= new HistoryFigure(id,f_id,xpos,ypos,angle);
+void FigureFeedback::newObject(tuio::DirectObject * object){
+    objects[object->s_id]= new HistoryFigure(object);
 }
 
-void FigureFeedback::updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel){
-    objects[id]->SetFigure(xpos,ypos,angle);
-}
-
-void FigureFeedback::removeTuioObject(int32 id){
-    objects[id]->Release(ofGetElapsedTimef());
-    to_delete.push_back(objects[id]);
+void FigureFeedback::removeObject(tuio::DirectObject * object){
+    objects[object->s_id]->Release(ofGetElapsedTimef());
+    to_delete.push_back(objects[object->s_id]);
 }
