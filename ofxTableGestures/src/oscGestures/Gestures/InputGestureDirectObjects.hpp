@@ -78,7 +78,7 @@ class CanDirectObjects : public  Base
     //Interface redefined by ofApp
     virtual void newObject(DirectObject * object){}
     virtual void removeObject(DirectObject * object){}
-    virtual void updateObject(DirectObject * object);
+    virtual void updateObject(DirectObject * object){}
 
     //registering
     CanDirectObjects()
