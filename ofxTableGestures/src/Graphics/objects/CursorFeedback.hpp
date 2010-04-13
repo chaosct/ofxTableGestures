@@ -40,7 +40,6 @@
 #include <map>
 #include <list>
 
-#define MAX_SECONDS 0.5f
 class time_point{
     public:
         time_point(float _time, DirectPoint p):time(_time),point(p){}
@@ -51,9 +50,12 @@ class time_point{
 class HistoryPoint: private DirectPoint{
     private:
         std::list<time_point> points;
+        float & MAX_SECONDS;
     public:
         int32 sid;
-        HistoryPoint(int32 sid, float x, float y){
+        HistoryPoint(int32 sid, float x, float y):
+        MAX_SECONDS(GlobalConfig::getRef("CURSORFEEDBACK:MAX_TAIL_SECONDS",0.5f))
+        {
             SetPoint(x,y);
         }
         void SetPoint(float x, float y){
