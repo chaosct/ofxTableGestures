@@ -33,8 +33,8 @@ class InputGestureTuio112D : public CanTuio11ValidBundle< CompositeGesture > {
     int & checkObjectLimits;
     public:
         InputGestureTuio112D():
-        checkCursorLimits(GlobalConfig::getRef("TUIO112D:CUR:CheckLimits",0)),
-        checkObjectLimits(GlobalConfig::getRef("TUIO112D:OBJ:CheckLimits",0))
+        checkCursorLimits(GlobalConfig::getRef("GESTURES:TUIO112D:CUR:CheckLimits",0)),
+        checkObjectLimits(GlobalConfig::getRef("GESTURES:TUIO112D:OBJ:CheckLimits",0))
         {}
         void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
         void tuio2Dcur(osc::ReceivedMessageArgumentStream & argList);

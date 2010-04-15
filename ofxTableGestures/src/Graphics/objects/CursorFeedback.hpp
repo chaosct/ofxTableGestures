@@ -54,7 +54,7 @@ class HistoryPoint: private DirectPoint{
     public:
         int32 sid;
         HistoryPoint(int32 sid, float x, float y):
-        MAX_SECONDS(GlobalConfig::getRef("CURSORFEEDBACK:MAX_TAIL_SECONDS",0.5f))
+        MAX_SECONDS(GlobalConfig::getRef("FEEDBACK:CURSOR:MAX_TAIL_SECONDS",0.5f))
         {
             SetPoint(x,y);
         }

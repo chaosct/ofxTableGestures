@@ -48,7 +48,7 @@ class HistoryFigure{
         float & OBJECT_DISAPPEAR_TIME;
         HistoryFigure(tuio::DirectObject * obj):
             dobj(obj),
-            OBJECT_DISAPPEAR_TIME(GlobalConfig::getRef("FIGUREFEEDBACK:DISAPPEAR",0.25f)),
+            OBJECT_DISAPPEAR_TIME(GlobalConfig::getRef("FEEDBACK:FIGURE:DISAPPEAR",0.25f)),
             scale_factor(1){}
         void Release(float time){
             released_time = time;
