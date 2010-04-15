@@ -43,12 +43,14 @@ void GraphicDispatcher::Draw(){
 }
 
 void GraphicDispatcher::Update(){
-    for(std::list<Graphic*>::iterator it = graphics.begin(); it != graphics.end(); it++)
+    std::list<Graphic*> l (graphics);
+    for(std::list<Graphic*>::iterator it = l.begin(); it != l.end(); it++)
         (*it)->update();
 }
 
 void GraphicDispatcher::Resize(int w, int h){
-    for(std::list<Graphic*>::iterator it = graphics.begin(); it != graphics.end(); it++)
+    std::list<Graphic*> l (graphics);
+    for(std::list<Graphic*>::iterator it = l.begin(); it != l.end(); it++)
         (*it)->resize(w,h);
 }
 
