@@ -102,9 +102,9 @@ class CanDirectFingers : public  Base
     virtual void removeCursor(DirectFinger *){}
     virtual void updateCursor(DirectFinger *){}
 
-    //registering
-    CanDirectFingers()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanDirectFingers,newCursor);
         SimpleRegisterEvent(CanDirectFingers,removeCursor);
         SimpleRegisterEvent(CanDirectFingers,updateCursor);

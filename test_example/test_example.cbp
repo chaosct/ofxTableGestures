@@ -49,6 +49,9 @@
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 					<Add directory="../../../addons/ofxTableGestures/src/Graphics/objects" />
 					<Add directory="../../../addons/ofxTableGestures/ext" />
+					<Add directory="../../../addons" />
+					<Add directory="../../../addons/ofxXmlSettings/libs" />
+					<Add directory="../../../addons/ofxXmlSettings/src" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -452,6 +455,12 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/TableApp.hpp">
 			<Option virtualFolder="addons/TableGestures" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Area.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/AreaGesture.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/DirectPoint.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
@@ -492,9 +501,6 @@
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGesture.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGestureClasses.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/OSCListener.cpp">

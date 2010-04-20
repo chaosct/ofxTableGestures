@@ -76,8 +76,9 @@ public:
     virtual void removeTuioObject(int32 id) {}
 
     //registering
-    CanBasicObjects()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanBasicObjects,addTuioObject);
         SimpleRegisterEvent(CanBasicObjects,updateTuioObject);
         SimpleRegisterEvent(CanBasicObjects,removeTuioObject);

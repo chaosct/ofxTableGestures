@@ -89,8 +89,9 @@ class CanTuio11ValidBundle : public Base
     //interface
     virtual void isvalid(bool v){}
 
-    CanTuio11ValidBundle()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanTuio11ValidBundle,isvalid);
         Base::template registerIG<InputGestureTuio11ValidBundle>();
     }

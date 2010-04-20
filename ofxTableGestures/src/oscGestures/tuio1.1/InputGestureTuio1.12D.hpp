@@ -93,8 +93,9 @@ class CanTuio112D : public Base
     virtual void removeTuioBlob2D(int32 id){}
 
     //registering
-    CanTuio112D()
+    void Register(Area * a)
     {
+        Base::Register(a);
         ///2D Events
 
         SimpleRegisterEvent(CanTuio112D,removeTuioCursor2D);

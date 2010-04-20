@@ -37,7 +37,7 @@
 #include <iostream>
 
 #include "TEvent.hpp"
-
+#include "Area.hpp"
 
 
 namespace tuio {
@@ -48,7 +48,7 @@ class InputGesture : public OSCListener {
     std::list<TEvent *> events;
     ///Number of non-Gesture listeners
     int nonGestureListeners;
-
+    void Register(Area * a = NULL){}
     InputGesture():nonGestureListeners(0){}
 
 };

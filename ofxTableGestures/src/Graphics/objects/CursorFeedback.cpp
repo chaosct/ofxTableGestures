@@ -31,6 +31,7 @@
 #include "CursorFeedback.hpp"
 
 CursorFeedback::CursorFeedback(){
+    this->Register(NULL);
 }
 
 CursorFeedback::~CursorFeedback(){

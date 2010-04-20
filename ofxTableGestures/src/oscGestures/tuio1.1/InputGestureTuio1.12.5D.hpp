@@ -192,8 +192,9 @@ class CanTuio1125D : public Base
     }
 
     //registering
-    CanTuio1125D()
+    void Register(Area * a)
     {
+        Base::Register(a);
         ///2.5D Events
 
         TRegistraCallback(CanTuio1125D,TeventTuio11RemoveFinger25D);

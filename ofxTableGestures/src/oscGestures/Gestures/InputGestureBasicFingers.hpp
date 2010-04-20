@@ -76,8 +76,9 @@ class CanBasicFingers : public Base
     virtual void removeTuioCursor(int32 id){}
 
     //registering
-    CanBasicFingers()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanBasicFingers,addTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,updateTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,removeTuioCursor);

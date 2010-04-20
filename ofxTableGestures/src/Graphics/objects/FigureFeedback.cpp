@@ -31,6 +31,7 @@
 #include "FigureFeedback.hpp"
 
 FigureFeedback::FigureFeedback(){
+    this->Register(NULL);
 }
 
 FigureFeedback::~FigureFeedback(){

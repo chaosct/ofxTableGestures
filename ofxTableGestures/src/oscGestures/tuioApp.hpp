@@ -39,6 +39,8 @@
 #include "InputGesture.hpp"
 #include "inputGestureManager.hpp"
 #include <iostream>
+#include <map>
+#include <cassert>
 
 #define BOOST_FUSION_INVOKE_PROCEDURE_MAX_ARITY 15
 #define FUSION_MAX_VECTOR_SIZE 15
@@ -50,6 +52,7 @@
 #include "boost/static_assert.hpp"
 #include "boost/mpl/assert.hpp"
 #include "boost/type_traits/is_base_of.hpp"
+#include "Area.hpp"
 
 namespace tuio
 {
@@ -138,41 +141,95 @@ class AEvent : public TEvent
 };
 
 
-
 class VoidClass {};
-class tuioAppBase {};
+class tuioAreaBase {
+    public:
+    inputGestureManagerBase * manager;
+    virtual void processTevent(TEvent * te){}
+};
+
+class tuioAreaDelivery: public Singleton<tuioAreaDelivery>
+{
+    std::map<Area *,std::list<tuioAreaBase *> >  tareas;
+    public:
+    void RegisterTA(Area *a,tuioAreaBase *ta)
+    {
+        tareas[a].push_back(ta);
+    }
+    void processTevents()
+    {
+        for (std::map<Area *,std::list<tuioAreaBase *> >::iterator it = tareas.begin();
+                it != tareas.end(); ++it)
+                {
+                    std::list<tuioAreaBase *> & l = it->second;
+                    if(l.size() > 0)
+                    {
+                        inputGestureManagerBase * manager = l.front()->manager;
+                        processTevents(manager,l);
+                    }
+                }
+    }
+    void processTevents(inputGestureManagerBase * manager,std::list<tuioAreaBase *> & l)
+    {
+        TEvent * te;
+        //std::cout << "tuioAreaDelivery::processTevents("<< manager <<") " << std::endl;
+        while((te = manager->queue->pop())!= NULL){
+            for(std::list<tuioAreaBase *>::iterator it = l.begin(); it != l.end(); ++it){
+                (*it)->processTevent(te);
+            }
+            delete te;
+        }
+    }
+
+    template<typename GestureType>
+    static GestureType * getGestureByArea(Area * a)
+    {
+       static std::map<Area*, GestureType *> pairs;
+       GestureType * ig;
+       if(pairs.find(a) == pairs.end())
+       {
+           ig = new GestureType();
+           pairs[a] = ig;
+       }
+       else
+       {
+           ig = pairs[a];
+       }
+       return ig;
+    }
+};
+
+
 
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
 template< class Base = VoidClass>
-class tuioApp : public Base, tuioAppBase
+class tuioArea : public Base, tuioAreaBase
 {
-private:
+    private:
+    Area * area;
     eventprocessorsType eventprocessors;
     ///To know if we are in the osc thread or in the app's one. Gestures only live in osc thread.
     bool isGestureListener;
-protected:
+
+    void registerInputGesture(InputGesture * IG)
+    {
+        assert(manager != NULL);
+        manager->addGesture(IG);
+        feeders.push_back(IG);
+        if(!isGestureListener)
+        {
+            IG->nonGestureListeners++;
+        }
+    }
+
+    protected:
     ///List of IG that create events we can process
     std::list<InputGesture *> feeders;
-public:
+
+    public:
     ///Do not allow to use this template twice on the same class
-    BOOST_MPL_ASSERT_NOT(( boost::is_base_of<tuioAppBase,Base> ));
-
-    tuioApp( bool _isGestureListener = false):isGestureListener(_isGestureListener)
-    {
-        ///TODO: better sizing
-        eventprocessors.resize(100,NULL);
-    }
-
-    virtual ~tuioApp()
-    {
-        for (std::list<InputGesture *>::iterator it = feeders.begin();
-                it != feeders.end(); ++it)
-                {
-                    InputGesture * ig = *it;
-                    ig->nonGestureListeners--;
-                }
-    }
+    BOOST_MPL_ASSERT_NOT(( boost::is_base_of<tuioAreaBase,Base> ));
 
     void processTevent(TEvent * te)
     {
@@ -184,35 +241,46 @@ public:
     {
         if(eventprocessors.size() <= n)
         {
-            std::cout << "tuioApp: Fatal! register number out of range!" << std::endl;
+            std::cout << "tuioArea: Fatal! register number out of range!" << std::endl;
         }
         eventprocessors[n]=callback;
     }
 
+    void Register(Area * a = NULL);
 
-    void registerInputGesture(InputGesture * IG)
+    tuioArea( bool _isGestureListener = false):
+    isGestureListener(_isGestureListener),
+    area(NULL)
     {
-        inputGestureManager::Instance().addGesture(IG);
-        feeders.push_back(IG);
-        if(!isGestureListener)
-        {
-            IG->nonGestureListeners++;
-        }
+        manager=NULL;
+        ///TODO: better sizing
+        eventprocessors.resize(100,NULL);
     }
 
+    virtual ~tuioArea()
+    {
+        for (std::list<InputGesture *>::iterator it = feeders.begin();
+                it != feeders.end(); ++it)
+                {
+                    InputGesture * ig = *it;
+                    ig->nonGestureListeners--;
+                }
+    }
 
     template< typename I>
     void registerIG()
     {
-        registerInputGesture(Singleton<I>::get());
+        ///TODO: register replacements
+        I * ig = tuioAreaDelivery::Instance().getGestureByArea<I>(area);
+        ig->Register(area);
+        registerInputGesture(ig);
     }
-
 };
 
-class CompositeGesture : public tuioApp< InputGesture >
+class CompositeGesture : public tuioArea< InputGesture >
 {
     public:
-    CompositeGesture():tuioApp< InputGesture >(true){}
+    CompositeGesture():tuioArea< InputGesture >(true){}
     virtual void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
     {
         for (std::list<InputGesture *>::iterator it = feeders.begin();
@@ -227,6 +295,29 @@ class CompositeGesture : public tuioApp< InputGesture >
         InputGesture::ProcessBundle(b,remoteEndpoint);
     }
 };
+
+class InputGestureProxy: public inputGestureManagerBase, public InputGesture
+{
+    public:
+    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
+    {
+        IGMProcessBundle( b, remoteEndpoint );
+    }
+};
+
+template<typename T>
+void tuioArea<T>::Register(Area * a )
+{
+    area = a;
+    if(!area)
+    {
+        area = NoArea::Create();
+    }
+    InputGestureProxy * p = tuioAreaDelivery::Instance().getGestureByArea<InputGestureProxy>(area);
+    inputGestureManager::Instance().addGesture(p);
+    manager = static_cast<inputGestureManagerBase *>(p);
+    tuioAreaDelivery::Instance().RegisterTA(area,this);
+}
 
 }
 #endif // TUIOAPP_H_INCLUDED

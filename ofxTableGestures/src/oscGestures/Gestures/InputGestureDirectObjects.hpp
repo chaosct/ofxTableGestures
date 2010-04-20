@@ -81,8 +81,9 @@ class CanDirectObjects : public  Base
     virtual void updateObject(DirectObject * object){}
 
     //registering
-    CanDirectObjects()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanDirectObjects,newObject);
         SimpleRegisterEvent(CanDirectObjects,removeObject);
         SimpleRegisterEvent(CanDirectObjects,updateObject);

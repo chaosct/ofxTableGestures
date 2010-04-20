@@ -63,7 +63,7 @@ void inputGestureManagerBase::IGMProcessBundle(const osc::ReceivedBundle& b, con
         i = *it;
         //std::cout << "This IG has " << i->nonGestureListeners << " real subscribers" << std::endl;
         ///We only transmit events when someone is expecting them
-        if(i->nonGestureListeners > 0)
+        if(true || i->nonGestureListeners > 0)
         {
             for (std::list<TEvent *>::iterator it = i->events.begin(); it != i->events.end(); ++it)
             {

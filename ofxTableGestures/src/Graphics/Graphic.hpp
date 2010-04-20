@@ -38,7 +38,7 @@
 #define NOT_LAYER 0
 class GraphicDispatcher;
 
-class Graphic :public tuio::GestureListener{
+class Graphic :public tuio::tuioArea<>{
     public:
         Graphic();
         Graphic(int _layer);
