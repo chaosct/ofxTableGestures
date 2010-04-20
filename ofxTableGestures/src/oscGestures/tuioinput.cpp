@@ -76,7 +76,7 @@ EventQueue  * tuioinput::getQueue() {
 
 tuioinput::tuioinput():running(false){
 
-    gesturemanager = new inputGestureManager();
+    gesturemanager = inputGestureManager::get();
 
 }
 

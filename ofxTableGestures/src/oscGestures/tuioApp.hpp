@@ -192,7 +192,7 @@ public:
 
     void registerInputGesture(InputGesture * IG)
     {
-        inputGestureManager::addGesture(IG);
+        inputGestureManager::Instance().addGesture(IG);
         feeders.push_back(IG);
         if(!isGestureListener)
         {

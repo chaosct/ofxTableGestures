@@ -35,15 +35,13 @@
 namespace tuio
 {
 
-inputGestureManager * inputGestureManager::instance = NULL;
 
-inputGestureManager::inputGestureManager()
+inputGestureManagerBase::inputGestureManagerBase()
 {
     queue = new EventQueue();
-    instance = this;
 }
 
-void inputGestureManager::ProcessBundle(const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint)
+void inputGestureManagerBase::IGMProcessBundle(const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint)
 {
 
     ///First of all: add pending InputGestures
