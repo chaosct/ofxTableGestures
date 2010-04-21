@@ -49,19 +49,48 @@ SimpleDeclareEvent(CanBasicFingers,updateTuioCursor,int32,float,float,float,floa
 
 class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
 {
+    std::set<int32> ids;
     public:
+        Area * area;
         InputGestureBasicFingers(){}
         void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            SimpleCallEvent(CanBasicFingers,addTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            if(area->isInside(xpos,ypos))
+            {
+                ids.insert(id);
+                SimpleCallEvent(CanBasicFingers,addTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            }
         }
         void updateTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            SimpleCallEvent(CanBasicFingers,updateTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            if(area->isInside(xpos,ypos))
+            {
+                if(ids.find(id) == ids.end())
+                {
+                    ids.insert(id);
+                    SimpleCallEvent(CanBasicFingers,addTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+                }
+                else
+                {
+                    SimpleCallEvent(CanBasicFingers,updateTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+                }
+            }
+            else
+            {
+                if(ids.find(id) != ids.end())
+                {
+                    ids.erase(id);
+                    SimpleCallEvent(CanBasicFingers,removeTuioCursor,(id));
+                }
+            }
         }
         void removeTuioCursor2D(int32 id)
         {
-            SimpleCallEvent(CanBasicFingers,removeTuioCursor,(id));
+            if(ids.find(id) != ids.end())
+            {
+                ids.erase(id);
+                SimpleCallEvent(CanBasicFingers,removeTuioCursor,(id));
+            }
         }
 
 };
@@ -82,7 +111,7 @@ class CanBasicFingers : public Base
         SimpleRegisterEvent(CanBasicFingers,addTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,updateTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,removeTuioCursor);
-        Base::template registerIG<InputGestureBasicFingers>();
+        Base::template registerIGA<InputGestureBasicFingers>();
     }
 };
 

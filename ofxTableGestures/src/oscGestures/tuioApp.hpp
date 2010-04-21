@@ -110,10 +110,19 @@ class AlternateCallback : public GenericCallback
 #define SimpleMakeEvent(canclass,method,arguments) makeEvent(_SimpleGetEventName(canclass,method),arguments)
 #define SimpleRegisterEvent(canclass,method) _SimpleGetEventName(canclass,method)::registerCallback(this,&canclass::method);
 
+#ifdef DEBUG
+#define _DeclareEvent_Debug_Line(eventname)  debugName = #eventname ;
+#else
+#define _DeclareEvent_Debug_Line(eventname)
+#endif
+
 #define DeclareEvent(eventname,...) class eventname : \
     public AEvent<eventname,boost::fusion::vector<__VA_ARGS__> >\
         {   typedef boost::fusion::vector<__VA_ARGS__> SequenceType;\
-            public: eventname(SequenceType v = SequenceType()):AEvent<eventname,SequenceType>(v){}};
+            public: eventname(SequenceType v = SequenceType()): \
+            AEvent<eventname,SequenceType>(v){\
+            _DeclareEvent_Debug_Line(eventname) \
+            }};
 
 #define makeEvent(classname,arguments) new classname(boost::fusion::make_vector arguments)
 
@@ -204,10 +213,9 @@ class tuioAreaDelivery: public Singleton<tuioAreaDelivery>
 typedef std::vector<GenericCallback * > eventprocessorsType;
 
 template< class Base = VoidClass>
-class tuioArea : public Base, tuioAreaBase
+class tuioArea : public Base, public tuioAreaBase
 {
     private:
-    Area * area;
     eventprocessorsType eventprocessors;
     ///To know if we are in the osc thread or in the app's one. Gestures only live in osc thread.
     bool isGestureListener;
@@ -226,6 +234,7 @@ class tuioArea : public Base, tuioAreaBase
     protected:
     ///List of IG that create events we can process
     std::list<InputGesture *> feeders;
+    Area * area;
 
     public:
     ///Do not allow to use this template twice on the same class
@@ -246,7 +255,12 @@ class tuioArea : public Base, tuioAreaBase
         eventprocessors[n]=callback;
     }
 
-    void Register(Area * a = NULL);
+    void _Register(Area * a = NULL);
+    void Register(Area * a )
+    {
+        _Register(a);
+        tuioAreaDelivery::Instance().RegisterTA(area,this);
+    }
 
     tuioArea( bool _isGestureListener = false):
     isGestureListener(_isGestureListener),
@@ -275,7 +289,39 @@ class tuioArea : public Base, tuioAreaBase
         ig->Register(area);
         registerInputGesture(ig);
     }
+    template< typename I>
+    void registerIGA()
+    {
+        ///TODO: register replacements
+        I * ig = tuioAreaDelivery::Instance().getGestureByArea<I>(area);
+        ig->area = area;
+        ig->Register(area);
+        registerInputGesture(ig);
+    }
 };
+
+
+class InputGestureProxy: public inputGestureManagerBase, public InputGesture
+{
+    public:
+    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
+    {
+        IGMProcessBundle( b, remoteEndpoint );
+    }
+};
+
+template<typename T>
+void tuioArea<T>::_Register(Area * a )
+{
+    area = a;
+    if(!area)
+    {
+        area = NoArea::Create();
+    }
+    InputGestureProxy * p = tuioAreaDelivery::Instance().getGestureByArea<InputGestureProxy>(area);
+    inputGestureManager::Instance().addGesture(p);
+    manager = static_cast<inputGestureManagerBase *>(p);
+}
 
 class CompositeGesture : public tuioArea< InputGesture >
 {
@@ -294,30 +340,12 @@ class CompositeGesture : public tuioArea< InputGesture >
         }
         InputGesture::ProcessBundle(b,remoteEndpoint);
     }
-};
-
-class InputGestureProxy: public inputGestureManagerBase, public InputGesture
-{
-    public:
-    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
+    void Register(Area * a = NULL)
     {
-        IGMProcessBundle( b, remoteEndpoint );
+        _Register(a);
     }
 };
 
-template<typename T>
-void tuioArea<T>::Register(Area * a )
-{
-    area = a;
-    if(!area)
-    {
-        area = NoArea::Create();
-    }
-    InputGestureProxy * p = tuioAreaDelivery::Instance().getGestureByArea<InputGestureProxy>(area);
-    inputGestureManager::Instance().addGesture(p);
-    manager = static_cast<inputGestureManagerBase *>(p);
-    tuioAreaDelivery::Instance().RegisterTA(area,this);
 }
 
-}
 #endif // TUIOAPP_H_INCLUDED

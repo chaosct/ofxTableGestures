@@ -59,12 +59,10 @@ class InputGestureTuio112D : public CanTuio11ValidBundle< CompositeGesture > {
     std::set<int32> o_s_ids;
     std::set<int32> b_s_ids;
     bool valid;
-    int & checkCursorLimits;
-    int & checkObjectLimits;
+    int & squaredInterface;
     public:
         InputGestureTuio112D():
-        checkCursorLimits(GlobalConfig::getRef("GESTURES:TUIO112D:CUR:CheckLimits",0)),
-        checkObjectLimits(GlobalConfig::getRef("GESTURES:TUIO112D:OBJ:CheckLimits",0))
+        squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
         {}
         void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
         void tuio2Dcur(osc::ReceivedMessageArgumentStream & argList);
