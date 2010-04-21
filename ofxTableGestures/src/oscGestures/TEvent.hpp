@@ -73,6 +73,9 @@ class EventTypes : public Singleton<EventTypes>
 class TEvent {
   public:
       unsigned int name;
+#ifdef DEBUG
+      std::string debugName;
+#endif
     TEvent(){}
 
 };
