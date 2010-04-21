@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -21,6 +21,7 @@
 					<Add option="-g" />
 					<Add option="-MMD" />
 					<Add option="-fexceptions" />
+					<Add option="-DDEBUG" />
 					<Add directory="../../../addons/" />
 					<Add directory="../../../libs/openFrameworks/" />
 					<Add directory="../../../libs/openFrameworks/events" />
@@ -598,6 +599,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
+		</Unit>
+		<Unit filename="bin/data/GlobalConfig.xml">
+			<Option virtualFolder="conf/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />

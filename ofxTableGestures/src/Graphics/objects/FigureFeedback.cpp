@@ -34,6 +34,10 @@ FigureFeedback::FigureFeedback(){
     this->Register(NULL);
 }
 
+FigureFeedback::FigureFeedback(Area * a){
+    this->Register(a);
+}
+
 FigureFeedback::~FigureFeedback(){
 }
 

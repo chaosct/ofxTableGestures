@@ -77,6 +77,7 @@ class FigureFeedback: public tuio::CanDirectObjects < NotificationGraphic > {
         std::list<HistoryFigure*> to_delete;
     public:
         FigureFeedback();
+        FigureFeedback(Area * a);
         ~FigureFeedback();
         void newObject(tuio::DirectObject * object);
         void removeObject(tuio::DirectObject * object);

@@ -94,7 +94,7 @@ class CursorFeedback: public tuio::CanBasicFingers < NotificationGraphic > {
 
     public:
         CursorFeedback();
-
+        CursorFeedback(Area * a);
         ~CursorFeedback();
         virtual void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
         virtual void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
