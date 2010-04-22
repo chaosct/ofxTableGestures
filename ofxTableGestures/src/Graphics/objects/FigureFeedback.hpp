@@ -45,9 +45,11 @@ class HistoryFigure{
         float released_time;
         float scale_factor;
         float & OBJECT_DISAPPEAR_TIME;
+        float & OBJECT_SIZE;
         HistoryFigure(tuio::DirectObject * obj):
             dobj(obj),
             OBJECT_DISAPPEAR_TIME(GlobalConfig::getRef("FEEDBACK:FIGURE:DISAPPEAR",0.25f)),
+            OBJECT_SIZE(GlobalConfig::getRef("FEEDBACK:FIGURE:SIZE",0.001f)),
             scale_factor(1){}
         void Release(float time){
             released_time = time;
@@ -63,9 +65,10 @@ class HistoryFigure{
         }
         void draw(){
             ofPushMatrix();
-            ofTranslate(dobj->getX()*ofGetWidth(),dobj->getY()*ofGetHeight());
+            ofTranslate(dobj->getX(),dobj->getY());
             ofRotate(dobj->angle*180/M_PI);
             ofScale(scale_factor,scale_factor,1);
+            ofScale(OBJECT_SIZE,OBJECT_SIZE,1);
             shapes::Figure_shape::Instance().drawShape(dobj->f_id);
             ofPopMatrix();
         }

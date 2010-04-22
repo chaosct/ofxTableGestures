@@ -77,6 +77,7 @@ class TableApp : public ofBaseApp{
             bool was_cursor_hide;
         #endif
         static double* calibration_matrix;
+        int & squaredInterface;
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.

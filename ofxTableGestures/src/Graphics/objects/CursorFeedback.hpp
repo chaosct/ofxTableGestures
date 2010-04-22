@@ -69,7 +69,7 @@ class HistoryPoint: private DirectPoint{
         void Draw(){
             ///Draws cursor
             ofSetColor(255,0,0);
-            ofCircle(xpos*ofGetWidth(),ypos*ofGetHeight(),7);
+            ofCircle(xpos,ypos,0.007);
             ///Draws trace
             ofSetLineWidth(3);
             float actual_time = ofGetElapsedTimef();
@@ -78,7 +78,7 @@ class HistoryPoint: private DirectPoint{
             glBegin(GL_LINE_STRIP);
             for (std::list<time_point>::iterator it = points.begin(); it != points.end(); it++){
                 ofSetColor(255,0,0,255-255*(actual_time-it->time)/MAX_SECONDS);
-                glVertex2f(it->point.getX()*ofGetWidth(),it->point.getY()*ofGetHeight());
+                glVertex2f(it->point.getX(),it->point.getY());
             }
             glEnd();
             glEnable(GL_DEPTH_TEST);

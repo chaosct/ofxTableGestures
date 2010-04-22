@@ -33,6 +33,7 @@
 #include "GraphicDispatcher.hpp"
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
+#include "GlobalConfig.hpp"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
@@ -45,7 +46,8 @@ TableApp::TableApp(bool use_render_to_texture):
     calibration_mode(0),
     show_help(false),
     show_info(false),
-    hide_cursor(true)
+    hide_cursor(true),
+    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
     #ifdef SIMULATOR
     ,simulator(new simulator::Simulator()),
     is_simulating(false)
@@ -153,7 +155,18 @@ void TableApp::draw(){
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
     renderer->Start();
+    ///draw grid
     grid->Draw(show_grid,calibration_mode);
+    if(squaredInterface)
+    {
+        ///We force to draw between 0 and 1
+        glTranslatef((ofGetWidth()-ofGetHeight())/2.0,0,0);
+        glScalef(ofGetHeight(),ofGetHeight(),1);
+    }
+    else
+    {
+        glScalef(ofGetWidth(),ofGetHeight(),1);
+    }
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
