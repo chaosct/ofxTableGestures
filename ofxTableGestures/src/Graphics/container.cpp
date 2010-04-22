@@ -31,8 +31,8 @@
 #include "Shapes.hpp"
 
 using namespace shapes;
-using namespace simulator;
-
+namespace simulator
+{
 void object::Draw(){
     ofSetLineWidth(0.2f);
     ofPushMatrix();
@@ -64,4 +64,5 @@ void object::Draw(){
     //text
     ofDrawBitmapString(msg.str(), 0, 0);
     ofPopMatrix();
+}
 }
