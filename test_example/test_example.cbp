@@ -468,18 +468,6 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureListener.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureListener.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
@@ -517,10 +505,10 @@
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12.5D.cpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures/Tuio1.1" />

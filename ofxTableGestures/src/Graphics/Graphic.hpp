@@ -30,8 +30,7 @@
 
 #ifndef _GRAPHIC
 #define _GRAPHIC
-#include "GestureListener.hpp"
-//#include "GraphicDispatcher.hpp"
+#include "tuioApp.hpp"
 
 #define BGR_LAYER 200
 #define APP_LAYER 100

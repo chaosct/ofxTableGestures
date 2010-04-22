@@ -34,7 +34,6 @@
 #include "ofMain.h"
 #include "tuioApp.hpp"
 #include "InputGestureDirectObjects.hpp"
-#include "GestureListener.hpp"
 #include <map>
 #include "Shapes.hpp"
 #include "Graphic.hpp"

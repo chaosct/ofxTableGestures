@@ -30,7 +30,6 @@
 
 #include <fstream>
 #include "TableApp.hpp"
-#include "GestureDispatcher.hpp"
 #include "GraphicDispatcher.hpp"
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
@@ -77,6 +76,8 @@ void TableApp::setup(){
     grid = new Grid(6,6);
     full=false;
     ofSetFrameRate(60);
+    ///starts the tuioinput thread
+    tuio::tuioinput::Instance().init();
     ofSetWindowTitle("Table APP    press 'h' to show help content");
     Setup();
     ofBackground(0, 0, 0);
@@ -87,10 +88,9 @@ void TableApp::setup(){
 void TableApp::update(){
     TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
-    tuio::GestureDispatcher::Instance().processTevents();
+    tuio::tuioAreaDelivery::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
-    tuio::tuioAreaDelivery::Instance().processTevents();
     Update();
 }
 
