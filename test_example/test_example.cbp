@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -53,6 +53,7 @@
 					<Add directory="../../../addons" />
 					<Add directory="../../../addons/ofxXmlSettings/libs" />
 					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -232,6 +233,7 @@
 					<Add directory="../../../addons/ofxTableGestures/ext" />
 					<Add directory="../../../addons/ofxXmlSettings/libs" />
 					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -381,6 +383,12 @@
 		<Compiler>
 			<Add option="-DSIMULATOR" />
 		</Compiler>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Introspection.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/SimpleObjectController.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfig.hpp">
 			<Option virtualFolder="addons/TableGestures/" />
 		</Unit>
