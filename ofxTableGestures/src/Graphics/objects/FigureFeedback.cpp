@@ -49,7 +49,8 @@ void FigureFeedback::update(){
         if((*it)->CanDelete()){
             std::list<HistoryFigure*>::iterator tmp = it;
             it++;
-            objects.erase((*tmp)->dobj->s_id);
+            if(*tmp == objects[(*tmp)->dobj->s_id])
+                objects.erase((*tmp)->dobj->s_id);
             to_delete.erase(tmp);
         }
         else it++;
