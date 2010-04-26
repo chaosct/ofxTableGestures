@@ -7,9 +7,11 @@
 int main( ){
 
     ofAppGlutWindow window;
+    int width = GlobalConfig::getRef("PROGRAM:WIDTH",1024);
+    int height = GlobalConfig::getRef("PROGRAM:HEIGHT",768);
     if(GlobalConfig::getRef("PROGRAM:FULLSCREEN",0))
-        ofSetupOpenGL(&window, 1024 ,768, OF_GAME_MODE);
+        ofSetupOpenGL(&window, width ,height, OF_GAME_MODE);
     else
-        ofSetupOpenGL(&window, 1024 ,768, OF_WINDOW);
+        ofSetupOpenGL(&window, width ,height, OF_WINDOW);
 	ofRunApp( new testApp());
 }

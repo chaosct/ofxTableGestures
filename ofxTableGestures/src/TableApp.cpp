@@ -157,16 +157,17 @@ void TableApp::draw(){
     renderer->Start();
     ///draw grid
     grid->Draw(show_grid,calibration_mode);
+
+    int shortside = min(ofGetWidth(),ofGetHeight());
     if(squaredInterface)
     {
-        ///We force to draw between 0 and 1
-        glTranslatef((ofGetWidth()-ofGetHeight())/2.0,0,0);
-        glScalef(ofGetHeight(),ofGetHeight(),1);
+        //if the surface is squared we center the drawing  plane
+        glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
     }
-    else
-    {
-        glScalef(ofGetWidth(),ofGetHeight(),1);
-    }
+    glScalef(shortside,shortside,1);
+    GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
+    GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();

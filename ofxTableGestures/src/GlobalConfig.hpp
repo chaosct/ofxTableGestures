@@ -44,7 +44,7 @@
     #include <semaphore.h>
 #endif
 
-class GlobalConfig : Singleton<GlobalConfig>
+class GlobalConfig : public Singleton<GlobalConfig>
 {
 
 class BaseContainer
@@ -170,6 +170,15 @@ static T & getRef(const std::string& k, const T & defaultvalue = T())
     gc.unlock();
     return c->getRef();
 }
+
+
+///Global vars not in the XML config (calculated on runtime)
+
+float width;
+float height;
+
+static float getHeight(){return Instance().height;}
+static float getWidth(){return Instance().width;}
 
 };
 
