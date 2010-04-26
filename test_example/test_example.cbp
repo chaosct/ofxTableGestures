@@ -470,9 +470,6 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Area.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/AreaGesture.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/DirectPoint.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
