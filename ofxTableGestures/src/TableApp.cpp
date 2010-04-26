@@ -56,7 +56,7 @@ TableApp::TableApp(bool use_render_to_texture):
     else renderer = new Renderer_plane();
 
     renderer->LoadDistortion();
-    show_grid = renderer->IsEnabled();
+    show_grid = false;
 }
 
 TableApp::~TableApp(){

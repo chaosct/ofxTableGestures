@@ -34,10 +34,8 @@
 
 #define DISTORTION_PATH "calibration.conf"
 
-Renderer::Renderer():distortion_enabled(false){
-    DistortionPath=DISTORTION_PATH;
+Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH){
     LoadDefaultValues();
-    distortion_enabled = false;
     SetIdentity(matrix);
 }
 
@@ -134,8 +132,6 @@ void Renderer::LoadDefaultValues(){
     angle_w=0;
     angle=0;
 }
-
-//double matrix[16];
 
 void Renderer::SetIdentity(double* _matrix){
     for (int i=0;i<4;i++)
