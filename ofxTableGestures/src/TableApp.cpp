@@ -156,7 +156,6 @@ void TableApp::draw(){
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
     renderer->Start();
-    grid->Draw(show_grid,calibration_mode);
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
@@ -164,6 +163,7 @@ void TableApp::draw(){
     ofPushMatrix();
     Draw();
     ofPopMatrix();
+    grid->Draw(show_grid,calibration_mode);
     renderer->End();
     ///Draws Info & help
     DrawInfo();

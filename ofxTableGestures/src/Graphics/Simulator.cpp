@@ -682,7 +682,6 @@ namespace simulator
             for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
                 message_alive.addIntArg((*it)->sid);
             }
-
             //fseq message
             fseqGenerator++;
             ofxOscMessage message_frame;
