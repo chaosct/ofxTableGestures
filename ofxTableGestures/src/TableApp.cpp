@@ -350,6 +350,9 @@ void TableApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void TableApp::windowResized(int w, int h){
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->windowResized(w,h);
+    #endif
     grid->Resize();
     ///calls resize method of all 'Graphics' when nedded.
     GraphicDispatcher::Instance().Resize(w,h);

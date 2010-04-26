@@ -44,6 +44,7 @@
 namespace simulator{
     typedef std::vector<cursor*> cursor_list;
     typedef std::vector<object*> object_list;
+    typedef std::list<string> message_queue;
     class Simulator{
         private:
             cursor_list cursors;
@@ -59,6 +60,8 @@ namespace simulator{
             int ytray;
             int previous_y;
             float previous_timef;
+            message_queue notify;
+            ofTrueTypeFont	verdana;
             #ifdef _ofxOscSENDER_H
                 ofxOscSender* sender;
                 int port;
@@ -66,6 +69,7 @@ namespace simulator{
                 bool loaded;
                 bool load_default;
             #endif
+            string message_notif;
         public:
             Simulator();
             ~Simulator();
@@ -77,6 +81,7 @@ namespace simulator{
             void mouseDragged(int x, int y, int button);
             void mousePressed(int x, int y, int button);
             void mouseReleased(int x, int y, int button);
+            void windowResized(int w, int h);
         protected:
             container* Collide(int x,int y,bool only_objects=false);
             bool IsOnTheScene(container*c);
@@ -104,6 +109,8 @@ namespace simulator{
             float Transformy(float to_transform);
 
             bool LoadConfigFile(std::string path);
+
+            void pushMessage(string message);
     };
 }
 

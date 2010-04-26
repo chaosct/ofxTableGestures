@@ -75,6 +75,7 @@ namespace simulator
         sender = new ofxOscSender();
         sender->setup(address,port);
         #endif
+        verdana.loadFont("verdana.ttf",(0.09*ofGetHeight())/7, false, true);
     }
 
     Simulator::~Simulator(){
@@ -158,7 +159,15 @@ namespace simulator
         ofRect(0,ofGetHeight()-0.09*ofGetHeight(),ofGetWidth()-0.09*ofGetWidth(),0.09*ofGetHeight());
         ofPopMatrix();
         //Draw info...
-        ///TODO
+        ofPushMatrix();
+        ofSetColor(255,100,0);
+        ofTranslate(10,(ofGetHeight()-0.09*ofGetHeight())+10,0);
+        message_notif.clear();
+        for(std::list<string>::iterator it = notify.begin(); it != notify.end(); it++){
+            message_notif+=(*it);
+        }
+        verdana.drawString(message_notif,0,0);
+        ofPopMatrix();
         //Draw Cursors..
         for(cursor_list::iterator it = cursors.begin(); it != cursors.end(); it++){
             (*it)->Draw();
@@ -387,8 +396,10 @@ namespace simulator
 
         cursors_escene.clear();
         objects_escene.clear();
-        removeTuioCursor(NULL);
-        removeTuioObject(NULL);
+        //removeTuioCursor(NULL);
+        //removeTuioObject(NULL);
+        updateCursors();
+        updateObjects();
     }
 
     cursor_list::iterator Simulator::IsAtCursorList(cursor* c){
@@ -509,9 +520,20 @@ namespace simulator
             Bundle.addMessage(message_set);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "obj add\t\t" << o->sid << " " << o->fid << " " << o->xpos/ofGetWidth() << " " << o->ypos/ofGetHeight() << " " << o->angle << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "add /tuio/2Dobj SID: " << o->sid <<
+                ", FID: " << o->fid <<
+                ", X: " << Transformx(o->xpos) <<
+                ", Y: " << Transformy(o->ypos) <<
+                ", angle: " << o->angle <<
+                ", xspeed: " << o->xspeed <<
+                ", yspeed: " << o->yspeed <<
+                ", rspeed: " << o->rspeed <<
+                ", maccel: " << o->maccel <<
+                ", raccel: " << o->raccel << std::endl;
+        pushMessage(ostring.str());
     }
 
     void Simulator::updateTuioObject(object* o){
@@ -549,9 +571,20 @@ namespace simulator
             Bundle.addMessage(message_set);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "obj update\t" << o->sid << " " << o->fid << " " << o->xpos << " " << o->ypos << " " << o->angle << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "update /tuio/2Dobj SID: " << o->sid <<
+                ", FID: " << o->fid <<
+                ", X: " << Transformx(o->xpos) <<
+                ", Y: " << Transformy(o->ypos) <<
+                ", angle: " << o->angle <<
+                ", xspeed: " << o->xspeed <<
+                ", yspeed: " << o->yspeed <<
+                ", rspeed: " << o->rspeed <<
+                ", maccel: " << o->maccel <<
+                ", raccel: " << o->raccel << std::endl;
+        pushMessage(ostring.str());
     }
 
     void Simulator::removeTuioObject(object* o){
@@ -571,9 +604,12 @@ namespace simulator
             Bundle.addMessage(message_alive);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "obj remove\t" << o->sid << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "remove /tuio/2Dobj SID: " << o->sid <<
+                ", FID: " << o->fid << std::endl;
+        pushMessage(ostring.str());
     }
 
     void Simulator::addTuioCursor(cursor* c){
@@ -607,9 +643,16 @@ namespace simulator
             Bundle.addMessage(message_set);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "cur add\t\t" << c->sid << " " << c->xpos << " " << c->ypos << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "add /tuio/2Dcur SID: " << c->sid <<
+                ", X: " << Transformx(c->xpos) <<
+                ", Y: " << Transformy(c->ypos) <<
+                ", xspeed: " << c->xspeed <<
+                ", yspeed: " << c->yspeed <<
+                ", maccel: " << c->maccel << std::endl;
+        pushMessage(ostring.str());
     }
 
     void Simulator::updateTuioCursor(cursor* c){
@@ -643,9 +686,16 @@ namespace simulator
             Bundle.addMessage(message_set);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "cur update\t" << c->sid << " " << c->xpos << " " << c->ypos << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "update /tuio/2Dcur SID: " << c->sid <<
+                ", X: " << Transformx(c->xpos) <<
+                ", Y: " << Transformy(c->ypos) <<
+                ", xspeed: " << c->xspeed <<
+                ", yspeed: " << c->yspeed <<
+                ", maccel: " << c->maccel << std::endl;
+        pushMessage(ostring.str());
     }
 
     void Simulator::removeTuioCursor(cursor* c){
@@ -665,14 +715,17 @@ namespace simulator
             Bundle.addMessage(message_alive);
             Bundle.addMessage(message_frame);
             sender->sendBundle(Bundle);
-        #else
-            std::cout << "cur remove\t" << c->sid << std::endl;
         #endif
+        stringstream ostring;
+        ostring <<
+                "remove /tuio/2Dcur SID: " << c->sid
+                << std::endl;
+        pushMessage(ostring.str());
     }
 
     ///missatge cada segon?
     void Simulator::updateCursors(){
-        if(cursors_escene.size() == 0) return;
+        //if(cursors_escene.size() == 0) return;
         #ifdef _ofxOscSENDER_H
             ofxOscBundle Bundle;
             //alive message
@@ -711,7 +764,7 @@ namespace simulator
     }
 
     void Simulator::updateObjects(){
-        if(objects_escene.size() == 0) return;
+        //if(objects_escene.size() == 0) return;
         #ifdef _ofxOscSENDER_H
             ofxOscBundle Bundle;
             //alive message
@@ -761,4 +814,13 @@ namespace simulator
         return to_transform/(ofGetHeight()*0.91f);
     }
 
+    void Simulator::pushMessage(string message){
+        if(notify.size() >= 5)
+            notify.pop_back();
+        notify.push_front(message);
+    }
+
+    void Simulator::windowResized(int w, int h){
+        verdana.loadFont("verdana.ttf",(0.09*ofGetHeight())/7, false, true);
+    }
 }
