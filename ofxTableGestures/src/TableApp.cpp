@@ -90,6 +90,10 @@ void TableApp::update(){
     tuio::GestureDispatcher::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
+    ///Update simulator objects
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->Update();
+    #endif
     Update();
 }
 

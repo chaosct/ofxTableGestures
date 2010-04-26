@@ -41,7 +41,15 @@ using namespace shapes;
 
 namespace simulator
 {
-    Simulator::Simulator():sessionGenerator(0),fseqGenerator(0),hold(false),select(false),move_selecteds(false),ytray(0){
+    Simulator::Simulator():
+            sessionGenerator(0),
+            fseqGenerator(0),
+            hold(false),
+            select(false),
+            move_selecteds(false),
+            ytray(0),
+            previous_timef(0)
+            {
         #ifdef _ofxOscSENDER_H
         port = DEFAULT_PORT;
         address = DEFAULT_ADDR;
@@ -160,6 +168,15 @@ namespace simulator
             (*it)->Draw();
         }
         glEnable(GL_DEPTH_TEST);
+    }
+
+    void Simulator::Update(){
+        float actual = ofGetElapsedTimef();
+        if(actual - previous_timef > 1){
+            updateCursors();
+            updateObjects();
+            previous_timef = actual;
+        }
     }
 
     container* Simulator::Collide(int x, int y,bool only_objects)
@@ -654,6 +671,88 @@ namespace simulator
     }
 
     ///missatge cada segon?
+    void Simulator::updateCursors(){
+        if(cursors_escene.size() == 0) return;
+        #ifdef _ofxOscSENDER_H
+            ofxOscBundle Bundle;
+            //alive message
+            ofxOscMessage message_alive;
+            message_alive.setAddress("/tuio/2Dcur");
+            message_alive.addStringArg("alive");
+            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+                message_alive.addIntArg((*it)->sid);
+            }
+
+            //fseq message
+            fseqGenerator++;
+            ofxOscMessage message_frame;
+            message_frame.setAddress("/tuio/2Dcur");
+            message_frame.addStringArg("fseq");
+            message_frame.addIntArg(fseqGenerator);
+            //build bundle
+            Bundle.addMessage(message_alive);
+            //set messages
+            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+                ofxOscMessage message_set;
+                message_set.setAddress("/tuio/2Dcur");
+                message_set.addStringArg("set");
+                message_set.addIntArg((*it)->sid);
+                message_set.addFloatArg( Transformx((*it)->xpos) );
+                message_set.addFloatArg( Transformy((*it)->ypos) );
+                message_set.addFloatArg((*it)->xspeed);
+                message_set.addFloatArg((*it)->yspeed);
+                message_set.addFloatArg((*it)->maccel);
+                Bundle.addMessage(message_set);
+            }
+            Bundle.addMessage(message_frame);
+            sender->sendBundle(Bundle);
+        #else
+            std::cout << "cur update\t" << c->sid << " " << c->xpos << " " << c->ypos << std::endl;
+        #endif
+    }
+
+    void Simulator::updateObjects(){
+        if(objects_escene.size() == 0) return;
+        #ifdef _ofxOscSENDER_H
+            ofxOscBundle Bundle;
+            //alive message
+            ofxOscMessage message_alive;
+            message_alive.setAddress("/tuio/2Dobj");
+            message_alive.addStringArg("alive");
+            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+                message_alive.addIntArg((*it)->sid);
+            }
+            //fseq message
+            fseqGenerator++;
+            ofxOscMessage message_frame;
+            message_frame.setAddress("/tuio/2Dobj");
+            message_frame.addStringArg("fseq");
+            message_frame.addIntArg(fseqGenerator);
+            //build bundle
+            Bundle.addMessage(message_alive);
+            //set message
+            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+                ofxOscMessage message_set;
+                message_set.setAddress("/tuio/2Dobj");
+                message_set.addStringArg("set");
+                message_set.addIntArg((*it)->sid);
+                message_set.addIntArg((*it)->fid);
+                message_set.addFloatArg( Transformx((*it)->xpos) );
+                message_set.addFloatArg( Transformy((*it)->ypos));
+                message_set.addFloatArg((*it)->angle);
+                message_set.addFloatArg((*it)->xspeed);
+                message_set.addFloatArg((*it)->yspeed);
+                message_set.addFloatArg((*it)->rspeed);
+                message_set.addFloatArg((*it)->maccel);
+                message_set.addFloatArg((*it)->raccel);
+                Bundle.addMessage(message_set);
+            }
+            Bundle.addMessage(message_frame);
+            sender->sendBundle(Bundle);
+        #else
+            std::cout << "obj update\t" << o->sid << " " << o->fid << " " << o->xpos << " " << o->ypos << " " << o->angle << std::endl;
+        #endif
+    }
 
     float Simulator::Transformx(float to_transform){
         return to_transform/(ofGetWidth()*0.91f);

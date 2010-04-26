@@ -58,6 +58,7 @@ namespace simulator{
             void SortObject(object* o);
             int ytray;
             int previous_y;
+            float previous_timef;
             #ifdef _ofxOscSENDER_H
                 ofxOscSender* sender;
                 int port;
@@ -69,6 +70,7 @@ namespace simulator{
             Simulator();
             ~Simulator();
             void Draw();
+            void Update();
             void Hold(bool stat);
             void Select(bool stat);
             void Reset();
@@ -94,6 +96,9 @@ namespace simulator{
             void addTuioCursor(cursor* c);
             void updateTuioCursor(cursor* c);
             void removeTuioCursor(cursor* c);
+
+            void updateCursors();
+            void updateObjects();
 
             float Transformx(float to_transform);
             float Transformy(float to_transform);
