@@ -392,6 +392,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfig.hpp">
 			<Option virtualFolder="addons/TableGestures/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfigDetail.hpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/Graphic.cpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/" />
 		</Unit>
@@ -480,7 +483,7 @@
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicObjects.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
