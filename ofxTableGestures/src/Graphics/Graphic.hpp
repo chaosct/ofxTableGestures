@@ -64,4 +64,16 @@ typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
 bool CompareLayers(Graphic* object1, Graphic* object2);
 
+///Adapters
+
+template<typename T>
+class OnTable: public T
+{
+    public:
+    OnTable()
+    {
+        this->Register(NULL);
+    }
+};
+
 #endif //_GRAPHICDISPATCHER
