@@ -480,7 +480,7 @@
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicObjects.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
