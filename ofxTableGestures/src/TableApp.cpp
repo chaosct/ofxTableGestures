@@ -163,11 +163,16 @@ void TableApp::draw(){
     {
         //if the surface is squared we center the drawing  plane
         glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
+        GlobalConfig::Instance().height = 1;
+        GlobalConfig::Instance().width = 1;
     }
-    glScalef(shortside,shortside,1);
-    GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
-    GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+    else
+    {
+        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
+        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+    }
 
+    glScalef(shortside,shortside,1);
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
