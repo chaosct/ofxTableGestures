@@ -61,6 +61,7 @@ class InputGestureTuio112D : public CanTuio11ValidBundle< CompositeGesture > {
     bool valid;
     int & squaredInterface;
     public:
+        SetDebugName(InputGestureTuio112D)
         InputGestureTuio112D():
         squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
         {}

@@ -53,6 +53,7 @@ class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
 {
     std::set<int32> ids;
     public:
+    SetDebugName(InputGestureBasicFingers)
         Area * area;
         InputGestureBasicFingers(){}
         void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)

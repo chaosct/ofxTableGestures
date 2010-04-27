@@ -48,6 +48,7 @@ class InputGestureTuio11ValidBundle : public InputGesture
 {
     int32 lastFrame;
     public:
+    SetDebugName(InputGestureTuio11ValidBundle)
     InputGestureTuio11ValidBundle():lastFrame(0){}
     void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & args)
     {

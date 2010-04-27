@@ -62,6 +62,7 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
 {
     std::map<int32,DirectFinger *> fingers;
     public:
+        SetDebugName(InputGestureDirectFingers)
         InputGestureDirectFingers(){}
         void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {

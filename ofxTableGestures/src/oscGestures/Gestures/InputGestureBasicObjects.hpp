@@ -53,6 +53,7 @@ class InputGestureBasicObjects : public CanTuio112D < CompositeGesture >
 {
     std::set<int32> ids;
 public:
+    SetDebugName(InputGestureBasicObjects)
     Area * area;
     InputGestureBasicObjects() {}
     void addTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)

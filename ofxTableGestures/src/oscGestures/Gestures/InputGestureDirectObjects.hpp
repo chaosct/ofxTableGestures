@@ -67,6 +67,7 @@ SimpleDeclareEvent(CanDirectObjects,exitObject,DirectObject *);
 class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture > {
     std::map<int32,DirectObject *> objects;
     public:
+        SetDebugName(InputGestureDirectObjects)
         InputGestureDirectObjects(){}
         void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         void enterTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
