@@ -45,12 +45,19 @@ class inputGestureManagerBase {
   private:
     std::list<InputGesture *> gestures;
     blocklessQueue<InputGesture ,1024> gesturesToAdd;
+    blocklessQueue<InputGesture ,1024> gesturesToRemove;
     void addPendingGestures()
     {
         InputGesture *IG;
         while((IG = gesturesToAdd.pop())!= NULL){
             if (std::find (gestures.begin(), gestures.end(), IG) == gestures.end())
+            {
                 gestures.push_back(IG);
+            }
+
+        }
+        while((IG = gesturesToRemove.pop())!= NULL){
+           gestures.remove(IG);
         }
     }
   public:
@@ -59,6 +66,10 @@ class inputGestureManagerBase {
     void addGesture(InputGesture *IG)
     {
         gesturesToAdd.push(IG);
+    }
+    void removeGesture(InputGesture *IG)
+    {
+        gesturesToRemove.push(IG);
     }
     inputGestureManagerBase();
 

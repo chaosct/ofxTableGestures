@@ -149,6 +149,15 @@ class AEvent : public TEvent
     }
 };
 
+class InputGestureProxy: public inputGestureManagerBase, public InputGesture
+{
+    public:
+    SetDebugName(InputGestureProxy)
+    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
+    {
+        IGMProcessBundle( b, remoteEndpoint );
+    }
+};
 
 class VoidClass {};
 class tuioAreaBase {
@@ -164,6 +173,14 @@ class tuioAreaDelivery: public Singleton<tuioAreaDelivery>
     void RegisterTA(Area *a,tuioAreaBase *ta)
     {
         tareas[a].push_back(ta);
+    }
+    void UnregisterTA(Area * a,tuioAreaBase *ta)
+    {
+        tareas[a].remove(ta);
+        if(tareas[a].size() == 0)
+        {
+            inputGestureManager::Instance().removeGesture(getGestureByArea<InputGestureProxy>(a));
+        }
     }
     void processTevents()
     {
@@ -181,7 +198,6 @@ class tuioAreaDelivery: public Singleton<tuioAreaDelivery>
     void processTevents(inputGestureManagerBase * manager,std::list<tuioAreaBase *> & l)
     {
         TEvent * te;
-        //std::cout << "tuioAreaDelivery::processTevents("<< manager <<") " << std::endl;
         while((te = manager->queue->pop())!= NULL){
             for(std::list<tuioAreaBase *>::iterator it = l.begin(); it != l.end(); ++it){
                 (*it)->processTevent(te);
@@ -280,12 +296,12 @@ class tuioArea : public Base, public tuioAreaBase
                     InputGesture * ig = *it;
                     ig->nonGestureListeners--;
                 }
+        tuioAreaDelivery::Instance().UnregisterTA(area,this);
     }
 
     template< typename I>
     void registerIG()
     {
-        ///TODO: register replacements
         I * ig = tuioAreaDelivery::Instance().getGestureByArea<I>(area);
         ig->Register(area);
         registerInputGesture(ig);
@@ -293,21 +309,10 @@ class tuioArea : public Base, public tuioAreaBase
     template< typename I>
     void registerIGA()
     {
-        ///TODO: register replacements
         I * ig = tuioAreaDelivery::Instance().getGestureByArea<I>(area);
         ig->area = area;
         ig->Register(area);
         registerInputGesture(ig);
-    }
-};
-
-
-class InputGestureProxy: public inputGestureManagerBase, public InputGesture
-{
-    public:
-    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
-    {
-        IGMProcessBundle( b, remoteEndpoint );
     }
 };
 
