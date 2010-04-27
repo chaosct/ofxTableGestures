@@ -57,11 +57,9 @@ void inputGestureManagerBase::IGMProcessBundle(const osc::ReceivedBundle& b, con
     ///Then we send the events through the queue. We whait until all inputgestures have finished
     ///because some of them can be using events of the previous ones. We don't want to share
     ///events between threads!
-    //std::cout << "----------------------------------------------" << std::endl;
     for(std::list<InputGesture *>::iterator  it = gestures.begin(); it != gestures.end(); ++it)
     {
         i = *it;
-        //std::cout << "This IG has " << i->nonGestureListeners << " real subscribers" << std::endl;
         ///We only transmit events when someone is expecting them
         if(true || i->nonGestureListeners > 0)
         {
