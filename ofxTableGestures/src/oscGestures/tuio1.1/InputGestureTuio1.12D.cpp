@@ -62,7 +62,7 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel >> EndMessage;
         if(squaredInterface)
         {
-            xpos = (xpos -0.125f)*1.33f;
+            xpos = (xpos -0.125f)*1.333333f;
         }
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
@@ -110,7 +110,7 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
 
             if(squaredInterface)
             {
-                xpos = (xpos -0.125f)*1.33f;
+                xpos = (xpos -0.125f)*1.333333f;
             }
 
             if(o_s_ids.find(s_id) == o_s_ids.end())
