@@ -224,7 +224,8 @@ class tuioArea : public Base, public tuioAreaBase
     {
         assert(manager != NULL);
         manager->addGesture(IG);
-        feeders.push_back(IG);
+        if(std::find(feeders.begin(),feeders.end(),IG) == feeders.end())
+            feeders.push_back(IG);
         if(!isGestureListener)
         {
             IG->nonGestureListeners++;
