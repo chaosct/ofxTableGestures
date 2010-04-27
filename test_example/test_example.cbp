@@ -497,9 +497,6 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureTuio1.1.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGesture.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGesture.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
