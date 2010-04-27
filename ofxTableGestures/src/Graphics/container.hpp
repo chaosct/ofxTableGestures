@@ -35,21 +35,34 @@
 #define CURSOR_RADIUS 0.01
 #define OBJECT_RADIUS 0.07
 
+#define M_2PI M_PI*2
+
 namespace simulator{
     class container{
+        protected:
+            float previous_time;
+            float dt;
+
         private:
-            int xpos_old;
-            int ypos_old;
+            int x_old;
+            int y_old;
+
+            int xpos_old, ypos_old;
+            float mspeed_old;
+            float mspeed;
         public:
             unsigned int sid;
             int xpos, ypos;
             float xspeed,yspeed,maccel;
             bool mouse_on;
         public:
-            container(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float maccel):
-                sid(_sid),xpos(_xpos),ypos(_ypos),xspeed(_xspeed),yspeed(_yspeed),mouse_on(false){
+            container(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float _maccel):
+                sid(_sid),xpos(_xpos),ypos(_ypos),xspeed(_xspeed),yspeed(_yspeed),mouse_on(false),maccel(_maccel){
+                    x_old = xpos;
+                    y_old = ypos;
                     xpos_old = xpos;
                     ypos_old = ypos;
+                    previous_time = ofGetElapsedTimef();
                 }
             ~container(){}
             float GetDistance(const container& cont){
@@ -60,17 +73,38 @@ namespace simulator{
             }
             virtual void Draw()=0;
             virtual bool Collide(int x, int y)=0;
-            virtual void Add(int x, int y){
-                xpos_old = x;
-                ypos_old = y;
+            virtual void Add(int x, int y,bool only = false){
+                x_old = x;
+                y_old = y;
+                previous_time = ofGetElapsedTimef();
+                mspeed_old = 0;
             }
-            virtual void Update(int x, int y){
-                xpos += x-xpos_old;
-                ypos += y-ypos_old;
-                xpos_old=x;
-                ypos_old=y;
+
+            virtual void Update(int x, int y,bool only = false){
+                float actual_time = ofGetElapsedTimef();
+                dt = previous_time - actual_time;
+                previous_time = actual_time;
+                xpos_old = xpos;
+                ypos_old = ypos;
+                xpos += x-x_old;
+                ypos += y-y_old;
+                x_old=x;
+                y_old=y;
+                if(dt == 0 )return;
+                float dx = (float)(xpos - xpos_old)/ofGetScreenWidth();
+                float dy = (float)(ypos - ypos_old)/ofGetScreenHeight();
+                float dist = sqrt(dx*dx + dy*dy);
+
+                mspeed_old = mspeed;
+                mspeed = dist/dt;
+
+                xspeed = dx/dt;
+                yspeed = dy/dt;
+                maccel = ( mspeed - mspeed_old) /dt;
             }
+
         protected:
+
             float distance (int x, int y, int a, int b)
             {
                 float dx = x-a;
@@ -91,8 +125,8 @@ namespace simulator{
             bool isHolded;
             bool isSelected;
         public:
-            cursor(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float maccel):
-                container(_sid,_xpos,_ypos,_xspeed,_yspeed,maccel),isHolded(false),isSelected(false){}
+            cursor(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float _maccel):
+                container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),isHolded(false),isSelected(false){}
             void Draw(){
                 ofPushMatrix();
                 ofEnableAlphaBlending();
@@ -111,18 +145,68 @@ namespace simulator{
     };
 
     class object:public container{
+        private:
+            float angle_old;
+            float previous_angle_time;
+            float rspeed_old;
         public:
+            float angle;
             unsigned int fid;
-            float angle, rspeed,raccel;
+            float rspeed,raccel;
             int tray_number;
             bool isUp;
         public:
             object(unsigned int _sid,unsigned int _fid, int _xpos,int _ypos,float _angle,float _xspeed,float _yspeed,float _rspeed,float _maccel,float _raccel,int _trayNumber=0):
-                container(_sid,_xpos,_ypos,_xspeed,_yspeed,maccel),fid(_fid),angle(_angle),rspeed(_rspeed),raccel(_raccel),tray_number(_trayNumber),isUp(false){}
+                container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),
+                fid(_fid),
+                angle(_angle),
+                rspeed(_rspeed),
+                raccel(_raccel),
+                tray_number(_trayNumber),
+                isUp(false){}
             void Draw();
             bool Collide(int x, int y){
                 if(GetDistance(x,y)<= OBJECT_RADIUS*ofGetHeight()/2) return true;
                 return false;
+            }
+
+            virtual void AddAngle(bool only = false){
+                angle_old = angle;
+                previous_angle_time = ofGetElapsedTimef();
+                rspeed_old = 0;
+                if(!only)
+                    this->Add(0,0,true);
+            }
+
+            virtual void UpdateAngle(float _angle, bool only = false){
+                float new_angle = ofGetElapsedTimef();
+                float dta = previous_angle_time - new_angle;
+                if(dta == 0) return;
+                angle_old = angle;
+                angle += _angle;
+                if(angle >= M_2PI)angle = angle-M_2PI;
+                if(angle < 0)angle = angle+M_2PI;
+
+                float da = angle-angle_old;
+                if (da>(M_PI*1.5f)) da-=M_2PI;
+                else if (da<(M_PI*-1.5f)) da+=M_2PI;
+
+                da = da/M_2PI;
+                rspeed_old = rspeed;
+                rspeed = da /dta;
+                raccel = (rspeed - rspeed_old)/dta;
+                if(!only)
+                    this->Update(0,0,true);
+            }
+
+            virtual void Add(int x, int y,bool only = false){
+                container::Add(x,y,only);
+                if(!only)AddAngle(true);
+            }
+
+            virtual void Update(int x, int y,bool only = false){
+                container::Update(x,y,only);
+                if(!only)UpdateAngle(0,true);
             }
     };
 }

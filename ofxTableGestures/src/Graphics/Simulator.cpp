@@ -255,9 +255,7 @@ namespace simulator
             int increment = y-previous_y;
             for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
                 if((*it)->mouse_on){
-                    (*it)->angle += (2*PI*increment)/100;
-                    if((*it)->angle >= M_2PI)(*it)->angle = (*it)->angle-M_2PI;
-                    if((*it)->angle < 0)(*it)->angle = (*it)->angle+M_2PI;
+                    (*it)->UpdateAngle((2*PI*increment)/100);
                     if(!(*it)->isUp)objectUpdated(*it);
                 }
             }
@@ -292,9 +290,18 @@ namespace simulator
         }
         else if(button == 3){
             MoveYTray(INC_STEP);
+            for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
+                if((*it)->mouse_on)
+                    (*it)->UpdateAngle(M_PI/30,true);
+            }
         }
         else if(button == 4){
             MoveYTray(-INC_STEP);
+            MoveYTray(INC_STEP);
+            for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
+                if((*it)->mouse_on)
+                    (*it)->UpdateAngle(-M_PI/30,true);
+            }
         }
         else if(button == 2){
             container* tmp = Collide (x,y,true);
@@ -304,6 +311,12 @@ namespace simulator
             }
             else
                 previous_y = -1;
+
+            for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
+                if((*it)->mouse_on){
+                    (*it)->AddAngle();
+                }
+            }
         }
     }
 
@@ -522,6 +535,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "add /tuio/2Dobj SID: " << o->sid <<
                 ", FID: " << o->fid <<
@@ -573,6 +587,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "update /tuio/2Dobj SID: " << o->sid <<
                 ", FID: " << o->fid <<
@@ -606,6 +621,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "remove /tuio/2Dobj SID: " << o->sid <<
                 ", FID: " << o->fid << std::endl;
@@ -645,6 +661,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "add /tuio/2Dcur SID: " << c->sid <<
                 ", X: " << Transformx(c->xpos) <<
@@ -688,6 +705,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "update /tuio/2Dcur SID: " << c->sid <<
                 ", X: " << Transformx(c->xpos) <<
@@ -717,6 +735,7 @@ namespace simulator
             sender->sendBundle(Bundle);
         #endif
         stringstream ostring;
+        ostring.precision(3);
         ostring <<
                 "remove /tuio/2Dcur SID: " << c->sid
                 << std::endl;
