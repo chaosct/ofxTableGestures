@@ -30,17 +30,16 @@ class SimpleObjectController: public tuio::CanDirectObjects <Graphic>
 
     void Create(tuio::DirectObject * d)
     {
-        SimpleObjectController * i = new SimpleObjectController(value,f_id,Min,Max);
-        i->dobj = d;
+        SimpleObjectController * i = new SimpleObjectController(value,f_id,Min,Max,d);
         i->angle = d->angle;
     }
 
     public:
-    SimpleObjectController(T & v,unsigned int F_id,T min,T max):
+    SimpleObjectController(T & v,unsigned int F_id,T min,T max,tuio::DirectObject * d=NULL):
         Min(min),
         Max(max),
         f_id(F_id),
-        dobj(NULL),
+        dobj(d),
         todelete(false),
         angle(0),
         value(v),
