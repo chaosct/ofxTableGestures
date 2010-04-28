@@ -41,7 +41,7 @@
 
 double * TableApp::calibration_matrix = NULL;
 
-TableApp::TableApp(bool use_render_to_texture):
+TableApp::TableApp():
 //    calibration_enabled(false),
     calibration_mode(0),
     show_help(false),
@@ -53,7 +53,7 @@ TableApp::TableApp(bool use_render_to_texture):
     is_simulating(false)
     #endif
 {
-    if(use_render_to_texture) renderer = new Renderer_to_texture();
+    if(GlobalConfig::getRef("GLOBAL:RENDERTOTEXTURE",0)) renderer = new Renderer_to_texture();
     else renderer = new Renderer_plane();
 
     renderer->LoadDistortion();

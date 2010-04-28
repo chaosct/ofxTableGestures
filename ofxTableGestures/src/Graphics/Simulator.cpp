@@ -31,6 +31,7 @@
 #include "Simulator.hpp"
 #include <fstream>
 #include "Shapes.hpp"
+#include "GlobalConfig.hpp"
 
 #define INC_STEP 20
 #define CONFIGPATH "../simulator.config"
@@ -75,7 +76,7 @@ namespace simulator
         sender = new ofxOscSender();
         sender->setup(address,port);
         #endif
-        verdana.loadFont("verdana.ttf",(0.09*ofGetHeight())/7, false, true);
+        verdana.loadFont(GlobalConfig::getRef<std::string>("PROGRAM:HELPFONT","verdana.ttf"),(0.09*ofGetHeight())/7, false, true);
     }
 
     Simulator::~Simulator(){
