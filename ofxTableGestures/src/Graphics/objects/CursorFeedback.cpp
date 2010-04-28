@@ -31,7 +31,7 @@
 #include "CursorFeedback.hpp"
 
 CursorFeedback::CursorFeedback(){
-    this->Register(ZeroArea::Create());
+    this->Register(NULL);
 }
 CursorFeedback::CursorFeedback(Area * a){
     this->Register(a);
