@@ -61,14 +61,19 @@ class DirectObject:public DirectPoint
 SimpleDeclareEvent(CanDirectObjects,newObject,DirectObject *);
 SimpleDeclareEvent(CanDirectObjects,removeObject,DirectObject *);
 SimpleDeclareEvent(CanDirectObjects,updateObject,DirectObject *);
+SimpleDeclareEvent(CanDirectObjects,enterObject,DirectObject *);
+SimpleDeclareEvent(CanDirectObjects,exitObject,DirectObject *);
 
 class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture > {
     std::map<int32,DirectObject *> objects;
     public:
+        SetDebugName(InputGestureDirectObjects)
         InputGestureDirectObjects(){}
         void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
+        void enterTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
         void removeTuioObject(int32 id);
+        void exitTuioObject(int32 id);
 };
 
 template <class Base>
@@ -79,13 +84,19 @@ class CanDirectObjects : public  Base
     virtual void newObject(DirectObject * object){}
     virtual void removeObject(DirectObject * object){}
     virtual void updateObject(DirectObject * object){}
+    //Area-aware interface optionally redefined by ofApp
+    virtual void enterObject(DirectObject * object)         {newObject(object);}
+    virtual void exitObject(DirectObject * object)          {removeObject(object);}
 
     //registering
-    CanDirectObjects()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanDirectObjects,newObject);
         SimpleRegisterEvent(CanDirectObjects,removeObject);
         SimpleRegisterEvent(CanDirectObjects,updateObject);
+        SimpleRegisterEvent(CanDirectObjects,enterObject);
+        SimpleRegisterEvent(CanDirectObjects,exitObject);
         Base::template registerIG<InputGestureDirectObjects>();
     }
 

@@ -150,8 +150,9 @@ class CanTuio113D : public Base
 
 
     //registering
-    CanTuio113D()
+    void Register(Area * a)
     {
+        Base::Register(a);
         ///2.5D Events
 
         TRegistraCallback(CanTuio113D,TeventTuio11RemoveFinger3D);

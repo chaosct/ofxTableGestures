@@ -37,7 +37,16 @@
 #include <iostream>
 
 #include "TEvent.hpp"
+#include "Area.hpp"
 
+///Debbugging macros
+#ifdef DEBUG
+    #define SetDebugName(name) virtual const std::string & debugName(){\
+        static std::string s = #name ;\
+        return s;}
+#else
+    #define SetDebugName(name)
+#endif
 
 
 namespace tuio {
@@ -48,9 +57,9 @@ class InputGesture : public OSCListener {
     std::list<TEvent *> events;
     ///Number of non-Gesture listeners
     int nonGestureListeners;
-
+    void Register(Area * a = NULL){}
     InputGesture():nonGestureListeners(0){}
-
+    SetDebugName(Undefined InputGesture)
 };
 
 } // namespace tuio

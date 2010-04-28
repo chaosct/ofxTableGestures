@@ -41,28 +41,48 @@
 
 namespace tuio {
 
-class inputGestureManager : public OSCListener {
+class inputGestureManagerBase {
   private:
     std::list<InputGesture *> gestures;
-    static inputGestureManager * instance;
     blocklessQueue<InputGesture ,1024> gesturesToAdd;
-    static void addPendingGestures()
+    blocklessQueue<InputGesture ,1024> gesturesToRemove;
+    void addPendingGestures()
     {
         InputGesture *IG;
-        while((IG = instance->gesturesToAdd.pop())!= NULL){
-            if (std::find (instance->gestures.begin(), instance->gestures.end(), IG) == instance->gestures.end())
-                instance->gestures.push_back(IG);
+        while((IG = gesturesToAdd.pop())!= NULL){
+            if (std::find (gestures.begin(), gestures.end(), IG) == gestures.end())
+            {
+                gestures.push_back(IG);
+            }
+
+        }
+        while((IG = gesturesToRemove.pop())!= NULL){
+           gestures.remove(IG);
         }
     }
   public:
     EventQueue * queue;
 
-    static void addGesture(InputGesture *IG)
+    void addGesture(InputGesture *IG)
     {
-        instance->gesturesToAdd.push(IG);
+        gesturesToAdd.push(IG);
     }
-    inputGestureManager();
-    virtual void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint );
+    void removeGesture(InputGesture *IG)
+    {
+        gesturesToRemove.push(IG);
+    }
+    inputGestureManagerBase();
+
+    void IGMProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint );
+};
+
+class inputGestureManager : public Singleton<inputGestureManager,inputGestureManagerBase,OSCListener>
+{
+    public:
+    void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint )
+    {
+        IGMProcessBundle( b, remoteEndpoint );
+    }
 };
 
 } // namespace tuio

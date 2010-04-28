@@ -45,7 +45,7 @@
 
 namespace tuio {
 
-class tuioinput {
+class tuioinput :public Singleton<tuioinput>{
   private:
     inputGestureManager * gesturemanager;
 

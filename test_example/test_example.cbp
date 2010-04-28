@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -21,6 +21,7 @@
 					<Add option="-g" />
 					<Add option="-MMD" />
 					<Add option="-fexceptions" />
+					<Add option="-DDEBUG" />
 					<Add directory="../../../addons/" />
 					<Add directory="../../../libs/openFrameworks/" />
 					<Add directory="../../../libs/openFrameworks/events" />
@@ -49,6 +50,11 @@
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 					<Add directory="../../../addons/ofxTableGestures/src/Graphics/objects" />
 					<Add directory="../../../addons/ofxTableGestures/ext" />
+					<Add directory="../../../addons" />
+					<Add directory="../../../addons/ofxXmlSettings/libs" />
+					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -228,6 +234,8 @@
 					<Add directory="../../../addons/ofxTableGestures/ext" />
 					<Add directory="../../../addons/ofxXmlSettings/libs" />
 					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -377,7 +385,19 @@
 		<Compiler>
 			<Add option="-DSIMULATOR" />
 		</Compiler>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Button.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Introspection.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/SimpleObjectController.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfig.hpp">
+			<Option virtualFolder="addons/TableGestures/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfigDetail.hpp">
 			<Option virtualFolder="addons/TableGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/Graphic.cpp">
@@ -452,29 +472,23 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/TableApp.hpp">
 			<Option virtualFolder="addons/TableGestures" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Tests/ButtonMadnessTest.hpp">
+			<Option virtualFolder="addons/TableGestures/Tests/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Area.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/DirectPoint.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureListener.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/GestureListener.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicObjects.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureDirectFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
@@ -488,13 +502,7 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureTuio1.1.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
 		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGesture.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGesture.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/InputGestureClasses.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/OSCListener.cpp">
@@ -510,10 +518,10 @@
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.cpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/inputGestureManager.hpp">
-			<Option virtualFolder="addons/TableGestures/oscGestures" />
+			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.12.5D.cpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures/Tuio1.1" />
@@ -592,6 +600,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
+		</Unit>
+		<Unit filename="bin/data/GlobalConfig.xml">
+			<Option virtualFolder="conf/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />

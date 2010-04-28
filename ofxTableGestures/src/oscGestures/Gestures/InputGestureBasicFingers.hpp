@@ -43,25 +43,57 @@ using osc::int32;
 namespace tuio {
 
 SimpleDeclareEvent(CanBasicFingers,removeTuioCursor,int32);
+SimpleDeclareEvent(CanBasicFingers,exitTuioCursor,int32);
 SimpleDeclareEvent(CanBasicFingers,addTuioCursor,int32,float,float,float,float,float);
+SimpleDeclareEvent(CanBasicFingers,enterTuioCursor,int32,float,float,float,float,float);
 SimpleDeclareEvent(CanBasicFingers,updateTuioCursor,int32,float,float,float,float,float);
 
 
 class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>
 {
+    std::set<int32> ids;
     public:
+    SetDebugName(InputGestureBasicFingers)
+        Area * area;
         InputGestureBasicFingers(){}
         void addTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            SimpleCallEvent(CanBasicFingers,addTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            if(area->isInside(xpos,ypos))
+            {
+                ids.insert(id);
+                SimpleCallEvent(CanBasicFingers,addTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            }
         }
         void updateTuioCursor2D(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
-            SimpleCallEvent(CanBasicFingers,updateTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+            if(area->isInside(xpos,ypos))
+            {
+                if(ids.find(id) == ids.end())
+                {
+                    ids.insert(id);
+                    SimpleCallEvent(CanBasicFingers,enterTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+                }
+                else
+                {
+                    SimpleCallEvent(CanBasicFingers,updateTuioCursor,(id,xpos,ypos,xspeed,yspeed,maccel));
+                }
+            }
+            else
+            {
+                if(ids.find(id) != ids.end())
+                {
+                    ids.erase(id);
+                    SimpleCallEvent(CanBasicFingers,exitTuioCursor,(id));
+                }
+            }
         }
         void removeTuioCursor2D(int32 id)
         {
-            SimpleCallEvent(CanBasicFingers,removeTuioCursor,(id));
+            if(ids.find(id) != ids.end())
+            {
+                ids.erase(id);
+                SimpleCallEvent(CanBasicFingers,removeTuioCursor,(id));
+            }
         }
 
 };
@@ -74,14 +106,20 @@ class CanBasicFingers : public Base
     virtual void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){}
     virtual void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel){}
     virtual void removeTuioCursor(int32 id){}
+    //Area-aware interface optionally redefined by ofApp
+    virtual void exitTuioCursor(int32 id)                                                                   {removeTuioCursor(id);}
+    virtual void enterTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)    {addTuioCursor(id,xpos,ypos,xspeed,yspeed,maccel);}
 
     //registering
-    CanBasicFingers()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanBasicFingers,addTuioCursor);
+        SimpleRegisterEvent(CanBasicFingers,enterTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,updateTuioCursor);
         SimpleRegisterEvent(CanBasicFingers,removeTuioCursor);
-        Base::template registerIG<InputGestureBasicFingers>();
+        SimpleRegisterEvent(CanBasicFingers,exitTuioCursor);
+        Base::template registerIGA<InputGestureBasicFingers>();
     }
 };
 

@@ -55,11 +55,14 @@ SimpleDeclareEvent(CanDirectFingers,removeCursor,DirectFinger *);
 SimpleDeclareEvent(CanDirectFingers,newCursor,DirectFinger *);
 SimpleDeclareEvent(CanDirectFingers,updateCursor,DirectFinger *);
 
+SimpleDeclareEvent(CanDirectFingers,enterCursor,DirectFinger *);
+SimpleDeclareEvent(CanDirectFingers,exitCursor,DirectFinger *);
 
 class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
 {
     std::map<int32,DirectFinger *> fingers;
     public:
+        SetDebugName(InputGestureDirectFingers)
         InputGestureDirectFingers(){}
         void addTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
@@ -72,6 +75,18 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
             e->maccel = maccel;
             fingers[id]=e;
             SimpleCallEvent(CanDirectFingers,newCursor,(e));
+        }
+        void enterTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+        {
+            DirectFinger * e = new DirectFinger();
+            e->s_id = id;
+            e->setX(xpos);
+            e->setY(ypos);
+            e->xspeed = xspeed;
+            e->yspeed = yspeed;
+            e->maccel = maccel;
+            fingers[id]=e;
+            SimpleCallEvent(CanDirectFingers,enterCursor,(e));
         }
         void updateTuioCursor(int32 id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
         {
@@ -88,6 +103,11 @@ class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >
             DirectFinger * e = fingers[id];
             SimpleCallEvent(CanDirectFingers,removeCursor,(e));
         }
+        void exitTuioCursor(int32 id)
+        {
+            DirectFinger * e = fingers[id];
+            SimpleCallEvent(CanDirectFingers,exitCursor,(e));
+        }
 };
 
 
@@ -101,13 +121,18 @@ class CanDirectFingers : public  Base
     virtual void newCursor(DirectFinger *){}
     virtual void removeCursor(DirectFinger *){}
     virtual void updateCursor(DirectFinger *){}
+    //Area-aware interface optionally redefined by ofApp
+    virtual void enterCursor(DirectFinger *df)            {newCursor(df);}
+    virtual void exitCursor(DirectFinger *df)             {removeCursor(df);}
 
-    //registering
-    CanDirectFingers()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanDirectFingers,newCursor);
         SimpleRegisterEvent(CanDirectFingers,removeCursor);
         SimpleRegisterEvent(CanDirectFingers,updateCursor);
+        SimpleRegisterEvent(CanDirectFingers,enterCursor);
+        SimpleRegisterEvent(CanDirectFingers,exitCursor);
         Base::template registerIG<InputGestureDirectFingers>();
     }
 

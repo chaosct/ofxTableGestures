@@ -60,22 +60,12 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
         float xpos, ypos, xspeed, yspeed, maccel;
 
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel >> EndMessage;
-
+        if(squaredInterface)
+        {
+            xpos = (xpos -0.125f)*1.333333f;
+        }
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
-            if(checkCursorLimits)
-            {
-                float newxpos = (xpos -0.125f)*1.33f;
-                float dx = newxpos - 0.5;
-                float dy = ypos -0.5;
-                float d = sqrt(dx*dx+dy*dy);
-                if(d > 0.5)
-                {
-                    std::cout << "Ignoring finger in " << xpos << "," << ypos << std::endl;
-                    return;
-                }
-            }
-
             SimpleCallEvent(CanTuio112D,addTuioCursor2D,(s_id, xpos,ypos,xspeed,yspeed,maccel ));
             c_s_ids.insert(s_id);
         }
@@ -118,21 +108,13 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
 
             args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel >> EndMessage;
 
+            if(squaredInterface)
+            {
+                xpos = (xpos -0.125f)*1.333333f;
+            }
+
             if(o_s_ids.find(s_id) == o_s_ids.end())
             {
-                if(checkObjectLimits)
-                {
-                    float newxpos = (xpos -0.125f)*1.33f;
-                    float dx = newxpos - 0.5;
-                    float dy = ypos -0.5;
-                    float d = sqrt(dx*dx+dy*dy);
-                    if(d > 0.5)
-                    {
-                        std::cout << "Ignoring object in " << xpos << "," << ypos << std::endl;
-                        return;
-                    }
-                }
-
                 o_s_ids.insert(s_id);
                 SimpleCallEvent(CanTuio112D,addTuioObject2D,( s_id, f_id ,xpos, ypos, angle, xspeed,yspeed, rspeed, maccel,  raccel));
             }

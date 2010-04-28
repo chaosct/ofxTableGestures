@@ -30,10 +30,10 @@
 
 #include <fstream>
 #include "TableApp.hpp"
-#include "GestureDispatcher.hpp"
 #include "GraphicDispatcher.hpp"
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
+#include "GlobalConfig.hpp"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
@@ -46,7 +46,8 @@ TableApp::TableApp(bool use_render_to_texture):
     calibration_mode(0),
     show_help(false),
     show_info(false),
-    hide_cursor(true)
+    hide_cursor(true),
+    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
     #ifdef SIMULATOR
     ,simulator(new simulator::Simulator()),
     is_simulating(false)
@@ -77,6 +78,8 @@ void TableApp::setup(){
     grid = new Grid(6,6);
     full=false;
     ofSetFrameRate(60);
+    ///starts the tuioinput thread
+    tuio::tuioinput::Instance().init();
     ofSetWindowTitle("Table APP    press 'h' to show help content");
     Setup();
     ofBackground(0, 0, 0);
@@ -87,7 +90,7 @@ void TableApp::setup(){
 void TableApp::update(){
     TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
-    tuio::GestureDispatcher::Instance().processTevents();
+    tuio::tuioAreaDelivery::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
     Update();
@@ -152,7 +155,24 @@ void TableApp::draw(){
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
     renderer->Start();
+    ///draw grid
     grid->Draw(show_grid,calibration_mode);
+
+    int shortside = min(ofGetWidth(),ofGetHeight());
+    if(squaredInterface)
+    {
+        //if the surface is squared we center the drawing  plane
+        glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
+        GlobalConfig::Instance().height = 1;
+        GlobalConfig::Instance().width = 1;
+    }
+    else
+    {
+        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
+        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+    }
+
+    glScalef(shortside,shortside,1);
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();

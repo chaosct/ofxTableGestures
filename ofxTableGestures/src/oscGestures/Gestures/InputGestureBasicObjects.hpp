@@ -46,23 +46,54 @@ namespace tuio
 SimpleDeclareEvent(CanBasicObjects,removeTuioObject,    int32);
 SimpleDeclareEvent(CanBasicObjects,addTuioObject,       int32 , int32  ,float ,float , float , float ,float ,float ,float , float );
 SimpleDeclareEvent(CanBasicObjects,updateTuioObject,    int32 , int32  ,float ,float , float , float ,float ,float ,float , float );
-
+SimpleDeclareEvent(CanBasicObjects,exitTuioObject,    int32);
+SimpleDeclareEvent(CanBasicObjects,enterTuioObject,       int32 , int32  ,float ,float , float , float ,float ,float ,float , float );
 
 class InputGestureBasicObjects : public CanTuio112D < CompositeGesture >
 {
+    std::set<int32> ids;
 public:
+    SetDebugName(InputGestureBasicObjects)
+    Area * area;
     InputGestureBasicObjects() {}
     void addTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
     {
-        SimpleCallEvent(CanBasicObjects,addTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
+        if(area->isInside(xpos,ypos))
+        {
+            ids.insert(id);
+            SimpleCallEvent(CanBasicObjects,addTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
+        }
     }
     void updateTuioObject2D(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
     {
-        SimpleCallEvent(CanBasicObjects,updateTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
+       if(area->isInside(xpos,ypos))
+        {
+            if(ids.find(id) == ids.end())
+            {
+                ids.insert(id);
+                SimpleCallEvent(CanBasicObjects,enterTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
+            }
+            else
+            {
+                SimpleCallEvent(CanBasicObjects,updateTuioObject,(id, f_id , xpos, ypos,  angle,  xspeed, yspeed, rspeed, maccel,  raccel));
+            }
+        }
+        else
+        {
+            if(ids.find(id) != ids.end())
+            {
+                ids.erase(id);
+                SimpleCallEvent(CanBasicObjects,exitTuioObject,(id));
+            }
+        }
     }
     void removeTuioObject2D(int32 id)
     {
-        SimpleCallEvent(CanBasicObjects,removeTuioObject,(id));
+        if(ids.find(id) != ids.end())
+        {
+            ids.erase(id);
+            SimpleCallEvent(CanBasicObjects,removeTuioObject,(id));
+        }
     }
 };
 
@@ -74,15 +105,21 @@ public:
     virtual void addTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
     virtual void updateTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
     virtual void removeTuioObject(int32 id) {}
+    //Area-aware interface optionally redefined by ofApp
+    virtual void enterTuioObject(int32 id, int32 f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)   {addTuioObject(id, f_id , xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel);}
+    virtual void exitTuioObject(int32 id)                                                                                                                       {removeTuioObject(id);}
 
     //registering
-    CanBasicObjects()
+    void Register(Area * a)
     {
+        Base::Register(a);
         SimpleRegisterEvent(CanBasicObjects,addTuioObject);
         SimpleRegisterEvent(CanBasicObjects,updateTuioObject);
         SimpleRegisterEvent(CanBasicObjects,removeTuioObject);
+        SimpleRegisterEvent(CanBasicObjects,enterTuioObject);
+        SimpleRegisterEvent(CanBasicObjects,exitTuioObject);
 
-        Base::template registerIG<InputGestureBasicObjects>();
+        Base::template registerIGA<InputGestureBasicObjects>();
     }
 
 };

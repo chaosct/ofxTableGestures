@@ -59,12 +59,11 @@ class InputGestureTuio112D : public CanTuio11ValidBundle< CompositeGesture > {
     std::set<int32> o_s_ids;
     std::set<int32> b_s_ids;
     bool valid;
-    int & checkCursorLimits;
-    int & checkObjectLimits;
+    int & squaredInterface;
     public:
+        SetDebugName(InputGestureTuio112D)
         InputGestureTuio112D():
-        checkCursorLimits(GlobalConfig::getRef("GESTURES:TUIO112D:CUR:CheckLimits",0)),
-        checkObjectLimits(GlobalConfig::getRef("GESTURES:TUIO112D:OBJ:CheckLimits",0))
+        squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
         {}
         void ReceiveCall(const char * addr, osc::ReceivedMessageArgumentStream & argList);
         void tuio2Dcur(osc::ReceivedMessageArgumentStream & argList);
@@ -93,8 +92,9 @@ class CanTuio112D : public Base
     virtual void removeTuioBlob2D(int32 id){}
 
     //registering
-    CanTuio112D()
+    void Register(Area * a)
     {
+        Base::Register(a);
         ///2D Events
 
         SimpleRegisterEvent(CanTuio112D,removeTuioCursor2D);

@@ -30,15 +30,14 @@
 
 #ifndef _GRAPHIC
 #define _GRAPHIC
-#include "GestureListener.hpp"
-//#include "GraphicDispatcher.hpp"
+#include "tuioApp.hpp"
 
 #define BGR_LAYER 200
 #define APP_LAYER 100
 #define NOT_LAYER 0
 class GraphicDispatcher;
 
-class Graphic :public tuio::GestureListener{
+class Graphic :public tuio::tuioArea<>{
     public:
         Graphic();
         Graphic(int _layer);
@@ -64,5 +63,17 @@ typedef TGraphic<NOT_LAYER> NotificationGraphic;
 typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
 bool CompareLayers(Graphic* object1, Graphic* object2);
+
+///Adapters
+
+template<typename T>
+class OnTable: public T
+{
+    public:
+    OnTable()
+    {
+        this->Register(NULL);
+    }
+};
 
 #endif //_GRAPHICDISPATCHER
