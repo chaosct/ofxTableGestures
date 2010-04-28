@@ -57,7 +57,7 @@ TableApp::TableApp(bool use_render_to_texture):
     else renderer = new Renderer_plane();
 
     renderer->LoadDistortion();
-    show_grid = renderer->IsEnabled();
+    show_grid = false;
 }
 
 TableApp::~TableApp(){
@@ -93,6 +93,10 @@ void TableApp::update(){
     tuio::tuioAreaDelivery::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
+    ///Update simulator objects
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->Update();
+    #endif
     Update();
 }
 
@@ -180,6 +184,7 @@ void TableApp::draw(){
     ofPushMatrix();
     Draw();
     ofPopMatrix();
+//    grid->Draw(show_grid,calibration_mode);
     renderer->End();
     ///Draws Info & help
     DrawInfo();
@@ -366,6 +371,9 @@ void TableApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void TableApp::windowResized(int w, int h){
+    #ifdef SIMULATOR
+    if(is_simulating) simulator->windowResized(w,h);
+    #endif
     grid->Resize();
     ///calls resize method of all 'Graphics' when nedded.
     GraphicDispatcher::Instance().Resize(w,h);

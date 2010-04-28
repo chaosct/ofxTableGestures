@@ -149,6 +149,13 @@
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 					<Add directory="../../../addons/ofxTableGestures/src/Graphics/objects" />
+					<Add directory="../../../addons/" />
+					<Add directory="../../../libs/openFrameworks/" />
+					<Add directory="../../../libs/rtAudio" />
+					<Add directory="../../../libs/unicap/include" />
+					<Add directory="../../../libs/gstappsink/include" />
+					<Add directory="../../../addons" />
+					<Add directory="../../../addons/ofxTableGestures/ext" />
 				</Compiler>
 				<Linker>
 					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworksDebug.lib" />
@@ -300,10 +307,8 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-march=core2" />
 					<Add option="-O3" />
-					<Add option="-MMD" />
-					<Add option="-fexceptions" />
+					<Add option="-Wno-multichar" />
 					<Add directory="../../../addons/" />
 					<Add directory="../../../libs/openFrameworks/" />
 					<Add directory="../../../libs/openFrameworks/events" />
@@ -332,25 +337,47 @@
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
 					<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 					<Add directory="../../../addons/ofxTableGestures/src/Graphics/objects" />
+					<Add directory="../../../libs/glu/include" />
+					<Add directory="../../../libs/quicktime/include" />
+					<Add directory="../../../libs/rtAudio/include" />
+					<Add directory="../../../libs/videoInput/include" />
+					<Add directory="../../../libs/glut/include" />
+					<Add directory="../../../libs/openFrameworks" />
+					<Add directory="../../../addons/ofxTableGestures/ext" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="openFrameworks" />
-					<Add library="fmodex" />
-					<Add library="raw1394" />
-					<Add library="glut" />
-					<Add library="GL" />
-					<Add library="GLU" />
-					<Add library="Xxf86vm" />
-					<Add library="asound" />
-					<Add library="PocoFoundation" />
-					<Add library="unicap" />
-					<Add library="freetype" />
-					<Add library="freeimage" />
-					<Add library="RtAudio" />
-					<Add library="GLee" />
-					<Add library="oFappsink" />
-					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
+					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworks.lib" />
+					<Add option="../../../libs/FreeImage/lib/win_cb/FreeImage.lib" />
+					<Add option="../../../libs/rtAudio/lib/win_cb/RtAudio.a" />
+					<Add option="../../../libs/quicktime/lib/win_cb/qtmlClient.lib" />
+					<Add option="../../../libs/freetype/lib/win_cb/libfreetype.a" />
+					<Add option="../../../libs/glut/lib/win_cb/libglut.a" />
+					<Add option="../../../libs/videoInput/lib/win_cb/videoInputLib.a" />
+					<Add option="../../../libs/fmodex/lib/win_cb/libfmodex.a" />
+					<Add option="../../../libs/glee/lib/win_cb/GLee.lib" />
+					<Add option="../../../libs/glu/lib/win_cb/glu32.lib" />
+					<Add option="../../../libs/poco/lib/win_cb/libPocoNetmt.a" />
+					<Add option="../../../libs/poco/lib/win_cb/libPocoUtilmt.a" />
+					<Add option="../../../libs/poco/lib/win_cb/libPocoXMLmt.a" />
+					<Add option="../../../libs/poco/lib/win_cb/libPocoFoundationmt.a" />
+					<Add option="../../../addons/ofxOsc/libs/oscpack/lib/win_cb/oscpack.a" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
+					<Add option="-ldsound" />
+					<Add option="-lwinmm" />
+					<Add option="-ldxguid" />
+					<Add option="-lstrmbase" />
+					<Add option="-lstrmiids" />
+					<Add option="-lz" />
+					<Add option="-luuid" />
+					<Add option="-lole32" />
+					<Add option="-loleaut32" />
+					<Add option="-lsetupapi" />
+					<Add option="-lwsock32" />
+					<Add option="-lws2_32" />
+					<Add option="-lIphlpapi" />
+					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/win_cb/oscpack.a" />
 					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
 					<Add directory="../../../libs/freetype/lib/linux" />
 					<Add directory="../../../libs/FreeImage/lib/linux" />
@@ -362,22 +389,8 @@
 					<Add directory="../../../libs/poco/lib/linux" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="#" />
-					<Add after="#      copy libs and shell script to bin directory:" />
-					<Add after="#" />
-					<Add after="cp -r ../../../export/linux/libs $(PROJECT_DIR)bin/" />
-					<Add after="cp ../../../export/linux/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
-					<Add after="sed -i s/applicationName/$(TARGET_OUTPUT_BASENAME)/g  $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
-					<Add after="#" />
-					<Add after="#    this is a shell script that can either (a) run the app or (b) launch nautilus to a good directory for you to run the app" />
-					<Add after="#" />
-					<Add after="./cb_build_runner.sh $(TARGET_OUTPUT_BASENAME) $runOnBuild $nautilusOnBuild" />
-					<Add after="#" />
-					<Add after="#     to enable either, change the custom variables in project-&gt;build options-&gt;custom variables" />
-					<Add after="#     to true / false." />
-					<Add after="#" />
-					<Add after="#     currently this is disabled, but allows you to run the app from w/in CB." />
-					<Add after="#" />
+					<Add after='xcopy /e /i /y &quot;$(PROJECT_DIR)..\..\..\export\win_cb\*.dll&quot;  &quot;$(PROJECT_DIR)bin&quot;' />
+					<Add after='cmd /c if not exist &quot;$(PROJECT_DIR)bin/data&quot; mkdir &quot;$(PROJECT_DIR)bin/data&quot;' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>

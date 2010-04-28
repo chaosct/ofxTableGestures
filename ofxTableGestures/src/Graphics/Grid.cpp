@@ -53,6 +53,7 @@ void Grid::Draw(bool calibration_enabled, int calibration_mode)
     if(calibration_enabled)
     {
         glPushMatrix();
+        ofSetLineWidth(4.0f);
         ofSetColor(255,255,255);
         glCallList(grid_list);
         glColor4f(1,0,0,0.6f);
