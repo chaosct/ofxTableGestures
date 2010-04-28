@@ -158,10 +158,9 @@ void TableApp::draw(){
     #ifdef SIMULATOR
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
-    renderer->Start();
-    ///draw grid
-    grid->Draw(show_grid,calibration_mode);
 
+    renderer->Start();
+    ofPushMatrix();
     int shortside = min(ofGetWidth(),ofGetHeight());
     if(squaredInterface)
     {
@@ -175,8 +174,8 @@ void TableApp::draw(){
         GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
         GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
     }
-
     glScalef(shortside,shortside,1);
+
     ///Draws all 'Graphics'
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
@@ -184,7 +183,9 @@ void TableApp::draw(){
     ofPushMatrix();
     Draw();
     ofPopMatrix();
-//    grid->Draw(show_grid,calibration_mode);
+
+    ofPopMatrix();
+    grid->Draw(show_grid,calibration_mode);
     renderer->End();
     ///Draws Info & help
     DrawInfo();
