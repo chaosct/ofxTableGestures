@@ -35,7 +35,6 @@ class Grid{
     private:
         /// opengl list index
         int grid_list;
-        int arrows_list;
         int w_lines;
         int h_lines;
     public:
