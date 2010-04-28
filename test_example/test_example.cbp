@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -54,6 +54,7 @@
 					<Add directory="../../../addons/ofxXmlSettings/libs" />
 					<Add directory="../../../addons/ofxXmlSettings/src" />
 					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
 				</Compiler>
 				<Linker>
 					<Add library="openFrameworksDebug" />
@@ -234,6 +235,7 @@
 					<Add directory="../../../addons/ofxXmlSettings/libs" />
 					<Add directory="../../../addons/ofxXmlSettings/src" />
 					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -469,6 +471,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/TableApp.hpp">
 			<Option virtualFolder="addons/TableGestures" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Tests/ButtonMadnessTest.hpp">
+			<Option virtualFolder="addons/TableGestures/Tests/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Area.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/" />
