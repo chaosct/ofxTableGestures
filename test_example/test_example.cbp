@@ -156,6 +156,10 @@
 					<Add directory="../../../libs/gstappsink/include" />
 					<Add directory="../../../addons" />
 					<Add directory="../../../addons/ofxTableGestures/ext" />
+					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxXmlSettings/libs" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
 				</Compiler>
 				<Linker>
 					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworksDebug.lib" />
@@ -307,7 +311,8 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-O3" />
+					<Add option="-O1" />
+					<Add option="-g" />
 					<Add option="-Wno-multichar" />
 					<Add directory="../../../addons/" />
 					<Add directory="../../../libs/openFrameworks/" />
@@ -344,9 +349,12 @@
 					<Add directory="../../../libs/glut/include" />
 					<Add directory="../../../libs/openFrameworks" />
 					<Add directory="../../../addons/ofxTableGestures/ext" />
+					<Add directory="../../../addons/ofxXmlSettings/src" />
+					<Add directory="../../../addons/ofxXmlSettings/libs" />
+					<Add directory="../../../addons/ofxTableGestures/src/Tests" />
+					<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
 					<Add option="../../../libs/openFrameworksCompiled/lib/win_cb/openFrameworks.lib" />
 					<Add option="../../../libs/FreeImage/lib/win_cb/FreeImage.lib" />
 					<Add option="../../../libs/rtAudio/lib/win_cb/RtAudio.a" />
@@ -378,15 +386,6 @@
 					<Add option="-lws2_32" />
 					<Add option="-lIphlpapi" />
 					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/win_cb/oscpack.a" />
-					<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
-					<Add directory="../../../libs/freetype/lib/linux" />
-					<Add directory="../../../libs/FreeImage/lib/linux" />
-					<Add directory="../../../libs/rtAudio/lib/linux" />
-					<Add directory="../../../libs/glee/lib/linux" />
-					<Add directory="../../../libs/gstappsink/lib/linux" />
-					<Add directory="../../../libs/fmodex/lib/linux" />
-					<Add directory="../../../libs/unicap/lib/linux" />
-					<Add directory="../../../libs/poco/lib/linux" />
 				</Linker>
 				<ExtraCommands>
 					<Add after='xcopy /e /i /y &quot;$(PROJECT_DIR)..\..\..\export\win_cb\*.dll&quot;  &quot;$(PROJECT_DIR)bin&quot;' />
