@@ -62,7 +62,7 @@ class TapFeedback : public tuio::CanTap < Graphic >
             float now = ofGetElapsedTimef();
             float alpha = ((now - born) / lifetime);
             float radius = alpha * maxradius ;
-            int alpha255 = (1.0f-alpha)*255;
+            int alpha255 = (int)((1.0f-alpha)*255);
             ofPushStyle();
             ofNoFill();
             ofSetLineWidth(4);

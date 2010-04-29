@@ -43,7 +43,7 @@ using namespace shapes;
 namespace simulator
 {
     Simulator::Simulator():
-            sessionGenerator(0),
+            sessionGenerator(1),
             fseqGenerator(0),
             hold(false),
             select(false),
@@ -58,7 +58,7 @@ namespace simulator
         if(!loaded || load_default){
             std::cout << "Simulator: loading default values" << std::endl;
             for (int i = 0; i< 50; i++){
-                object* tmp = new object(-1,i,0,0,0,0,0,0,0,0,i);
+                object* tmp = new object(0,i,0,0,0,0,0,0,0,0,i);
                 SortObject(tmp);
                 objects.push_back(tmp);
             }
@@ -67,7 +67,7 @@ namespace simulator
             std::list<int> ids = Figure_shape::Instance().GetFiducialIds();
             int i = 0;
             for(std::list<int>::iterator it = ids.begin(); it!= ids.end(); it++ ){
-                object* tmp = new object(-1,(*it),0,0,0,0,0,0,0,0,i);
+                object* tmp = new object(0,(*it),0,0,0,0,0,0,0,0,i);
                 SortObject(tmp);
                 objects.push_back(tmp);
                 i++;
@@ -76,7 +76,7 @@ namespace simulator
         sender = new ofxOscSender();
         sender->setup(address,port);
         #endif
-        verdana.loadFont(GlobalConfig::getRef<std::string>("PROGRAM:HELPFONT","verdana.ttf"),(0.09*ofGetHeight())/7, false, true);
+        verdana.loadFont(GlobalConfig::getRef<std::string>("PROGRAM:HELPFONT","verdana.ttf"),int((0.09*ofGetHeight())/7), false, true);
     }
 
     Simulator::~Simulator(){
@@ -129,10 +129,10 @@ namespace simulator
     }
 
     void Simulator::SortObject(object* o){
-        int x = ofGetWidth()-0.045*ofGetWidth();
-        int y = o->tray_number* OBJECT_RADIUS*ofGetHeight();
+        int x = (int)(ofGetWidth()-0.045*ofGetWidth());
+        int y = (int)(o->tray_number* OBJECT_RADIUS*ofGetHeight());
         o->xpos=x;
-        o->ypos=y+ytray+(OBJECT_RADIUS*ofGetHeight()/2);
+        o->ypos=(int)(y+ytray+(OBJECT_RADIUS*ofGetHeight()/2));
     }
 
     bool Simulator::IsAtLateralTray(container* c){
@@ -223,7 +223,7 @@ namespace simulator
                     if(select){
                         (*it)->isUp=true;
                         objectRemoved(*it);
-                        (*it)->sid = -1;
+                        (*it)->sid = 0;
                     }
                     else{
                         (*it)->isUp=false;
@@ -281,7 +281,7 @@ namespace simulator
                 if(select){
                     o->isUp=true;
                     objectRemoved(o);
-                    o->sid = -1;
+                    o->sid = 0;
                 }
                 else{
                     o->isUp=false;
@@ -331,7 +331,7 @@ namespace simulator
                     if(select){
                         (*it)->isUp=true;
                         objectRemoved(*it);
-                        (*it)->sid = -1;
+                        (*it)->sid = 0;
                     }
                     else{
                         (*it)->isUp=false;
@@ -391,7 +391,7 @@ namespace simulator
         }
         float max = (objects.size()-14)* OBJECT_RADIUS*ofGetHeight()*-1;
         if(ytray < max){
-            ytray=max;
+            ytray=(int)max;
             return;
         }
 
@@ -483,7 +483,7 @@ namespace simulator
                 //remove obj
                 objects_escene.erase(it);
                 removeTuioObject(o);
-                o->sid = -1;
+                o->sid = 0;
             }
         }
 
@@ -495,7 +495,7 @@ namespace simulator
             //remove obj
             objects_escene.erase(it);
             removeTuioObject(o);
-            o->sid = -1;
+            o->sid = 0;
         }
     }
 
@@ -841,6 +841,6 @@ namespace simulator
     }
 
     void Simulator::windowResized(int w, int h){
-        verdana.loadFont("verdana.ttf",(0.09*ofGetHeight())/7, false, true);
+        verdana.loadFont("verdana.ttf",(int)((0.09*ofGetHeight())/7), false, true);
     }
 }

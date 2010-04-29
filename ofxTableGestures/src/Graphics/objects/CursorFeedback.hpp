@@ -77,7 +77,7 @@ class HistoryPoint: private DirectPoint{
             glDisable(GL_DEPTH_TEST);
             glBegin(GL_LINE_STRIP);
             for (std::list<time_point>::iterator it = points.begin(); it != points.end(); it++){
-                ofSetColor(255,0,0,255-255*(actual_time-it->time)/MAX_SECONDS);
+                ofSetColor(255,0,0,(int)(255-255*(actual_time-it->time)/MAX_SECONDS));
                 glVertex2f(it->point.getX(),it->point.getY());
             }
             glEnd();
