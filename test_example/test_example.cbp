@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;addons/TableGestures/oscGestures/Gestures-Extra/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -397,6 +397,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-DSIMULATOR" />
+			<Add directory="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras" />
 		</Compiler>
 		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Button.hpp">
 			<Option virtualFolder="addons/TableGestures/Controllers/" />
@@ -461,6 +462,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Renderer.cpp">
 			<Option virtualFolder="addons/TableGestures/" />
 		</Unit>
@@ -496,6 +500,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureTap.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures/InputGestureBasicFingers.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures" />
