@@ -72,8 +72,8 @@
 				</ExtraCommands>
 				<Environment>
 					<Variable name="target" value="TSIframework" />
-					<Variable name="nautilusOnBuild" value="false" />
 					<Variable name="runOnBuild" value="false" />
+					<Variable name="nautilusOnBuild" value="false" />
 				</Environment>
 			</Target>
 			<Target title="Windows_debug">
@@ -192,8 +192,8 @@
 				</ExtraCommands>
 				<Environment>
 					<Variable name="target" value="TSIframework" />
-					<Variable name="nautilusOnBuild" value="false" />
 					<Variable name="runOnBuild" value="false" />
+					<Variable name="nautilusOnBuild" value="false" />
 				</Environment>
 			</Target>
 			<Target title="Windows_release">
@@ -249,6 +249,142 @@
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Linux64_Debug">
+				<Option platforms="Unix;" />
+				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Debug/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworksDebug.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-MMD" />
+					<Add option="-fexceptions" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="openFrameworksDebug" />
+					<Add library="openFrameworks" />
+					<Add library="fmodex" />
+					<Add library="raw1394" />
+					<Add library="glut" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="Xxf86vm" />
+					<Add library="asound" />
+					<Add library="PocoFoundation" />
+					<Add library="unicap" />
+					<Add library="freetype" />
+					<Add library="freeimage" />
+					<Add library="RtAudio" />
+					<Add library="GLee" />
+					<Add library="oFappsink" />
+					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux64/liboscpack.a" />
+					<Add directory="../../../libs/openFrameworksCompiled/lib/linux64" />
+					<Add directory="../../../libs/freetype/lib/linux64" />
+					<Add directory="../../../libs/FreeImage/lib/linux64" />
+					<Add directory="../../../libs/rtAudio/lib/linux64" />
+					<Add directory="../../../libs/glee/lib/linux64" />
+					<Add directory="../../../libs/gstappsink/lib/linux64" />
+					<Add directory="../../../libs/fmodex/lib/linux64" />
+					<Add directory="../../../libs/unicap/lib/linux64" />
+					<Add directory="../../../libs/poco/lib/linux64" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="#" />
+					<Add after="#      copy libs and shell script to bin directory:" />
+					<Add after="#" />
+					<Add after="cp -r ../../../export/linux64/libs $(PROJECT_DIR)bin/" />
+					<Add after="cp ../../../export/linux64/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
+					<Add after="sed -i s/applicationName/$(TARGET_OUTPUT_BASENAME)/g  $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
+					<Add after="#" />
+					<Add after="#    this is a shell script that can either (a) run the app or (b) launch nautilus to a good directory for you to run the app" />
+					<Add after="#" />
+					<Add after="./cb_build_runner.sh $(TARGET_OUTPUT_BASENAME) $runOnBuild $nautilusOnBuild" />
+					<Add after="#" />
+					<Add after="#     to enable either, change the custom variables in project-&gt;build options-&gt;custom variables" />
+					<Add after="#     to true / false." />
+					<Add after="#" />
+					<Add after="#     currently this is disabled, but allows you to run the app from w/in CB." />
+					<Add after="#" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="runOnBuild" value="false" />
+					<Variable name="target" value="TSIframework" />
+					<Variable name="nautilusOnBuild" value="false" />
+				</Environment>
+			</Target>
+			<Target title="Linux64_Release">
+				<Option platforms="Unix;" />
+				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Release/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-march=core2" />
+					<Add option="-MMD" />
+					<Add option="-fexceptions" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="openFrameworks" />
+					<Add library="fmodex" />
+					<Add library="raw1394" />
+					<Add library="glut" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="Xxf86vm" />
+					<Add library="asound" />
+					<Add library="PocoFoundation" />
+					<Add library="unicap" />
+					<Add library="freetype" />
+					<Add library="freeimage" />
+					<Add library="RtAudio" />
+					<Add library="GLee" />
+					<Add library="oFappsink" />
+					<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux64/liboscpack.a" />
+					<Add directory="../../../libs/openFrameworksCompiled/lib/linux64" />
+					<Add directory="../../../libs/freetype/lib/linux64" />
+					<Add directory="../../../libs/FreeImage/lib/linux64" />
+					<Add directory="../../../libs/rtAudio/lib/linux64" />
+					<Add directory="../../../libs/glee/lib/linux64" />
+					<Add directory="../../../libs/gstappsink/lib/linux64" />
+					<Add directory="../../../libs/fmodex/lib/linux64" />
+					<Add directory="../../../libs/unicap/lib/linux64" />
+					<Add directory="../../../libs/poco/lib/linux64" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="#" />
+					<Add after="#      copy libs and shell script to bin directory:" />
+					<Add after="#" />
+					<Add after="cp -r ../../../export/linux64/libs $(PROJECT_DIR)bin/" />
+					<Add after="cp ../../../export/linux64/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
+					<Add after="sed -i s/applicationName/$(TARGET_OUTPUT_BASENAME)/g  $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
+					<Add after="#" />
+					<Add after="#    this is a shell script that can either (a) run the app or (b) launch nautilus to a good directory for you to run the app" />
+					<Add after="#" />
+					<Add after="./cb_build_runner.sh $(TARGET_OUTPUT_BASENAME) $runOnBuild $nautilusOnBuild" />
+					<Add after="#" />
+					<Add after="#     to enable either, change the custom variables in project-&gt;build options-&gt;custom variables" />
+					<Add after="#     to true / false." />
+					<Add after="#" />
+					<Add after="#     currently this is disabled, but allows you to run the app from w/in CB." />
+					<Add after="#" />
+					<Mode after="always" />
+				</ExtraCommands>
+				<Environment>
+					<Variable name="runOnBuild" value="false" />
+					<Variable name="target" value="TSIframework" />
+					<Variable name="nautilusOnBuild" value="false" />
+				</Environment>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-DSIMULATOR" />
@@ -292,6 +428,36 @@
 			<Add directory="../../../libs/videoInput/include" />
 			<Add directory="../../../libs/glut/include" />
 		</Compiler>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Button.hpp">
 			<Option virtualFolder="addons/TableGestures/Controllers/" />
 		</Unit>
@@ -465,36 +631,6 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/tuioinput.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofXmlSettings/libs" />
