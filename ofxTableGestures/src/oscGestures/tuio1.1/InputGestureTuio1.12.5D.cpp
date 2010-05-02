@@ -62,32 +62,12 @@ void InputGestureTuio1125D::tuio25Dcur(ReceivedMessageArgumentStream & args)
 
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
-
-            TeventTuio11NewFinger25D * e = new TeventTuio11NewFinger25D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->zpos = zpos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->zspeed = zspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio1125D,addTuioCursor25D,(s_id,xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel));
             c_s_ids.insert(s_id);
         }
         else
         {
-
-            TeventTuio11MoveFinger25D * e = new TeventTuio11MoveFinger25D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->zpos = zpos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->zspeed = zspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio1125D,updateTuioCursor25D,(s_id,xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel));
         }
 
     }
@@ -105,9 +85,7 @@ void InputGestureTuio1125D::tuio25Dcur(ReceivedMessageArgumentStream & args)
         {
             s_id = *it;
             c_s_ids.erase(s_id);
-            TeventTuio11RemoveFinger25D * e = new TeventTuio11RemoveFinger25D();
-            e->s_id = s_id;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio1125D,removeTuioCursor25D,(s_id));
         }
     }
 
@@ -128,40 +106,12 @@ void InputGestureTuio1125D::tuio25Dobj(ReceivedMessageArgumentStream & args)
 
             if(o_s_ids.find(s_id) == o_s_ids.end())
             {
-
-                TeventTuio11NewObject25D * e = new TeventTuio11NewObject25D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->angle = angle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,addTuioObject25D,(s_id,f_id,xpos, ypos, zpos, angle, xspeed, yspeed, zspeed, rspeed, maccel, raccel));
                 o_s_ids.insert(s_id);
             }
             else
             {
-
-                TeventTuio11MoveObject25D * e = new TeventTuio11MoveObject25D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->angle = angle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,updateTuioObject25D,(s_id,f_id,xpos, ypos, zpos, angle, xspeed, yspeed, zspeed, rspeed, maccel, raccel));
             }
 
         }
@@ -180,9 +130,7 @@ void InputGestureTuio1125D::tuio25Dobj(ReceivedMessageArgumentStream & args)
             {
                 s_id = *it;
                 o_s_ids.erase(s_id);
-                TeventTuio11RemoveObject25D * e = new TeventTuio11RemoveObject25D();
-                e->s_id = s_id;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,removeTuioObject25D,(s_id));
             }
         }
 }
@@ -202,44 +150,12 @@ void InputGestureTuio1125D::tuio25Dblb(ReceivedMessageArgumentStream & args)
 
             if(b_s_ids.find(s_id) == b_s_ids.end())
             {
-
-                TeventTuio11NewBlob25D * e = new TeventTuio11NewBlob25D();
-                e->s_id = s_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->angle = angle;
-                e->width = width;
-                e->height = height;
-                e->area = area;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,addTuioBlob25D,(s_id,xpos, ypos, zpos, angle, width, height, area, xspeed, yspeed, zspeed, rspeed, maccel, raccel));
                 b_s_ids.insert(s_id);
             }
             else
             {
-
-                TeventTuio11MoveBlob25D * e = new TeventTuio11MoveBlob25D();
-                e->s_id = s_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->angle = angle;
-                e->width = width;
-                e->height = height;
-                e->area = area;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->rspeed = rspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,updateTuioBlob25D,(s_id,xpos, ypos, zpos, angle, width, height, area, xspeed, yspeed, zspeed, rspeed, maccel, raccel));
             }
 
         }
@@ -258,9 +174,7 @@ void InputGestureTuio1125D::tuio25Dblb(ReceivedMessageArgumentStream & args)
             {
                 s_id = *it;
                 b_s_ids.erase(s_id);
-                TeventTuio11RemoveBlob25D * e = new TeventTuio11RemoveBlob25D();
-                e->s_id = s_id;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio1125D,removeTuioBlob25D,(s_id));
             }
         }
 }
