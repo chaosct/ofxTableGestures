@@ -39,48 +39,13 @@ using osc::int32;
 
 namespace tuio {
 
-///2.5D Events
+SimpleDeclareEvent(CanTuio113D,addTuioCursor3D,int32,float,float,float,float,float,float,float);
+SimpleDeclareEvent(CanTuio113D,updateTuioCursor3D,int32,float,float,float,float,float,float,float);
+SimpleDeclareEvent(CanTuio113D,removeTuioCursor3D,int32);
 
-class TeventTuio11RemoveFinger3D : public TTEvent<TeventTuio11RemoveFinger3D>
-{
-    public:
-    int32 s_id;
-};
-
-class TeventTuio11NewFinger3D : public TTEvent< TeventTuio11NewFinger3D>
-{
-    public:
-    int32 s_id;
-    float xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel;
-};
-
-class TeventTuio11MoveFinger3D : public TTEvent<TeventTuio11MoveFinger3D>
-{
-    public:
-    int32 s_id;
-    float xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel;
-};
-
-class TeventTuio11RemoveObject3D : public TTEvent< TeventTuio11RemoveObject3D >
-{
-    public:
-    int32 s_id;
-};
-
-class TeventTuio11NewObject3D : public TTEvent<TeventTuio11NewObject3D>
-{
-    public:
-    int32 s_id, f_id;
-    float xpos, ypos, zpos, aangle, bangle, cangle , xspeed, yspeed, zspeed, aspeed,bspeed,cspeed, maccel, raccel;
-};
-
-class TeventTuio11MoveObject3D : public TTEvent <TeventTuio11MoveObject3D>
-{
-    public:
-    int32 s_id, f_id;
-    float xpos, ypos, zpos, aangle, bangle, cangle , xspeed, yspeed, zspeed, aspeed,bspeed,cspeed, maccel, raccel;
-};
-
+SimpleDeclareEvent(CanTuio113D,addTuioObject3D,int32,int32,float,float,float,float,float,float,float,float,float,float,float,float,float,float);
+SimpleDeclareEvent(CanTuio113D,updateTuioObject3D,int32,int32,float,float,float,float,float,float,float,float,float,float,float,float,float,float);
+SimpleDeclareEvent(CanTuio113D,removeTuioObject3D,int32);
 
 class InputGestureTuio113D : public CanTuio11ValidBundle< CompositeGesture > {
     std::set<int32> c_s_ids;
@@ -100,7 +65,6 @@ class CanTuio113D : public Base
 {
     public:
     //Interface redefined by ofApp
-    ///2.5D functions
 
     virtual void addTuioCursor3D(int32 id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
     virtual void updateTuioCursor3D(int32 id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
@@ -110,58 +74,20 @@ class CanTuio113D : public Base
     virtual void updateTuioObject3D(int32 id, int32 f_id ,float xpos,float ypos, float zpos, float aangle, float bangle, float cangle, float xspeed,float yspeed, float zspeed, float aspeed, float bspeed, float cspeed, float maccel, float raccel){}
     virtual void removeTuioObject3D(int32 id){}
 
-    ////2.5D Handlers
-
-    TEventHandler(TeventTuio11RemoveFinger3D)
-    {
-        TeventTuio11RemoveFinger3D * e = static_cast<TeventTuio11RemoveFinger3D *>(evt);
-        removeTuioCursor3D(e->s_id);
-    }
-
-    TEventHandler(TeventTuio11NewFinger3D)
-    {
-        TeventTuio11NewFinger3D * e = static_cast<TeventTuio11NewFinger3D *>(evt);
-        addTuioCursor3D(e->s_id,e->xpos, e->ypos, e->zpos, e->xspeed, e->yspeed, e->zspeed, e->maccel);
-    }
-
-    TEventHandler(TeventTuio11MoveFinger3D)
-    {
-        TeventTuio11MoveFinger3D * e = static_cast<TeventTuio11MoveFinger3D *>(evt);
-        updateTuioCursor3D(e->s_id,e->xpos, e->ypos, e->zpos, e->xspeed, e->yspeed, e->zspeed, e->maccel);
-    }
-
-       TEventHandler(TeventTuio11RemoveObject3D)
-    {
-        TeventTuio11RemoveObject3D * e = static_cast<TeventTuio11RemoveObject3D *>(evt);
-        removeTuioObject3D(e->s_id);
-    }
-
-    TEventHandler(TeventTuio11NewObject3D)
-    {
-        TeventTuio11NewObject3D * e = static_cast<TeventTuio11NewObject3D *>(evt);
-        addTuioObject3D(e->s_id, e->f_id, e->xpos, e->ypos, e->zpos, e->aangle, e->bangle, e->cangle, e->xspeed, e->yspeed, e->zspeed, e->aspeed, e->bspeed, e->cspeed, e->maccel, e->raccel);
-    }
-
-    TEventHandler(TeventTuio11MoveObject3D)
-    {
-        TeventTuio11MoveObject3D * e = static_cast<TeventTuio11MoveObject3D *>(evt);
-        updateTuioObject3D(e->s_id, e->f_id, e->xpos, e->ypos, e->zpos, e->aangle, e->bangle, e->cangle, e->xspeed, e->yspeed, e->zspeed, e->aspeed, e->bspeed, e->cspeed, e->maccel, e->raccel);
-    }
-
-
     //registering
     void Register(Area * a)
     {
         Base::Register(a);
-        ///2.5D Events
 
-        TRegistraCallback(CanTuio113D,TeventTuio11RemoveFinger3D);
-        TRegistraCallback(CanTuio113D,TeventTuio11NewFinger3D);
-        TRegistraCallback(CanTuio113D,TeventTuio11MoveFinger3D);
-        TRegistraCallback(CanTuio113D,TeventTuio11RemoveObject3D);
-        TRegistraCallback(CanTuio113D,TeventTuio11NewObject3D);
-        TRegistraCallback(CanTuio113D,TeventTuio11MoveObject3D);
-        Base::registerInputGesture(Singleton<InputGestureTuio113D>::get());
+        SimpleRegisterEvent(CanTuio113D,addTuioCursor3D);
+        SimpleRegisterEvent(CanTuio113D,updateTuioCursor3D);
+        SimpleRegisterEvent(CanTuio113D,removeTuioCursor3D);
+
+        SimpleRegisterEvent(CanTuio113D,addTuioObject3D);
+        SimpleRegisterEvent(CanTuio113D,updateTuioObject3D);
+        SimpleRegisterEvent(CanTuio113D,removeTuioObject3D);
+
+        Base::template registerIG<InputGestureTuio113D>();
     }
 };
 

@@ -60,32 +60,12 @@ void InputGestureTuio113D::tuio3Dcur(ReceivedMessageArgumentStream & args)
 
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
-
-            TeventTuio11NewFinger3D * e = new TeventTuio11NewFinger3D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->zpos = zpos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->zspeed = zspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio113D,addTuioCursor3D,(s_id, xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel));
             c_s_ids.insert(s_id);
         }
         else
         {
-
-            TeventTuio11MoveFinger3D * e = new TeventTuio11MoveFinger3D();
-            e->s_id = s_id;
-            e->xpos = xpos;
-            e->ypos = ypos;
-            e->zpos = zpos;
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->zspeed = zspeed;
-            e->maccel = maccel;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio113D,updateTuioCursor3D,(s_id, xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel));
         }
 
     }
@@ -103,9 +83,7 @@ void InputGestureTuio113D::tuio3Dcur(ReceivedMessageArgumentStream & args)
         {
             s_id = *it;
             c_s_ids.erase(s_id);
-            TeventTuio11RemoveFinger3D * e = new TeventTuio11RemoveFinger3D();
-            e->s_id = s_id;
-            events.push_back(e);
+            SimpleCallEvent(CanTuio113D,removeTuioCursor3D,(s_id));
         }
     }
 
@@ -126,48 +104,12 @@ void InputGestureTuio113D::tuio3Dobj(ReceivedMessageArgumentStream & args)
 
             if(o_s_ids.find(s_id) == o_s_ids.end())
             {
-
-                TeventTuio11NewObject3D * e = new TeventTuio11NewObject3D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->aangle = aangle;
-                e->bangle = bangle;
-                e->cangle = cangle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->aspeed = aspeed;
-                e->bspeed = bspeed;
-                e->cspeed = cspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio113D,addTuioObject3D,(s_id, f_id,xpos, ypos, zpos, aangle, bangle, cangle , xspeed, yspeed, zspeed, aspeed,bspeed,cspeed, maccel, raccel));
                 o_s_ids.insert(s_id);
             }
             else
             {
-
-                TeventTuio11MoveObject3D * e = new TeventTuio11MoveObject3D();
-                e->s_id = s_id;
-                e->f_id = f_id;
-                e->xpos = xpos;
-                e->ypos = ypos;
-                e->zpos = zpos;
-                e->aangle = aangle;
-                e->bangle = bangle;
-                e->cangle = cangle;
-                e->xspeed = xspeed;
-                e->yspeed = yspeed;
-                e->zspeed = zspeed;
-                e->aspeed = aspeed;
-                e->bspeed = bspeed;
-                e->cspeed = cspeed;
-                e->maccel = maccel;
-                e->raccel = raccel;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio113D,updateTuioObject3D,(s_id, f_id,xpos, ypos, zpos, aangle, bangle, cangle , xspeed, yspeed, zspeed, aspeed,bspeed,cspeed, maccel, raccel));
             }
 
         }
@@ -186,9 +128,7 @@ void InputGestureTuio113D::tuio3Dobj(ReceivedMessageArgumentStream & args)
             {
                 s_id = *it;
                 o_s_ids.erase(s_id);
-                TeventTuio11RemoveObject3D * e = new TeventTuio11RemoveObject3D();
-                e->s_id = s_id;
-                events.push_back(e);
+                SimpleCallEvent(CanTuio113D,removeTuioObject3D,(s_id));
             }
         }
 }
