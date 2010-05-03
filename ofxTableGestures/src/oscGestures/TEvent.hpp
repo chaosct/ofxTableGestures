@@ -41,7 +41,7 @@
 
 namespace tuio {
 
-///This class assigns a single identifier to every TTEvent subclass
+///This class assigns a single identifier to every TEvent subclass
 class EventTypes : public Singleton<EventTypes>
 {
     private:
@@ -50,10 +50,6 @@ class EventTypes : public Singleton<EventTypes>
     friend class Singleton<EventTypes>;
     EventTypes():n(0){}
     public:
-    /*unsigned int getNumber()
-    {
-        return n++;
-    }*/
     template<typename T>
     unsigned int get_number()
     {
@@ -79,26 +75,6 @@ class TEvent {
     TEvent(){}
 
 };
-
-
-///The TTEvent template class allows every TEvent subclass to get a single differenciate identifier.
-template <typename TE>
-class TTEvent : public TEvent
-{
-    public:
-    TTEvent()
-    {
-        static bool ins = false;
-        static unsigned int uniquename;
-        if (!ins)
-        {
-            uniquename = EventTypes::Instance().get_number<TE>();
-            ins = true;
-        }
-        name = uniquename;
-    }
-};
-
 
 
 } // namespace tuio

@@ -30,10 +30,6 @@
 #ifndef TUIOAPP_H_INCLUDED
 #define TUIOAPP_H_INCLUDED
 
-#define TRegistraCallback(T,TE) Base::registerCallback(Singleton<TE>::Instance().name,new tuio::Callback<T>(this,&T::EP_##TE ))
-#define TEventHandler(en) void EP_##en (tuio::TEvent * evt)
-
-
 #include "EventQueue.hpp"
 #include "tuioinput.hpp"
 #include "InputGesture.hpp"
@@ -64,31 +60,12 @@ public:
 };
 
 
-//from http://stackoverflow.com/questions/1284014/callback-in-c-template-member#answer-1284047
-template<typename C>
+template<typename C, typename M, typename E>
 class Callback : public GenericCallback
 {
       public:
   // constructs a callback to a method in the context of a given object
-  Callback(C* object, void (C::*method)(TEvent *))
-    : o(object),m(method) {}
-  // calls the method
-  void run(TEvent * te) {
-    (o ->* m) (te);
-  }
-  private:
-  // container for the pointer to method
-    C* o;
-    void (C::*m)(TEvent *);
-};
-
-///This Callback doesn't need handlers, but it needs to use AEvent
-template<typename C, typename M, typename E>
-class AlternateCallback : public GenericCallback
-{
-      public:
-  // constructs a callback to a method in the context of a given object
-  AlternateCallback(C* object, M method)
+  Callback(C* object, M method)
     : o(object),m(method) {}
   // calls the method
   void _run(TEvent * te)
@@ -104,10 +81,10 @@ class AlternateCallback : public GenericCallback
 };
 
 #define _SimpleGetEventName(canclass,method) Event_##canclass##method
-
-#define SimpleDeclareEvent(canclass,method,...) DeclareEvent(_SimpleGetEventName(canclass,method),__VA_ARGS__)
+#define _makeEvent(classname,arguments) new classname(boost::fusion::make_vector arguments)
+#define SimpleDeclareEvent(canclass,method,...) _DeclareEvent(_SimpleGetEventName(canclass,method),__VA_ARGS__)
 #define SimpleCallEvent(canclass,method,arguments) this->events.push_back(SimpleMakeEvent(canclass,method,arguments))
-#define SimpleMakeEvent(canclass,method,arguments) makeEvent(_SimpleGetEventName(canclass,method),arguments)
+#define SimpleMakeEvent(canclass,method,arguments) _makeEvent(_SimpleGetEventName(canclass,method),arguments)
 #define SimpleRegisterEvent(canclass,method) _SimpleGetEventName(canclass,method)::registerCallback(this,&canclass::method);
 
 #ifdef DEBUG
@@ -116,7 +93,7 @@ class AlternateCallback : public GenericCallback
 #define _DeclareEvent_Debug_Line(eventname)
 #endif
 
-#define DeclareEvent(eventname,...) class eventname : \
+#define _DeclareEvent(eventname,...) class eventname : \
     public AEvent<eventname,boost::fusion::vector<__VA_ARGS__> >\
         {   typedef boost::fusion::vector<__VA_ARGS__> SequenceType;\
             public: eventname(SequenceType v = SequenceType()): \
@@ -124,7 +101,7 @@ class AlternateCallback : public GenericCallback
             _DeclareEvent_Debug_Line(eventname) \
             }};
 
-#define makeEvent(classname,arguments) new classname(boost::fusion::make_vector arguments)
+
 
 
 
@@ -138,9 +115,9 @@ class AEvent : public TEvent
     }
     Sequence s;
     template<typename C,typename M>
-    static AlternateCallback<C,M,AEvent> * makeCallback(C* object, M method)
+    static Callback<C,M,AEvent> * makeCallback(C* object, M method)
     {
-        return new AlternateCallback<C,M,AEvent>(object,method);
+        return new Callback<C,M,AEvent>(object,method);
     }
     template<typename TA,typename M>
     static void registerCallback(TA *ta,M m)
