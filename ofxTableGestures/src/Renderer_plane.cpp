@@ -31,6 +31,7 @@
 #include <fstream>
 #include "Renderer_plane.hpp"
 #include "ofMain.h"
+#include "TableApp.hpp"
 
 Renderer_plane::Renderer_plane(){
 }
@@ -41,13 +42,18 @@ Renderer_plane::~Renderer_plane(){
 void Renderer_plane::StartDistortion(){
     glPushMatrix();
     glTranslated(center_x,center_y,0);
-    glTranslatef((ofGetWidth())/2,(ofGetHeight())/2,0);
+    glTranslatef(0.5f,0.5f,0.0f);
     glRotated(angle,0,0,1);
     glRotated(angle_h,1,0,0);
     glRotated(angle_w,0,1,0);
     glScaled(width_offset,height_offset,1);
-    glTranslatef(-(ofGetWidth())/2,-(ofGetHeight())/2,0);
-    glGetDoublev(GL_MODELVIEW_MATRIX,Renderer::matrix);
+    glTranslatef(-0.5f,-0.5f,0.0f);
+    glGetDoublev(GL_MODELVIEW_MATRIX,matrix);
+//    std::cout << matrix[0] << "\t" << matrix[4] << "\t" << matrix[8] << "\t"<< matrix[12] << std::endl;
+//    std::cout << matrix[1] << "\t" << matrix[5] << "\t" << matrix[9] << "\t"<< matrix[13] << std::endl;
+//    std::cout << matrix[2] << "\t" << matrix[6] << "\t" << matrix[10] << "\t"<< matrix[14] << std::endl;
+//    std::cout << matrix[3] << "\t" << matrix[7] << "\t" << matrix[11] << "\t"<< matrix[15] << std::endl;
+//    std::cout << std::endl;
 }
 
 void Renderer_plane::EndDistortion(){

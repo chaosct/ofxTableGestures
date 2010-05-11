@@ -57,15 +57,19 @@ class Renderer{
     protected:
         ///Distortion matrix to be stored
         double matrix[16];
+        double imatrix[16];
         void SetIdentity(double* _matrix);
         ///To be rewritted:
         ///Called before draw thing to be distortionate
         virtual void StartDistortion()=0;
         ///Called after draw things to be distortionate
         virtual void EndDistortion()=0;
+
+        void CalculateInverse(int n, double* matrix);
     public:
         ///returns the distortion Matrix
         double * GetDistortionMatrix();
+        double * GetInverseDistortionMatrix();
         ///constructor
         Renderer();
         virtual ~Renderer()=0;
@@ -87,6 +91,8 @@ class Renderer{
         virtual std::string ToString();
         ///Resets the distortion values
         void LoadDefaultValues();
+
+        void UpdateMatrix();
 };
 
 #endif

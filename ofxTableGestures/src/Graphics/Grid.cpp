@@ -45,7 +45,7 @@ Grid::~Grid()
 
 void Grid::Resize()
 {
-    GenerateOpenGL_lists();
+    //GenerateOpenGL_lists();
 }
 
 void Grid::Draw(bool calibration_enabled, int calibration_mode)
@@ -70,11 +70,11 @@ void Grid::Draw(bool calibration_enabled, int calibration_mode)
 
 void Grid::GenerateOpenGL_lists()
 {
-    int width = ofGetWidth();
-    int height = ofGetHeight();
+    float width = 1;//ofGetWidth();
+    float height = 1;//ofGetHeight();
     ofSetColor(255,255,255);
     ofSetLineWidth(4.0f);
-    int linelength;
+    int linelength = 1;
     grid_list = glGenLists(5);
 
     //################################
@@ -84,28 +84,15 @@ void Grid::GenerateOpenGL_lists()
     glPushMatrix();
     ///Draws the line-grid depending the dimensions of the screen,
     ///for the reactable, the grid must be square shaped.
-    if(width>height)
-    {
-        linelength = height;
-        glTranslatef((width-height)/2,0,0);
         for (int i =0; i<=w_lines; i++)
-            ofLine( i*(linelength/w_lines) ,  0 , i*(linelength/w_lines), linelength);
+            ofLine( (float)i*(linelength/(float)w_lines) ,  0 , (float)i*(linelength/(float)w_lines), linelength);
         for (int i =0; i<=h_lines; i++)
-            ofLine(0, i*(linelength/h_lines) , linelength, i*(linelength/h_lines));
-    }else
-    {
-        glTranslatef(0,(height-width)/2,0);
-        linelength = width;
-        for (int i =0; i<=w_lines; i++)
-            ofLine( i*(linelength/w_lines) ,  0 , i*(linelength/w_lines), linelength);
-        for (int i =0; i<=h_lines; i++)
-            ofLine(0, i*(linelength/h_lines) , linelength, i*(linelength/h_lines));
-    }
+            ofLine(0, (float)i*(linelength/(float)h_lines) , linelength, (float)i*(linelength/(float)h_lines));
     ofNoFill();
     ///Draws the helping circles of the grid.
     ofSetCircleResolution(60);
     for (int i =0; i<=w_lines/2; i++)
-        ofCircle(linelength/2,linelength/2,(i*(linelength/w_lines)));
+        ofCircle(0.5f,0.5f,((float)i*(1.0f/(float)w_lines)));
     ofFill();
     ofSetCircleResolution(20);
     glPopMatrix();
@@ -116,13 +103,11 @@ void Grid::GenerateOpenGL_lists()
     //################################
     glNewList(grid_list+1,GL_COMPILE);
     glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
-		glTranslatef(0.5f*linelength,0.55f*linelength,0);
-		RenderArrow_two(linelength/2);
-		glTranslatef(-0.05*linelength,-0.05f*linelength,0);
+		glTranslatef(0.5f,0.6f,0);
+		RenderArrow_two(linelength);
+		glTranslatef(-0.1f,-0.1f,0);
 		glRotatef(90,0,0,1);
-		RenderArrow_two(linelength/2);
+		RenderArrow_two(linelength);
 	glPopMatrix();
     glEndList();
 	//################################
@@ -130,8 +115,6 @@ void Grid::GenerateOpenGL_lists()
     //################################
     glNewList(grid_list+2,GL_COMPILE);
     glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
 		glPushMatrix();
 		glTranslatef(0.5f*linelength,0.9f*linelength,0);
 		RenderArrow_one(linelength);
@@ -156,8 +139,6 @@ void Grid::GenerateOpenGL_lists()
     //################################
     glNewList(grid_list+3,GL_COMPILE);
 	glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
 		glTranslatef(0.5f*linelength,0.5f*linelength,0);
 		glRotatef(-90,0,0,1);
 		DrawArrow_three(linelength);
@@ -168,8 +149,6 @@ void Grid::GenerateOpenGL_lists()
     //################################
     glNewList(grid_list+4,GL_COMPILE);
     glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
 		glPushMatrix();
 		glTranslatef(0.05f*linelength,0.5f*linelength,0);
 		glPushMatrix();

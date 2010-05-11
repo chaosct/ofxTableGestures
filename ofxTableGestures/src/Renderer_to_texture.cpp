@@ -52,12 +52,19 @@ void Renderer_to_texture::EndDistortion(){
     ofSetColor(255,255,255);
     glPushMatrix();
     glTranslated(center_x,center_y,0);
-    glTranslatef((ofGetWidth())/2,(ofGetHeight())/2,0);
+    glTranslatef(0.5f,0.5f,0);
     glRotated(angle,0,0,1);
     glRotated(angle_h,1,0,0);
     glRotated(angle_w,0,1,0);
     glScaled(width_offset,height_offset,1);
-    glTranslatef(-(ofGetWidth())/2,-(ofGetHeight())/2,0);
+    glTranslatef(-0.5f,-0.5f,0);
+    //glGetDoublev(GL_MODELVIEW_MATRIX,Renderer::matrix);
+//    std::cout << matrix[0] << "\t" << matrix[4] << "\t" << matrix[8] << "\t"<< matrix[12] << std::endl;
+//    std::cout << matrix[1] << "\t" << matrix[5] << "\t" << matrix[9] << "\t"<< matrix[13] << std::endl;
+//    std::cout << matrix[2] << "\t" << matrix[6] << "\t" << matrix[10] << "\t"<< matrix[14] << std::endl;
+//    std::cout << matrix[3] << "\t" << matrix[7] << "\t" << matrix[11] << "\t"<< matrix[15] << std::endl;
+//    std::cout << std::endl;
+
     ///Draws the texture
     texScreen.draw(0,0);
     glPopMatrix();

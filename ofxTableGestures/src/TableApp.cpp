@@ -35,11 +35,13 @@
 #include "Renderer_to_texture.hpp"
 #include "GlobalConfig.hpp"
 
-#define WIDTH_STEP 0.005
-#define ANGLE_STEP 1
+#define OFFSET_STEP 0.002f
+#define WIDTH_STEP 0.005f
+#define ANGLE_STEP 1.0f
 #define DISTORTION_PATH "calibration.conf"
 
 double * TableApp::calibration_matrix = NULL;
+double * TableApp::inverse_calibration_matrix = NULL;
 
 TableApp::TableApp():
 //    calibration_enabled(false),
@@ -84,11 +86,25 @@ void TableApp::setup(){
     ofBackground(0, 0, 0);
     ofHideCursor();
     Setup();
+    shortside = min(ofGetWidth(),ofGetHeight());
+    if(squaredInterface)
+    {
+        //if the surface is squared we center the drawing  plane
+        //glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
+        GlobalConfig::Instance().height = 1;
+        GlobalConfig::Instance().width = 1;
+    }
+    else
+    {
+        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
+        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+    }
 }
 
 //--------------------------------------------------------------
 void TableApp::update(){
     TableApp::calibration_matrix = renderer->GetDistortionMatrix();
+    TableApp::inverse_calibration_matrix = renderer->GetInverseDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
     tuio::tuioAreaDelivery::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
@@ -155,43 +171,36 @@ void TableApp::DrawHelp()
 
 void TableApp::draw(){
     ofPushMatrix();
-    #ifdef SIMULATOR
-    if(is_simulating) ofScale(0.91f,0.91f,1.0f);
-    #endif
+        #ifdef SIMULATOR
+        if(is_simulating) ofScale(0.91f,0.91f,1.0f);
+        #endif
 
-    renderer->Start();
-    ofPushMatrix();
-    int shortside = min(ofGetWidth(),ofGetHeight());
-    if(squaredInterface)
-    {
-        //if the surface is squared we center the drawing  plane
-        glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
-        GlobalConfig::Instance().height = 1;
-        GlobalConfig::Instance().width = 1;
-    }
-    else
-    {
-        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
-        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
-    }
-    glScalef(shortside,shortside,1);
+        if(squaredInterface) glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
 
-    ///Draws all 'Graphics'
-    glDisable(GL_DEPTH_TEST);
-    ofPushMatrix();
-    GraphicDispatcher::Instance().Draw();
-    ofPopMatrix();
-    ofPushMatrix();
-    Draw();
-    ofPopMatrix();
-    glEnable(GL_DEPTH_TEST);
+        ofPushMatrix();
+            glScalef(shortside,shortside,1);
+        ///renderer init
+            renderer->Start();
+            ///Draws all 'Graphics'
+            glDisable(GL_DEPTH_TEST);
+            ofPushMatrix();
+                GraphicDispatcher::Instance().Draw();
+            ofPopMatrix();
 
-    ofPopMatrix();
-    grid->Draw(show_grid,calibration_mode);
-    renderer->End();
-    ///Draws Info & help
-    DrawInfo();
-    DrawHelp();
+            ofPushMatrix();
+                Draw();
+            ofPopMatrix();
+
+            glEnable(GL_DEPTH_TEST);
+        ///renderer ends
+            grid->Draw(show_grid,calibration_mode);
+            renderer->End();
+        ofPopMatrix();
+
+        ///Draws Info & help
+        DrawInfo();
+        DrawHelp();
+
     ofPopMatrix();
     #ifdef SIMULATOR
     if(is_simulating) simulator->Draw();
@@ -255,7 +264,7 @@ void TableApp::keyReleased(int key){
             {
                 switch(calibration_mode)
                 {
-                    case 0:renderer->center_y--;break;
+                    case 0:renderer->center_y-=OFFSET_STEP;break;
                     case 1:renderer->height_offset+=WIDTH_STEP;break;
                     case 2:renderer->angle+=ANGLE_STEP;break;
                     case 3:renderer->angle_h+=ANGLE_STEP;break;
@@ -270,7 +279,7 @@ void TableApp::keyReleased(int key){
             {
                 switch(calibration_mode)
                 {
-                    case 0:renderer->center_y++;break;
+                    case 0:renderer->center_y+=OFFSET_STEP;break;
                     case 1:renderer->height_offset-=WIDTH_STEP;break;
                     case 2:renderer->angle-=ANGLE_STEP;break;
                     case 3:renderer->angle_h-=ANGLE_STEP;break;
@@ -285,7 +294,7 @@ void TableApp::keyReleased(int key){
             {
                 switch(calibration_mode)
                 {
-                    case 0:renderer->center_x++;break;
+                    case 0:renderer->center_x+=OFFSET_STEP;break;
                     case 1:renderer->width_offset+=WIDTH_STEP;break;
                     case 2:renderer->angle+=ANGLE_STEP;break;
                     case 3:renderer->angle_w+=ANGLE_STEP;break;
@@ -300,7 +309,7 @@ void TableApp::keyReleased(int key){
             {
                 switch(calibration_mode)
                 {
-                    case 0:renderer->center_x--;break;
+                    case 0:renderer->center_x-=OFFSET_STEP;break;
                     case 1:renderer->width_offset-=WIDTH_STEP;break;
                     case 2:renderer->angle-=ANGLE_STEP;break;
                     case 3:renderer->angle_w-=ANGLE_STEP;break;
@@ -370,6 +379,7 @@ void TableApp::keyReleased(int key){
             #endif
         break;
     }
+    renderer->UpdateMatrix();
 }
 
 //--------------------------------------------------------------
@@ -380,6 +390,18 @@ void TableApp::windowResized(int w, int h){
     grid->Resize();
     ///calls resize method of all 'Graphics' when nedded.
     GraphicDispatcher::Instance().Resize(w,h);
+    shortside = min(ofGetWidth(),ofGetHeight());
+    if(squaredInterface)
+    {
+        //if the surface is squared we center the drawing  plane
+        GlobalConfig::Instance().height = 1;
+        GlobalConfig::Instance().width = 1;
+    }
+    else
+    {
+        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
+        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+    }
 }
 
 //--------------------------------------------------------------

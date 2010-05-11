@@ -37,6 +37,7 @@
 Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH){
     LoadDefaultValues();
     SetIdentity(matrix);
+    SetIdentity(imatrix);
 }
 
 Renderer::~Renderer(){}
@@ -141,4 +142,55 @@ void Renderer::SetIdentity(double* _matrix){
 
 double * Renderer::GetDistortionMatrix(){
     return matrix;
+}
+
+double * Renderer::GetInverseDistortionMatrix(){
+    return imatrix;
+}
+
+void Renderer::UpdateMatrix(){
+    CalculateInverse(4,matrix);
+}
+
+void Renderer::CalculateInverse(int n, double* matrix)
+{
+    double a[16];
+    for(int i=0;i<n*n;i++) a[i]=matrix[i];
+    double b[16];
+    for(int i=0;i<n*n;i++) b[i]=0;
+   // double *_imatrix = new double(n*n);
+    for(int i=0;i<n*n;i++) imatrix[i]=0;
+    for (int i=0; i<n; i++)b[(i*n)+i]=1.0;
+
+//transformación de la matriz y de los términos independientes
+    for (int k=0; k<n-1; k++)
+    {
+        for (int i=k+1; i<n; i++)
+        {
+//términos independientes
+            for (int s=0; s<n; s++)
+            {
+                b[(i*n)+s]-=a[(i*n)+k]*b[(k*n)+s]/a[(k*n)+k];
+            }
+//elementos de la matriz
+            for (int j=k+1; j<n; j++)
+            {
+                a[(i*n)+j]-=a[(i*n)+k]*a[(k*n)+j]/a[(k*n)+k];
+            }
+        }
+    }
+//cálculo de las incógnitas, elementos de la matriz inversa
+    for (int s=0; s<n; s++)
+    {
+        imatrix[((n-1)*n)+s]=b[((n-1)*n)+s]/a[((n-1)*n)+(n-1)];
+        for (int i=n-2; i>=0; i--)
+        {
+            imatrix[(i*n)+s]=b[(i*n)+s]/a[(i*n)+i];
+            for (int k=n-1; k>i; k--)
+            {
+                imatrix[(i*n)+s]-=a[(i*n)+k]*imatrix[(k*n)+s]/a[(i*n)+i];
+            }
+        }
+    }
+//    return c;
 }
