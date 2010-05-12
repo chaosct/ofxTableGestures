@@ -37,17 +37,24 @@ namespace tuio
 {
 
 SimpleDeclareEvent(CanTap,Tap,float,float);
+SimpleDeclareEvent(CanTap,DoubleTap,float,float);
 
 class InputGestueTap : public CanDirectFingers < CompositeGesture >
 {
     float & maxdistance;
+    float & maxdistance_doubletap;
     float & maxtime;
+    float & maxtime_doubletap;
+
     std::map< DirectFinger *,  std::pair < DirectPoint , float > > previous;
+    std::list< std::pair < DirectPoint , float > >  tap;
 
     public:
     InputGestueTap():
     maxdistance(GlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
-    maxtime(GlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f)){}
+    maxdistance_doubletap(GlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE_DOUBLETAP",0.002f)),
+    maxtime(GlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f)),
+    maxtime_doubletap(GlobalConfig::getRef("GESTURES:TAP:MAXTIME_DOUBLETAP",0.2f)){}
 
     virtual void newCursor(DirectFinger * f)
     {
@@ -56,6 +63,7 @@ class InputGestueTap : public CanDirectFingers < CompositeGesture >
     }
     virtual void removeCursor(DirectFinger *f)
     {
+        checkTime();
         if(previous.find(f) != previous.end())
         {
             float now = ofGetElapsedTimef();
@@ -63,11 +71,31 @@ class InputGestueTap : public CanDirectFingers < CompositeGesture >
                 previous[f].first.getDistance(f) <= maxdistance)
                 {
                     SimpleCallEvent(CanTap,Tap,(f->getX(),f->getY()));
+                    for(std::list< std::pair < DirectPoint , float > >::iterator it = tap.begin(); it != tap.end(); it++ ){
+                        if(it->first.getDistance(f) <= maxdistance_doubletap){
+                            std::list< std::pair < DirectPoint , float > >::iterator it2 = it;
+                            it++;
+                            tap.erase(it2);
+                            SimpleCallEvent(CanTap,DoubleTap,(f->getX(),f->getY()));
+                        }
+                    }
+                    tap.push_back(make_pair(DirectPoint(f->getX(),f->getY()),now));
                 }
             previous.erase(f);
         }
     }
     virtual void updateCursor(DirectFinger *){}
+
+    void checkTime(){
+        float now = ofGetElapsedTimef();
+        for(std::list< std::pair < DirectPoint , float > >::iterator it = tap.begin(); it != tap.end(); it++ ){
+            if((now-it->second) > (maxtime_doubletap)){
+                std::list< std::pair < DirectPoint , float > >::iterator it2 = it;
+                it++;
+                tap.erase(it2);
+            }
+        }
+    }
     //Area-aware interface optionally redefined by ofApp
     virtual void enterCursor(DirectFinger *df){}
     virtual void exitCursor(DirectFinger *f)
@@ -83,11 +111,13 @@ class CanTap: public Base
     public:
     //Interface redefined by ofApp
     virtual void Tap(float x, float y){}
+    virtual void DoubleTap(float x, float y){}
 
     void Register(Area * a)
     {
         Base::Register(a);
         SimpleRegisterEvent(CanTap, Tap);
+        SimpleRegisterEvent(CanTap, DoubleTap);
         Base::template registerIG<InputGestueTap>();
     }
 };
