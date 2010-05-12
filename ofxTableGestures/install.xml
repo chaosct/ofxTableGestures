@@ -73,6 +73,7 @@
 
             <folder name="addons/TableGestures/oscGestures/Gestures-Extras">
                 <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureTap.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureLongPush.hpp</file>
             </folder>
 
 
@@ -97,6 +98,11 @@
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.cpp</file>
+            </folder>
+            
+            <folder name="addons/TableGestures/Tools">
+                <file>../../../addons/ofxTableGestures/src/Tools/Calibrator.hpp</file>
             </folder>
 
         </src>
@@ -112,6 +118,7 @@
             <path>../../../addons/ofxTableGestures/src/Graphics</path>
             <path>../../../addons/ofxTableGestures/src/Graphics/objects</path>
             <path>../../../addons/ofxTableGestures/ext</path>
+            <path>../../../addons/ofxTableGestures/src/Tools/</path>
         </include>
         
     </add>
