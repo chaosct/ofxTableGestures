@@ -66,6 +66,7 @@ class Renderer{
         virtual void EndDistortion()=0;
 
         void CalculateInverse(int n, double* matrix);
+        void UpdateMatrix();
     public:
         ///returns the distortion Matrix
         double * GetDistortionMatrix();
@@ -91,8 +92,6 @@ class Renderer{
         virtual std::string ToString();
         ///Resets the distortion values
         void LoadDefaultValues();
-
-        void UpdateMatrix();
 };
 
 #endif

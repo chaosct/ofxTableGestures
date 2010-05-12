@@ -379,7 +379,6 @@ void TableApp::keyReleased(int key){
             #endif
         break;
     }
-    renderer->UpdateMatrix();
 }
 
 //--------------------------------------------------------------

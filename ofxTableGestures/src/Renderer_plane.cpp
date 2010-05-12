@@ -49,11 +49,7 @@ void Renderer_plane::StartDistortion(){
     glScaled(width_offset,height_offset,1);
     glTranslatef(-0.5f,-0.5f,0.0f);
     glGetDoublev(GL_MODELVIEW_MATRIX,matrix);
-//    std::cout << matrix[0] << "\t" << matrix[4] << "\t" << matrix[8] << "\t"<< matrix[12] << std::endl;
-//    std::cout << matrix[1] << "\t" << matrix[5] << "\t" << matrix[9] << "\t"<< matrix[13] << std::endl;
-//    std::cout << matrix[2] << "\t" << matrix[6] << "\t" << matrix[10] << "\t"<< matrix[14] << std::endl;
-//    std::cout << matrix[3] << "\t" << matrix[7] << "\t" << matrix[11] << "\t"<< matrix[15] << std::endl;
-//    std::cout << std::endl;
+    UpdateMatrix();
 }
 
 void Renderer_plane::EndDistortion(){
