@@ -2,10 +2,11 @@
 #define BUTTON_HPP_INCLUDED
 
 #include "InputGestureDirectFingers.hpp"
+#include "InputGestureTap.hpp"
 #include "Graphic.hpp"
 #include <set>
 
-class Button : public tuio::CanDirectFingers< Graphic >
+class Button : public tuio::CanTap < tuio::CanDirectFingers< Graphic > >
 {
     std::set<tuio::DirectFinger *> fingers;
     public:
@@ -18,10 +19,13 @@ class Button : public tuio::CanDirectFingers< Graphic >
     //ignore cursors not appearing directly
     void enterCursor(tuio::DirectFinger *){}
 
+    void Tap(float x, float y){OnTap();}
+
     bool IsPressed(){return fingers.size() > 0;}
 
     virtual void OnPush(){}
     virtual void OnRelease(){}
+    virtual void OnTap(){}
 };
 
 class CircleButton: public Button

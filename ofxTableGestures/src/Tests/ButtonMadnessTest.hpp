@@ -72,7 +72,7 @@ class ButtonMadnessTest : public CircleButton
         ofCircle(x,y,r);
         ofDisableAlphaBlending();
     }
-    void OnPush()
+    void OnTap()
     {
         ButtonMadnessTest * b = new ButtonMadnessTest();
         b->vx = ofRandom(-0.005,0.005f);

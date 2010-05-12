@@ -49,6 +49,7 @@
 #include "boost/mpl/assert.hpp"
 #include "boost/type_traits/is_base_of.hpp"
 #include "Area.hpp"
+#include "GlobalConfig.hpp"
 
 namespace tuio
 {
@@ -299,7 +300,11 @@ void tuioArea<T>::_Register(Area * a )
     area = a;
     if(!area)
     {
-        area = NoArea::Create();
+        if(GlobalConfig::getRef("GLOBAL:ROUNDTABLE",1))
+            area = RoundTableArea::Create();
+        else
+            area = NoArea::Create();
+
     }
     InputGestureProxy * p = tuioAreaDelivery::Instance().getGestureByArea<InputGestureProxy>(area);
     inputGestureManager::Instance().addGesture(p);
