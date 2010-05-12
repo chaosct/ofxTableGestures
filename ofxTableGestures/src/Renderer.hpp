@@ -54,6 +54,8 @@ class Renderer{
 		std::string DistortionPath;
         ///Enable/disable distortion flag
         bool distortion_enabled;
+
+        bool is_matrix_updated;
     protected:
         ///Distortion matrix to be stored
         double matrix[16];
@@ -64,6 +66,7 @@ class Renderer{
         virtual void StartDistortion()=0;
         ///Called after draw things to be distortionate
         virtual void EndDistortion()=0;
+
 
         void CalculateInverse(int n, double* matrix);
         void UpdateMatrix();

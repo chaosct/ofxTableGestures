@@ -34,7 +34,7 @@
 
 #define DISTORTION_PATH "calibration.conf"
 
-Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH){
+Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH),is_matrix_updated(false){
     LoadDefaultValues();
     SetIdentity(matrix);
     SetIdentity(imatrix);
@@ -149,7 +149,10 @@ double * Renderer::GetInverseDistortionMatrix(){
 }
 
 void Renderer::UpdateMatrix(){
-    CalculateInverse(4,matrix);
+    if(!is_matrix_updated){
+        CalculateInverse(4,matrix);
+        is_matrix_updated = true;
+    }
 }
 
 void Renderer::CalculateInverse(int n, double* matrix)

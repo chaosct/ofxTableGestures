@@ -269,6 +269,7 @@ void TableApp::keyReleased(int key){
                     case 2:renderer->angle+=ANGLE_STEP;break;
                     case 3:renderer->angle_h+=ANGLE_STEP;break;
                 }
+                renderer->is_matrix_updated = false;
             }
         break;
         case OF_KEY_DOWN:
@@ -284,6 +285,7 @@ void TableApp::keyReleased(int key){
                     case 2:renderer->angle-=ANGLE_STEP;break;
                     case 3:renderer->angle_h-=ANGLE_STEP;break;
                 }
+                renderer->is_matrix_updated = false;
             }
         break;
         case OF_KEY_RIGHT:
@@ -299,6 +301,7 @@ void TableApp::keyReleased(int key){
                     case 2:renderer->angle+=ANGLE_STEP;break;
                     case 3:renderer->angle_w+=ANGLE_STEP;break;
                 }
+                renderer->is_matrix_updated = false;
             }
         break;
         case OF_KEY_LEFT:
@@ -314,6 +317,7 @@ void TableApp::keyReleased(int key){
                     case 2:renderer->angle-=ANGLE_STEP;break;
                     case 3:renderer->angle_w-=ANGLE_STEP;break;
                 }
+                renderer->is_matrix_updated = false;
             }
         break;
         case 'i':
@@ -330,8 +334,10 @@ void TableApp::keyReleased(int key){
             }
         break;
         case 'r':
-            if(renderer->IsEnabled() && show_grid)
+            if(renderer->IsEnabled() && show_grid){
                 renderer->LoadDefaultValues();
+                renderer->is_matrix_updated = false;
+            }
             #ifdef SIMULATOR
                 if(is_simulating)
                     simulator->Reset();
