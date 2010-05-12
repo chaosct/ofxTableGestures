@@ -59,7 +59,6 @@ void Renderer_to_texture::EndDistortion(bool is_enabled, bool is_simulating){
     glScaled(width_offset,height_offset,1);
     glTranslatef(-0.5f,-0.5f,0);
     glPushMatrix();
-    if(is_simulating)glTranslatef(-(1-0.91)/2,-(1-0.91)/2,0);
     glGetDoublev(GL_MODELVIEW_MATRIX,matrix);
     glPopMatrix();
     UpdateMatrix();
