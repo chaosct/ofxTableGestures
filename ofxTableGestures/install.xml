@@ -33,6 +33,8 @@
 				<file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.cpp</file>
 				<file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.cpp</file>
+				<file>../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.cpp</file>
 			</folder>
 			<folder name="addons/TableGestures/oscGestures">
 				<file>../../../addons/ofxTableGestures/src/oscGestures/GestureDispatcher.cpp</file>
@@ -71,6 +73,13 @@
 				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.13D.hpp</file>
 				<file>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/InputGestureTuio1.1fseq.hpp</file>
 			</folder>
+			<folder name="addons/TableGestures/oscGestures/Gestures-Extras">
+			    <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureTap.hpp</file>
+			    <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureLongPush.hpp</file>
+			</folder>
+			<folder name="addons/TableGestures/Tools">
+			    <file>../../../addons/ofxTableGestures/src/Tools/Calibrator.hpp</file>
+			</folder>
 		</src>
 		
 		<include>
@@ -80,6 +89,8 @@
 			<path>../../../addons/ofxTableGestures/src/oscGestures/</path>
 			<path>../../../addons/ofxTableGestures/src/oscGestures/Gestures/</path>
 			<path>../../../addons/ofxTableGestures/src/oscGestures/tuio1.1/</path>
+			<path>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/</path>
+			<path>../../../addons/ofxTableGestures/src/Tools/</path>
 		</include>
 		
 	</add>

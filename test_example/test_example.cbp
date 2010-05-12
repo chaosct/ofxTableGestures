@@ -6,7 +6,7 @@
 		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;addons/TableGestures/oscGestures/Gestures-Extra/;" />
+		<Option virtualFolders="addons/;addons/ofxOsc/;src/;addons/ofxOsc/src/;addons/TableGestures/Graphics/;addons/TableGestures/Graphics/objects/;addons/TableGestures/;addons/TableGestures/oscGestures/;addons/TableGestures/oscGestures/Gestures/;addons/TableGestures/oscGestures/Gestures/Tuio1.1/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;conf/;addons/TableGestures/Controllers/;addons/TableGestures/Tests/;addons/TableGestures/oscGestures/Gestures-Extra/;addons/TableGestures/Tools/;" />
 		<Build>
 			<Target title="Linux_Debug">
 				<Option platforms="Unix;" />
@@ -72,8 +72,8 @@
 				</ExtraCommands>
 				<Environment>
 					<Variable name="target" value="TSIframework" />
-					<Variable name="runOnBuild" value="false" />
 					<Variable name="nautilusOnBuild" value="false" />
+					<Variable name="runOnBuild" value="false" />
 				</Environment>
 			</Target>
 			<Target title="Windows_debug">
@@ -192,8 +192,8 @@
 				</ExtraCommands>
 				<Environment>
 					<Variable name="target" value="TSIframework" />
-					<Variable name="runOnBuild" value="false" />
 					<Variable name="nautilusOnBuild" value="false" />
+					<Variable name="runOnBuild" value="false" />
 				</Environment>
 			</Target>
 			<Target title="Windows_release">
@@ -312,9 +312,9 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="runOnBuild" value="false" />
 					<Variable name="target" value="TSIframework" />
 					<Variable name="nautilusOnBuild" value="false" />
+					<Variable name="runOnBuild" value="false" />
 				</Environment>
 			</Target>
 			<Target title="Linux64_Release">
@@ -380,16 +380,16 @@
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
-					<Variable name="runOnBuild" value="false" />
 					<Variable name="target" value="TSIframework" />
 					<Variable name="nautilusOnBuild" value="false" />
+					<Variable name="runOnBuild" value="false" />
 				</Environment>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-DSIMULATOR" />
-			<Add directory="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras" />
 			<Add directory="../../../addons/" />
+			<Add directory="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras" />
 			<Add directory="../../../libs/openFrameworks/" />
 			<Add directory="../../../libs/openFrameworks/events" />
 			<Add directory="../../../libs/openFrameworks/app" />
@@ -422,42 +422,13 @@
 			<Add directory="../../../addons/ofxXmlSettings/src" />
 			<Add directory="../../../addons/ofxTableGestures/src/Controllers" />
 			<Add directory="../../../addons/ofxTableGestures/src/Tests" />
+			<Add directory="../../../addons/ofxTableGestures/src/Tools" />
 			<Add directory="../../../libs/glu/include" />
 			<Add directory="../../../libs/quicktime/include" />
 			<Add directory="../../../libs/rtAudio/include" />
 			<Add directory="../../../libs/videoInput/include" />
 			<Add directory="../../../libs/glut/include" />
 		</Compiler>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
-			<Option virtualFolder="addons/ofxOsc/src" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/Button.hpp">
 			<Option virtualFolder="addons/TableGestures/Controllers/" />
 		</Unit>
@@ -521,6 +492,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
@@ -551,6 +525,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Tests/ButtonMadnessTest.hpp">
 			<Option virtualFolder="addons/TableGestures/Tests/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Tools/Calibrator.hpp">
+			<Option virtualFolder="addons/TableGestures/Tools/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Area.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/" />
 		</Unit>
@@ -559,6 +536,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureLongPush.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureTap.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
@@ -631,6 +611,36 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/tuioinput.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp">
+			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
+			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofXmlSettings/libs" />
