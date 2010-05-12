@@ -39,11 +39,11 @@ Renderer_to_texture::Renderer_to_texture(){
 Renderer_to_texture::~Renderer_to_texture(){
 }
 
-void Renderer_to_texture::StartDistortion(){
+void Renderer_to_texture::StartDistortion(bool is_enabled, bool is_simulating){
     //nothing to do
 }
 
-void Renderer_to_texture::EndDistortion(){
+void Renderer_to_texture::EndDistortion(bool is_enabled, bool is_simulating){
     ///Grabs the output screen
     texScreen.loadScreenData(0,0,w,h);
     ///clears the screen
@@ -58,7 +58,10 @@ void Renderer_to_texture::EndDistortion(){
     glRotated(angle_w,0,1,0);
     glScaled(width_offset,height_offset,1);
     glTranslatef(-0.5f,-0.5f,0);
-    glGetDoublev(GL_MODELVIEW_MATRIX,Renderer::matrix);
+    glPushMatrix();
+    if(is_simulating)glTranslatef(-(1-0.91)/2,-(1-0.91)/2,0);
+    glGetDoublev(GL_MODELVIEW_MATRIX,matrix);
+    glPopMatrix();
     UpdateMatrix();
     ///Draws the texture
     texScreen.draw(0,0);

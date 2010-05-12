@@ -99,6 +99,8 @@ void TableApp::setup(){
         GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
         GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
     }
+    TableApp::calibration_matrix = renderer->GetDistortionMatrix();
+    TableApp::inverse_calibration_matrix = renderer->GetInverseDistortionMatrix();
 }
 
 //--------------------------------------------------------------
@@ -111,7 +113,7 @@ void TableApp::update(){
     GraphicDispatcher::Instance().Update();
     ///Update simulator objects
     #ifdef SIMULATOR
-    if(is_simulating) simulator->Update();
+    //if(is_simulating) simulator->Update();
     #endif
     Update();
 }
@@ -171,8 +173,9 @@ void TableApp::DrawHelp()
 
 void TableApp::draw(){
     ofPushMatrix();
+
         #ifdef SIMULATOR
-        if(is_simulating) ofScale(0.91f,0.91f,1.0f);
+            if(is_simulating) ofScale(0.91f,0.91f,1.0f);
         #endif
 
         if(squaredInterface) glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
@@ -180,21 +183,25 @@ void TableApp::draw(){
         ofPushMatrix();
             glScalef(shortside,shortside,1);
         ///renderer init
-            renderer->Start();
-            ///Draws all 'Graphics'
-            glDisable(GL_DEPTH_TEST);
-            ofPushMatrix();
-                GraphicDispatcher::Instance().Draw();
-            ofPopMatrix();
+            renderer->Start(is_simulating);
 
             ofPushMatrix();
-                Draw();
-            ofPopMatrix();
+                ///Draws all 'Graphics'
+                glDisable(GL_DEPTH_TEST);
+                ofPushMatrix();
+                    GraphicDispatcher::Instance().Draw();
+                ofPopMatrix();
 
-            glEnable(GL_DEPTH_TEST);
+                ofPushMatrix();
+                    Draw();
+                ofPopMatrix();
+
+                glEnable(GL_DEPTH_TEST);
+
+                grid->Draw(show_grid,calibration_mode);
+            ofPopMatrix();
         ///renderer ends
-            grid->Draw(show_grid,calibration_mode);
-            renderer->End();
+            renderer->End(is_simulating);
         ofPopMatrix();
 
         ///Draws Info & help
@@ -382,6 +389,7 @@ void TableApp::keyReleased(int key){
                     ofShowCursor();
                     is_simulating=true;
                 }
+                renderer->is_matrix_updated = false;
             #endif
         break;
     }

@@ -63,9 +63,9 @@ class Renderer{
         void SetIdentity(double* _matrix);
         ///To be rewritted:
         ///Called before draw thing to be distortionate
-        virtual void StartDistortion()=0;
+        virtual void StartDistortion(bool is_enabled, bool is_simulating)=0;
         ///Called after draw things to be distortionate
-        virtual void EndDistortion()=0;
+        virtual void EndDistortion(bool is_enabled, bool is_simulating)=0;
 
 
         void CalculateInverse(int n, double* matrix);
@@ -82,9 +82,9 @@ class Renderer{
         ///Saves distortion to configuration file
         virtual void SaveDistortion();
         ///Called before draw thing to be distortionate
-        void Start();
+        void Start(bool is_simulating);
         ///Called after draw things to be distortionate
-        void End();
+        void End(bool is_simulating);
         ///Enables distortion
         virtual void Enable();
         ///Disables distortion

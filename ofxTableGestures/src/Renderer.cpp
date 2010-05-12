@@ -98,14 +98,14 @@ void Renderer::Disable(){
     distortion_enabled=false;
 }
 
-void Renderer::Start(){
-    if(distortion_enabled)
-        StartDistortion();
+void Renderer::Start(bool is_simulating){
+   // if(distortion_enabled)
+        StartDistortion(distortion_enabled,is_simulating);
 }
 
-void Renderer::End(){
-    if(distortion_enabled)
-        EndDistortion();
+void Renderer::End(bool is_simulating){
+   // if(distortion_enabled)
+        EndDistortion(distortion_enabled,is_simulating);
 }
 
 bool Renderer::IsEnabled(){

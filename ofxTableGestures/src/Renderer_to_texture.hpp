@@ -48,8 +48,8 @@ class Renderer_to_texture : public Renderer{
     public:
         Renderer_to_texture();
         virtual ~Renderer_to_texture();
-        virtual void StartDistortion();
-        virtual void EndDistortion();
+        virtual void StartDistortion(bool is_enabled, bool is_simulating);
+        virtual void EndDistortion(bool is_enabled, bool is_simulating);
 };
 
 #endif

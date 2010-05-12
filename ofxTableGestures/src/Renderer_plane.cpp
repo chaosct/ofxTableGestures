@@ -39,7 +39,8 @@ Renderer_plane::Renderer_plane(){
 Renderer_plane::~Renderer_plane(){
 }
 
-void Renderer_plane::StartDistortion(){
+void Renderer_plane::StartDistortion(bool is_enabled, bool is_simulating){
+    if(is_enabled){
     glPushMatrix();
     glTranslated(center_x,center_y,0);
     glTranslatef(0.5f,0.5f,0.0f);
@@ -48,10 +49,14 @@ void Renderer_plane::StartDistortion(){
     glRotated(angle_w,0,1,0);
     glScaled(width_offset,height_offset,1);
     glTranslatef(-0.5f,-0.5f,0.0f);
+    }
+
+    glPushMatrix();
     glGetDoublev(GL_MODELVIEW_MATRIX,matrix);
+    glPopMatrix();
     UpdateMatrix();
 }
 
-void Renderer_plane::EndDistortion(){
+void Renderer_plane::EndDistortion(bool is_enabled, bool is_simulating){
     glPopMatrix();
 }
