@@ -34,6 +34,14 @@
 
 #define DISTORTION_PATH "calibration.conf"
 
+double Renderer::height_offset = 1;
+double Renderer::width_offset=1;
+double Renderer::center_x=0;
+double Renderer::center_y=0;
+double Renderer::angle_h=0;
+double Renderer::angle_w=0;
+double Renderer::angle=0;
+
 Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH){
     LoadDefaultValues();
     SetIdentity(matrix);
