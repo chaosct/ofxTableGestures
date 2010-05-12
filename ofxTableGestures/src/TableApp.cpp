@@ -81,9 +81,9 @@ void TableApp::setup(){
     ///starts the tuioinput thread
     tuio::tuioinput::Instance().init();
     ofSetWindowTitle("Table APP    press 'h' to show help content");
-    Setup();
     ofBackground(0, 0, 0);
     ofHideCursor();
+    Setup();
 }
 
 //--------------------------------------------------------------
@@ -177,12 +177,14 @@ void TableApp::draw(){
     glScalef(shortside,shortside,1);
 
     ///Draws all 'Graphics'
+    glDisable(GL_DEPTH_TEST);
     ofPushMatrix();
     GraphicDispatcher::Instance().Draw();
     ofPopMatrix();
     ofPushMatrix();
     Draw();
     ofPopMatrix();
+    glEnable(GL_DEPTH_TEST);
 
     ofPopMatrix();
     grid->Draw(show_grid,calibration_mode);
