@@ -33,6 +33,18 @@ class ZeroArea: public Area
     }
 };
 
+template <class Base>
+class ElasticArea: public Base
+{
+    public:
+    ElasticArea():Base(){}
+    bool isInside(float x, float y)
+    {
+        //TRANSLATE x and y
+        return Base::isInside(x,y);
+    }
+};
+
 class CircularArea: public Area
 {
     public:
