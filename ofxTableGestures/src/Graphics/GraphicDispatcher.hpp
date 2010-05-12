@@ -48,6 +48,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
         void Resize(int w, int h);
         void AddGraphic(Graphic* graphic);
         void RemoveGraphic(Graphic* graphic);
+        std::list<Graphic*>* GetGraphics(){return &graphics;}
 };
 
 #endif //_GRAPHICDISPATCHER
