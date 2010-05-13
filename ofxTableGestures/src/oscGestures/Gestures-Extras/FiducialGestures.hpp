@@ -49,12 +49,14 @@ class time_point{
 
 class aux_fiducial_gesture{
     public:
-        aux_fiducial_gesture():object(NULL),previous_fid_angle(0){}
-        aux_fiducial_gesture(DirectObject * o):object(o),previous_fid_angle(o->angle){
+        aux_fiducial_gesture():object(NULL),previous_fid_angle(0),previous_fid_angle_offset(0){}
+        aux_fiducial_gesture(DirectObject * o):object(o),previous_fid_angle(o->angle),previous_fid_angle_offset(o->angle){
             points.push_back(time_point(ofGetElapsedTimef(),DirectPoint(o->getX(),o->getY())));
         }
         DirectObject * object;
         float previous_fid_angle;
+        float previous_fid_angle_offset;
+
         std::list<time_point> points;
         void Update(float shake_time){
             if(points.size() != 0){
@@ -109,10 +111,10 @@ class InputGestueFiducial : public CanDirectObjects < CompositeGesture >
     }
 
     virtual void updateObject(DirectObject * object){
+        ///Check tikUP/DOWN
         fiducials[object->s_id].Update(Shake_time);
         float new_angle = object->angle;
         float angle_increment = new_angle - fiducials[object->s_id].previous_fid_angle;
-        if(angle_increment <= 0.0001f) {fiducials[object->s_id].points.push_back(time_point(ofGetElapsedTimef(),DirectPoint(object->getX(),object->getY()))); }//add point to shake gesture}
         if( angle_increment > M_PI)  angle_increment = (new_angle - (2*M_PI))-fiducials[object->s_id].previous_fid_angle;
         if( angle_increment < -M_PI)  angle_increment = (new_angle + (2*M_PI))-fiducials[object->s_id].previous_fid_angle;
         if(fabs( angle_increment) >= TikStep){
@@ -123,6 +125,12 @@ class InputGestueFiducial : public CanDirectObjects < CompositeGesture >
             }
             fiducials[object->s_id].previous_fid_angle = new_angle;
         }
+        ///check if it is a deplacement
+        angle_increment = new_angle-fiducials[object->s_id].previous_fid_angle_offset;
+        if(fabs(angle_increment) <= 0.0001f) {
+            fiducials[object->s_id].points.push_back(time_point(ofGetElapsedTimef(),DirectPoint(object->getX(),object->getY())));
+        }
+        fiducials[object->s_id].previous_fid_angle_offset = new_angle;
         ///CALCULATE SHAKE
         if(fiducials[object->s_id].points.size() > Shake_threshold ){
             DirectPoint p = fiducials[object->s_id].GetMidPoint();
