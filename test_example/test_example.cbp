@@ -492,6 +492,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/HandFeedback.hpp">
+			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.hpp">
 			<Option virtualFolder="addons/TableGestures/Graphics/objects/" />
 		</Unit>
@@ -536,6 +539,12 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/EventQueue.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureHand.cpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureHand.hpp">
+			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureLongPush.hpp">
 			<Option virtualFolder="addons/TableGestures/oscGestures/Gestures-Extra/" />
