@@ -1,0 +1,273 @@
+// !$*UTF8*$!
+{
+	BD77478911AE82BE0012A349 /* emptyExample */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = emptyExample;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	BD77479211AE82C60012A349 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BD77479311AE82C60012A349 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BD77517A11AE83560012A349 /* GlobalConfigDetail.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {650, 2080}}";
+			sepNavSelRange = "{1373, 0}";
+			sepNavVisRange = "{777, 838}";
+		};
+	};
+	BD77519A11AE83560012A349 /* InputGestureTuio1.1.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {650, 520}}";
+			sepNavSelRange = "{1479, 0}";
+			sepNavVisRange = "{431, 1117}";
+		};
+	};
+	BD7751A811AE83560012A349 /* InputGestureTuio1.12.5D.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {684, 2327}}";
+			sepNavSelRange = "{1285, 0}";
+			sepNavVisRange = "{1038, 336}";
+		};
+	};
+	BD7751A911AE83560012A349 /* InputGestureTuio1.12.5D.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {957, 1521}}";
+			sepNavSelRange = "{1389, 0}";
+			sepNavVisRange = "{974, 1069}";
+		};
+	};
+	BD7751AA11AE83560012A349 /* InputGestureTuio1.12D.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {523, 2470}}";
+			sepNavSelRange = "{1285, 0}";
+			sepNavVisRange = "{974, 396}";
+		};
+	};
+	BD7751AB11AE83560012A349 /* InputGestureTuio1.12D.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {880, 1612}}";
+			sepNavSelRange = "{1384, 0}";
+			sepNavVisRange = "{845, 946}";
+		};
+	};
+	BD7751AC11AE83560012A349 /* InputGestureTuio1.13D.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {677, 1729}}";
+			sepNavSelRange = "{1285, 0}";
+			sepNavVisRange = "{1038, 334}";
+		};
+	};
+	BD7751AD11AE83560012A349 /* InputGestureTuio1.13D.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1041, 1287}}";
+			sepNavSelRange = "{1375, 0}";
+			sepNavVisRange = "{1038, 394}";
+		};
+	};
+	BD7751AF11AE83560012A349 /* tuioApp.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {650, 4407}}";
+			sepNavSelRange = "{1584, 0}";
+			sepNavVisRange = "{1168, 784}";
+		};
+	};
+	BD7751BD11AE83560012A349 /* Calibrator.hpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {628, 3705}}";
+			sepNavSelRange = "{6132, 0}";
+			sepNavVisRange = "{5969, 328}";
+		};
+	};
+	BD7751D611AE83940012A349 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/reactable/Desktop/of_preRelease_v0061_osxSL_FAT/apps/OF-TangibleFramework/test_example_mac/openFrameworks-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	BD77522811AE89ED0012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD77517A11AE83560012A349 /* GlobalConfigDetail.hpp */;
+		name = "GlobalConfigDetail.hpp: 35";
+		rLen = 0;
+		rLoc = 1373;
+		rType = 0;
+		vrLen = 838;
+		vrLoc = 777;
+	};
+	BD77522911AE89ED0012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD7751AF11AE83560012A349 /* tuioApp.hpp */;
+		name = "tuioApp.hpp: 44";
+		rLen = 0;
+		rLoc = 1584;
+		rType = 0;
+		vrLen = 784;
+		vrLoc = 1168;
+	};
+	BD77522A11AE89ED0012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD77519A11AE83560012A349 /* InputGestureTuio1.1.hpp */;
+		name = "InputGestureTuio1.1.hpp: 37";
+		rLen = 0;
+		rLoc = 1479;
+		rType = 0;
+		vrLen = 1117;
+		vrLoc = 431;
+	};
+	BD77522B11AE89ED0012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD7751AB11AE83560012A349 /* InputGestureTuio1.12D.hpp */;
+		name = "InputGestureTuio1.12D.hpp: 36";
+		rLen = 0;
+		rLoc = 1384;
+		rType = 0;
+		vrLen = 946;
+		vrLoc = 845;
+	};
+	BD77522C11AE89ED0012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD7751A911AE83560012A349 /* InputGestureTuio1.12.5D.hpp */;
+		name = "InputGestureTuio1.12.5D.hpp: 37";
+		rLen = 0;
+		rLoc = 1389;
+		rType = 0;
+		vrLen = 1069;
+		vrLoc = 974;
+	};
+	BD77523111AE8A090012A349 /* GlobalConfig.xml */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {650, 572}}";
+			sepNavSelRange = "{1091, 0}";
+			sepNavVisRange = "{199, 625}";
+		};
+	};
+	BD77523611AE8CC60012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD7751AD11AE83560012A349 /* InputGestureTuio1.13D.hpp */;
+		name = "InputGestureTuio1.13D.hpp: 37";
+		rLen = 0;
+		rLoc = 1385;
+		rType = 0;
+		vrLen = 1214;
+		vrLoc = 845;
+	};
+	BD77528011AE9E670012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD77523111AE8A090012A349 /* GlobalConfig.xml */;
+		name = "GlobalConfig.xml: 36";
+		rLen = 0;
+		rLoc = 913;
+		rType = 0;
+		vrLen = 769;
+		vrLoc = 144;
+	};
+	BD7752A011AEA0590012A349 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BD77523111AE8A090012A349 /* GlobalConfig.xml */;
+		name = "GlobalConfig.xml: 43";
+		rLen = 0;
+		rLoc = 1091;
+		rType = 0;
+		vrLen = 625;
+		vrLoc = 199;
+	};
+	E4B69B4C0A3A1720003C02F2 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = BD77478911AE82BE0012A349 /* emptyExample */;
+		activeTarget = E4B69B5A0A3A1756003C02F2 /* emptyExample */;
+		addToTargets = (
+			E4B69B5A0A3A1756003C02F2 /* emptyExample */,
+		);
+		codeSenseManager = BD77479311AE82C60012A349 /* Code sense */;
+		executables = (
+			BD77478911AE82BE0012A349 /* emptyExample */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					472,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 296656533;
+			PBXWorkspaceStateSaveDate = 296656533;
+		};
+		perUserProjectItems = {
+			BD7751D611AE83940012A349 /* PlistBookmark */ = BD7751D611AE83940012A349 /* PlistBookmark */;
+			BD77522811AE89ED0012A349 /* PBXTextBookmark */ = BD77522811AE89ED0012A349 /* PBXTextBookmark */;
+			BD77522911AE89ED0012A349 /* PBXTextBookmark */ = BD77522911AE89ED0012A349 /* PBXTextBookmark */;
+			BD77522A11AE89ED0012A349 /* PBXTextBookmark */ = BD77522A11AE89ED0012A349 /* PBXTextBookmark */;
+			BD77522B11AE89ED0012A349 /* PBXTextBookmark */ = BD77522B11AE89ED0012A349 /* PBXTextBookmark */;
+			BD77522C11AE89ED0012A349 /* PBXTextBookmark */ = BD77522C11AE89ED0012A349 /* PBXTextBookmark */;
+			BD77523611AE8CC60012A349 /* PBXTextBookmark */ = BD77523611AE8CC60012A349 /* PBXTextBookmark */;
+			BD77528011AE9E670012A349 /* PBXTextBookmark */ = BD77528011AE9E670012A349 /* PBXTextBookmark */;
+			BD7752A011AEA0590012A349 /* PBXTextBookmark */ = BD7752A011AEA0590012A349 /* PBXTextBookmark */;
+		};
+		sourceControlManager = BD77479211AE82C60012A349 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	E4B69B5A0A3A1756003C02F2 /* emptyExample */ = {
+		activeExec = 0;
+		executables = (
+			BD77478911AE82BE0012A349 /* emptyExample */,
+		);
+	};
+}

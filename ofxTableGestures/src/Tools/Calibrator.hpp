@@ -158,7 +158,7 @@ class Calibrator : public OnTable< tuio::CanLongPush< Graphic > >
 
     void TapANGLE_W(float x,float y)
     {
-        static bool first = True;
+        static bool first = true;
         static float lastx= 0;
         static float lessthanx = 45;
         static float morethanx = -45;
@@ -182,7 +182,7 @@ class Calibrator : public OnTable< tuio::CanLongPush< Graphic > >
 
             Renderer::angle_w = (morethanx + lessthanx) / 2;
         }
-        first = False;
+        first = false;
         lastx = x;
         STATE_ANGLE_W = ++STATE_ANGLE_W % 2;
     }
@@ -203,7 +203,7 @@ class Calibrator : public OnTable< tuio::CanLongPush< Graphic > >
 
     void TapANGLE_H(float x,float y)
     {
-        static bool first = True;
+        static bool first = true;
         static float lasty = 0;
         static float lessthany = 45;
         static float morethany = -45;
@@ -226,7 +226,7 @@ class Calibrator : public OnTable< tuio::CanLongPush< Graphic > >
             }
             Renderer::angle_h = (morethany + lessthany) / 2;
         }
-        first = False;
+        first = false;
         lasty = y;
         STATE_ANGLE_H = ++STATE_ANGLE_H % 2;
     }
