@@ -102,7 +102,7 @@ class SimpleObjectController: public tuio::CanDirectObjects <Graphic>
 
 
 template<>
-void SimpleObjectController<int>::updateObject(tuio::DirectObject * object)
+inline void SimpleObjectController<int>::updateObject(tuio::DirectObject * object)
 {
     static float accumulated_diff = 0.0f;
     static float step = fabs(TWO_PI / (Max-Min));
