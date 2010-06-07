@@ -29,6 +29,8 @@
                 <file>../../../addons/ofxTableGestures/src/Controllers/Introspection.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Controllers/SimpleObjectController.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Controllers/Button.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Controllers/allObjects.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Controllers/allFingers.hpp</file>
             </folder>
 
             <folder name="addons/TableGestures/Tests">

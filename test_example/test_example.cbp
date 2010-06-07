@@ -438,6 +438,12 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/SimpleObjectController.hpp">
 			<Option virtualFolder="addons/TableGestures/Controllers/" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/allFingers.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Controllers/allObjects.hpp">
+			<Option virtualFolder="addons/TableGestures/Controllers/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfig.hpp">
 			<Option virtualFolder="addons/TableGestures/" />
 		</Unit>
