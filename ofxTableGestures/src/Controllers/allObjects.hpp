@@ -4,17 +4,16 @@
 #include "Graphic.hpp"
 #include "InputGestureDirectObjects.hpp"
 
-class allObjects: public OnTable < tuio::CanDirectObjects < Graphic > >
+class allObjects: public OnTable < tuio::CanDirectObjects < Graphic > >, public std::set<tuio::DirectObject *>
 {
     public:
-    std::set<tuio::DirectObject *> objects;
     void newObject(tuio::DirectObject * object)
     {
-        objects.insert(object);
+        insert(object);
     }
     void removeObject(tuio::DirectObject * object)
     {
-        objects.erase(object);
+        erase(object);
     }
 };
 

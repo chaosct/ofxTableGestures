@@ -3,17 +3,16 @@
 
 #include "Graphic.hpp"
 #include "InputGestureDirectFingers.hpp"
-class allFingers: public OnTable < tuio::CanDirectFingers < Graphic > >
+class allFingers: public OnTable < tuio::CanDirectFingers < Graphic > >, public std::set<tuio::DirectFinger *>
 {
     public:
-    std::set<tuio::DirectFinger *> fingers;
     void newCursor(tuio::DirectFinger * object)
     {
-        fingers.insert(object);
+        insert(object);
     }
     void removeCursor(tuio::DirectFinger * object)
     {
-        fingers.erase(object);
+        erase(object);
     }
 };
 
