@@ -2,13 +2,12 @@
 #define _TEST_APP
 
 #include "TableApp.hpp"
-
+#include "Graphic.hpp"
 
 ///Example of a class that receives events from direct objects and direct fingers
 ///inheritance: dummylistener-->OnTable-->CanDirectObjects-->CanDirectFingers-->Graphic
 //#include "InputGestureDirectObjects.hpp"
 //#include "InputGestureDirectFingers.hpp"
-//#include "Graphic.hpp"
 //class dummylistener: public OnTable< tuio::CanDirectObjects < tuio::CanDirectFingers < Graphic > > >
 //{
 //    public:
@@ -21,7 +20,6 @@
 
 ///Example of a class that draws a circle at the middle of the screen
 /// it rewrites all methods from 'graphic': draw, update and resize
-//#include "Graphic.hpp"
 //#include "GlobalConfig.hpp"
 //class dummyGraphic: public Graphic
 //{
@@ -35,7 +33,6 @@
 
 ///Example of a class that draws a circle where the last finger added is
 //#include "InputGestureDirectFingers.hpp"
-//#include "Graphic.hpp"
 //class dummyListenerGraphic: public OnTable < tuio::CanDirectFingers < Graphic > >
 //{
 //    tuio::DirectFinger * finger;
@@ -55,9 +52,6 @@
 
 class testApp : public TableApp{
 	public:
-        testApp():TableApp(){}
-        ///To use render_to_texture, change the constructor for the following line:
-        //testApp():TableApp(true){}
 		void Setup();
 		void Update();
 		void Draw();
