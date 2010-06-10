@@ -214,6 +214,8 @@ class tuioArea : public Base, public tuioAreaBase
     ///To know if we are in the osc thread or in the app's one. Gestures only live in osc thread.
     bool isGestureListener;
 
+    bool registered;
+
     void registerInputGesture(InputGesture * IG)
     {
         assert(manager != NULL);
@@ -274,7 +276,8 @@ class tuioArea : public Base, public tuioAreaBase
                     InputGesture * ig = *it;
                     ig->nonGestureListeners--;
                 }
-        tuioAreaDelivery::Instance().UnregisterTA(area,this);
+        if(registered)
+            tuioAreaDelivery::Instance().UnregisterTA(area,this);
     }
 
     template< typename I>
@@ -309,6 +312,7 @@ void tuioArea<T>::_Register(Area * a )
     InputGestureProxy * p = tuioAreaDelivery::Instance().getGestureByArea<InputGestureProxy>(area);
     inputGestureManager::Instance().addGesture(p);
     manager = static_cast<inputGestureManagerBase *>(p);
+    registered = true;
 }
 
 class CompositeGesture : public tuioArea< InputGesture >
