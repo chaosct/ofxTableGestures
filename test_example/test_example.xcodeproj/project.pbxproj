@@ -244,6 +244,8 @@
 		E4C2429310CC5C38004149E2 /* freetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = freetype.a; path = ../../../libs/freetype/lib/osx/freetype.a; sourceTree = SOURCE_ROOT; };
 		E4C242CC10CC650E004149E2 /* libfmodex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodex.dylib; path = ../../../libs/fmodex/lib/osx/libfmodex.dylib; sourceTree = SOURCE_ROOT; };
 		E4C246D910CCAE22004149E2 /* freeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = freeimage.a; path = ../../../libs/FreeImage/lib/osx/freeimage.a; sourceTree = SOURCE_ROOT; };
+		F0B4222111C24C1E006796FF /* allObjects.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = allObjects.hpp; path = ../../../addons/ofxTableGestures/src/Controllers/allObjects.hpp; sourceTree = SOURCE_ROOT; };
+		F0B4222211C24C1E006796FF /* allFingers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = allFingers.hpp; path = ../../../addons/ofxTableGestures/src/Controllers/allFingers.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +425,8 @@
 		BD77517511AE83560012A349 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F0B4222111C24C1E006796FF /* allObjects.hpp */,
+				F0B4222211C24C1E006796FF /* allFingers.hpp */,
 				BD77517611AE83560012A349 /* Button.hpp */,
 				BD77517711AE83560012A349 /* Introspection.hpp */,
 				BD77517811AE83560012A349 /* SimpleObjectController.hpp */,
