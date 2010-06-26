@@ -29,6 +29,8 @@
                 <file>../../../addons/ofxTableGestures/src/Controllers/Introspection.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Controllers/SimpleObjectController.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Controllers/Button.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Controllers/allObjects.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Controllers/allFingers.hpp</file>
             </folder>
 
             <folder name="addons/TableGestures/Tests">
@@ -73,6 +75,9 @@
 
             <folder name="addons/TableGestures/oscGestures/Gestures-Extras">
                 <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureTap.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureLongPush.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureHand.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/oscGestures/Gestures-Extras/InputGestureHand.cpp</file>
             </folder>
 
 
@@ -97,6 +102,12 @@
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.cpp</file>
+                <file>../../../addons/ofxTableGestures/src/Graphics/objects/HandFeedback.cpp</file>
+            </folder>
+            
+            <folder name="addons/TableGestures/Tools">
+                <file>../../../addons/ofxTableGestures/src/Tools/Calibrator.hpp</file>
             </folder>
 
         </src>
@@ -112,6 +123,7 @@
             <path>../../../addons/ofxTableGestures/src/Graphics</path>
             <path>../../../addons/ofxTableGestures/src/Graphics/objects</path>
             <path>../../../addons/ofxTableGestures/ext</path>
+            <path>../../../addons/ofxTableGestures/src/Tools/</path>
         </include>
         
     </add>

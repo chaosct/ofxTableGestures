@@ -28,7 +28,7 @@
 
 */
 
-#include "tuio1.1/InputGestureTuio1.12.5D.hpp"
+#include "InputGestureTuio1.12.5D.hpp"
 #include <cstring>
 
 using namespace osc;

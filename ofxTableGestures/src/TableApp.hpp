@@ -34,7 +34,7 @@
 #include "ofMain.h"
 #include "Grid.hpp"
 #include "Renderer.hpp"
-
+#include "tuioApp.hpp"
 ///By defining the global "SIMULATOR", it enables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
 #ifdef SIMULATOR
@@ -45,7 +45,7 @@
 
 ///Table App is an interface class to deal with all table calibration processes, simulator mode and
 ///abstractize the dispatchers from the main aplication of this project
-class TableApp : public ofBaseApp{
+class TableApp : public tuio::tuioArea<ofBaseApp> {
     ///The data contained by this class is private and it is mainly used for distortionate the output,
     ///draws the calibration grid and draws the simulator scene.
     private:

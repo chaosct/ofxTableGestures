@@ -37,19 +37,19 @@ class Renderer{
     public:
         ///Calibration data:
             ///height scale factor
-        double height_offset;
+        static double height_offset;
             ///width scale factor
-		double width_offset;
+		static double width_offset;
             ///x position
-		double center_x;
+		static double center_x;
             ///y position
-		double center_y;
+		static double center_y;
             ///y rotation angle
-		double angle_h;
+		static double angle_h;
             ///x rotation angle
-		double angle_w;
+		static double angle_w;
             ///z rotation angle
-		double angle;
+		static double angle;
 		///Distortion path file
 		std::string DistortionPath;
         ///Enable/disable distortion flag
