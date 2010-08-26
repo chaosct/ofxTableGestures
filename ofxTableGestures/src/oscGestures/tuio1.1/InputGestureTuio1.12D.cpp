@@ -60,9 +60,15 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
         float xpos, ypos, xspeed, yspeed, maccel;
 
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel >> EndMessage;
+
+        ///This is a quick fix, it only works with 4:3 window ratios
         if(squaredInterface)
         {
             xpos = (xpos -0.125f)*1.333333f;
+        }
+        else
+        {
+            xpos = xpos *1.333333f;
         }
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
@@ -108,9 +114,14 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
 
             args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel >> EndMessage;
 
+            ///This is a quick fix, it only works with 4:3 window ratios
             if(squaredInterface)
             {
                 xpos = (xpos -0.125f)*1.333333f;
+            }
+            else
+            {
+                xpos = xpos *1.333333f;
             }
 
             if(o_s_ids.find(s_id) == o_s_ids.end())
