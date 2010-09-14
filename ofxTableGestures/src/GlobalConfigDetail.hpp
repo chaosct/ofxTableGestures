@@ -31,6 +31,7 @@
 
 #include "Singleton.hpp"
 #include <string>
+#include <sstream>
 #include <map>
 #include "ofxXmlSettings.h"
 
@@ -109,7 +110,10 @@ template<typename T>
 static void set(const std::string& k,const T & t)
 {
     GlobalConfigDetail & gc = GlobalConfigDetail::Instance();
-    gc.XML.setValue(k,t);
+    ///Workaround for strange commas appearing in XML
+    std::stringstream s;
+    s << t;
+    gc.XML.setValue(k,s.str());
 }
 
 #ifdef TARGET_WIN32
