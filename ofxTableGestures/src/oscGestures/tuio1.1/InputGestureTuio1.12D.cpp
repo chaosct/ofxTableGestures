@@ -60,10 +60,22 @@ void InputGestureTuio112D::tuio2Dcur(ReceivedMessageArgumentStream & args)
         float xpos, ypos, xspeed, yspeed, maccel;
 
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel >> EndMessage;
+
+        ///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
         if(squaredInterface)
         {
-            xpos = (xpos -0.125f)*1.333333f;
+            float mins = min(ofGetWidth(),ofGetHeight());
+            float w = ofGetWidth()/mins;
+            float h = ofGetHeight()/mins;
+            xpos = xpos * w - (w-1)/2;
+            ypos = ypos * h - (h-1)/2;
         }
+        else
+        {
+            ypos = ypos * GlobalConfig::getHeight();
+            xpos = xpos * GlobalConfig::getWidth();
+        }
+
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
             SimpleCallEvent(CanTuio112D,addTuioCursor2D,(s_id, xpos,ypos,xspeed,yspeed,maccel ));
@@ -108,11 +120,20 @@ void InputGestureTuio112D::tuio2Dobj(ReceivedMessageArgumentStream & args)
 
             args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel >> EndMessage;
 
+            ///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
             if(squaredInterface)
             {
-                xpos = (xpos -0.125f)*1.333333f;
+                float mins = min(ofGetWidth(),ofGetHeight());
+                float w = ofGetWidth()/mins;
+                float h = ofGetHeight()/mins;
+                xpos = xpos * w - (w-1)/2;
+                ypos = ypos * h - (h-1)/2;
             }
-
+            else
+            {
+                ypos = ypos * GlobalConfig::getHeight();
+                xpos = xpos * GlobalConfig::getWidth();
+            }
             if(o_s_ids.find(s_id) == o_s_ids.end())
             {
                 o_s_ids.insert(s_id);
