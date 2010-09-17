@@ -1,9 +1,10 @@
 /*
 
-    OF-TangibleFramework . Framework for Taller de Sistemes Interactius I
+    ofxTableGestures (formerly OF-TangibleFramework)
+    Developed for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2009 Carles F. Julià <carles.fernandez@upf.edu>
+    Copyright (c) 2010 Carles F. Julià <carles.fernandez@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
