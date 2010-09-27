@@ -39,6 +39,12 @@ Graphic::Graphic(int _layer):layer(_layer){
     GraphicDispatcher::Instance().AddGraphic(this);
 }
 
+///Copy constructor: this allows to copy graphic-herited members of classes
+Graphic::Graphic(Graphic & original):layer(original.layer)
+{
+    GraphicDispatcher::Instance().AddGraphic(this);
+}
+
 int Graphic::GetLayer(){
     return layer;
 }

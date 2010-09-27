@@ -42,6 +42,7 @@ class Graphic :public tuio::tuioArea<>{
     public:
         Graphic();
         Graphic(int _layer);
+        Graphic(Graphic & original);
         virtual ~Graphic();
         int GetLayer();
 		void BringTop();
