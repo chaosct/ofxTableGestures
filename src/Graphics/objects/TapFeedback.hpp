@@ -60,6 +60,10 @@ class TapFeedback : public tuio::CanTap < Graphic >
         }
         void draw()
         {
+            static int & R = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
+            static int & G = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
+            static int & B = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
+
             float now = ofGetElapsedTimef();
             float alpha = ((now - born) / lifetime);
             float radius = alpha * maxradius ;
@@ -67,7 +71,7 @@ class TapFeedback : public tuio::CanTap < Graphic >
             ofPushStyle();
             ofNoFill();
             ofSetLineWidth(4);
-            ofSetColor(255,0,0,alpha255);
+            ofSetColor(R,G,B,alpha255);
             ofEnableAlphaBlending();
             ofCircle(p.getX(),p.getY(),radius);
             ofDisableAlphaBlending();

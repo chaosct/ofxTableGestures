@@ -68,8 +68,11 @@ class HistoryPoint: private DirectPoint{
                 points.pop_front();
         }
         void Draw(){
+            static int & R = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
+            static int & G = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
+            static int & B = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
             ///Draws cursor
-            ofSetColor(255,0,0);
+            ofSetColor(R,G,B);
             ofCircle(xpos,ypos,0.007);
             ///Draws trace
             ofSetLineWidth(3);
@@ -78,7 +81,7 @@ class HistoryPoint: private DirectPoint{
             glDisable(GL_DEPTH_TEST);
             glBegin(GL_LINE_STRIP);
             for (std::list<time_point>::iterator it = points.begin(); it != points.end(); it++){
-                ofSetColor(255,0,0,(int)(255-255*(actual_time-it->time)/MAX_SECONDS));
+                ofSetColor(R,G,B,(int)(255-255*(actual_time-it->time)/MAX_SECONDS));
                 glVertex2f(it->point.getX(),it->point.getY());
             }
             glEnd();
