@@ -155,10 +155,19 @@ GlobalConfigDetail()
 }
 ~GlobalConfigDetail()
 {
+    if(getRef("PROGRAM:XML_AUTOSAVE",1))
+    {
+        std::cout << "Saving xml..." << std::endl;
+        save();
+    }
+    else
+    {
+        std::cout << "PROGRAM:XML_AUTOSAVE preventing XML to save" << std::endl;
+    }
+
     #ifndef TARGET_WIN32
       pthread_mutex_destroy(&myMutex);
     #endif
-    save();
 }
 
 template<typename T>
