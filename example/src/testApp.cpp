@@ -9,7 +9,6 @@ void testApp::Setup(){
     new CursorFeedback();
     new FigureFeedback();
     new TapFeedback();
-    new CalibratorObject(1);
 }
 
 //--------------------------------------------------------------
