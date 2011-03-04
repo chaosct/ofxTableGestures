@@ -59,6 +59,14 @@ TableApp::TableApp():
 
     renderer->LoadDistortion();
     show_grid = false;
+    
+    ofAddListener(ofEvents.update,this,&TableApp::update);
+    ofAddListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
+    ofAddListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
+    ofAddListener(ofEvents.mouseDragged,this,&TableApp::mouseDragged);
+    ofAddListener(ofEvents.mousePressed,this,&TableApp::mousePressed);
+    ofAddListener(ofEvents.mouseReleased,this,&TableApp::mouseReleased);
+    ofAddListener(ofEvents.windowResized,this,&TableApp::windowResized);
 }
 
 TableApp::~TableApp(){
@@ -67,7 +75,17 @@ TableApp::~TableApp(){
     #endif
     delete renderer;
     delete grid;
+    
+    ofRemoveListener(ofEvents.update,this,&TableApp::update);
+    ofRemoveListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
+    ofRemoveListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
+    ofRemoveListener(ofEvents.mouseDragged,this,&TableApp::mouseDragged);
+    ofRemoveListener(ofEvents.mousePressed,this,&TableApp::mousePressed);
+    ofRemoveListener(ofEvents.mouseReleased,this,&TableApp::mouseReleased);
+    ofRemoveListener(ofEvents.windowResized,this,&TableApp::windowResized);
+
 }
+
 
 int TableApp::GetSquareSide(){
     if(ofGetWidth() > ofGetHeight())return ofGetHeight();
@@ -87,7 +105,7 @@ void TableApp::setup(){
 }
 
 //--------------------------------------------------------------
-void TableApp::update(){
+void TableApp::update(ofEventArgs & args){
     TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
     //tuio::tuioAreaDelivery::Instance().processTevents();
@@ -195,7 +213,8 @@ void TableApp::draw(){
 }
 
 //--------------------------------------------------------------
-void TableApp::keyPressed(int key){
+void TableApp::keyPressed(ofKeyEventArgs & event){
+    int key = event.key;
     #ifdef SIMULATOR
     switch(key)
     {
@@ -213,7 +232,8 @@ void TableApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void TableApp::keyReleased(int key){
+void TableApp::keyReleased(ofKeyEventArgs & event){
+    int key = event.key;
     switch(key)
     {
         default:
@@ -369,7 +389,9 @@ void TableApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void TableApp::windowResized(int w, int h){
+void TableApp::windowResized(ofResizeEventArgs & event){
+    int w = event.width;
+    int h = event.height;
     #ifdef SIMULATOR
     if(is_simulating) simulator->windowResized(w,h);
     #endif
@@ -378,28 +400,25 @@ void TableApp::windowResized(int w, int h){
     GraphicDispatcher::Instance().Resize(w,h);
 }
 
-//--------------------------------------------------------------
-void TableApp::mouseMoved(int x, int y ){
-}
 
 //--------------------------------------------------------------
-void TableApp::mouseDragged(int x, int y, int button){
+void TableApp::mouseDragged(ofMouseEventArgs & event){
     #ifdef SIMULATOR
-    if(is_simulating) simulator->mouseDragged(x,y,button);
+    if(is_simulating) simulator->mouseDragged(event.x,event.y,event.button);
     #endif
 }
 
 //--------------------------------------------------------------
-void TableApp::mousePressed(int x, int y, int button){
+void TableApp::mousePressed(ofMouseEventArgs & event){
     #ifdef SIMULATOR
-    if(is_simulating) simulator->mousePressed(x,y,button);
+    if(is_simulating) simulator->mousePressed(event.x,event.y,event.button);
     #endif
 }
 
 //--------------------------------------------------------------
-void TableApp::mouseReleased(int x, int y, int button){
+void TableApp::mouseReleased(ofMouseEventArgs & event){
     #ifdef SIMULATOR
-    if(is_simulating) simulator->mouseReleased(x,y,button);
+    if(is_simulating) simulator->mouseReleased(event.x,event.y,event.button);
     #endif
 }
 

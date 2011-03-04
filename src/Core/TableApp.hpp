@@ -99,15 +99,14 @@ class TableApp {
 
         /// ofBaseApp methods..
 		void setup();
-		void update();
+		void update(ofEventArgs & args);
 		void draw();
-		void keyPressed  (int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
+		void keyPressed  (ofKeyEventArgs & event);
+		void keyReleased(ofKeyEventArgs & event);
+		void mouseDragged(ofMouseEventArgs & event);
+		void mousePressed(ofMouseEventArgs & event);
+		void mouseReleased(ofMouseEventArgs & event);
+		void windowResized(ofResizeEventArgs & event);
 };
 
 #endif
