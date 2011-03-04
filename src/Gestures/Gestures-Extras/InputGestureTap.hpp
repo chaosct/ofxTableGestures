@@ -103,6 +103,10 @@ public:
     {
         ofAddListener(InputGestueTap::Instance().Tap,this,&CanTap::ETap);
     }
+    virtual ~CanTap()
+    {
+        ofRemoveListener(InputGestueTap::Instance().Tap,this,&CanTap::ETap);
+    }
 };
 
 

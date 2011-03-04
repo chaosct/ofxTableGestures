@@ -162,6 +162,14 @@ ofAddListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirect
 ofAddListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
 ofAddListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
     }
+    virtual ~CanDirectFingers()
+    {
+ofRemoveListener(InputGestureDirectFingers::Instance().newCursor,this,&CanDirectFingers::EnewCursor);
+ofRemoveListener(InputGestureDirectFingers::Instance().removeCursor,this,&CanDirectFingers::EremoveCursor);
+ofRemoveListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirectFingers::EupdateCursor);
+ofRemoveListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
+ofRemoveListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
+    }
 
 };
 

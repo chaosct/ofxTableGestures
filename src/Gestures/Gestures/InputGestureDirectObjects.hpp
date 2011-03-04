@@ -141,6 +141,15 @@ public:
         ofAddListener(InputGestureDirectObjects::Instance().updateObject,this,&CanDirectObjects::EupdateObject);
         ofAddListener(InputGestureDirectObjects::Instance().enterObject,this,&CanDirectObjects::EenterObject);
         ofAddListener(InputGestureDirectObjects::Instance().exitObject,this,&CanDirectObjects::EexitObject);
+    }    
+    
+    virtual ~CanDirectObjects()
+    {
+        ofRemoveListener(InputGestureDirectObjects::Instance().newObject,this,&CanDirectObjects::EnewObject);
+        ofRemoveListener(InputGestureDirectObjects::Instance().removeObject,this,&CanDirectObjects::EremoveObject);
+        ofRemoveListener(InputGestureDirectObjects::Instance().updateObject,this,&CanDirectObjects::EupdateObject);
+        ofRemoveListener(InputGestureDirectObjects::Instance().enterObject,this,&CanDirectObjects::EenterObject);
+        ofRemoveListener(InputGestureDirectObjects::Instance().exitObject,this,&CanDirectObjects::EexitObject);
     }
 
 };

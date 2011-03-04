@@ -72,6 +72,10 @@ class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>{
         {
             ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
         }
+        virtual ~InputGestureTuio1125D()
+        {
+            ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
+        }
         void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
         void tuio25Dcur(OscOptionalUnpacker & argList);
         void tuio25Dobj(OscOptionalUnpacker & argList);

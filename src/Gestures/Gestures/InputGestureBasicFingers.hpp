@@ -216,6 +216,16 @@ public:
         ofAddListener(InputGestureBasicFingers::Instance().exitTuioCursor,this,&CanBasicFingers::EexitTuioCursor);
 
     }
+    virtual ~CanBasicFingers()
+    {
+
+        ofRemoveListener(InputGestureBasicFingers::Instance().addTuioCursor,this,&CanBasicFingers::EaddTuioCursor);
+        ofRemoveListener(InputGestureBasicFingers::Instance().enterTuioCursor,this,&CanBasicFingers::EenterTuioCursor);
+        ofRemoveListener(InputGestureBasicFingers::Instance().updateTuioCursor,this,&CanBasicFingers::EupdateTuioCursor);
+        ofRemoveListener(InputGestureBasicFingers::Instance().removeTuioCursor,this,&CanBasicFingers::EremoveTuioCursor);
+        ofRemoveListener(InputGestureBasicFingers::Instance().exitTuioCursor,this,&CanBasicFingers::EexitTuioCursor);
+
+    }
 
 };
 

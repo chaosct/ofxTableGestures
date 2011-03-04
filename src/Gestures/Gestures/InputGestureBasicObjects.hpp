@@ -228,6 +228,14 @@ public:
         ofAddListener(InputGestureBasicObjects::Instance().enterTuioObject,this,&CanBasicObjects::EenterTuioObject);
         ofAddListener(InputGestureBasicObjects::Instance().exitTuioObject,this,&CanBasicObjects::EexitTuioObject);
     }
+    virtual ~CanBasicObjects()
+    {
+        ofRemoveListener(InputGestureBasicObjects::Instance().addTuioObject,this,&CanBasicObjects::EaddTuioObject);
+        ofRemoveListener(InputGestureBasicObjects::Instance().updateTuioObject,this,&CanBasicObjects::EupdateTuioObject);
+        ofRemoveListener(InputGestureBasicObjects::Instance().removeTuioObject,this,&CanBasicObjects::EremoveTuioObject);
+        ofRemoveListener(InputGestureBasicObjects::Instance().enterTuioObject,this,&CanBasicObjects::EenterTuioObject);
+        ofRemoveListener(InputGestureBasicObjects::Instance().exitTuioObject,this,&CanBasicObjects::EexitTuioObject);
+    }
 
 };
 

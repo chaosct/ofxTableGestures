@@ -142,6 +142,12 @@ public:
         ofAddListener(InputGestureHands::Instance().removeHand,this,&CanHands::EremoveHand);
         ofAddListener(InputGestureHands::Instance().updateHand,this,&CanHands::EupdateHand);
     }
+    virtual ~CanHands()
+    {
+        ofRemoveListener(InputGestureHands::Instance().newHand,this,&CanHands::EnewHand);
+        ofRemoveListener(InputGestureHands::Instance().removeHand,this,&CanHands::EremoveHand);
+        ofRemoveListener(InputGestureHands::Instance().updateHand,this,&CanHands::EupdateHand);
+    }
 };
 
 template<class Base>

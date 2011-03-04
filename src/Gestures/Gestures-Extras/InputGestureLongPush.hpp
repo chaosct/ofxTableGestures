@@ -116,6 +116,10 @@
         {
             ofAddListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
         }
+        virtual ~CanLongPush()
+        {
+            ofRemoveListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
+        }
     };
 
 

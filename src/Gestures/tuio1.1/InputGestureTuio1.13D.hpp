@@ -63,6 +63,10 @@ class InputGestureTuio113D : public Singleton<InputGestureTuio113D> {
         {
             ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio113D::ReceiveCall);
         }
+        virtual ~InputGestureTuio113D()
+        {
+            ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio113D::ReceiveCall);
+        }
         void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
         void tuio3Dcur(OscOptionalUnpacker & argList);
         void tuio3Dobj(OscOptionalUnpacker & argList);

@@ -149,6 +149,10 @@ class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
     {
         ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
     }
+    virtual ~InputGestureTuio112D()
+    {
+        ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
+    }
     void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
     void tuio2Dcur(OscOptionalUnpacker & argList);
     void tuio2Dobj(OscOptionalUnpacker & argList);
@@ -226,6 +230,24 @@ public:
         ofAddListener(InputGestureTuio112D::Instance().addTuioBlob2D,this,&CanTuio112D::EaddTuioBlob2D);
         ofAddListener(InputGestureTuio112D::Instance().updateTuioBlob2D,this,&CanTuio112D::EupdateTuioBlob2D);
         ofAddListener(InputGestureTuio112D::Instance().removeTuioBlob2D,this,&CanTuio112D::EremoveTuioBlob2D);
+
+    }
+    virtual ~CanTuio112D()
+    {
+
+        ///2D Events
+
+        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioCursor2D,this,&CanTuio112D::EremoveTuioCursor2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().addTuioCursor2D,this,&CanTuio112D::EaddTuioCursor2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioCursor2D,this,&CanTuio112D::EupdateTuioCursor2D);
+
+        ofRemoveListener(InputGestureTuio112D::Instance().addTuioObject2D,this,&CanTuio112D::EaddTuioObject2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioObject2D,this,&CanTuio112D::EupdateTuioObject2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioObject2D,this,&CanTuio112D::EremoveTuioObject2D);
+
+        ofRemoveListener(InputGestureTuio112D::Instance().addTuioBlob2D,this,&CanTuio112D::EaddTuioBlob2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioBlob2D,this,&CanTuio112D::EupdateTuioBlob2D);
+        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioBlob2D,this,&CanTuio112D::EremoveTuioBlob2D);
 
     }
 };
