@@ -32,9 +32,10 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 //Inspired by http://cc.byexamples.com/20080609/stl-singleton-template/
-class VoidClass{};
-template<typename T, class Base=VoidClass>
-class Singleton : public Base
+
+//OK, this is not a REAL singleton, but you get the idea: I just want to avoid repeating code
+template<typename T>
+class Singleton 
 {
     public:
         static T& Instance()
@@ -42,10 +43,7 @@ class Singleton : public Base
             static T me;
             return me;
         }
-        static T* get()
-        {
-            return &Instance();
-        }
+
 };
 
 #endif //SINGLETON_H
