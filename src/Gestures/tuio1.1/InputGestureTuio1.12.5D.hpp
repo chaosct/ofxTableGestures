@@ -42,17 +42,110 @@
 
 
 
-class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>{
-    struct addTuioCursor25DArgs: public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
-    struct updateTuioCursor25DArgs: public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
-    struct removeTuioCursor25DArgs: public EventArgs {int id;};
-    struct addTuioObject25DArgs: public EventArgs {int id; int f_id ;float xpos;float ypos; float zpos; float angle; float xspeed;float yspeed; float zspeed; float rspeed;float maccel; float raccel;};
-    struct updateTuioObject25DArgs: public EventArgs {int id; int f_id ;float xpos;float ypos; float zpos; float angle; float xspeed;float yspeed; float zspeed; float rspeed;float maccel; float raccel;};
-    struct removeTuioObject25DArgs: public EventArgs {int id;};
-    struct addTuioBlob25DArgs: public EventArgs {int id;float xpos;float ypos; float zpos; float angle; float width; float height; float area; float xspeed;float yspeed; float zspeed; float rspeed;float maccel; float raccel;};
-    struct updateTuioBlob25DArgs: public EventArgs {int id;float xpos;float ypos; float zpos; float angle; float width; float height; float area; float xspeed;float yspeed; float zspeed; float rspeed;float maccel; float raccel;};
-    struct removeTuioBlob25DArgs: public EventArgs {int id;};
+class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>
+{
     
+    public:
+    
+    struct addTuioCursor25DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float zpos;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float maccel;
+    };
+    struct updateTuioCursor25DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float zpos;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float maccel;
+    };
+    struct removeTuioCursor25DArgs: public EventArgs
+    {
+        int id;
+    };
+    struct addTuioObject25DArgs: public EventArgs
+    {
+        int id;
+        int f_id ;
+        float xpos;
+        float ypos;
+        float zpos;
+        float angle;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    struct updateTuioObject25DArgs: public EventArgs
+    {
+        int id;
+        int f_id ;
+        float xpos;
+        float ypos;
+        float zpos;
+        float angle;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    struct removeTuioObject25DArgs: public EventArgs
+    {
+        int id;
+    };
+    struct addTuioBlob25DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float zpos;
+        float angle;
+        float width;
+        float height;
+        float area;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    struct updateTuioBlob25DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float zpos;
+        float angle;
+        float width;
+        float height;
+        float area;
+        float xspeed;
+        float yspeed;
+        float zspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    struct removeTuioBlob25DArgs: public EventArgs
+    {
+        int id;
+    };
+
     ofEvent<addTuioCursor25DArgs>       addTuioCursor25D;
     ofEvent<updateTuioCursor25DArgs>    updateTuioCursor25D;
     ofEvent<removeTuioCursor25DArgs>    removeTuioCursor25D;
@@ -67,19 +160,19 @@ class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>{
     std::set<int> o_s_ids;
     std::set<int> b_s_ids;
 
-    public:
-        InputGestureTuio1125D()
-        {
-            ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
-        }
-        virtual ~InputGestureTuio1125D()
-        {
-            ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
-        }
-        void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
-        void tuio25Dcur(OscOptionalUnpacker & argList);
-        void tuio25Dobj(OscOptionalUnpacker & argList);
-        void tuio25Dblb(OscOptionalUnpacker & argList);
+
+    InputGestureTuio1125D()
+    {
+        ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
+    }
+    virtual ~InputGestureTuio1125D()
+    {
+        ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio1125D::ReceiveCall);
+    }
+    void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
+    void tuio25Dcur(OscOptionalUnpacker & argList);
+    void tuio25Dobj(OscOptionalUnpacker & argList);
+    void tuio25Dblb(OscOptionalUnpacker & argList);
 };
 
 /*

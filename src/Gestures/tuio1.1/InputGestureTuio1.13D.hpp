@@ -41,6 +41,8 @@
 
 class InputGestureTuio113D : public Singleton<InputGestureTuio113D> {
     
+
+    public:
     struct addTuioCursor3DArgs:     public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
     struct updateTuioCursor3DArgs:  public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
     struct removeTuioCursor3DArgs:  public EventArgs {int id;};
@@ -58,7 +60,7 @@ class InputGestureTuio113D : public Singleton<InputGestureTuio113D> {
     std::set<int> c_s_ids;
     std::set<int> o_s_ids;
 
-    public:
+
         InputGestureTuio113D()
         {
             ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio113D::ReceiveCall);
