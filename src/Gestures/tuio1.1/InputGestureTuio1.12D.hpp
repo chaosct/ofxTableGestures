@@ -41,93 +41,66 @@
 
 class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
 {
+    
+    
+    struct commonCursor2DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float xspeed;
+        float yspeed;
+        float maccel;
+    };
+    
+    struct commonObject2DArgs: public EventArgs
+    {
+        int id;
+        int f_id ;
+        float xpos;
+        float ypos;
+        float angle;
+        float xspeed;
+        float yspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    
+    struct commonBlob2DArgs: public EventArgs
+    {
+        int id;
+        float xpos;
+        float ypos;
+        float angle;
+        float width;
+        float height;
+        float area;
+        float xspeed;
+        float yspeed;
+        float rspeed;
+        float maccel;
+        float raccel;
+    };
+    
+    struct commonRemove2DArgs: public EventArgs
+    {
+        int id;
+    };
+    
     public:
-    struct addTuioCursor2DArgs:     public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float xspeed;
-        float yspeed;
-        float maccel;
-    };
-    struct updateTuioCursor2DArgs:  public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float xspeed;
-        float yspeed;
-        float maccel;
-    };
-    struct removeTuioCursor2DArgs:  public EventArgs
-    {
-        int id;
-    };
-    struct addTuioObject2DArgs:     public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct updateTuioObject2DArgs:  public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct removeTuioObject2DArgs:  public EventArgs
-    {
-        int id;
-    };
-    struct addTuioBlob2DArgs:       public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float angle;
-        float width;
-        float height;
-        float area;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct updateTuioBlob2DArgs:    public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float angle;
-        float width;
-        float height;
-        float area;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct removeTuioBlob2DArgs:    public EventArgs
-    {
-        int id;
-    };
+    
+    typedef commonCursor2DArgs addTuioCursor2DArgs;
+    typedef commonCursor2DArgs updateTuioCursor2DArgs;
+    typedef commonRemove2DArgs removeTuioCursor2DArgs;
+    
+    typedef commonObject2DArgs addTuioObject2DArgs;
+    typedef commonObject2DArgs updateTuioObject2DArgs;
+    typedef commonRemove2DArgs removeTuioObject2DArgs;
+    
+    typedef commonBlob2DArgs addTuioBlob2DArgs;
+    typedef commonBlob2DArgs updateTuioBlob2DArgs;
+    typedef commonRemove2DArgs removeTuioBlob2DArgs;
 
     ofEvent<addTuioCursor2DArgs>    addTuioCursor2D;
     ofEvent<updateTuioCursor2DArgs> updateTuioCursor2D;
