@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "TableApp.hpp"
+#include "Matrix.h"
 
 class testApp : public ofBaseApp{
 
