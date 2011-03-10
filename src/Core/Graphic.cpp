@@ -62,4 +62,13 @@ bool CompareLayers(Graphic* object1, Graphic* object2){
     return false;
 }
 
+bool Graphic::Collide()
+{
+    return false;
+}
 
+void Graphic::Position(float & x, float & y)
+{
+    x = -1;
+    y = -1;
+}

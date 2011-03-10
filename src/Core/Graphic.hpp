@@ -52,23 +52,23 @@ struct EventUnregister: public AbstractUnregister
     EventType & event;
     ListenerClass  * listener;
     void (ListenerClass::*listenerMethod)(ArgumentsType&);
-    
+
     void unregister()
     {
         ofRemoveListener(event,listener,listenerMethod);
     }
-    
+
     EventUnregister(EventType & _event,
                     ListenerClass  * _listener,
                     void (ListenerClass::*_listenerMethod)(ArgumentsType&))
-                    
+
                     :event(_event),
                      listener(_listener),
                      listenerMethod(_listenerMethod)
     {
         ofAddListener(event,listener,listenerMethod);
     }
-    
+
 };
 
 template <class EventType,typename ArgumentsType, class ListenerClass>
@@ -88,7 +88,7 @@ class EventClient
         ListenerClass * listener = static_cast<ListenerClass *>(this);
         unregisterlist.push_back(make_unregister(event,listener,listenerMethod));
     }
-    
+
     virtual ~EventClient()
     {
         for (UnregisterListType::iterator it = unregisterlist.begin(); it != unregisterlist.end(); ++it)
@@ -109,6 +109,8 @@ class Graphic :public Area, public EventClient{
         virtual ~Graphic();
         int GetLayer();
 		void BringTop();
+		bool Collide();
+		void Position(float & x, float & y);
     protected:
         int layer;
         friend class GraphicDispatcher;
