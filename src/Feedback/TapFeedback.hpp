@@ -48,10 +48,10 @@ class TapFeedback : public CanTap < Graphic >
         DirectPoint p;
         public:
         CircleTap(const DirectPoint & dp, float r, float lt):
-        p(dp),
-        maxradius(r),
+        born(ofGetElapsedTimef()),
         lifetime(lt),
-        born(ofGetElapsedTimef()){}
+        maxradius(r),
+        p(dp){}
         void update()
         {
             float now = ofGetElapsedTimef();

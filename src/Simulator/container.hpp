@@ -59,7 +59,14 @@ namespace simulator{
             bool mouse_on;
         public:
             container(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float _maccel):
-                sid(_sid),xpos(_xpos),ypos(_ypos),xspeed(_xspeed),yspeed(_yspeed),mouse_on(false),maccel(_maccel){
+                sid(_sid),
+                xpos(_xpos),
+                ypos(_ypos),
+                xspeed(_xspeed),
+                yspeed(_yspeed),
+                maccel(_maccel),
+                mouse_on(false)
+                {
                     x_old = xpos;
                     y_old = ypos;
                     xpos_old = xpos;
@@ -160,8 +167,8 @@ namespace simulator{
         public:
             object(unsigned int _sid,unsigned int _fid, int _xpos,int _ypos,float _angle,float _xspeed,float _yspeed,float _rspeed,float _maccel,float _raccel,int _trayNumber=0):
                 container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),
-                fid(_fid),
                 angle(_angle),
+                fid(_fid),
                 rspeed(_rspeed),
                 raccel(_raccel),
                 tray_number(_trayNumber),

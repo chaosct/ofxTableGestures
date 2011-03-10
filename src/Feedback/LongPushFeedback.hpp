@@ -46,12 +46,15 @@ class LongPushFeedback : public CanLongPush < Graphic >
         float lifetime;
         float maxradius;
         DirectPoint p;
+
         public:
+
         CircleTap(const DirectPoint & dp, float r, float lt):
-        p(dp),
-        maxradius(r),
+        born(ofGetElapsedTimef()),
         lifetime(lt),
-        born(ofGetElapsedTimef()){}
+        maxradius(r),
+        p(dp){}
+
         void update()
         {
             float now = ofGetElapsedTimef();

@@ -48,18 +48,18 @@ TableApp::TableApp():
     show_help(false),
     show_info(false),
     hide_cursor(true),
-    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
     #ifdef SIMULATOR
-    ,simulator(new simulator::Simulator()),
-    is_simulating(false)
+    simulator(new simulator::Simulator()),
+    is_simulating(false),
     #endif
+    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
 {
     if(GlobalConfig::getRef("GLOBAL:RENDERTOTEXTURE",0)) renderer = new Renderer_to_texture();
     else renderer = new Renderer_plane();
 
     renderer->LoadDistortion();
     show_grid = false;
-    
+
     ofAddListener(ofEvents.update,this,&TableApp::update);
     ofAddListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
     ofAddListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
@@ -75,7 +75,7 @@ TableApp::~TableApp(){
     #endif
     delete renderer;
     delete grid;
-    
+
     ofRemoveListener(ofEvents.update,this,&TableApp::update);
     ofRemoveListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
     ofRemoveListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
@@ -357,9 +357,13 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
         case 'd':
             #ifdef SIMULATOR
             if(!is_simulating)
+            {
             #endif
             if(renderer->IsEnabled()) renderer->Disable();
             else renderer->Enable();
+            #ifdef SIMULATOR
+            }
+            #endif
         break;
         case 's':
             #ifdef SIMULATOR

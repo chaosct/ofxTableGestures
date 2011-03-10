@@ -43,10 +43,13 @@ double Renderer::angle_h=0;
 double Renderer::angle_w=0;
 double Renderer::angle=0;
 
-Renderer::Renderer():distortion_enabled(false),DistortionPath(DISTORTION_PATH){
-    LoadDefaultValues();
-    SetIdentity(matrix);
-}
+Renderer::Renderer():
+    DistortionPath(DISTORTION_PATH),
+    distortion_enabled(false)
+    {
+        LoadDefaultValues();
+        SetIdentity(matrix);
+    }
 
 Renderer::~Renderer(){}
 
