@@ -28,3 +28,42 @@
     OTHER DEALINGS IN THE SOFTWARE.
 
 */
+
+#ifndef POLYGON_H
+#define POLYGON_H
+
+#include "Figure.h"
+#include "CollisionHelper.h"
+
+namespace Figures
+{
+    class Polygon : public Figure
+    {
+        public:
+            Polygon();
+            Polygon(vector_points);
+            void AddVertex(ofPoint vertex);
+        protected:
+            /// Vertexs of the polygon.
+            vector_points raw_vertexs;
+            /// Flag that says if all vertexs has been processed.
+            bool processed;
+            /// vertexs to be processed by the cutting ears algorythm.
+            vector_points updatedVertexs;
+            /// <summary>
+            /// cutted ears temporary list.
+            /// </summary>
+            //private System.Collections.ArrayList m_alEars = new System.Collections.ArrayList();
+            /// Subdivision in triangles of the polygon.
+            std::vector<vector_points> triangles;
+            /// centre of th polygon.
+            ofPoint centre;
+
+            virtual void RebuildGeometry();
+            virtual void Design();
+            virtual void DesignStroke();
+            virtual bool CheckCollision(ofPoint const & point);
+            virtual void GetCentre(float & x, float & y);
+    };
+}
+#endif // POLYGON_H

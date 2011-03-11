@@ -29,38 +29,52 @@
 
 */
 
-#ifndef DFIGURE_H
-#define DFIGURE_H
+#include "Polygon.h"
 
-#include "BoundingBox.h"
-#include <string>
-#include "ofMain.h"
-#include "Matrix.h"
+using namespace Figures;
+using namespace std;
 
-namespace Figures
+Polygon::Polygon()
 {
-    class Figure
-    {
-        public:
-            Figure();
-            virtual ~Figure();
-            void SetTexture(const std::string & path);
-            void SetTexture(ofImage& image);
-            void Draw();
-            void DrawStroke();
-            bool Collide(ofPoint const & point);
-            virtual void GetCentre(float & x, float & y);
-            ofPoint GetCentre();
-        protected:
-            BoundingBox bbox;
-            bool has_texture;
-            ofImage texture;
-            Matrix matrix;
 
-            virtual void RebuildGeometry()=0;
-            virtual void Design()=0;
-            virtual void DesignStroke()=0;
-            virtual bool CheckCollision(ofPoint const & point)=0;
-    };
 }
-#endif // DFIGURE_H
+
+Polygon::Polygon(vector_points)
+{
+
+}
+
+void Polygon::AddVertex(ofPoint vertex)
+{
+    raw_vertexs.push_back(vertex);
+    bbox.AddPoint(vertex.x,vertex.y);
+    centre += vertex;
+    centre = centre / 2;
+    processed = false;
+}
+
+void Polygon::RebuildGeometry()
+{
+
+}
+
+void Polygon::Design()
+{
+
+}
+
+void Polygon::DesignStroke()
+{
+
+}
+
+bool Polygon::CheckCollision(ofPoint const & point)
+{
+    return false;
+}
+
+void Polygon::GetCentre(float & x, float & y)
+{
+    x = centre.x;
+    y = centre.y;
+}

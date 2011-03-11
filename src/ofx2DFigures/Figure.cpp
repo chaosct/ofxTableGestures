@@ -91,9 +91,10 @@ bool Figure::Collide(ofPoint const & point)
 ofPoint Figure::GetCentre()
 {
     ofPoint center;
-    center.x = 0;
+    /*center.x = 0;
     center.y = 0;
-    center.z = 0;
+    center.z = 0;*/
+    GetCentre(center.x,center.y);
     return matrix.Transform(center);
 }
 

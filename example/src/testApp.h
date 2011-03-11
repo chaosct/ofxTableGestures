@@ -6,6 +6,7 @@
 #include "TableApp.hpp"
 #include "Figure.h"
 #include "CollisionHelper.h"
+#include "Polygon.h"
 
 class testApp : public ofBaseApp{
 
