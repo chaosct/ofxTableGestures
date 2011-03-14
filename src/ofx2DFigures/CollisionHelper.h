@@ -191,7 +191,7 @@ namespace Figures
             }
 
             /// Returns the area of a polygon.
-            float PolygonArea(vector_points const &points)
+            static float PolygonArea(vector_points const &points)
             {
                 float area_value = 0;
                 int NumOfPts = points.size();

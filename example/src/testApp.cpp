@@ -5,7 +5,7 @@
 #include "HandFeedback.hpp"
 #include "TapFeedback.hpp"
 #include "LongPushFeedback.hpp"
-
+#include "Polygon.h"
 //class test: public Graphic
 //{
 //    float r;
@@ -37,7 +37,20 @@ void testApp::setup(){
     new HandFeedback();
     new TapFeedback();
     new LongPushFeedback();
-    
+
+    Figures::Polygon polygon;
+    polygon.AddVertex(ofPoint(-0.05f, -0.05f));
+    polygon.AddVertex(ofPoint(-0.05f, 0.05f));
+    polygon.AddVertex(ofPoint(0.05f, 0.05f));
+    polygon.AddVertex(ofPoint(0.05f, 0.025f));
+    polygon.AddVertex(ofPoint(-0.025f, 0.025f));
+    polygon.AddVertex(ofPoint(-0.025f, -0.025f));
+    polygon.AddVertex(ofPoint(0.025f, -0.025f));
+    polygon.AddVertex(ofPoint(0.025f, 0.0f));
+    polygon.AddVertex(ofPoint(0.05f, 0.0f));
+    polygon.AddVertex(ofPoint(0.05f, -0.05f));
+    polygon.Collide(ofPoint(0,0));
+    std::cout<< polygon.GetTriangleNumber() << std::endl;
 }
 
 //--------------------------------------------------------------
@@ -53,12 +66,12 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-    
+
 }
 
 //--------------------------------------------------------------

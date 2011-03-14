@@ -43,16 +43,19 @@ namespace Figures
             Polygon();
             Polygon(vector_points);
             void AddVertex(ofPoint vertex);
+            int GetTriangleNumber();
         protected:
             /// Vertexs of the polygon.
             vector_points raw_vertexs;
             /// Flag that says if all vertexs has been processed.
             bool processed;
+            bool it_is_empty;
             /// vertexs to be processed by the cutting ears algorythm.
             vector_points updatedVertexs;
             /// <summary>
             /// cutted ears temporary list.
             /// </summary>
+            std::vector<vector_points> m_alEars;
             //private System.Collections.ArrayList m_alEars = new System.Collections.ArrayList();
             /// Subdivision in triangles of the polygon.
             std::vector<vector_points> triangles;
@@ -60,6 +63,17 @@ namespace Figures
             ofPoint centre;
 
             virtual void RebuildGeometry();
+            void SetUpdatedPolygonVertices();
+            void CutEars();
+            bool IsEarOfUpdatedPolygon(ofPoint const & vertex);
+            bool IsPartOfUpdatedVertexs(ofPoint const & vertex);
+            int VertexIndex_of_UpdatedVertexs(ofPoint const & vertex);
+            ofPoint PreviousUpdatedVertexs(ofPoint const & vertex);
+            ofPoint NextUpdatedVertexs(ofPoint const & vertex);
+            PolyVertexType PolygonVertexType_on_UpdatedVertexs(ofPoint const & vertex);
+            void UpdatePolygonVertices(ofPoint const & vertex);
+            void SetPolygons();
+
             virtual void Design();
             virtual void DesignStroke();
             virtual bool CheckCollision(ofPoint const & point);
