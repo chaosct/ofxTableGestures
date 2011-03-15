@@ -107,7 +107,6 @@
 			<Add library="Xxf86vm" />
 			<Add library="asound" />
 			<Add library="PocoFoundation" />
-			<Add library="unicap" />
 			<Add library="freetype" />
 			<Add library="freeimage" />
 			<Add library="RtAudio" />
