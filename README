@@ -1,14 +1,6 @@
 ofxTableGestures (formerly OF-TangibleFramework) is an addon of OpenFrameworks to support rich interaction using tabletop and tangible interfaces via the TUIO protocol.
 
-At the moment it includes:
-* An embedded simulator.
-* Distortion correction for projection.
-* A general framework to create gesture recognizers directly or through composition.
-* Areas for filtering inputs
-* All gesture recognition and area filtering is done in a separated thread.
-* Base classes for autonomous objects, with updating, drawing and event notification, with automatic subscription.
-* Some basic examples on how to use the code.
-* A partial implementation of tuio 1.1 (no 3D blobs or multiple sources at the moment)
+We are changing a lot of code, modernizing and making it more OF-ish. It is incomplete ATM
 
 Warning:
 This project is currently under heavy development. The underlying code as well as the specific interfaces of
