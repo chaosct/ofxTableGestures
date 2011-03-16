@@ -41,8 +41,6 @@
 
 class Renderer_plane : public Renderer{
     public:
-        Renderer_plane();
-        virtual ~Renderer_plane();
         virtual void StartDistortion();
         virtual void EndDistortion();
 };

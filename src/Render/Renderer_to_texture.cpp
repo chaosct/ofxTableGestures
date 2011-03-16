@@ -37,9 +37,6 @@ Renderer_to_texture::Renderer_to_texture(){
     texScreen.allocate(w,h,GL_RGB);
 }
 
-Renderer_to_texture::~Renderer_to_texture(){
-}
-
 void Renderer_to_texture::StartDistortion(){
     //nothing to do
 }

@@ -47,6 +47,8 @@
 
 using namespace shapes;
 
+Shape::~Shape(){}
+
 shapeSquare::shapeSquare(bool _round_edges):round_edges(_round_edges){
 }
 

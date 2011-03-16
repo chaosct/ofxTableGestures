@@ -33,12 +33,6 @@
 #include "Renderer_plane.hpp"
 #include "ofMain.h"
 
-Renderer_plane::Renderer_plane(){
-}
-
-Renderer_plane::~Renderer_plane(){
-}
-
 void Renderer_plane::StartDistortion(){
     glPushMatrix();
     glTranslated(center_x,center_y,0);
