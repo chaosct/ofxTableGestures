@@ -4,7 +4,7 @@
     Developed for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2010 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
+    Copyright (c) 2011 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
@@ -29,46 +29,58 @@
 
 */
 
-#include "GraphicDispatcher.hpp"
+#include "BoundingBox.h"
+#include "ofMain.h"
 
-Graphic::Graphic():layer(APP_LAYER){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
+using namespace Figures;
 
-Graphic::Graphic(int _layer):layer(_layer){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
-
-///Copy constructor: this allows to copy graphic-herited members of classes
-Graphic::Graphic(Graphic & original):layer(original.layer)
+BoundingBox::BoundingBox():setedup(false)
 {
-    GraphicDispatcher::Instance().AddGraphic(this);
+    Reset();
 }
 
-int Graphic::GetLayer(){
-    return layer;
+void BoundingBox::Reset()
+{
+    xmin = 0;    xmax = 0;
+    ymin = 0;
+    ymax = 0;
+    setedup = false;
 }
 
-Graphic::~Graphic(){
-    GraphicDispatcher::Instance().RemoveGraphic(this);
+void BoundingBox::AddPoint(float x, float y)
+{
+    if(!setedup)
+    {
+        setedup = true;
+        xmin = x;
+        xmax = x;
+        ymin = y;
+        ymax = y;
+    }
+    else
+    {
+        xmin = (xmin > x) ? x : xmin;
+        xmax = (xmax < x) ? x : xmax;
+        ymin = (ymin > y) ? y : ymin;
+        ymax = (ymax < y) ? y : ymax;
+    }
 }
 
-void Graphic::BringTop(){
-    GraphicDispatcher::Instance().bring_top(this);
-}
-
-bool CompareLayers(Graphic* object1, Graphic* object2){
-    if (object1->GetLayer() > object2->GetLayer()) return true;
+bool BoundingBox::Collide(float x, float y)
+{
+    if( !setedup ) return false;
+    if( x >= xmin && x <= xmax && y >= ymin && y <= ymax) return true;
     return false;
 }
 
-bool Graphic::Collide()
+void BoundingBox::Draw()
 {
-    return false;
-}
-
-void Graphic::Position(float & x, float & y)
-{
-    x = -1;
-    y = -1;
+    ofPushStyle();
+    ofSetLineWidth(1.0f);
+    ofSetColor(255,0,0);
+    ofLine(xmin,ymin,xmin,ymax);
+    ofLine(xmin,ymax,xmax,ymax);
+    ofLine(xmax,ymax,xmax,ymin);
+    ofLine(xmax,ymin,xmin,ymin);
+    ofPopStyle();
 }

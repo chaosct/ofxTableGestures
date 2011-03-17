@@ -5,7 +5,7 @@
 		<Option title="emptyExample" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxOsc/src/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/Simulator/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/GlobalConfig/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Render/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/Utils/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/Feedback/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/Core/;addons/ofxTableGestures/Gestures/TUIO/;addons/ofxTableGestures/Gestures/Basic/;addons/ofxTableGestures/Gestures/Extra/;addons/ofxGlobalConfig/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxOsc/src/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/Simulator/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/GlobalConfig/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Render/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/Utils/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/Feedback/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/Core/;addons/ofxTableGestures/Gestures/TUIO/;addons/ofxTableGestures/Gestures/Basic/;addons/ofxTableGestures/Gestures/Extra/;addons/ofxGlobalConfig/;addons/ofx2DFigures/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/advancedEventsExample_debug" prefix_auto="1" extension_auto="1" />
@@ -96,6 +96,7 @@
 			<Add directory="../../../addons/ofxTableGestures/src/Render" />
 			<Add directory="../../../addons/ofxTableGestures/src/Simulator" />
 			<Add directory="../../../addons/ofxTableGestures/src/Utils" />
+			<Add directory="../src/ofx2DFigures" />
 		</Compiler>
 		<Linker>
 			<Add library="openFrameworks" />
@@ -173,6 +174,15 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Area.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/Core/" />
@@ -327,6 +337,39 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Utils/Singleton.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/Utils/" />
 		</Unit>
+		<Unit filename="../src/ofx2DFigures/BoundingBox.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/BoundingBox.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/CollisionHelper.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/CollisionHelper.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Figure.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Figure.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Matrix.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Polygon.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Polygon.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Triangulate.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Triangulate.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofXmlSettings/libs" />
 		</Unit>
@@ -344,15 +387,6 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
-		</Unit>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

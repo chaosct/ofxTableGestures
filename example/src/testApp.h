@@ -4,10 +4,14 @@
 
 #include "ofMain.h"
 #include "TableApp.hpp"
+#include "Figure.h"
+#include "CollisionHelper.h"
+#include "Polygon.h"
 
 class testApp : public ofBaseApp{
 
 	public:
+
         TableApp tableapp;
 		void setup();
 		void update();
@@ -20,7 +24,6 @@ class testApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
-
 };
 
 #endif

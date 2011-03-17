@@ -4,7 +4,7 @@
     Developed for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2010 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
+    Copyright (c) 2011 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
@@ -29,46 +29,38 @@
 
 */
 
-#include "GraphicDispatcher.hpp"
+#ifndef DFIGURE_H
+#define DFIGURE_H
 
-Graphic::Graphic():layer(APP_LAYER){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
+#include "BoundingBox.h"
+#include <string>
+#include "ofMain.h"
+#include "Matrix.h"
 
-Graphic::Graphic(int _layer):layer(_layer){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
-
-///Copy constructor: this allows to copy graphic-herited members of classes
-Graphic::Graphic(Graphic & original):layer(original.layer)
+namespace Figures
 {
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
+    class Figure
+    {
+        public:
+            Figure();
+            virtual ~Figure();
+            void SetTexture(const std::string & path);
+            void SetTexture(ofImage& image);
+            void Draw();
+            void DrawStroke();
+            bool Collide(ofPoint const & point);
+            virtual void GetCentre(float & x, float & y);
+            ofPoint GetCentre();
+        protected:
+            BoundingBox bbox;
+            bool has_texture;
+            ofImage texture;
+            Matrix matrix;
 
-int Graphic::GetLayer(){
-    return layer;
+            virtual void RebuildGeometry()=0;
+            virtual void Design()=0;
+            virtual void DesignStroke()=0;
+            virtual bool CheckCollision(ofPoint const & point)=0;
+    };
 }
-
-Graphic::~Graphic(){
-    GraphicDispatcher::Instance().RemoveGraphic(this);
-}
-
-void Graphic::BringTop(){
-    GraphicDispatcher::Instance().bring_top(this);
-}
-
-bool CompareLayers(Graphic* object1, Graphic* object2){
-    if (object1->GetLayer() > object2->GetLayer()) return true;
-    return false;
-}
-
-bool Graphic::Collide()
-{
-    return false;
-}
-
-void Graphic::Position(float & x, float & y)
-{
-    x = -1;
-    y = -1;
-}
+#endif // DFIGURE_H

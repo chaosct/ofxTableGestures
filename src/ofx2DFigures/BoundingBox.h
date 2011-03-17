@@ -4,7 +4,7 @@
     Developed for Taller de Sistemes Interactius I
     Universitat Pompeu Fabra
 
-    Copyright (c) 2010 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
+    Copyright (c) 2011 Daniel Gallardo Grassot <daniel.gallardo@upf.edu>
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
@@ -29,46 +29,26 @@
 
 */
 
-#include "GraphicDispatcher.hpp"
+#ifndef BOUNDINGBOX_H
+#define BOUNDINGBOX_H
 
-Graphic::Graphic():layer(APP_LAYER){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
-
-Graphic::Graphic(int _layer):layer(_layer){
-    GraphicDispatcher::Instance().AddGraphic(this);
-}
-
-///Copy constructor: this allows to copy graphic-herited members of classes
-Graphic::Graphic(Graphic & original):layer(original.layer)
+namespace Figures
 {
-    GraphicDispatcher::Instance().AddGraphic(this);
+    class BoundingBox
+    {
+        public:
+            BoundingBox();
+            void Reset();
+            void AddPoint(float x, float y);
+            bool Collide(float x, float y);
+            void Draw();
+            float GetXmin(){return xmin;}
+            float GetXmax(){return xmax;}
+            float GetYmin(){return ymin;}
+            float GetYmax(){return ymax;}
+        private:
+            float xmin,xmax,ymin,ymax;
+            bool setedup;
+    };
 }
-
-int Graphic::GetLayer(){
-    return layer;
-}
-
-Graphic::~Graphic(){
-    GraphicDispatcher::Instance().RemoveGraphic(this);
-}
-
-void Graphic::BringTop(){
-    GraphicDispatcher::Instance().bring_top(this);
-}
-
-bool CompareLayers(Graphic* object1, Graphic* object2){
-    if (object1->GetLayer() > object2->GetLayer()) return true;
-    return false;
-}
-
-bool Graphic::Collide()
-{
-    return false;
-}
-
-void Graphic::Position(float & x, float & y)
-{
-    x = -1;
-    y = -1;
-}
+#endif // BOUNDINGBOX_H
