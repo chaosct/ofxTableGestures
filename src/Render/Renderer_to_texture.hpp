@@ -48,7 +48,6 @@ class Renderer_to_texture : public Renderer{
         int w,h;
     public:
         Renderer_to_texture();
-        virtual ~Renderer_to_texture();
         virtual void StartDistortion();
         virtual void EndDistortion();
 };

@@ -50,6 +50,7 @@ namespace shapes
 class Shape{
     public:
         virtual void  draw()=0;
+        virtual ~Shape() = 0;
 };
 
 class shapeSquare:public Shape{
