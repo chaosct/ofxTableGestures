@@ -35,12 +35,11 @@
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
 #include "GlobalConfig.hpp"
+#include "CollisionHelper.h"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
-
-double * TableApp::calibration_matrix = NULL;
 
 TableApp::TableApp():
 //    calibration_enabled(false),
@@ -52,7 +51,8 @@ TableApp::TableApp():
     simulator(new simulator::Simulator()),
     is_simulating(false),
     #endif
-    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
+    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1)),
+    matrix_updated(false)
 {
     if(GlobalConfig::getRef("GLOBAL:RENDERTOTEXTURE",0)) renderer = new Renderer_to_texture();
     else renderer = new Renderer_plane();
@@ -67,6 +67,8 @@ TableApp::TableApp():
     ofAddListener(ofEvents.mousePressed,this,&TableApp::mousePressed);
     ofAddListener(ofEvents.mouseReleased,this,&TableApp::mouseReleased);
     ofAddListener(ofEvents.windowResized,this,&TableApp::windowResized);
+
+    Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
 }
 
 TableApp::~TableApp(){
@@ -106,7 +108,6 @@ void TableApp::setup(){
 
 //--------------------------------------------------------------
 void TableApp::update(ofEventArgs & args){
-    TableApp::calibration_matrix = renderer->GetDistortionMatrix();
     ///Update input events, it says to all input gestures to process the gesture stack.
     //tuio::tuioAreaDelivery::Instance().processTevents();
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
@@ -193,6 +194,12 @@ void TableApp::draw(){
     }
     glScalef(shortside,shortside,1);
 
+    if(!matrix_updated)
+    {
+        matrix_updated = true;
+        glGetDoublev(GL_MODELVIEW_MATRIX,Figures::CollisionHelper::ignore_transformation_matrix.data);
+        Figures::CollisionHelper::ignore_transformation_matrix = Figures::CollisionHelper::ignore_transformation_matrix.GetInverse();
+    }
     ///Draws all 'Graphics'
     glDisable(GL_DEPTH_TEST);
     ofPushMatrix();
@@ -387,7 +394,11 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
                     ofShowCursor();
                     is_simulating=true;
                 }
+                matrix_updated = false;
             #endif
+        break;
+        case 'b':
+            Figures::CollisionHelper::debug_graphics = !Figures::CollisionHelper::debug_graphics;
         break;
     }
 }

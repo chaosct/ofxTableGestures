@@ -31,6 +31,7 @@
 
 #include "Figure.h"
 #include "GlobalConfig.hpp"
+#include "CollisionHelper.h"
 
 using namespace Figures;
 
@@ -70,21 +71,35 @@ void Figure::SetTexture(ofImage& image)
 void Figure::Draw()
 {
     glGetDoublev(GL_MODELVIEW_MATRIX,matrix.data);
+    if(CollisionHelper::debug_graphics)
+    {
+        bbox.Draw();
+        ofNoFill();
+        ofSetLineWidth(1.0f);
+    }
     Design();
-    if(GlobalConfig::getRef("CONFIG:GRAPHICS:DRAW_BOUNDING",1))bbox.Draw();
+    if(CollisionHelper::debug_graphics)
+        ofFill();
+
 }
 
 void Figure::DrawStroke()
 {
     glGetDoublev(GL_MODELVIEW_MATRIX,matrix.data);
     DesignStroke();
-    if(GlobalConfig::getRef("CONFIG:GRAPHICS:DRAW_BOUNDING",1))bbox.Draw();
+    if(CollisionHelper::debug_graphics)
+        bbox.Draw();
 }
 
 bool Figure::Collide(ofPoint const & point)
 {
-    ofPoint target = matrix.GetInverse().Transform(point);
-    if(bbox.Collide(target.x,target.y) && CheckCollision(target))return true;
+    ofPoint target = (CollisionHelper::ignore_transformation_matrix*matrix).TransformInverse(point);
+    //std::cout << (CollisionHelper::ignore_transformation_matrix*matrix).ToString() << std::endl;
+    //if(bbox.Collide(target.x,target.y) && CheckCollision(target))return true;
+    //std::cout << target.x << " " << target.y << " -- " << point.x << " " << point.y << std::endl;
+    if(bbox.Collide(target.x,target.y))
+        if(CheckCollision(target))
+            return true;
     return false;
 }
 

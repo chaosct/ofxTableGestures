@@ -33,6 +33,7 @@
 #define MATRIX_H
 
 #include "ofMain.h"
+#include <sstream>
 
 namespace Figures
 {
@@ -73,6 +74,16 @@ namespace Figures
                 point_r.y = data[1] * point.x + data[5] * point.y + data[9] * point.z + data[13];
                 point_r.z = data[2] * point.x + data[6] * point.y + data[10] * point.z + data[14];
                 return point_r;
+            }
+
+            ofPoint TransformInverse(const ofPoint& point)
+            {
+                double aedb = data[0]*data[5]-data[1]*data[4];
+                double x = data[5]*(point.x - data[12]) + data[4]*(data[13]-point.y);
+                x = x / aedb;
+                double y = data[5]*(point.y- data[13])+data[1]*(data[12]-point.x);
+                y = y / aedb;
+                return ofPoint(x,y);
             }
 
             Matrix& operator=(Matrix const &m)
@@ -142,6 +153,18 @@ namespace Figures
                     }
                 }
                 return matrix_r;
+            }
+
+            std::string ToString()
+            {
+                stringstream s_ret;
+                //std::string s_ret;
+                s_ret << "Matrix:" << std::endl;
+                s_ret << data[0] << "  " << data[1] << "  " << data[2] << "  " << data[3] << std::endl;
+                s_ret << data[4] << "  " << data[5] << "  " << data[6] << "  " << data[7] << std::endl;
+                s_ret << data[8] << "  " << data[9] << "  " << data[10] << "  " << data[11] << std::endl;
+                s_ret << data[12] << "  " << data[13] << "  " << data[14] << "  " << data[15] << std::endl;
+                return s_ret.str();
             }
     };
 }

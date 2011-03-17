@@ -344,6 +344,9 @@
 		<Unit filename="../src/ofx2DFigures/BoundingBox.h">
 			<Option virtualFolder="addons/ofx2DFigures/" />
 		</Unit>
+		<Unit filename="../src/ofx2DFigures/CollisionHelper.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
 		<Unit filename="../src/ofx2DFigures/CollisionHelper.h">
 			<Option virtualFolder="addons/ofx2DFigures/" />
 		</Unit>
@@ -360,6 +363,12 @@
 			<Option virtualFolder="addons/ofx2DFigures/" />
 		</Unit>
 		<Unit filename="../src/ofx2DFigures/Polygon.h">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Triangulate.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/" />
+		</Unit>
+		<Unit filename="../src/ofx2DFigures/Triangulate.h">
 			<Option virtualFolder="addons/ofx2DFigures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">

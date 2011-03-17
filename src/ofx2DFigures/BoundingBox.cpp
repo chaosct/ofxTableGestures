@@ -30,6 +30,7 @@
 */
 
 #include "BoundingBox.h"
+#include "ofMain.h"
 
 using namespace Figures;
 
@@ -56,6 +57,13 @@ void BoundingBox::AddPoint(float x, float y)
         ymin = y;
         ymax = y;
     }
+    else
+    {
+        xmin = (xmin > x) ? x : xmin;
+        xmax = (xmax < x) ? x : xmax;
+        ymin = (ymin > y) ? y : ymin;
+        ymax = (ymax < y) ? y : ymax;
+    }
 }
 
 bool BoundingBox::Collide(float x, float y)
@@ -67,5 +75,12 @@ bool BoundingBox::Collide(float x, float y)
 
 void BoundingBox::Draw()
 {
-    // to do
+    ofPushStyle();
+    ofSetLineWidth(1.0f);
+    ofSetColor(255,0,0);
+    ofLine(xmin,ymin,xmin,ymax);
+    ofLine(xmin,ymax,xmax,ymax);
+    ofLine(xmax,ymax,xmax,ymin);
+    ofLine(xmax,ymin,xmin,ymin);
+    ofPopStyle();
 }

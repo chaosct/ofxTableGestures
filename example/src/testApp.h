@@ -6,11 +6,12 @@
 #include "TableApp.hpp"
 #include "Figure.h"
 #include "CollisionHelper.h"
-
+#include "Polygon.h"
 
 class testApp : public ofBaseApp{
 
 	public:
+
         TableApp tableapp;
 		void setup();
 		void update();

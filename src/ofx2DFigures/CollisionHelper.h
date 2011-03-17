@@ -34,6 +34,7 @@
 
 #include <math.h>
 #include <vector>
+#include "Matrix.h"
 
 namespace Figures
 {
@@ -54,9 +55,12 @@ namespace Figures
         ErrorPoint, ConvexPoint, ConcavePoint
     };
 
+    void OfSetColor
     class CollisionHelper
     {
         public:
+            static Matrix ignore_transformation_matrix;
+            static bool debug_graphics;
             /// Givven a segment A(ax,ay)--B(bx,by) returns if the point P(px,py) is at the left side of the segment.
             static float IsLeft(float ax, float ay, float bx, float by, float px, float py)
             {
@@ -82,9 +86,9 @@ namespace Figures
             /// Checks a collision of the point P (x,y) with the triangle C - A - B
             static bool CollideTriangle(ofPoint A, ofPoint B, ofPoint C, float x, float y)
             {
-                if (IsLeft(A.x, A.y, B.x, B.y, x, y) > 0 ||
-                    IsLeft(B.x, B.y, C.x, C.y, x, y) > 0 ||
-                    IsLeft(C.x, C.y, A.x, A.y, x, y) > 0)
+                if (IsLeft(A.x, A.y, B.x, B.y, x, y) < 0 ||
+                    IsLeft(B.x, B.y, C.x, C.y, x, y) < 0 ||
+                    IsLeft(C.x, C.y, A.x, A.y, x, y) < 0)
                     return false;
                 return true;
             }
