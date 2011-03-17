@@ -35,6 +35,7 @@
 #include <math.h>
 #include <vector>
 #include "Matrix.h"
+#include "ofMain.h"
 
 namespace Figures
 {
@@ -43,19 +44,15 @@ namespace Figures
     #define BigValue 99999.0
     typedef std::vector<ofPoint> vector_points;
 
-    /// Direction descriptor of a polygon points.
-    enum PolyPointsDirection
-    {
-        Unknown, Clockwise, Count_Clockwise
-    };
+    void SetColor (ofColor color);
 
-    /// Vertex descriptor
-    enum PolyVertexType
-    {
-        ErrorPoint, ConvexPoint, ConcavePoint
-    };
+    unsigned int parseHexColor(std::string & color);
 
-    //void OfSetColor
+    void Get_rgb_from_hex(std::string & color, int &red, int &green, int &blue, int &alpha);
+
+    ofColor GetColorFromString(std::string color);
+
+
     class CollisionHelper
     {
         public:
@@ -133,81 +130,6 @@ namespace Figures
                     else
                         return (float)sqrt(dist2);
                 }
-            }
-
-            /// Returns if Point1 and point2 are near the same with an error of JudgeValues.SmallValue
-            static bool SamePoints(ofPoint Point1, ofPoint Point2)
-            {
-
-                double DX = fabs(Point1.x - Point2.x);
-                double DY = fabs(Point1.y - Point2.y);
-
-                if ((DX < SmallValue) && (DY < SmallValue))
-                    return true;
-                else
-                    return false;
-            }
-
-            /// Givven a point path determines if its direction is counter clockwise or clockwise.
-            /// For les than 3 points it can't determine the direction.
-            static PolyPointsDirection PointsDirection(vector_points const &points)
-            {
-                int nCount = 0, j = 0, k = 0;
-                int nPoints = points.size();
-
-                if (nPoints < 3) return Unknown;
-
-                for (int i = 0; i < nPoints; i++)
-                {
-                    j = (i + 1) % nPoints; //j:=i+1;
-                    k = (i + 2) % nPoints; //k:=i+2;
-
-                    float crossProduct = (points[j].x - points[i].x) * (points[k].y - points[j].y);
-                    crossProduct = crossProduct - ((points[j].y - points[i].y) * (points[k].x - points[j].x));
-
-                    if (crossProduct > 0)
-                        nCount++;
-                    else
-                        nCount--;
-                }
-
-                if (nCount < 0)
-                    return Count_Clockwise;
-                else if (nCount > 0)
-                    return Clockwise;
-                else
-                    return Unknown;
-            }
-
-            /// Change the direction of a point path.
-            static void ReversePointsDirection(vector_points &points)
-            {
-                int nVertices = points.size();
-
-                vector_points aTempPts = vector_points(nVertices);
-                for(vector_points::reverse_iterator rit = points.rbegin();
-                    rit < points.rend(); ++rit )
-                    {
-                        aTempPts.push_back(*rit);
-                    }
-                points.clear();
-                points = aTempPts;
-            }
-
-            /// Returns the area of a polygon.
-            static float PolygonArea(vector_points const &points)
-            {
-                float area_value = 0;
-                int NumOfPts = points.size();
-                int j;
-                for (int i = 0; i < NumOfPts; i++)
-                {
-                    j = (i + 1) % NumOfPts;
-                    area_value += points[i].x * points[j].y;
-                    area_value -= (points[i].y * points[j].x);
-                }
-                area_value = area_value / 2;
-                return area_value;
             }
     };
 }
