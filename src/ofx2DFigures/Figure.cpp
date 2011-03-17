@@ -53,7 +53,11 @@ void Figure::SetTexture(const std::string & path)
         has_texture = false;
         return;
     }
-    texture.loadImage(path);
+    if(!texture.loadImage(path))
+    {
+        has_texture = false;
+        return;
+    }
     has_texture = true;
 }
 

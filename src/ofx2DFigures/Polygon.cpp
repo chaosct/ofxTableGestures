@@ -68,7 +68,14 @@ void Polygon::RebuildGeometry()
     if(raw_vertexs.size() >= 3)
     {
         updatedVertexs.clear();
+        textureVertexs.clear();
         Triangulate::Process(raw_vertexs,updatedVertexs);
+        float rx = bbox.GetXmax() - bbox.GetXmin();
+        float ry = bbox.GetYmax() - bbox.GetYmin();
+        for(unsigned int i = 0; i < updatedVertexs.size(); i++)
+        {
+            textureVertexs.push_back(ofPoint( 1 - ((updatedVertexs[i].x - bbox.GetXmin())/rx), 1 - ((updatedVertexs[i].y - bbox.GetYmin())/ry) ));
+        }
     }
 }
 
@@ -83,13 +90,38 @@ void Polygon::Design()
     if (!processed) RebuildGeometry();
     ofPushMatrix();
     int tcount = updatedVertexs.size()/3;
-    for (int i=0; i<tcount; i++)
+    if(has_texture)
     {
-        ofBeginShape();
-        ofVertex(updatedVertexs[i*3+0].x,updatedVertexs[i*3+0].y);
-        ofVertex(updatedVertexs[i*3+1].x,updatedVertexs[i*3+1].y);
-        ofVertex(updatedVertexs[i*3+2].x,updatedVertexs[i*3+2].y);
-        ofEndShape();
+        texture.getTextureReference().bind();
+        for (int i=0; i<tcount; i++)
+        {
+            glBegin(GL_TRIANGLES);
+            glTexCoord2f(textureVertexs[i*3+0].x * texture.getTextureReference().texData.tex_t,
+                         textureVertexs[i*3+0].y * texture.getTextureReference().texData.tex_u);
+            glVertex2f(updatedVertexs[i*3+0].x,updatedVertexs[i*3+0].y);
+
+            glTexCoord2f(textureVertexs[i*3+1].x * texture.getTextureReference().texData.tex_t,
+                         textureVertexs[i*3+1].y * texture.getTextureReference().texData.tex_u);
+            glVertex2f(updatedVertexs[i*3+1].x,updatedVertexs[i*3+1].y);
+
+            glTexCoord2f(textureVertexs[i*3+2].x * texture.getTextureReference().texData.tex_t,
+                         textureVertexs[i*3+2].y * texture.getTextureReference().texData.tex_u);
+            glVertex2f(updatedVertexs[i*3+2].x,updatedVertexs[i*3+2].y);
+
+            glEnd();
+        }
+        texture.getTextureReference().unbind();
+    }
+    else
+    {
+        for (int i=0; i<tcount; i++)
+        {
+            ofBeginShape();
+            ofVertex(updatedVertexs[i*3+0].x,updatedVertexs[i*3+0].y);
+            ofVertex(updatedVertexs[i*3+1].x,updatedVertexs[i*3+1].y);
+            ofVertex(updatedVertexs[i*3+2].x,updatedVertexs[i*3+2].y);
+            ofEndShape();
+        }
     }
     ofPopMatrix();
 }

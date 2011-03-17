@@ -26,6 +26,8 @@ class test: public Graphic
         polygon.AddVertex(ofPoint(0.05f, 0.0f));
         polygon.AddVertex(ofPoint(0.05f, -0.05f));
 
+        polygon.SetTexture("temp.png");
+
         std::cout<< polygon.GetTriangleNumber() << std::endl;
 //        ofAddListener(tuioBundles::Instance().EventNewOScMessage,this,&test::bundle);
         this->registerEvent(InputGestureBasicFingers::Instance().updateTuioCursor, &test::updatecursor);
@@ -43,7 +45,7 @@ class test: public Graphic
         polygon.Draw();
         ofSetColor(255,255,0);
         ofSetLineWidth(2.0f);
-        polygon.DrawStroke();
+        //polygon.DrawStroke();
         ofPopMatrix();
     }
 

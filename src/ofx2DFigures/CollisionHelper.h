@@ -55,7 +55,7 @@ namespace Figures
         ErrorPoint, ConvexPoint, ConcavePoint
     };
 
-    void OfSetColor
+    //void OfSetColor
     class CollisionHelper
     {
         public:

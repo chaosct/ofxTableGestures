@@ -42,6 +42,10 @@ namespace Figures
             void AddPoint(float x, float y);
             bool Collide(float x, float y);
             void Draw();
+            float GetXmin(){return xmin;}
+            float GetXmax(){return xmax;}
+            float GetYmin(){return ymin;}
+            float GetYmax(){return ymax;}
         private:
             float xmin,xmax,ymin,ymax;
             bool setedup;

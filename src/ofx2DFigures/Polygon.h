@@ -50,10 +50,12 @@ namespace Figures
             /// Flag that says if all vertexs has been processed.
             bool processed;
             bool it_is_empty;
-            /// vertexs to be processed by the cutting ears algorythm.
+            /// triangle vertexs.
             vector_points updatedVertexs;
             /// centre of th polygon.
             ofPoint centre;
+            /// triangle tecture vertexs.
+            vector_points textureVertexs;
 
             virtual void RebuildGeometry();
 
