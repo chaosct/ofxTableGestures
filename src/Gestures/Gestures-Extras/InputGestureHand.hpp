@@ -107,7 +107,7 @@ public:
     ofEvent<removeHandArgs> removeHand;
     ofEvent<updateHandArgs> updateHand;
     InputGestureHands():
-        HAND_MAX_RADIUS(GlobalConfig::getRef("GESTURES:HANDS:MAX_RADIUS",0.1f))
+        HAND_MAX_RADIUS(ofxGlobalConfig::getRef("GESTURES:HANDS:MAX_RADIUS",0.1f))
     {}
     void newCursor(DirectFinger *df);
     void removeCursor(DirectFinger *df);

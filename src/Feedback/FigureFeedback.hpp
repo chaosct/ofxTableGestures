@@ -49,8 +49,8 @@ class HistoryFigure{
         HistoryFigure(DirectObject * obj):
             dobj(obj),
             scale_factor(1),
-            OBJECT_DISAPPEAR_TIME(GlobalConfig::getRef("FEEDBACK:FIGURE:DISAPPEAR",0.25f)),
-            OBJECT_SIZE(GlobalConfig::getRef("FEEDBACK:FIGURE:SIZE",0.00141f)){}
+            OBJECT_DISAPPEAR_TIME(ofxGlobalConfig::getRef("FEEDBACK:FIGURE:DISAPPEAR",0.25f)),
+            OBJECT_SIZE(ofxGlobalConfig::getRef("FEEDBACK:FIGURE:SIZE",0.00141f)){}
         void Release(float time){
             released_time = time;
         }

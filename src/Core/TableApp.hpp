@@ -110,6 +110,13 @@ class TableApp {
 		void mousePressed(ofMouseEventArgs & event);
 		void mouseReleased(ofMouseEventArgs & event);
 		void windowResized(ofResizeEventArgs & event);
+		
+		///From old GlobalConfig
+		static float height;
+		static float width;
+        static float getHeight(){return TableApp::height;}
+        static float getWidth(){return TableApp::width;}
+		
 };
 
 #endif

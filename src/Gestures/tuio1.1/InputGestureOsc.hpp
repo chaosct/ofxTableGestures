@@ -1,7 +1,7 @@
 #ifndef INPUTGESTUREOSC_HPP_INCLUDED
 #define INPUTGESTUREOSC_HPP_INCLUDED
 
-#include "GlobalConfig.hpp"
+#include "ofxGlobalConfig.hpp"
 #include "Events.hpp"
 #include "Singleton.hpp"
 #include "Graphic.hpp"
@@ -19,7 +19,7 @@ class InputGestureOSC : public Singleton<InputGestureOSC>, public Graphic
     
     InputGestureOSC()
     {
-        OscReceiver.setup(GlobalConfig::getRef("INPUT:TUIO:PORT",3333));
+        OscReceiver.setup(ofxGlobalConfig::getRef("INPUT:TUIO:PORT",3333));
     }
     void update()
     {

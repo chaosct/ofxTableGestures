@@ -32,7 +32,7 @@
 #include "InputGestureTuio1.12D.hpp"
 
 #include <string>
-
+#include "TableApp.hpp"
 
 
 void InputGestureTuio112D::ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args)
@@ -71,8 +71,8 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
         }
         else
         {
-            ypos = ypos * GlobalConfig::getHeight();
-            xpos = xpos * GlobalConfig::getWidth();
+            ypos = ypos * TableApp::getHeight();
+            xpos = xpos * TableApp::getWidth();
         }
 
         if(c_s_ids.find(s_id) == c_s_ids.end())
@@ -149,8 +149,8 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
         }
         else
         {
-            ypos = ypos * GlobalConfig::getHeight();
-            xpos = xpos * GlobalConfig::getWidth();
+            ypos = ypos * TableApp::getHeight();
+            xpos = xpos * TableApp::getWidth();
         }
         if(o_s_ids.find(s_id) == o_s_ids.end())
         {

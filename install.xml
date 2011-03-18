@@ -5,7 +5,8 @@
     <author>Daniel Gallardo, Carles F. Julià</author>
     <url>http://github.com/chaosct/ofxTableGestures</url>
     <requires>ofxOsc</requires>
-    <requires>ofxXmlSettings</requires>
+    <requires>ofxGlobalConfig</requires>
+    <requires>ofx2DFigures</requires>
     
     <add>    
         <!--    =====================================================================    -->

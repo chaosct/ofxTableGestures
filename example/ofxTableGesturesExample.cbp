@@ -2,13 +2,13 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="emptyExample" />
+		<Option title="ofxTableGesturesExample" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxOsc/src/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/Simulator/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/GlobalConfig/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Render/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/Utils/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Feedback/;addons/ofxTableGestures/Feedback/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;src/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/;addons/ofxTableGestures/Gestures/;addons/ofxTableGestures/Core/;addons/ofxTableGestures/Gestures/TUIO/;addons/ofxTableGestures/Gestures/Basic/;addons/ofxTableGestures/Gestures/Extra/;addons/ofxGlobalConfig/;addons/ofx2DFigures/;" />
+		<Option virtualFolders="addons/;src/;addons/ofx2DFigures/src/;addons/ofxGlobalConfig/src/;addons/ofxOsc/src/;addons/ofxTableGestures/src/Core/;addons/ofxTableGestures/src/Feedback/;addons/ofxTableGestures/src/Gestures/;addons/ofxTableGestures/src/Gestures/Gestures-Extras/;addons/ofxTableGestures/src/Gestures/Gestures/;addons/ofxTableGestures/src/Gestures/tuio1.1/;addons/ofxTableGestures/src/Render/;addons/ofxTableGestures/src/Simulator/;addons/ofxTableGestures/src/Utils/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/advancedEventsExample_debug" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworksDebug.a;" />
@@ -20,11 +20,12 @@
 					<Add option="-MMD" />
 				</Compiler>
 				<Linker>
+					<Add option="-Wl,-rpath=./libs" />
 					<Add library="openFrameworksDebug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/advancedEventsExample" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
@@ -37,15 +38,11 @@
 					<Add option="-MMD" />
 				</Compiler>
 				<Linker>
+					<Add option="-Wl,-rpath=./libs" />
 					<Add option="-s" />
 					<Add library="openFrameworks" />
 				</Linker>
 			</Target>
-			<Environment>
-				<Variable name="target" value="emptyExample" />
-				<Variable name="nautilusOnBuild" value="false" />
-				<Variable name="runOnBuild" value="false" />
-			</Environment>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -66,26 +63,9 @@
 			<Add directory="../../../libs/FreeImage/include" />
 			<Add directory="../../../libs/freetype/include" />
 			<Add directory="../../../libs/freetype/include/freetype2" />
-			<Add directory="../../../libs/unicap/include" />
 			<Add directory="../../../libs/gstappsink/include" />
 			<Add directory="../../../addons" />
 			<Add directory="../../../libs/poco/include" />
-			<Add directory="../../../addons/ofx3DModelLoader/src/3DS/" />
-			<Add directory="../../../addons/ofx3DModelLoader/src/" />
-			<Add directory="../../../addons/ofxNetwork/src" />
-			<Add directory="../../../addons/ofxOsc/src" />
-			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
-			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
-			<Add directory="../../../addons/ofxVectorMath/src" />
-			<Add directory="../../../addons/ofxVectorGraphics/src" />
-			<Add directory="../../../addons/ofxVectorGraphics/libs" />
-			<Add directory="../../../addons/ofxOpenCv/src" />
-			<Add directory="../../../addons/ofxOpenCv/libs/opencv/include" />
-			<Add directory="../../../addons/ofxThread/src" />
-			<Add directory="../../../addons/ofxDirList/src" />
-			<Add directory="../../../addons/ofxXmlSettings/src" />
-			<Add directory="../../../addons/ofxXmlSettings/libs" />
-			<Add directory="src" />
 			<Add directory="../../../addons/ofxTableGestures/src" />
 			<Add directory="../../../addons/ofxTableGestures/src/Core" />
 			<Add directory="../../../addons/ofxTableGestures/src/Feedback" />
@@ -96,12 +76,16 @@
 			<Add directory="../../../addons/ofxTableGestures/src/Render" />
 			<Add directory="../../../addons/ofxTableGestures/src/Simulator" />
 			<Add directory="../../../addons/ofxTableGestures/src/Utils" />
-			<Add directory="../src/ofx2DFigures" />
+			<Add directory="../../../addons/ofx2DFigures/src" />
+			<Add directory="../../../addons/ofxGlobalConfig/src" />
+			<Add directory="../../../addons/ofxOsc/src" />
+			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/ip" />
+			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
+			<Add directory="../../../addons/ofxXmlSettings/src" />
+			<Add directory="../../../addons/ofxXmlSettings/libs" />
 		</Compiler>
 		<Linker>
-			<Add library="openFrameworks" />
 			<Add library="fmodex" />
-			<Add library="raw1394" />
 			<Add library="glut" />
 			<Add library="GL" />
 			<Add library="GLU" />
@@ -114,8 +98,6 @@
 			<Add library="GLee" />
 			<Add library="oFappsink" />
 			<Add library="../../../addons/ofxOsc/libs/oscpack/lib/linux/liboscpack.a" />
-			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcv.a" />
-			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcxcore.a" />
 			<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
 			<Add directory="../../../libs/freetype/lib/linux" />
 			<Add directory="../../../libs/FreeImage/lib/linux" />
@@ -123,7 +105,6 @@
 			<Add directory="../../../libs/glee/lib/linux" />
 			<Add directory="../../../libs/gstappsink/lib/linux" />
 			<Add directory="../../../libs/fmodex/lib/linux" />
-			<Add directory="../../../libs/unicap/lib/linux" />
 			<Add directory="../../../libs/poco/lib/linux" />
 		</Linker>
 		<ExtraCommands>
@@ -131,20 +112,50 @@
 			<Add after="#      copy libs and shell script to bin directory:" />
 			<Add after="#" />
 			<Add after="cp -r ../../../export/linux/libs $(PROJECT_DIR)bin/" />
-			<Add after="cp ../../../export/linux/clickToLaunchApp.sh $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
-			<Add after="sed -i s/applicationName/$(TARGET_OUTPUT_BASENAME)/g  $(PROJECT_DIR)bin/clickToLaunchApp_$(TARGET_NAME).sh" />
-			<Add after="#" />
-			<Add after="#    this is a shell script that can either (a) run the app or (b) launch nautilus to a good directory for you to run the app" />
-			<Add after="#" />
-			<Add after="./cb_build_runner.sh $(TARGET_OUTPUT_BASENAME) $runOnBuild $nautilusOnBuild" />
-			<Add after="#" />
-			<Add after="#     to enable either, change the custom variables in project-&gt;build options-&gt;custom variables" />
-			<Add after="#     to true / false." />
-			<Add after="#" />
-			<Add after="#     currently this is disabled, but allows you to run the app from w/in CB." />
-			<Add after="#" />
 			<Mode after="always" />
 		</ExtraCommands>
+		<Unit filename="../../../addons/ofx2DFigures/src/BoundingBox.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/BoundingBox.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/CollisionHelper.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/CollisionHelper.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Figure.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Figure.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Matrix.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Polygon.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Polygon.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/TestTriangulation.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Triangulate.cpp">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofx2DFigures/src/Triangulate.h">
+			<Option virtualFolder="addons/ofx2DFigures/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxGlobalConfig/src/GlobalConfig.hpp">
+			<Option virtualFolder="addons/ofxGlobalConfig/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxGlobalConfig/src/GlobalConfigDetail.hpp">
+			<Option virtualFolder="addons/ofxGlobalConfig/src" />
+		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
@@ -175,200 +186,152 @@
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
-		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Area.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Graphic.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Graphic.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/GraphicDispatcher.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/GraphicDispatcher.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/TableApp.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/TableApp.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Core/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/CursorFeedback.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/CursorFeedback.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/FigureFeedback.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/FigureFeedback.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/HandFeedback.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/LongPushFeedback.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Feedback/TapFeedback.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Feedback/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Feedback" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/DirectPoint.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Events.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureHand.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Extra/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureHand.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Extra/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureLongPush.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Extra/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureTap.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Extra/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicObjects.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectFingers.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureTuio1.1.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/Basic/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureOsc.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.12.5D.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.12.5D.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.12D.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.12D.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.13D.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/tuio1.1/InputGestureTuio1.13D.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Gestures/TUIO/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfig.hpp">
-			<Option virtualFolder="addons/ofxGlobalConfig/" />
-		</Unit>
-		<Unit filename="../../../addons/ofxTableGestures/src/GlobalConfigDetail.hpp">
-			<Option virtualFolder="addons/ofxGlobalConfig/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/tuio1.1" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Grid.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Grid.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer_plane.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer_plane.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer_to_texture.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Render/Renderer_to_texture.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Render/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Render" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/Shapes.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/Shapes.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/Simulator.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/Simulator.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/container.cpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/container.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Simulator/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Utils/OscTools.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Utils/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Utils" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Utils/Singleton.hpp">
-			<Option virtualFolder="addons/ofxTableGestures/Utils/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/BoundingBox.cpp">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/BoundingBox.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/CollisionHelper.cpp">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/CollisionHelper.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Figure.cpp">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Figure.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Matrix.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Polygon.cpp">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Polygon.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Triangulate.cpp">
-			<Option virtualFolder="addons/ofx2DFigures/" />
-		</Unit>
-		<Unit filename="../src/ofx2DFigures/Triangulate.h">
-			<Option virtualFolder="addons/ofx2DFigures/" />
+			<Option virtualFolder="addons/ofxTableGestures/src/Utils" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofXmlSettings/libs" />
@@ -387,6 +350,15 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

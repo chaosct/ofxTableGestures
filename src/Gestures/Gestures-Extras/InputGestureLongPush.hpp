@@ -48,8 +48,8 @@
         struct LongPushTrigerArgs : public EventArgs {float x; float y;};
         ofEvent<LongPushTrigerArgs> LongPushTriger;
         InputGestureLongPush():
-            maxdistance(GlobalConfig::getRef("GESTURES:KEEP:MAXDISTANCE",0.005f)),
-            mintime(GlobalConfig::getRef("GESTURES:KEEP:MINTIME",1.0f)){}
+            maxdistance(ofxGlobalConfig::getRef("GESTURES:KEEP:MAXDISTANCE",0.005f)),
+            mintime(ofxGlobalConfig::getRef("GESTURES:KEEP:MINTIME",1.0f)){}
         virtual void newCursor(DirectFinger * f)
         {
             float now = ofGetElapsedTimef();

@@ -53,8 +53,8 @@ public:
     ofEvent<TapArgs> Tap;
 
     InputGestueTap():
-        maxdistance(GlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
-        maxtime(GlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f)) {}
+        maxdistance(ofxGlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
+        maxtime(ofxGlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f)) {}
 
     virtual void newCursor(DirectFinger * f)
     {

@@ -60,9 +60,9 @@ class TapFeedback : public CanTap < Graphic >
         }
         void draw()
         {
-            static int & R = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
-            static int & G = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
-            static int & B = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
+            static int & R = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
+            static int & G = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
+            static int & B = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
 
             float now = ofGetElapsedTimef();
             float alpha = ((now - born) / lifetime);
@@ -80,8 +80,8 @@ class TapFeedback : public CanTap < Graphic >
     };
 
     TapFeedback(Area * a = NULL):
-    lifetime(GlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
-    maxradius(GlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
+    lifetime(ofxGlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
+    maxradius(ofxGlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
     {
 //        Register(a);
     }

@@ -79,8 +79,8 @@ class LongPushFeedback : public CanLongPush < Graphic >
     };
 
     LongPushFeedback():
-    lifetime(GlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
-    maxradius(GlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
+    lifetime(ofxGlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
+    maxradius(ofxGlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
     {
 //        Register(a);
     }

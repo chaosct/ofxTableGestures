@@ -35,7 +35,7 @@
 
 #include <set>
 
-#include "GlobalConfig.hpp"
+#include "ofxGlobalConfig.hpp"
 #include "InputGestureOsc.hpp"
 #include "OscTools.hpp"
 
@@ -118,7 +118,7 @@ class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
 
     int & squaredInterface;
     InputGestureTuio112D():
-        squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
+        squaredInterface(ofxGlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
     {
         ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
     }

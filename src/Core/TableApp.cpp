@@ -34,12 +34,17 @@
 #include "GraphicDispatcher.hpp"
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
-#include "GlobalConfig.hpp"
+#include "ofxGlobalConfig.hpp"
 #include "CollisionHelper.h"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
 #define DISTORTION_PATH "calibration.conf"
+
+
+float TableApp::height = 0;
+float TableApp::width = 0;
+
 
 TableApp::TableApp():
 //    calibration_enabled(false),
@@ -51,10 +56,10 @@ TableApp::TableApp():
     simulator(new simulator::Simulator()),
     is_simulating(false),
     #endif
-    squaredInterface(GlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1)),
+    squaredInterface(ofxGlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1)),
     matrix_updated(false)
 {
-    if(GlobalConfig::getRef("GLOBAL:RENDERTOTEXTURE",0)) renderer = new Renderer_to_texture();
+    if(ofxGlobalConfig::getRef("GLOBAL:RENDERTOTEXTURE",0)) renderer = new Renderer_to_texture();
     else renderer = new Renderer_plane();
 
     renderer->LoadDistortion();
@@ -184,13 +189,13 @@ void TableApp::draw(){
     {
         //if the surface is squared we center the drawing  plane
         glTranslatef((ofGetWidth()-shortside)/2.0,(ofGetHeight()-shortside)/2.0,0);
-        GlobalConfig::Instance().height = 1;
-        GlobalConfig::Instance().width = 1;
+        TableApp::height = 1;
+        TableApp::width = 1;
     }
     else
     {
-        GlobalConfig::Instance().height = float(ofGetHeight())/float(shortside);
-        GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
+        TableApp::height = float(ofGetHeight())/float(shortside);
+        TableApp::width = float(ofGetWidth())/float(shortside);
     }
     glScalef(shortside,shortside,1);
 

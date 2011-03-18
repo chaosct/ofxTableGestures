@@ -53,7 +53,7 @@ class HistoryPoint: private DirectPoint{
     public:
         int sid;
         HistoryPoint(int sid, float x, float y):
-        MAX_SECONDS(GlobalConfig::getRef("FEEDBACK:CURSOR:MAX_TAIL_SECONDS",0.5f))
+        MAX_SECONDS(ofxGlobalConfig::getRef("FEEDBACK:CURSOR:MAX_TAIL_SECONDS",0.5f))
         {
             SetPoint(x,y);
         }
@@ -67,9 +67,9 @@ class HistoryPoint: private DirectPoint{
                 points.pop_front();
         }
         void Draw(){
-            static int & R = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
-            static int & G = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
-            static int & B = GlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
+            static int & R = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
+            static int & G = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
+            static int & B = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
             ///Draws cursor
             ofSetColor(R,G,B);
             ofCircle(xpos,ypos,0.007);
