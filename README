@@ -2,6 +2,10 @@ ofxTableGestures (formerly OF-TangibleFramework) is an addon of OpenFrameworks t
 
 We are changing a lot of code, modernizing and making it more OF-ish. It is incomplete ATM
 
+You will need:
+ofxGlobalConfig (https://github.com/chaosct/ofxGlobalConfig)
+ofx2DFigures (https://github.com/bestsheep1/ofx2DFigures)
+
 Warning:
 This project is currently under heavy development. The underlying code as well as the specific interfaces of
 its different parts may change in the future, leaving your project unable to compile unless you keep
