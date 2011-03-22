@@ -56,7 +56,7 @@ void InputGestureTuio113D::tuio3Dcur(OscOptionalUnpacker & args)
     if(cmd == "set")
     {
         int s_id;
-        float xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel;
+        float xpos=0, ypos=0, zpos=0, xspeed=0, yspeed=0, zspeed=0, maccel=0;
 
         args >> s_id >> xpos >> ypos >> zpos >> xspeed >> yspeed >> zspeed >> maccel ;
 
@@ -93,7 +93,7 @@ void InputGestureTuio113D::tuio3Dcur(OscOptionalUnpacker & args)
     }
     else if( cmd == "alive" )
     {
-        int s_id;
+        int s_id=0;
         std::set<int> t(c_s_ids);
         while(!args.Eos())
         {
@@ -121,8 +121,8 @@ void InputGestureTuio113D::tuio3Dobj(OscOptionalUnpacker & args)
     if(cmd == "set")
     {
 
-        int s_id, f_id;
-        float xpos, ypos, zpos, aangle, bangle, cangle , xspeed, yspeed, zspeed, aspeed,bspeed,cspeed, maccel, raccel;
+        int s_id=0, f_id=0;
+        float xpos=0, ypos=0, zpos=0, aangle=0, bangle=0, cangle =0, xspeed=0, yspeed=0, zspeed=0, aspeed=0,bspeed=0,cspeed=0, maccel=0, raccel=0;
 
         args >> s_id >> f_id >> xpos >> ypos >> zpos >> aangle >> bangle >> cangle >> xspeed >> yspeed >> zspeed >>  aspeed >> bspeed >>cspeed >> maccel >> raccel ;
 
@@ -176,7 +176,7 @@ void InputGestureTuio113D::tuio3Dobj(OscOptionalUnpacker & args)
     else if(cmd == "alive" )
     {
 
-        int s_id;
+        int s_id=0;
         std::set<int> t(o_s_ids);
         while(!args.Eos())
         {

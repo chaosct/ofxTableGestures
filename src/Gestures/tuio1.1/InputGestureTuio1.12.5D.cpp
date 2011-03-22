@@ -93,7 +93,7 @@ void InputGestureTuio1125D::tuio25Dcur(OscOptionalUnpacker & args)
     }
     else if(  cmd== "alive"  )
     {
-        int s_id;
+        int s_id=0;
         std::set<int> t(c_s_ids);
         while(!args.Eos())
         {
@@ -122,8 +122,8 @@ void InputGestureTuio1125D::tuio25Dobj(OscOptionalUnpacker & args)
     if(cmd=="set")
     {
 
-        int s_id, f_id;
-        float xpos, ypos, zpos, angle, xspeed, yspeed, zspeed, rspeed, maccel, raccel;
+        int s_id=0, f_id=0;
+        float xpos=0, ypos=0, zpos=0, angle=0, xspeed=0, yspeed=0, zspeed=0, rspeed=0, maccel=0, raccel=0;
 
         args >> s_id >> f_id >> xpos >> ypos >> zpos >> angle >> xspeed >> yspeed >> zspeed >> rspeed >> maccel >> raccel ;
 
@@ -169,7 +169,7 @@ void InputGestureTuio1125D::tuio25Dobj(OscOptionalUnpacker & args)
     else if(  cmd == "alive"  )
     {
 
-        int s_id;
+        int s_id=0;
         std::set<int> t(o_s_ids);
         while(!args.Eos())
         {
@@ -198,7 +198,7 @@ void InputGestureTuio1125D::tuio25Dblb(OscOptionalUnpacker & args)
     {
 
         int s_id;
-        float xpos, ypos, zpos, angle, width, height, area, xspeed, yspeed, zspeed, rspeed, maccel, raccel;
+        float xpos=0, ypos=0, zpos=0, angle=0, width=0, height=0, area=0, xspeed=0, yspeed=0, zspeed=0, rspeed=0, maccel=0, raccel=0;
 
         args >> s_id >> xpos >> ypos >> zpos >> angle >> width >> height >> area >> xspeed >> yspeed >> zspeed >> rspeed >> maccel >> raccel ;
 
@@ -248,7 +248,7 @@ void InputGestureTuio1125D::tuio25Dblb(OscOptionalUnpacker & args)
     else if( cmd == "alive"  )
     {
 
-        int s_id;
+        int s_id=0;
         std::set<int> t(b_s_ids);
         while(!args.Eos())
         {

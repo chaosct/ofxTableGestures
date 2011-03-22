@@ -56,7 +56,7 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
     if(cmd=="set")
     {
         int s_id;
-        float xpos, ypos, xspeed, yspeed, maccel;
+        float xpos=0, ypos=0, xspeed=0, yspeed=0, maccel=0;
 
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel ;
 
@@ -105,7 +105,7 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
     }
     else if( cmd== "alive"  )
     {
-        int s_id;
+        int s_id=0;
         std::set<int> t(c_s_ids);
         while(!args.Eos())
         {
@@ -133,8 +133,8 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
 
     if(cmd=="set")
     {
-        int s_id, f_id;
-        float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
+        int s_id=0, f_id=0;
+        float xpos=0, ypos=0, angle=0, xspeed=0, yspeed=0, rspeed=0, maccel=0, raccel=0;
 
         args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel ;
 
@@ -190,7 +190,7 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
     else if( cmd == "alive"  )
     {
 
-        int s_id;
+        int s_id=0;
         std::set<int> t(o_s_ids);
         while(!args.Eos())
         {
@@ -218,7 +218,7 @@ void InputGestureTuio112D::tuio2Dblb(OscOptionalUnpacker & args)
     if(cmd=="set")
     {
         int s_id;
-        float xpos, ypos, angle, width, height, area, xspeed, yspeed, rspeed, maccel, raccel;
+        float xpos=0, ypos=0, angle=0, width=0, height=0, area=0, xspeed=0, yspeed=0, rspeed=0, maccel=0, raccel=0;
         args >> s_id >> xpos >> ypos >> angle >> width >> height >> area >> xspeed >> yspeed >> rspeed >> maccel >> raccel ;
 
         if(b_s_ids.find(s_id) == b_s_ids.end())
@@ -263,7 +263,7 @@ void InputGestureTuio112D::tuio2Dblb(OscOptionalUnpacker & args)
     else if(  cmd == "alive"  )
     {
 
-        int s_id;
+        int s_id=0;
         std::set<int> t(b_s_ids);
         while(!args.Eos())
         {
