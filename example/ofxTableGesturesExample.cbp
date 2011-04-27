@@ -189,6 +189,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Area.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
+		<Unit filename="../../../addons/ofxTableGestures/src/Core/EventClient.hpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Core/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Graphic.cpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
