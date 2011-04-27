@@ -62,7 +62,7 @@ bool CompareLayers(Graphic* object1, Graphic* object2){
     return false;
 }
 
-bool Graphic::Collide()
+bool Graphic::Collide(ofPoint const & point)
 {
     return false;
 }

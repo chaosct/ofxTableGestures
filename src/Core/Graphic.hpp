@@ -39,6 +39,8 @@
 
 #include "Area.hpp"
 
+#include "ofMain.h"
+
 #include "EventClient.hpp"
 
 class Graphic :public Area, public EventClient{
@@ -49,8 +51,8 @@ class Graphic :public Area, public EventClient{
         virtual ~Graphic();
         int GetLayer();
 		void BringTop();
-		bool Collide();
-		void Position(float & x, float & y);
+		virtual bool Collide(ofPoint const & point);
+		virtual void Position(float & x, float & y);
     protected:
         int layer;
         friend class GraphicDispatcher;
