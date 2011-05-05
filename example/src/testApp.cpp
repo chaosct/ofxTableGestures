@@ -29,7 +29,6 @@ class test: public Graphic
         polygon.SetTexture("temp.png");
 
         std::cout<< polygon.GetTriangleNumber() << std::endl;
-//        ofAddListener(tuioBundles::Instance().EventNewOScMessage,this,&test::bundle);
         this->registerEvent(InputGestureBasicFingers::Instance().updateTuioCursor, &test::updatecursor);
         color.r = 255;
         color.g = 255;
@@ -56,6 +55,7 @@ class test: public Graphic
             color.r = 255;
             color.g = 0;
             color.b = 0;
+            this->unregisterEvent(InputGestureBasicFingers::Instance().updateTuioCursor);
         }
         else
         {
