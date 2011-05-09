@@ -55,7 +55,9 @@ class Graphic :public Area, public EventClient{
 		virtual void Position(float & x, float & y);
     protected:
         int layer;
+        float created_time;
         friend class GraphicDispatcher;
+        friend class CompareLayers;
         virtual void draw(){}
         virtual void update(){}
         virtual void resize(int w, int h){}
@@ -71,7 +73,16 @@ class TGraphic: public Graphic
 typedef TGraphic<NOT_LAYER> NotificationGraphic;
 typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
-bool CompareLayers(Graphic* object1, Graphic* object2);
+struct CompareLayers
+{
+    inline bool operator()(Graphic* object1, Graphic* object2)
+    {
+        if (object1->GetLayer() == object2->GetLayer())
+            return (object1->created_time > object2->created_time);
+        return (object1->GetLayer() > object2->GetLayer());
+    }
+};
+
 
 //template<typename T>
 //class OnTable: public T

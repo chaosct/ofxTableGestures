@@ -31,6 +31,8 @@
 
 #include "ofMain.h"
 #include "GraphicDispatcher.hpp"
+#include <algorithm>
+#include <functional>
 
 GraphicDispatcher::GraphicDispatcher(){
 }
@@ -39,38 +41,29 @@ GraphicDispatcher::~GraphicDispatcher(){
 }
 
 void GraphicDispatcher::Draw(){
-    for(std::list<Graphic*>::iterator it = graphics.begin(); it != graphics.end(); it++)
-        (*it)->draw();
+    std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&Graphic::draw));
 }
 
 void GraphicDispatcher::Update(){
-    std::list<Graphic*> l (graphics);
-    for(std::list<Graphic*>::iterator it = l.begin(); it != l.end(); it++)
-        (*it)->update();
+    GraphicsList l (graphics);
+    std::for_each(l.begin(),l.end(),std::mem_fun(&Graphic::update));
 }
 
 void GraphicDispatcher::Resize(int w, int h){
-    std::list<Graphic*> l (graphics);
-    for(std::list<Graphic*>::iterator it = l.begin(); it != l.end(); it++)
+    for(GraphicsList::iterator it = graphics.begin(); it != graphics.end(); it++)
         (*it)->resize(w,h);
 }
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
-    graphics.push_back(graphic);
-    graphics.sort(CompareLayers);
+    graphics.insert(graphic);
 }
 
 void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
-    graphics.remove(graphic);
+    graphics.erase(graphic);
 }
 
 void GraphicDispatcher::bring_top(Graphic* graphic){
-    for ( std::list<Graphic*>::iterator it=graphics.begin(); it!=graphics.end();it++){
-        if ( (*it) == graphic){
-            graphics.remove(*it);
-            break;
-        }
-    }
-    graphics.push_back(graphic);
-    graphics.sort(CompareLayers);
+    graphics.erase(graphic);
+    graphic->created_time = ofGetElapsedTimef();
+    graphics.insert(graphic);
 }

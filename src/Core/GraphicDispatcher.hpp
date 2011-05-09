@@ -31,14 +31,15 @@
 
 #ifndef _GRAPHICDISPATCHER
 #define _GRAPHICDISPATCHER
-#include <list>
+#include <set>
 #include "Singleton.hpp"
 #include "Graphic.hpp"
 
 
 class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
-        std::list<Graphic*> graphics;
+        typedef std::set<Graphic*,CompareLayers> GraphicsList;
+        GraphicsList graphics;
     protected:
         friend class Singleton<GraphicDispatcher>;
         GraphicDispatcher();
