@@ -33,6 +33,7 @@
 #include "GraphicDispatcher.hpp"
 #include <algorithm>
 #include <functional>
+#include <tr1/functional>
 
 GraphicDispatcher::GraphicDispatcher(){
 }
@@ -50,8 +51,8 @@ void GraphicDispatcher::Update(){
 }
 
 void GraphicDispatcher::Resize(int w, int h){
-    for(GraphicsList::iterator it = graphics.begin(); it != graphics.end(); it++)
-        (*it)->resize(w,h);
+    std::for_each(graphics.begin(),graphics.end(),
+                  std::tr1::bind(&Graphic::resize,std::tr1::placeholders::_1,w,h));
 }
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
