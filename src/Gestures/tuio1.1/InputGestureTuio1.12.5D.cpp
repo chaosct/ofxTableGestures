@@ -56,7 +56,7 @@ void InputGestureTuio1125D::tuio25Dcur(OscOptionalUnpacker & args)
     if(cmd =="set")
     {
         int s_id;
-        float xpos, ypos, zpos, xspeed, yspeed, zspeed, maccel;
+        float xpos(0), ypos(0), zpos(0), xspeed(0), yspeed(0), zspeed(0), maccel(0);
 
         args >> s_id >> xpos >> ypos >> zpos >> xspeed >> yspeed >> zspeed >> maccel ;
 
