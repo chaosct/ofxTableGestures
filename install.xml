@@ -102,8 +102,6 @@
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/FigureFeedback.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/CursorFeedback.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Graphics/objects/TapFeedback.hpp</file>
-                <file>../../../addons/ofxTableGestures/src/Graphics/objects/LongPushFeedback.cpp</file>
-                <file>../../../addons/ofxTableGestures/src/Graphics/objects/HandFeedback.cpp</file>
             </folder>
             
             <folder name="addons/TableGestures/Tools">
