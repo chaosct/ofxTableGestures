@@ -35,6 +35,7 @@
 #include "Renderer_plane.hpp"
 #include "Renderer_to_texture.hpp"
 #include "GlobalConfig.hpp"
+#include "CollisionHelper.h"
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
@@ -59,6 +60,8 @@ TableApp::TableApp():
 
     renderer->LoadDistortion();
     show_grid = false;
+
+    Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
 }
 
 TableApp::~TableApp(){
@@ -176,6 +179,11 @@ void TableApp::draw(){
         GlobalConfig::Instance().width = float(ofGetWidth())/float(shortside);
     }
     glScalef(shortside,shortside,1);
+
+//to optimize
+glGetDoublev(GL_MODELVIEW_MATRIX,Figures::CollisionHelper::ignore_transformation_matrix.data);
+Figures::CollisionHelper::ignore_transformation_matrix = Figures::CollisionHelper::ignore_transformation_matrix.GetInverse();
+//end
 
     ///Draws all 'Graphics'
     glDisable(GL_DEPTH_TEST);
