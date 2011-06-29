@@ -150,11 +150,11 @@
 		<Unit filename="../../../addons/ofx2DFigures/src/Triangulate.h">
 			<Option virtualFolder="addons/ofx2DFigures/src" />
 		</Unit>
-		<Unit filename="../../../addons/ofxGlobalConfig/src/GlobalConfig.hpp">
-			<Option virtualFolder="addons/ofxGlobalConfig/src" />
+		<Unit filename="../../ofxGlobalConfig/src/GlobalConfigDetail.hpp">
+			<Option virtualFolder="addons/ofxGlobalConfig/src/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxGlobalConfig/src/GlobalConfigDetail.hpp">
-			<Option virtualFolder="addons/ofxGlobalConfig/src" />
+		<Unit filename="../../ofxGlobalConfig/src/ofxGlobalConfig.hpp">
+			<Option virtualFolder="addons/ofxGlobalConfig/src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
@@ -185,6 +185,15 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Area.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
@@ -353,15 +362,6 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
-		</Unit>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>
