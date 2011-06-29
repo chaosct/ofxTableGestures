@@ -60,28 +60,38 @@ public:
 class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture >, public Singleton<InputGestureDirectObjects>
 {
     std::map<int,DirectObject *> objects;
+
+    struct DirectObjectArgsBase: public EventArgs
+    {
+        DirectObject * object;
+    };
 public:
 
-    struct newObjectArgs: public EventArgs
-    {
-        DirectObject * object;
-    };
-    struct removeObjectArgs: public EventArgs
-    {
-        DirectObject * object;
-    };
-    struct updateObjectArgs: public EventArgs
-    {
-        DirectObject * object;
-    };
-    struct enterObjectArgs: public EventArgs
-    {
-        DirectObject * object;
-    };
-    struct exitObjectArgs: public EventArgs
-    {
-        DirectObject * object;
-    };
+    typedef DirectObjectArgsBase newObjectArgs;
+    typedef DirectObjectArgsBase removeObjectArgs;
+    typedef DirectObjectArgsBase updateObjectArgs;
+    typedef DirectObjectArgsBase enterObjectArgs;
+    typedef DirectObjectArgsBase exitObjectArgs;
+//    struct newObjectArgs: public EventArgs
+//    {
+//        DirectObject * object;
+//    };
+//    struct removeObjectArgs: public EventArgs
+//    {
+//        DirectObject * object;
+//    };
+//    struct updateObjectArgs: public EventArgs
+//    {
+//        DirectObject * object;
+//    };
+//    struct enterObjectArgs: public EventArgs
+//    {
+//        DirectObject * object;
+//    };
+//    struct exitObjectArgs: public EventArgs
+//    {
+//        DirectObject * object;
+//    };
 
     ofEvent<newObjectArgs> newObject;
     ofEvent<removeObjectArgs> removeObject;
@@ -141,8 +151,8 @@ public:
         ofAddListener(InputGestureDirectObjects::Instance().updateObject,this,&CanDirectObjects::EupdateObject);
         ofAddListener(InputGestureDirectObjects::Instance().enterObject,this,&CanDirectObjects::EenterObject);
         ofAddListener(InputGestureDirectObjects::Instance().exitObject,this,&CanDirectObjects::EexitObject);
-    }    
-    
+    }
+
     virtual ~CanDirectObjects()
     {
         ofRemoveListener(InputGestureDirectObjects::Instance().newObject,this,&CanDirectObjects::EnewObject);
