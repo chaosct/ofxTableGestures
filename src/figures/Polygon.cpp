@@ -34,7 +34,7 @@
 #include "ofMain.h"
 #include "Triangulate.h"
 
-using namespace Figures;
+namespace Figures{
 using namespace std;
 
 Polygon::Polygon()
@@ -157,3 +157,4 @@ void Polygon::GetCentre(float & x, float & y)
     y = centre.y;
 }
 
+}
