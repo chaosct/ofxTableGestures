@@ -37,12 +37,13 @@
 #include <map>
 #include <list>
 
+#define NAMEPATH "simulator.config"
 #define SQUARE          0
 #define CIRCLE          1
 #define PENTAGON        2
 #define DODECAHEDRON    3
 #define STAR            4
-#define ROUNDSQUARE     5
+#define SQUARE_ROUNDED  5
 
 namespace shapes
 {
