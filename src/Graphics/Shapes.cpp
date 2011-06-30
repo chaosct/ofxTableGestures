@@ -41,8 +41,9 @@
 #define STAR_INNER_RADIUS 30
 #define STAR_EDGES 24
 
-#define CONFIGPATH "../simulator.config"
+//#define CONFIGPATH "../simulator.config"
 
+#include "ofUtils.h"
 #include <fstream>
 
 using namespace shapes;
@@ -95,7 +96,8 @@ void shapeCircle::draw(){
     ofCircle(0,0,CIRCLE_RADIUS);
 }
 
-void shapeStar::draw(){
+void shapeStar::draw()
+{
     float angleChangePerPt = TWO_PI / (float)STAR_EDGES;
     float angle = 0;
     ofBeginShape();
@@ -129,7 +131,8 @@ void shapeDodecahedron::draw(){
 	ofEndShape();
 }
 
-void shapePentagon::draw(){
+void shapePentagon::draw()
+{
     float angleChangePerPt = TWO_PI / 5.0f;
     float angle = 0;
     ofBeginShape();
@@ -161,7 +164,7 @@ void shape_color::draw(bool draw_color){
     }else if(shapeid == STAR){
         shapeStar s;
         s.draw();
-    }else if(shapeid == ROUNDSQUARE){
+    }else if(shapeid == SQUARE_ROUNDED){
         shapeSquare sq(true);
         sq.draw();
     }
@@ -183,11 +186,12 @@ Figure_shape::~Figure_shape(){
     objectid_shape.clear();
 }
 
-void Figure_shape::Load(){
-    std::ifstream infile(CONFIGPATH);
+void Figure_shape::Load()
+{
+    std::ifstream infile(ofToDataPath(NAMEPATH).c_str());
     std::string tmp;
     char first;
-    int f_id, r,g,b;
+    int f_id, r,g,b, a;
     std::string shape;
     int n_shape;
     if(infile.is_open()){
@@ -197,16 +201,18 @@ void Figure_shape::Load(){
                 f_id = 0;
                 r = g = b = 100;
                 n_shape = 0;
-                infile >> f_id >> shape >> r >> g >> b;
+                infile >> f_id >> shape >> r >> g >> b >> a;
                 if(shape.compare("circle")== 0)n_shape=CIRCLE;
                 else if(shape.compare("square")== 0)n_shape=SQUARE;
                 else if(shape.compare("star")== 0)n_shape=STAR;
-                else if(shape.compare("roundcircle")== 0)n_shape=ROUNDSQUARE;
+                else if(shape.compare("square_rounded")== 0)n_shape=SQUARE_ROUNDED;
                 else if(shape.compare("pentagon")== 0)n_shape=PENTAGON;
                 else if(shape.compare("dodecahedron")== 0)n_shape=DODECAHEDRON;
+                //std::cout << f_id << " " << n_shape<< " " << r<< " " << g<< " " << b<< " " << a<<std::endl;
                 objectid_shape[f_id]=new shape_color(n_shape, r, g, b);
             }
             getline(infile,tmp);
+            first = 0;
         }
     }
     if(objectid_shape.size()==0)

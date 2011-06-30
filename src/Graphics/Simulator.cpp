@@ -35,7 +35,6 @@
 #include "GlobalConfig.hpp"
 
 #define INC_STEP 20
-#define CONFIGPATH "../simulator.config"
 #define M_2PI M_PI*2
 using namespace shapes;
 
@@ -55,16 +54,10 @@ namespace simulator
         #ifdef _ofxOscSENDER_H
         port = DEFAULT_PORT;
         address = DEFAULT_ADDR;
-        loaded = LoadConfigFile(CONFIGPATH);
-        if(!loaded || load_default){
-            std::cout << "Simulator: loading default values" << std::endl;
-            for (int i = 0; i< 50; i++){
-                object* tmp = new object(0,i,0,0,0,0,0,0,0,0,i);
-                SortObject(tmp);
-                objects.push_back(tmp);
-            }
-        }else std::cout << "Simulator: " << CONFIGPATH << " loaded." << std::endl;
-        if(!load_default){
+        loaded = LoadConfigFile(ofToDataPath(NAMEPATH));
+        objects.clear();
+        if(!load_default)
+        {
             std::list<int> ids = Figure_shape::Instance().GetFiducialIds();
             int i = 0;
             for(std::list<int>::iterator it = ids.begin(); it!= ids.end(); it++ ){
@@ -73,7 +66,19 @@ namespace simulator
                 objects.push_back(tmp);
                 i++;
             }
+            std::cout << "Simulator: " << ofToDataPath(NAMEPATH) << " loaded." << std::endl;
         }
+        else if(!loaded || load_default)
+        {
+            std::cout << "Simulator: loading default values" << std::endl;
+            for (int i = 0; i< 50; i++){
+                object* tmp = new object(0,i,0,0,0,0,0,0,0,0,i);
+                SortObject(tmp);
+                objects.push_back(tmp);
+            }
+        }
+
+
         sender = new ofxOscSender();
         sender->setup(address,port);
         #endif
@@ -83,11 +88,11 @@ namespace simulator
     Simulator::~Simulator(){
         //SaveFile();
         if(!loaded){
-            std::ofstream ofs(CONFIGPATH);
+            std::ofstream ofs(ofToDataPath(NAMEPATH).c_str());
             ofs << "#Simulator config file." << std::endl;
             ofs << "#p -> port" << std::endl;
             ofs << "#a -> address" << std::endl;
-            ofs << "#o -> object = fid shape red green blue alpha [shape = circle, square, star, roundcircle, pentagon, dodecahedron]" << std::endl;
+            ofs << "#o -> object = fid shape red green blue alpha [shape = circle, square, star, square_rounded, pentagon, dodecahedron]" << std::endl;
             ofs << "#d -> load default figures" << std::endl;
             ofs << "p " << DEFAULT_PORT << std::endl;
             ofs << "a " << DEFAULT_ADDR << std::endl;
@@ -102,9 +107,9 @@ namespace simulator
         std::ifstream infile(path.c_str());
         std::string tmp;
         char first;
-        load_default = false;
         if(infile.is_open())
         {
+            load_default = false;
             while (!infile.eof()) {
                 infile >> first ;
                 if(first == '#'){
