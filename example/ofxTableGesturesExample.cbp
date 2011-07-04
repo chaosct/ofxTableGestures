@@ -186,6 +186,15 @@
 		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h">
 			<Option virtualFolder="addons/ofxOsc/src" />
 		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/testApp.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Area.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
@@ -248,6 +257,9 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureTap.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
+		</Unit>
+		<Unit filename="../src/Gestures/Gestures/InputGestureBasicFingers.cpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
@@ -353,15 +365,6 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
 			<Option virtualFolder="addons/ofXmlSettings/src" />
-		</Unit>
-		<Unit filename="src/main.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/testApp.h">
-			<Option virtualFolder="src/" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

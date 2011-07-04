@@ -79,7 +79,7 @@ class TapFeedback : public CanTap < Graphic >
         }
     };
 
-    TapFeedback(Area * a = NULL):
+    TapFeedback():
     lifetime(ofxGlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
     maxradius(ofxGlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
     {

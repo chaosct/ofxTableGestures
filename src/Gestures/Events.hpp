@@ -1,7 +1,12 @@
 #ifndef EVENTS_HPP_INCLUDED
 #define EVENTS_HPP_INCLUDED
 
-struct EventArgs {};
+class Graphic;
+
+struct EventArgs {
+    Graphic * target;
+    EventArgs():target(NULL){}
+};
 
 class CompositeGesture {};
 
