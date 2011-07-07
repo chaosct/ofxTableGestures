@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <functional>
 #include <tr1/functional>
+#include <cassert>
 
 GraphicDispatcher::GraphicDispatcher(){
 }
@@ -60,7 +61,9 @@ void GraphicDispatcher::AddGraphic(Graphic* graphic){
 }
 
 void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
+    int n = graphics.size();
     graphics.erase(graphic);
+    assert(graphics.size() == n-1);
 }
 
 void GraphicDispatcher::bring_top(Graphic* graphic){

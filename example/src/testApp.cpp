@@ -70,6 +70,28 @@ class test: public Graphic
 //    }
 };
 
+class Test2: public Graphic
+{
+    public:
+    Test2()
+    {
+        registerEvent(InputGestureBasicFingers::Instance().addTuioCursor, &Test2::genericCallback);
+    }
+    void genericCallback(InputGestureBasicFingers::addTuioCursorArgs & e)
+    {
+        std::cout << "addTuioCursor " << e.target << std::endl;
+    }
+    bool Collide(ofPoint const & point)
+    {
+        ofPoint d = point - ofPoint(0.5,0.5);
+        d = d*d;
+        std::cout << sqrt(d.x+d.y) << std::endl;
+        if (sqrt(d.x+d.y) < 0.02)
+            return true;
+        return false;
+    }
+};
+
 #include "Triangulate.h"
 
 //--------------------------------------------------------------
@@ -78,7 +100,8 @@ void testApp::setup(){
     tableapp.setup();
 
     //tuioBundles::Instance();
-    new test();
+    //new test();
+    //new Test2();
     new CursorFeedback();
     new FigureFeedback();
     new HandFeedback();
