@@ -33,19 +33,16 @@
 
 Graphic::Graphic():layer(APP_LAYER){
     GraphicDispatcher::Instance().AddGraphic(this);
-    created_time = ofGetElapsedTimef();
 }
 
 Graphic::Graphic(int _layer):layer(_layer){
     GraphicDispatcher::Instance().AddGraphic(this);
-    created_time = ofGetElapsedTimef();
 }
 
 ///Copy constructor: this allows to copy graphic-herited members of classes
 Graphic::Graphic(Graphic & original):layer(original.layer)
 {
     GraphicDispatcher::Instance().AddGraphic(this);
-    created_time = ofGetElapsedTimef();
 }
 
 int Graphic::GetLayer(){

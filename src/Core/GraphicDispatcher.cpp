@@ -57,13 +57,12 @@ void GraphicDispatcher::Resize(int w, int h){
 }
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
+    graphic->created_time = ofGetElapsedTimef();
     graphics.insert(graphic);
 }
 
 void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
-    int n = graphics.size();
     graphics.erase(graphic);
-    assert(graphics.size() == n-1);
 }
 
 void GraphicDispatcher::bring_top(Graphic* graphic){
