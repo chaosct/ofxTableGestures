@@ -35,92 +35,98 @@
 #include "InputGestureDirectFingers.hpp"
 #include <map>
 #include <algorithm>
+#include "Alarm.hpp"
 
-
-
-
-    class InputGestureLongPush: public CanDirectFingers< Graphic > , public Singleton<InputGestureLongPush>
+class InputGestureLongPush: public EventClient , public Singleton<InputGestureLongPush>
+{
+    float & maxdistance;
+    float & mintime;
+    std::map< DirectFinger *,  std::pair < DirectPoint , float > > previous;
+public:
+    struct LongPushTrigerArgs : public EventArgs
     {
-        float & maxdistance;
-        float & mintime;
-        std::map< DirectFinger *,  std::pair < DirectPoint , float > > previous;
-        public:
-        struct LongPushTrigerArgs : public EventArgs {float x; float y;};
-        ofEvent<LongPushTrigerArgs> LongPushTriger;
-        InputGestureLongPush():
-            maxdistance(ofxGlobalConfig::getRef("GESTURES:KEEP:MAXDISTANCE",0.005f)),
-            mintime(ofxGlobalConfig::getRef("GESTURES:KEEP:MINTIME",1.0f)){}
-        virtual void newCursor(DirectFinger * f)
+        float x;
+        float y;
+    };
+    ofEvent<LongPushTrigerArgs> LongPushTriger;
+    InputGestureLongPush():
+        maxdistance(ofxGlobalConfig::getRef("GESTURES:KEEP:MAXDISTANCE",0.005f)),
+        mintime(ofxGlobalConfig::getRef("GESTURES:KEEP:MINTIME",1.0f))
         {
-            float now = ofGetElapsedTimef();
-            previous[f]= make_pair(DirectPoint(f->getX(),f->getY()),now);
+            registerEvent(InputGestureDirectFingers::Instance().newCursor,&InputGestureLongPush::newCursor);
+            registerEvent(InputGestureDirectFingers::Instance().updateCursor,&InputGestureLongPush::updateCursor);
+            registerEvent(InputGestureDirectFingers::Instance().removeCursor,&InputGestureLongPush::removeCursor);
         }
+    virtual void newCursor(InputGestureDirectFingers::newCursorArgs & a)
+    {
+        DirectFinger * f = a.finger;
+        float now = ofGetElapsedTimef();
+        previous[f]= make_pair(DirectPoint(f->getX(),f->getY()),now);
+        Alarm::Instance().Setup(now+mintime,this,&InputGestureLongPush::update);
+    }
 
-        void update()
+    void update(float & now)
+    {
+        std::map< DirectFinger *,  std::pair < DirectPoint , float > >::iterator iter = previous.begin();
+        for(; iter!=previous.end();)
         {
-            float now = ofGetElapsedTimef();
-            std::map< DirectFinger *,  std::pair < DirectPoint , float > >::iterator iter = previous.begin();
-            for(;iter!=previous.end();)
+            if((now - iter->second.second) > mintime)
             {
-                if((now - iter->second.second) > mintime)
-                {
-                    LongPushTrigerArgs eventargs;
-                    eventargs.x = iter->first->getX();
-                    eventargs.y = iter->first->getY();
-                    ofNotifyEvent(LongPushTriger,eventargs);
+                LongPushTrigerArgs eventargs;
+                eventargs.x = iter->first->getX();
+                eventargs.y = iter->first->getY();
+                ofNotifyEvent(LongPushTriger,eventargs);
 
-                    previous.erase(iter++);
-                }
-                else
-                {
-                    ++iter;
-                }
+                previous.erase(iter++);
+            }
+            else
+            {
+                ++iter;
             }
         }
-        virtual void updateCursor(DirectFinger *f)
+    }
+    virtual void updateCursor(InputGestureDirectFingers::updateCursorArgs & a)
+    {
+        DirectFinger * f = a.finger;
+        if(previous.find(f) != previous.end())
         {
-            if(previous.find(f) != previous.end())
-            {
-                if (previous[f].first.getDistance(f) > maxdistance)
-                    {
-                         previous.erase(f);
-                    }
-            }
-        }
-        virtual void removeCursor(DirectFinger *f)
-        {
-            if(previous.find(f) != previous.end())
+            if (previous[f].first.getDistance(f) > maxdistance)
             {
                 previous.erase(f);
             }
         }
-
-        virtual void enterCursor(DirectFinger *df){}
-        virtual void exitCursor(DirectFinger *f)
+    }
+    virtual void removeCursor(InputGestureDirectFingers::removeCursorArgs & a)
+    {
+        DirectFinger * f = a.finger;
+        if(previous.find(f) != previous.end())
         {
             previous.erase(f);
         }
-    };
+    }
 
-    template<class Base>
-    class CanLongPush: public Base
+};
+
+template<class Base>
+class CanLongPush: public Base
+{
+public:
+    //Interface redefined by ofApp
+    void ELongPushTriger(InputGestureLongPush::LongPushTrigerArgs & eventargs)
     {
-        public:
-        //Interface redefined by ofApp
-        void ELongPushTriger(InputGestureLongPush::LongPushTrigerArgs & eventargs){
-            LongPushTriger(eventargs.x,eventargs.y);
-        }
-        virtual void LongPushTriger(float x, float y){}
+        LongPushTriger(eventargs.x,eventargs.y);
+    }
+    virtual void LongPushTriger(float x, float y) {}
 
-        CanLongPush()
-        {
-            ofAddListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
-        }
-        virtual ~CanLongPush()
-        {
-            ofRemoveListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
-        }
-    };
+    CanLongPush()
+    {
+        ofAddListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
+    }
+    virtual ~CanLongPush()
+    {
+        ofRemoveListener(InputGestureLongPush::Instance().LongPushTriger,this,&CanLongPush::ELongPushTriger);
+    }
+};
 
 
 
