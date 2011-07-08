@@ -65,9 +65,10 @@
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicObjects.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.cpp</file>
+                <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectFingers.hpp</file>
-                <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectFingers.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureTuio1.1.hpp</file>
             </folder>
             <folder name="addons/ofxTableGestures/src/Gestures/Gestures-Extras">

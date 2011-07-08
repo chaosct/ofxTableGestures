@@ -57,7 +57,7 @@ public:
 
 
 
-class InputGestureDirectObjects : public CanBasicObjects < CompositeGesture >, public Singleton<InputGestureDirectObjects>
+class InputGestureDirectObjects : public EventClient, public Singleton<InputGestureDirectObjects>
 {
     std::map<int,DirectObject *> objects;
 
@@ -72,26 +72,6 @@ public:
     typedef DirectObjectArgsBase updateObjectArgs;
     typedef DirectObjectArgsBase enterObjectArgs;
     typedef DirectObjectArgsBase exitObjectArgs;
-//    struct newObjectArgs: public EventArgs
-//    {
-//        DirectObject * object;
-//    };
-//    struct removeObjectArgs: public EventArgs
-//    {
-//        DirectObject * object;
-//    };
-//    struct updateObjectArgs: public EventArgs
-//    {
-//        DirectObject * object;
-//    };
-//    struct enterObjectArgs: public EventArgs
-//    {
-//        DirectObject * object;
-//    };
-//    struct exitObjectArgs: public EventArgs
-//    {
-//        DirectObject * object;
-//    };
 
     ofEvent<newObjectArgs> newObject;
     ofEvent<removeObjectArgs> removeObject;
@@ -99,12 +79,12 @@ public:
     ofEvent<enterObjectArgs> enterObject;
     ofEvent<exitObjectArgs> exitObject;
 
-    InputGestureDirectObjects() {}
-    void addTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
-    void enterTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
-    void updateTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
-    void removeTuioObject(int id);
-    void exitTuioObject(int id);
+    InputGestureDirectObjects();
+    void addTuioObject(InputGestureBasicObjects::addTuioObjectArgs & a);
+    void enterTuioObject(InputGestureBasicObjects::enterTuioObjectArgs & a);
+    void updateTuioObject(InputGestureBasicObjects::updateTuioObjectArgs & a);
+    void removeTuioObject(InputGestureBasicObjects::removeTuioObjectArgs & a);
+    void exitTuioObject(InputGestureBasicObjects::exitTuioObjectArgs & a);
 };
 
 template <class Base>

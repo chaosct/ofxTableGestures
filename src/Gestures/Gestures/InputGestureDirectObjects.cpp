@@ -31,79 +31,92 @@
 
 #include "InputGestureDirectObjects.hpp"
 
+InputGestureDirectObjects::InputGestureDirectObjects()
+{
+    registerEvent(InputGestureBasicObjects::Instance().addTuioObject,&InputGestureDirectObjects::addTuioObject);
+    registerEvent(InputGestureBasicObjects::Instance().enterTuioObject,&InputGestureDirectObjects::enterTuioObject);
+    registerEvent(InputGestureBasicObjects::Instance().updateTuioObject,&InputGestureDirectObjects::updateTuioObject);
+    registerEvent(InputGestureBasicObjects::Instance().removeTuioObject,&InputGestureDirectObjects::removeTuioObject);
+    registerEvent(InputGestureBasicObjects::Instance().exitTuioObject,&InputGestureDirectObjects::exitTuioObject);
+}
 
-
-void InputGestureDirectObjects::addTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
+void InputGestureDirectObjects::addTuioObject(InputGestureBasicObjects::addTuioObjectArgs & a)
 {
     DirectObject * dob = new DirectObject();
-    dob->s_id = id;
-    dob->f_id = f_id;
-    dob->setX( xpos);
-    dob->setY( ypos);
-    dob->angle = angle;
-    dob->xspeed = xspeed;
-    dob->yspeed= yspeed;
-    dob->rspeed = rspeed;
-    dob->maccel = maccel;
-    dob->raccel = raccel;
-    objects[id]= dob;
+    dob->s_id = a.id;
+    dob->f_id = a.f_id;
+    dob->setX( a.xpos);
+    dob->setY( a.ypos);
+    dob->angle = a.angle;
+    dob->xspeed = a.xspeed;
+    dob->yspeed= a.yspeed;
+    dob->rspeed = a.rspeed;
+    dob->maccel = a.maccel;
+    dob->raccel = a.raccel;
+    objects[a.id]= dob;
     newObjectArgs eventargs;
     eventargs.object = dob;
+    eventargs.target = a.target;
     ofNotifyEvent(newObject,eventargs);
 
 }
 
-void InputGestureDirectObjects::enterTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
+void InputGestureDirectObjects::enterTuioObject(InputGestureBasicObjects::enterTuioObjectArgs & a)
 {
-    DirectObject * dob = new DirectObject();
-    dob->s_id = id;
-    dob->f_id = f_id;
-    dob->setX( xpos);
-    dob->setY( ypos);
-    dob->angle = angle;
-    dob->xspeed = xspeed;
-    dob->yspeed= yspeed;
-    dob->rspeed = rspeed;
-    dob->maccel = maccel;
-    dob->raccel = raccel;
-    objects[id]= dob;
+    DirectObject * dob = objects[a.id];
+    dob->s_id = a.id;
+    dob->f_id = a.f_id;
+    dob->setX( a.xpos);
+    dob->setY( a.ypos);
+    dob->angle = a.angle;
+    dob->xspeed = a.xspeed;
+    dob->yspeed= a.yspeed;
+    dob->rspeed = a.rspeed;
+    dob->maccel = a.maccel;
+    dob->raccel = a.raccel;
+    objects[a.id]= dob;
     enterObjectArgs eventargs;
     eventargs.object = dob;
+    eventargs.target = a.target;
     ofNotifyEvent(enterObject,eventargs);
 
 }
 
-void InputGestureDirectObjects::updateTuioObject(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
+void InputGestureDirectObjects::updateTuioObject(InputGestureBasicObjects::updateTuioObjectArgs & a)
 {
-    DirectObject * dob = objects[id];
-    dob->s_id = id;
-    dob->f_id = f_id;
-    dob->setX( xpos);
-    dob->setY( ypos);
-    dob->angle = angle;
-    dob->xspeed = xspeed;
-    dob->yspeed= yspeed;
-    dob->rspeed = rspeed;
-    dob->maccel = maccel;
-    dob->raccel = raccel;
+    DirectObject * dob = objects[a.id];
+    dob->s_id = a.id;
+    dob->f_id = a.f_id;
+    dob->setX( a.xpos);
+    dob->setY( a.ypos);
+    dob->angle = a.angle;
+    dob->xspeed = a.xspeed;
+    dob->yspeed= a.yspeed;
+    dob->rspeed = a.rspeed;
+    dob->maccel = a.maccel;
+    dob->raccel = a.raccel;
+    objects[a.id]= dob;
     updateObjectArgs eventargs;
     eventargs.object = dob;
+    eventargs.target = a.target;
     ofNotifyEvent(updateObject,eventargs);
 
 }
 
-void InputGestureDirectObjects::removeTuioObject(int id)
+void InputGestureDirectObjects::removeTuioObject(InputGestureBasicObjects::removeTuioObjectArgs & a)
 {
     removeObjectArgs eventargs;
-    eventargs.object = objects[id];
+    eventargs.object = objects[a.id];
+    eventargs.target = a.target;
     ofNotifyEvent(removeObject,eventargs);
 
 }
 
-void InputGestureDirectObjects::exitTuioObject(int id)
+void InputGestureDirectObjects::exitTuioObject(InputGestureBasicObjects::exitTuioObjectArgs & a)
 {
     exitObjectArgs eventargs;
-    eventargs.object = objects[id];
+    eventargs.object = objects[a.id];
+    eventargs.target = a.target;
     ofNotifyEvent(exitObject,eventargs);
 
 }

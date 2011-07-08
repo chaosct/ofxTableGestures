@@ -270,6 +270,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicObjects.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
+		<Unit filename="../src/Gestures/Gestures/InputGestureDirectFingers.cpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectFingers.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>

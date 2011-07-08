@@ -38,92 +38,41 @@
 #include <map>
 
 
-
-
 class DirectFinger: public DirectPoint
 {
-    public:
+public:
     int s_id;
     float xspeed, yspeed, maccel;
 };
 
 
 
-class InputGestureDirectFingers : public CanBasicFingers < CompositeGesture >, public Singleton<InputGestureDirectFingers>
+class InputGestureDirectFingers : public EventClient, public Singleton<InputGestureDirectFingers>
 {
     std::map<int,DirectFinger *> fingers;
-    public:
-struct newCursorArgs: public EventArgs {DirectFinger * finger;};
-struct removeCursorArgs: public EventArgs {DirectFinger * finger;};
-struct updateCursorArgs: public EventArgs {DirectFinger * finger;};
-struct enterCursorArgs: public EventArgs {DirectFinger *finger;};
-struct exitCursorArgs: public EventArgs {DirectFinger *finger;};
-        ofEvent<removeCursorArgs> removeCursor;
-ofEvent<newCursorArgs> newCursor;
-ofEvent<updateCursorArgs> updateCursor;
-ofEvent<enterCursorArgs> enterCursor;
-ofEvent<exitCursorArgs> exitCursor;
+    struct DirectFingerArgsBase: public EventArgs
+    {
+        DirectFinger * finger;
+    };
+public:
+    typedef DirectFingerArgsBase newCursorArgs;
+    typedef DirectFingerArgsBase removeCursorArgs;
+    typedef DirectFingerArgsBase updateCursorArgs;
+    typedef DirectFingerArgsBase enterCursorArgs;
+    typedef DirectFingerArgsBase exitCursorArgs;
 
-        InputGestureDirectFingers(){}
-        void addTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
-        {
-            DirectFinger * e = new DirectFinger();
-            e->s_id = id;
-            e->setX(xpos);
-            e->setY(ypos);
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
-            fingers[id]=e;
-newCursorArgs eventargs;
-eventargs.finger = e;
-ofNotifyEvent(newCursor,eventargs);
+    ofEvent<removeCursorArgs> removeCursor;
+    ofEvent<newCursorArgs> newCursor;
+    ofEvent<updateCursorArgs> updateCursor;
+    ofEvent<enterCursorArgs> enterCursor;
+    ofEvent<exitCursorArgs> exitCursor;
 
-        }
-        void enterTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
-        {
-            DirectFinger * e = new DirectFinger();
-            e->s_id = id;
-            e->setX(xpos);
-            e->setY(ypos);
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
-            fingers[id]=e;
-enterCursorArgs eventargs;
-eventargs.finger = e;
-ofNotifyEvent(enterCursor,eventargs);
-
-        }
-        void updateTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
-        {
-            DirectFinger * e = fingers[id];
-            e->s_id = id;
-            e->set(xpos,ypos);
-            e->xspeed = xspeed;
-            e->yspeed = yspeed;
-            e->maccel = maccel;
-updateCursorArgs eventargs;
-eventargs.finger = e;
-ofNotifyEvent(updateCursor,eventargs);
-
-        }
-        void removeTuioCursor(int id)
-        {
-            DirectFinger * e = fingers[id];
-removeCursorArgs eventargs;
-eventargs.finger = e;
-ofNotifyEvent(removeCursor,eventargs);
-
-        }
-        void exitTuioCursor(int id)
-        {
-            DirectFinger * e = fingers[id];
-exitCursorArgs eventargs;
-eventargs.finger = e;
-ofNotifyEvent(exitCursor,eventargs);
-
-        }
+    InputGestureDirectFingers();
+    void addTuioCursor(InputGestureBasicFingers::addTuioCursorArgs & a);
+    void enterTuioCursor(InputGestureBasicFingers::enterTuioCursorArgs & a);
+    void updateTuioCursor(InputGestureBasicFingers::updateTuioCursorArgs & a);
+    void removeTuioCursor(InputGestureBasicFingers::removeTuioCursorArgs & a);
+    void exitTuioCursor(InputGestureBasicFingers::removeTuioCursorArgs & a);
 };
 
 
@@ -132,43 +81,54 @@ ofNotifyEvent(exitCursor,eventargs);
 template <class Base>
 class CanDirectFingers : public  Base
 {
-    public:
-void EnewCursor(InputGestureDirectFingers::newCursorArgs & eventargs){
-newCursor(eventargs.finger);
-}
-    virtual void newCursor(DirectFinger * finger){}
-void EremoveCursor(InputGestureDirectFingers::removeCursorArgs & eventargs){
-removeCursor(eventargs.finger);
-}
-    virtual void removeCursor(DirectFinger * finger){}
-void EupdateCursor(InputGestureDirectFingers::updateCursorArgs & eventargs){
-updateCursor(eventargs.finger);
-}
-    virtual void updateCursor(DirectFinger * finger){}
-void EenterCursor(InputGestureDirectFingers::enterCursorArgs & eventargs){
-enterCursor(eventargs.finger);
-}
-    virtual void enterCursor(DirectFinger *finger)            {newCursor(finger);}
-void EexitCursor(InputGestureDirectFingers::exitCursorArgs & eventargs){
-exitCursor(eventargs.finger);
-}
-    virtual void exitCursor(DirectFinger *finger)             {removeCursor(finger);}
+public:
+    void EnewCursor(InputGestureDirectFingers::newCursorArgs & eventargs)
+    {
+        newCursor(eventargs.finger);
+    }
+    virtual void newCursor(DirectFinger * finger) {}
+    void EremoveCursor(InputGestureDirectFingers::removeCursorArgs & eventargs)
+    {
+        removeCursor(eventargs.finger);
+    }
+    virtual void removeCursor(DirectFinger * finger) {}
+    void EupdateCursor(InputGestureDirectFingers::updateCursorArgs & eventargs)
+    {
+        updateCursor(eventargs.finger);
+    }
+    virtual void updateCursor(DirectFinger * finger) {}
+    void EenterCursor(InputGestureDirectFingers::enterCursorArgs & eventargs)
+    {
+        enterCursor(eventargs.finger);
+    }
+    virtual void enterCursor(DirectFinger *finger)
+    {
+        newCursor(finger);
+    }
+    void EexitCursor(InputGestureDirectFingers::exitCursorArgs & eventargs)
+    {
+        exitCursor(eventargs.finger);
+    }
+    virtual void exitCursor(DirectFinger *finger)
+    {
+        removeCursor(finger);
+    }
 
     CanDirectFingers()
     {
-ofAddListener(InputGestureDirectFingers::Instance().newCursor,this,&CanDirectFingers::EnewCursor);
-ofAddListener(InputGestureDirectFingers::Instance().removeCursor,this,&CanDirectFingers::EremoveCursor);
-ofAddListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirectFingers::EupdateCursor);
-ofAddListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
-ofAddListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
+        ofAddListener(InputGestureDirectFingers::Instance().newCursor,this,&CanDirectFingers::EnewCursor);
+        ofAddListener(InputGestureDirectFingers::Instance().removeCursor,this,&CanDirectFingers::EremoveCursor);
+        ofAddListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirectFingers::EupdateCursor);
+        ofAddListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
+        ofAddListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
     }
     virtual ~CanDirectFingers()
     {
-ofRemoveListener(InputGestureDirectFingers::Instance().newCursor,this,&CanDirectFingers::EnewCursor);
-ofRemoveListener(InputGestureDirectFingers::Instance().removeCursor,this,&CanDirectFingers::EremoveCursor);
-ofRemoveListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirectFingers::EupdateCursor);
-ofRemoveListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
-ofRemoveListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
+        ofRemoveListener(InputGestureDirectFingers::Instance().newCursor,this,&CanDirectFingers::EnewCursor);
+        ofRemoveListener(InputGestureDirectFingers::Instance().removeCursor,this,&CanDirectFingers::EremoveCursor);
+        ofRemoveListener(InputGestureDirectFingers::Instance().updateCursor,this,&CanDirectFingers::EupdateCursor);
+        ofRemoveListener(InputGestureDirectFingers::Instance().enterCursor,this,&CanDirectFingers::EenterCursor);
+        ofRemoveListener(InputGestureDirectFingers::Instance().exitCursor,this,&CanDirectFingers::EexitCursor);
     }
 
 };
