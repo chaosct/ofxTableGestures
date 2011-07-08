@@ -37,6 +37,7 @@
             <folder name="addons/ofxTableGestures/src/Utils">
                 <file>../../../addons/ofxTableGestures/src/Utils/OscTools.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Utils/Singleton.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Utils/Alarm.hpp</file>
             </folder>
             <folder name="addons/ofxTableGestures/src/Feedback">
                 <file>../../../addons/ofxTableGestures/src/Feedback/CursorFeedback.cpp</file>

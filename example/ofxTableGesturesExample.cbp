@@ -348,6 +348,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Simulator/container.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Simulator" />
 		</Unit>
+		<Unit filename="../src/Utils/Alarm.hpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Utils/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Utils/OscTools.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Utils" />
 		</Unit>
