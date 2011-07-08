@@ -27,7 +27,6 @@ void InputGestureBasicObjects::addTuioObject2D(int id, int f_id ,float xpos,floa
         eventargs.raccel = raccel;
         eventargs.target = target;
         ofNotifyEvent(addTuioObject,eventargs);
-        std::cout << "Bing!" << std::endl;
 
 }
 
