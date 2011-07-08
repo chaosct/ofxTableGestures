@@ -35,10 +35,6 @@
 #include <set>
 #include "InputGestureTuio1.1.hpp"
 
-struct commonIdArgs : public virtual EventArgs
-{
-    int id;
-};
 
 struct commonCursorArgs : public commonIdArgs
 {
@@ -51,7 +47,7 @@ struct commonCursorArgs : public commonIdArgs
 
 class InputGestureBasicFingers : public  EventClient, public Singleton<InputGestureBasicFingers>
 {
-    
+
 
 public:
 

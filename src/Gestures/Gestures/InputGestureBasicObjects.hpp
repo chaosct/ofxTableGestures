@@ -33,19 +33,10 @@
 #define TUIO_INPUTGESTUREBASICOBJECTS_H
 
 #include <set>
-
 #include "InputGestureTuio1.1.hpp"
 
-
-
-
-class InputGestureBasicObjects : public CanTuio112D < CompositeGesture >, public Singleton<InputGestureBasicObjects>
+struct commonObjectArgs : public commonIdArgs
 {
-    std::set<int> ids;
-public:
-    struct addTuioObjectArgs: public EventArgs
-    {
-        int id;
         int f_id ;
         float xpos;
         float ypos;
@@ -55,133 +46,54 @@ public:
         float rspeed;
         float maccel;
         float raccel;
-    };
-    struct updateTuioObjectArgs: public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct removeTuioObjectArgs: public EventArgs
-    {
-        int id;
-    };
-    struct enterTuioObjectArgs: public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct exitTuioObjectArgs: public EventArgs
-    {
-        int id;
-    };
-    ofEvent<removeTuioObjectArgs> removeTuioObject;
-    ofEvent<addTuioObjectArgs> addTuioObject;
-    ofEvent<updateTuioObjectArgs> updateTuioObject;
-    ofEvent<exitTuioObjectArgs> exitTuioObject;
-    ofEvent<enterTuioObjectArgs> enterTuioObject;
-
-
-    InputGestureBasicObjects() {}
-    void addTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
-    {
-        ///TODO areas
-        //if(area->isInside(xpos,ypos))
-        {
-            ids.insert(id);
-            addTuioObjectArgs eventargs;
-            eventargs.id = id;
-            eventargs. f_id  =  f_id ;
-            eventargs. xpos =  xpos;
-            eventargs. ypos =  ypos;
-            eventargs.  angle =   angle;
-            eventargs.  xspeed =   xspeed;
-            eventargs. yspeed =  yspeed;
-            eventargs. rspeed =  rspeed;
-            eventargs. maccel =  maccel;
-            eventargs.  raccel =   raccel;
-            ofNotifyEvent(addTuioObject,eventargs);
-
-        }
-    }
-    void updateTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel)
-    {
-        ///TODO areas
-        if( true /*area->isInside(xpos,ypos)*/)
-        {
-            if(ids.find(id) == ids.end())
-            {
-                ids.insert(id);
-                enterTuioObjectArgs eventargs;
-                eventargs.id = id;
-                eventargs. f_id  =  f_id ;
-                eventargs. xpos =  xpos;
-                eventargs. ypos =  ypos;
-                eventargs.  angle =   angle;
-                eventargs.  xspeed =   xspeed;
-                eventargs. yspeed =  yspeed;
-                eventargs. rspeed =  rspeed;
-                eventargs. maccel =  maccel;
-                eventargs.  raccel =   raccel;
-                ofNotifyEvent(enterTuioObject,eventargs);
-
-            }
-            else
-            {
-                updateTuioObjectArgs eventargs;
-                eventargs.id = id;
-                eventargs. f_id  =  f_id ;
-                eventargs. xpos =  xpos;
-                eventargs. ypos =  ypos;
-                eventargs.  angle =   angle;
-                eventargs.  xspeed =   xspeed;
-                eventargs. yspeed =  yspeed;
-                eventargs. rspeed =  rspeed;
-                eventargs. maccel =  maccel;
-                eventargs.  raccel =   raccel;
-                ofNotifyEvent(updateTuioObject,eventargs);
-
-            }
-        }
-        else
-        {
-            if(ids.find(id) != ids.end())
-            {
-                ids.erase(id);
-                exitTuioObjectArgs eventargs;
-                eventargs.id = id;
-                ofNotifyEvent(exitTuioObject,eventargs);
-
-            }
-        }
-    }
-    void removeTuioObject2D(int id)
-    {
-        if(ids.find(id) != ids.end())
-        {
-            ids.erase(id);
-            removeTuioObjectArgs eventargs;
-            eventargs.id = id;
-            ofNotifyEvent(removeTuioObject,eventargs);
-
-        }
-    }
 };
+
+class InputGestureBasicObjects : public  EventClient, public Singleton<InputGestureBasicObjects>
+{
+
+
+public:
+
+    typedef commonObjectArgs addTuioObjectArgs;
+    typedef commonObjectArgs updateTuioObjectArgs;
+    typedef commonIdArgs removeTuioObjectArgs;
+    typedef commonIdArgs exitTuioObjectArgs;
+    typedef commonObjectArgs enterTuioObjectArgs;
+
+    ofEvent<removeTuioObjectArgs> removeTuioObject;
+    ofEvent<exitTuioObjectArgs> exitTuioObject;
+    ofEvent<addTuioObjectArgs> addTuioObject;
+    ofEvent<enterTuioObjectArgs> enterTuioObject;
+    ofEvent<updateTuioObjectArgs> updateTuioObject;
+
+///Internal stuff
+
+private:
+
+    std::map<int,Graphic * > graphic_assignations;
+    std::set<int> ids;
+
+public:
+
+    InputGestureBasicObjects();
+    void addTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
+    void updateTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel);
+    void removeTuioObject2D(int id);
+    void addTuioObject2D(InputGestureTuio112D::addTuioObject2DArgs & eventargs)
+    {
+        addTuioObject2D(eventargs.id,eventargs.f_id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
+    }
+    void updateTuioObject2D(InputGestureTuio112D::updateTuioObject2DArgs & eventargs)
+    {
+        updateTuioObject2D(eventargs.id,eventargs.f_id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
+    }
+    void removeTuioObject2D(InputGestureTuio112D::removeTuioObject2DArgs & eventargs)
+    {
+        removeTuioObject2D(eventargs.id);
+    }
+
+};
+
 
 template <class Base>
 class CanBasicObjects : public Base

@@ -10,4 +10,9 @@ struct EventArgs {
 
 class CompositeGesture {};
 
+struct commonIdArgs : public virtual EventArgs
+{
+    int id;
+};
+
 #endif // EVENTS_HPP_INCLUDED
