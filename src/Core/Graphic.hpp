@@ -55,7 +55,7 @@ class Graphic : public EventClient{
 		virtual void Position(float & x, float & y);
     protected:
         int layer;
-        float created_time;
+        unsigned long created_time;
         friend class GraphicDispatcher;
         friend class CompareLayers;
         virtual void draw(){}
@@ -78,7 +78,7 @@ struct CompareLayers
     inline bool operator()(Graphic* object1, Graphic* object2)
     {
         if (object1->GetLayer() == object2->GetLayer())
-            return (object1->created_time > object2->created_time);
+            return (object1->created_time < object2->created_time);
         return (object1->GetLayer() > object2->GetLayer());
     }
 };

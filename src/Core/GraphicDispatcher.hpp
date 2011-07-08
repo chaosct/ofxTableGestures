@@ -40,6 +40,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
         typedef std::set<Graphic*,CompareLayers> GraphicsList;
         GraphicsList graphics;
+        unsigned long ngraphics;
     protected:
         friend class Singleton<GraphicDispatcher>;
         GraphicDispatcher();

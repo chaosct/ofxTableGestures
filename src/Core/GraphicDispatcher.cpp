@@ -36,7 +36,7 @@
 #include <tr1/functional>
 #include <cassert>
 
-GraphicDispatcher::GraphicDispatcher(){
+GraphicDispatcher::GraphicDispatcher():ngraphics(0) {
 }
 
 GraphicDispatcher::~GraphicDispatcher(){
@@ -57,7 +57,7 @@ void GraphicDispatcher::Resize(int w, int h){
 }
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
-    graphic->created_time = ofGetElapsedTimef();
+    graphic->created_time = ngraphics++;
     graphics.insert(graphic);
 }
 
@@ -67,7 +67,7 @@ void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
 
 void GraphicDispatcher::bring_top(Graphic* graphic){
     graphics.erase(graphic);
-    graphic->created_time = ofGetElapsedTimef();
+    graphic->created_time = ngraphics++;
     graphics.insert(graphic);
 }
 
