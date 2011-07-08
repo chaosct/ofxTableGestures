@@ -36,7 +36,7 @@
 
 
 
-class InputGestueTap : public CanDirectFingers < CompositeGesture >, public Singleton<InputGestueTap>
+class InputGestueTap : public EventClient, public Singleton<InputGestueTap>
 {
 
     float & maxdistance;
@@ -54,15 +54,21 @@ public:
 
     InputGestueTap():
         maxdistance(ofxGlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
-        maxtime(ofxGlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f)) {}
+        maxtime(ofxGlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f))
+        {
+            registerEvent(InputGestureDirectFingers::Instance().newCursor,&InputGestueTap::newCursor);
+            registerEvent(InputGestureDirectFingers::Instance().removeCursor,&InputGestueTap::removeCursor);
+        }
 
-    virtual void newCursor(DirectFinger * f)
+    virtual void newCursor(InputGestureDirectFingers::newCursorArgs & a)
     {
+        DirectFinger * f = a.finger;
         float now = ofGetElapsedTimef();
         previous[f]= make_pair(DirectPoint(f->getX(),f->getY()),now);
     }
-    virtual void removeCursor(DirectFinger *f)
+    virtual void removeCursor(InputGestureDirectFingers::removeCursorArgs & a)
     {
+        DirectFinger * f = a.finger;
         if(previous.find(f) != previous.end())
         {
             float now = ofGetElapsedTimef();
@@ -72,18 +78,11 @@ public:
                 TapArgs eventargs;
                 eventargs.x = f->getX();
                 eventargs.y = f->getY();
+                eventargs.target = a.target;
                 ofNotifyEvent(Tap,eventargs);
-
             }
             previous.erase(f);
         }
-    }
-    virtual void updateCursor(DirectFinger *) {}
-    //Area-aware interface optionally redefined by ofApp
-    virtual void enterCursor(DirectFinger *df) {}
-    virtual void exitCursor(DirectFinger *f)
-    {
-        previous.erase(f);
     }
 };
 
