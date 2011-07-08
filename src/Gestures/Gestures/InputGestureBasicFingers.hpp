@@ -35,46 +35,31 @@
 #include <set>
 #include "InputGestureTuio1.1.hpp"
 
-
-class InputGestureBasicFingers : public  CanTuio112D<CompositeGesture>, public Singleton<InputGestureBasicFingers>
+struct commonIdArgs : public virtual EventArgs
 {
+    int id;
+};
+
+struct commonCursorArgs : public commonIdArgs
+{
+    float xpos;
+    float ypos;
+    float xspeed;
+    float yspeed;
+    float maccel;
+};
+
+class InputGestureBasicFingers : public  EventClient, public Singleton<InputGestureBasicFingers>
+{
+    
+
 public:
 
-    struct addTuioCursorArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float xspeed;
-        float yspeed;
-        float maccel;
-    };
-    struct updateTuioCursorArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float xspeed;
-        float yspeed;
-        float maccel;
-    };
-    struct removeTuioCursorArgs: public EventArgs
-    {
-        int id;
-    };
-    struct exitTuioCursorArgs: public EventArgs
-    {
-        int id;
-    };
-    struct enterTuioCursorArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float xspeed;
-        float yspeed;
-        float maccel;
-    };
+    typedef commonCursorArgs addTuioCursorArgs;
+    typedef commonCursorArgs updateTuioCursorArgs;
+    typedef commonIdArgs removeTuioCursorArgs;
+    typedef commonIdArgs exitTuioCursorArgs;
+    typedef commonCursorArgs enterTuioCursorArgs;
 
     ofEvent<removeTuioCursorArgs> removeTuioCursor;
     ofEvent<exitTuioCursorArgs> exitTuioCursor;
@@ -82,80 +67,30 @@ public:
     ofEvent<enterTuioCursorArgs> enterTuioCursor;
     ofEvent<updateTuioCursorArgs> updateTuioCursor;
 
+///Internal stuff
+
+private:
+
+    std::map<int,Graphic * > graphic_assignations;
     std::set<int> ids;
 
+public:
 
-    InputGestureBasicFingers() {}
-    void addTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+    InputGestureBasicFingers();
+    void addTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
+    void updateTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
+    void removeTuioCursor2D(int id);
+    void addTuioCursor2D(InputGestureTuio112D::addTuioCursor2DArgs & eventargs)
     {
-        ///TODO: treballar amb àrees
-        //if(area->isInside(xpos,ypos))
-        {
-            ids.insert(id);
-            addTuioCursorArgs eventargs;
-            eventargs.id = id;
-            eventargs.xpos = xpos;
-            eventargs.ypos = ypos;
-            eventargs.xspeed = xspeed;
-            eventargs.yspeed = yspeed;
-            eventargs.maccel = maccel;
-            ofNotifyEvent(addTuioCursor,eventargs);
-
-        }
+        addTuioCursor2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.xspeed,eventargs.yspeed,eventargs.maccel);
     }
-    void updateTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
+    void updateTuioCursor2D(InputGestureTuio112D::updateTuioCursor2DArgs & eventargs)
     {
-        ///TODO: treballar amb àrees
-        if(true /*area->isInside(xpos,ypos)*/)
-        {
-            if(ids.find(id) == ids.end())
-            {
-                ids.insert(id);
-                enterTuioCursorArgs eventargs;
-                eventargs.id = id;
-                eventargs.xpos = xpos;
-                eventargs.ypos = ypos;
-                eventargs.xspeed = xspeed;
-                eventargs.yspeed = yspeed;
-                eventargs.maccel = maccel;
-                ofNotifyEvent(enterTuioCursor,eventargs);
-
-            }
-            else
-            {
-                updateTuioCursorArgs eventargs;
-                eventargs.id = id;
-                eventargs.xpos = xpos;
-                eventargs.ypos = ypos;
-                eventargs.xspeed = xspeed;
-                eventargs.yspeed = yspeed;
-                eventargs.maccel = maccel;
-                ofNotifyEvent(updateTuioCursor,eventargs);
-
-            }
-        }
-        else
-        {
-            if(ids.find(id) != ids.end())
-            {
-                ids.erase(id);
-                exitTuioCursorArgs eventargs;
-                eventargs.id = id;
-                ofNotifyEvent(exitTuioCursor,eventargs);
-
-            }
-        }
+        updateTuioCursor2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.xspeed,eventargs.yspeed,eventargs.maccel);
     }
-    void removeTuioCursor2D(int id)
+    void removeTuioCursor2D(InputGestureTuio112D::removeTuioCursor2DArgs & eventargs)
     {
-        if(ids.find(id) != ids.end())
-        {
-            ids.erase(id);
-            removeTuioCursorArgs eventargs;
-            eventargs.id = id;
-            ofNotifyEvent(removeTuioCursor,eventargs);
-
-        }
+        removeTuioCursor2D(eventargs.id);
     }
 
 };

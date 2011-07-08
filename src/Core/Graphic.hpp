@@ -37,13 +37,13 @@
 #define APP_LAYER 100
 #define NOT_LAYER 0
 
-#include "Area.hpp"
+
 
 #include "ofMain.h"
 
 #include "EventClient.hpp"
 
-class Graphic :public Area, public EventClient{
+class Graphic : public EventClient{
     public:
         Graphic();
         Graphic(int _layer);

@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <functional>
 #include <tr1/functional>
+#include <cassert>
 
 GraphicDispatcher::GraphicDispatcher(){
 }
@@ -56,6 +57,7 @@ void GraphicDispatcher::Resize(int w, int h){
 }
 
 void GraphicDispatcher::AddGraphic(Graphic* graphic){
+    graphic->created_time = ofGetElapsedTimef();
     graphics.insert(graphic);
 }
 
@@ -67,4 +69,13 @@ void GraphicDispatcher::bring_top(Graphic* graphic){
     graphics.erase(graphic);
     graphic->created_time = ofGetElapsedTimef();
     graphics.insert(graphic);
+}
+
+Graphic * GraphicDispatcher::Collide(ofPoint const & point)
+{
+    GraphicsList::reverse_iterator it = std::find_if(graphics.rbegin(),graphics.rend(),
+                                          std::tr1::bind(&Graphic::Collide,std::tr1::placeholders::_1,point));
+    if (it != graphics.rend())
+        return *it;
+    return NULL;
 }

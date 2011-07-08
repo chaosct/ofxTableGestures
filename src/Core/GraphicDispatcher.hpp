@@ -52,6 +52,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
         void Resize(int w, int h);
         void AddGraphic(Graphic* graphic);
         void RemoveGraphic(Graphic* graphic);
+        Graphic * Collide(ofPoint const & point);
 };
 
 #endif //_GRAPHICDISPATCHER

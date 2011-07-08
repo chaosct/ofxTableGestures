@@ -32,11 +32,12 @@
 #ifndef AREA_HPP_INCLUDED
 #define AREA_HPP_INCLUDED
 
-class Area
+/*class Area
 {
     public:
     virtual bool isInside(float x, float y){return false;}
 };
+*/
 
 //class NoArea: public Area
 //{

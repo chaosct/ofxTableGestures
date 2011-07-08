@@ -63,6 +63,7 @@
             <folder name="addons/ofxTableGestures/src/Gestures/Gestures">
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicObjects.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.hpp</file>
+                <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectFingers.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureDirectObjects.hpp</file>

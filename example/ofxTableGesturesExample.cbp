@@ -258,6 +258,9 @@
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures-Extras/InputGestureTap.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures-Extras" />
 		</Unit>
+		<Unit filename="../src/Gestures/Gestures/InputGestureBasicFingers.cpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures/" />
+		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Gestures/Gestures/InputGestureBasicFingers.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Gestures/Gestures" />
 		</Unit>
