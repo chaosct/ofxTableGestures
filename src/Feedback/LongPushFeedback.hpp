@@ -40,7 +40,7 @@ class LongPushFeedback : public CanLongPush < Graphic >
     float & lifetime;
     float & maxradius;
     public:
-    class CircleTap : public Graphic
+    class CircleTap : public NotificationGraphic
     {
         float born;
         float lifetime;
