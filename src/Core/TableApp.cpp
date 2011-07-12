@@ -418,6 +418,7 @@ void TableApp::windowResized(ofResizeEventArgs & event){
     grid->Resize();
     ///calls resize method of all 'Graphics' when nedded.
     GraphicDispatcher::Instance().Resize(w,h);
+    matrix_updated = false;
 }
 
 
