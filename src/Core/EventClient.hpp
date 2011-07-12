@@ -82,6 +82,52 @@ struct EventUnregister: public AbstractUnregister
 
 };
 
+/// template class EventUnregisterFiltered
+/// the same as EventUnregister, but
+/// filtering by area
+
+class Graphic;
+
+template <class EventArgsType,typename ArgumentsType, class ListenerClass>
+struct EventUnregisterFiltered: public AbstractUnregister
+{
+    ofEvent<EventArgsType> & event;
+    ListenerClass  * listener;
+    void (ListenerClass::*listenerMethod)(ArgumentsType&);
+    Graphic * target;
+
+    void unregister()
+    {
+        ofRemoveListener(event,this,&EventUnregisterFiltered::my_callback);
+    }
+    
+    void my_callback(EventArgsType & e)
+    {
+        if(e.target == target)
+            (listener->*listenerMethod)(e);
+    }
+    
+    bool isevent(void * eventptr)
+    {
+        void * myeventptr = static_cast<void *>(&event);
+        return (eventptr == myeventptr);
+    }
+
+    EventUnregisterFiltered(ofEvent<EventArgsType> & _event,
+                    ListenerClass  * _listener,
+                    void (ListenerClass::*_listenerMethod)(ArgumentsType&),
+                    Graphic * _target)
+
+                    :event(_event),
+                     listener(_listener),
+                     listenerMethod(_listenerMethod),
+                     target(_target)
+    {
+        ofAddListener(event,this,&EventUnregisterFiltered::my_callback);
+    }
+
+};
+
 /// function make_unregister
 /// Helper function to create EventUnregister
 /// without having to type template stuff
@@ -91,6 +137,12 @@ template <class EventType,typename ArgumentsType, class ListenerClass>
 AbstractUnregister * make_unregister(EventType & event,ListenerClass  * listener,void (ListenerClass::*listenerMethod)(ArgumentsType&))
 {
     return new EventUnregister<EventType,ArgumentsType,ListenerClass>(event,listener,listenerMethod);
+}
+
+template <class EventArgsType,typename ArgumentsType, class ListenerClass>
+AbstractUnregister * make_unregister_filtered(ofEvent<EventArgsType> & event,ListenerClass  * listener,void (ListenerClass::*listenerMethod)(ArgumentsType&),Graphic * target)
+{
+    return new EventUnregisterFiltered<EventArgsType,ArgumentsType,ListenerClass>(event,listener,listenerMethod,target);
 }
 
 /// class EventClientObject
@@ -108,6 +160,12 @@ class EventClientObject
     void registerEvent(ListenerClass * listener,EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&))
     {
         unregisterlist.push_back(make_unregister(event,listener,listenerMethod));
+    }
+    
+    template <class EventType,typename ArgumentsType, class ListenerClass>
+    void registerEventFiltered(ListenerClass * listener,EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&),Graphic * target)
+    {
+        unregisterlist.push_back(make_unregister_filtered(event,listener,listenerMethod,target));
     }
 
     template <class EventType>
@@ -149,10 +207,20 @@ class EventClient : EventClientObject
 {
     public:
     template <class EventType,typename ArgumentsType, class ListenerClass>
-    void registerEvent(EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&))
+    void registerEvent(EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&),ListenerClass * listener =NULL)
     {
-        ListenerClass * listener = static_cast<ListenerClass *>(this);
+        if(listener == NULL)
+            listener = static_cast<ListenerClass *>(this);
         this->EventClientObject::registerEvent(listener,event,listenerMethod);
+    }
+    
+    template <class EventType,typename ArgumentsType, class ListenerClass>
+    void registerMyEvent(EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&),ListenerClass * listener =NULL)
+    {
+        if(listener == NULL)
+            listener = static_cast<ListenerClass *>(this);
+        Graphic * target = static_cast<Graphic *>(this);
+        this->EventClientObject::registerEventFiltered(listener,event,listenerMethod,target);
     }
     
     template <class EventType>
