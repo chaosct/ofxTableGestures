@@ -15,6 +15,8 @@ class Alarm: public Graphic, public Singleton<Alarm>
     {
         bool operator()(const schedule & s1, const schedule & s2)
         {
+            if(s1.time == s2.time)
+                return &s1 < &s2;
             return s1.time < s2.time;
         }
     };
