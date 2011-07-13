@@ -62,7 +62,7 @@ public:
         DirectFinger * f = a.finger;
         float now = ofGetElapsedTimef();
         previous[f]= make_pair(DirectPoint(f->getX(),f->getY()),now);
-        Alarm::Instance().Setup(now+mintime,this,&InputGestureLongPush::update);
+        Alarm::Setup(now+mintime,this,&InputGestureLongPush::update);
     }
 
     void update(float & now)
