@@ -5,7 +5,7 @@
 		<Option title="ofxTableGesturesExample" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofx2DFigures/src/;addons/ofxGlobalConfig/src/;addons/ofxOsc/src/;addons/ofxTableGestures/src/Core/;addons/ofxTableGestures/src/Feedback/;addons/ofxTableGestures/src/Gestures/;addons/ofxTableGestures/src/Gestures/Gestures-Extras/;addons/ofxTableGestures/src/Gestures/Gestures/;addons/ofxTableGestures/src/Gestures/tuio1.1/;addons/ofxTableGestures/src/Render/;addons/ofxTableGestures/src/Simulator/;addons/ofxTableGestures/src/Utils/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;" />
+		<Option virtualFolders="addons/;src/;addons/ofx2DFigures/src/;addons/ofxGlobalConfig/src/;addons/ofxOsc/src/;addons/ofxTableGestures/src/Core/;addons/ofxTableGestures/src/Feedback/;addons/ofxTableGestures/src/Gestures/;addons/ofxTableGestures/src/Gestures/Gestures-Extras/;addons/ofxTableGestures/src/Gestures/Gestures/;addons/ofxTableGestures/src/Gestures/tuio1.1/;addons/ofxTableGestures/src/Render/;addons/ofxTableGestures/src/Simulator/;addons/ofxTableGestures/src/Utils/;addons/ofXmlSettings/libs/;addons/ofXmlSettings/src/;addons/ofxVectorMath/src/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -83,6 +83,7 @@
 			<Add directory="../../../addons/ofxOsc/libs/oscpack/include/osc" />
 			<Add directory="../../../addons/ofxXmlSettings/src" />
 			<Add directory="../../../addons/ofxXmlSettings/libs" />
+			<Add directory="../../../addons/ofxVectorMath/src" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -199,6 +200,9 @@
 			<Option virtualFolder="addons/ofxTableGestures/src/Core" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/EventClient.hpp">
+			<Option virtualFolder="addons/ofxTableGestures/src/Core/" />
+		</Unit>
+		<Unit filename="../src/Core/FigureGraphic.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Core/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Core/Graphic.cpp">
@@ -356,6 +360,36 @@
 		</Unit>
 		<Unit filename="../../../addons/ofxTableGestures/src/Utils/Singleton.hpp">
 			<Option virtualFolder="addons/ofxTableGestures/src/Utils" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix3x3.cpp">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix3x3.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix4x4.cpp">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix4x4.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxQuaternion.cpp">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxQuaternion.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec2f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec3f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVec4f.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxVectorMath/src/ofxVectorMath.h">
+			<Option virtualFolder="addons/ofxVectorMath/src" />
 		</Unit>
 		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
 			<Option virtualFolder="addons/ofXmlSettings/libs" />
