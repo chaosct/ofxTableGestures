@@ -17,7 +17,6 @@
         
             <folder name="addons/ofxTableGestures/src/Core">
                 <file>../../../addons/ofxTableGestures/src/Core/GraphicDispatcher.cpp</file>
-                <file>../../../addons/ofxTableGestures/src/Core/Area.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Core/EventClient.hpp</file>
                 <file>../../../addons/ofxTableGestures/src/Core/Graphic.cpp</file>
                 <file>../../../addons/ofxTableGestures/src/Core/Graphic.hpp</file>
