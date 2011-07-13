@@ -39,13 +39,15 @@
 #include "InputGestureOsc.hpp"
 #include "OscTools.hpp"
 
+
+
 class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
 {
     
+public:
     
-    struct commonCursor2DArgs: public EventArgs
+    struct commonCursor2DArgs: public commonIdArgs
     {
-        int id;
         float xpos;
         float ypos;
         float xspeed;
@@ -53,54 +55,37 @@ class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
         float maccel;
     };
     
-    struct commonObject2DArgs: public EventArgs
+    struct commonBasicObject2DArgs: public commonCursor2DArgs
     {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
         float angle;
-        float xspeed;
-        float yspeed;
         float rspeed;
-        float maccel;
         float raccel;
     };
     
-    struct commonBlob2DArgs: public EventArgs
+    struct commonObject2DArgs: public commonBasicObject2DArgs
     {
-        int id;
-        float xpos;
-        float ypos;
-        float angle;
+        int f_id ;
+    };
+    
+    struct commonBlob2DArgs: public commonBasicObject2DArgs
+    {
         float width;
         float height;
         float area;
-        float xspeed;
-        float yspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
     };
     
-    struct commonRemove2DArgs: public EventArgs
-    {
-        int id;
-    };
-    
-    public:
     
     typedef commonCursor2DArgs addTuioCursor2DArgs;
     typedef commonCursor2DArgs updateTuioCursor2DArgs;
-    typedef commonRemove2DArgs removeTuioCursor2DArgs;
+    typedef commonIdArgs removeTuioCursor2DArgs;
     
     typedef commonObject2DArgs addTuioObject2DArgs;
     typedef commonObject2DArgs updateTuioObject2DArgs;
-    typedef commonRemove2DArgs removeTuioObject2DArgs;
+    typedef commonIdArgs removeTuioObject2DArgs;
     
     typedef commonBlob2DArgs addTuioBlob2DArgs;
     typedef commonBlob2DArgs updateTuioBlob2DArgs;
-    typedef commonRemove2DArgs removeTuioBlob2DArgs;
+    typedef commonIdArgs removeTuioBlob2DArgs;
 
     ofEvent<addTuioCursor2DArgs>    addTuioCursor2D;
     ofEvent<updateTuioCursor2DArgs> updateTuioCursor2D;
@@ -132,100 +117,5 @@ class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
     void tuio2Dblb(OscOptionalUnpacker & argList);
 
 };
-
-
-template <class Base>
-class CanTuio112D : public Base
-{
-public:
-    //Interface redefined by ofApp
-    ///2D functions
-    void EaddTuioCursor2D(InputGestureTuio112D::addTuioCursor2DArgs & eventargs)
-    {
-        addTuioCursor2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.xspeed,eventargs.yspeed,eventargs.maccel);
-    }
-    virtual void addTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel) {}
-    void EupdateTuioCursor2D(InputGestureTuio112D::updateTuioCursor2DArgs & eventargs)
-    {
-        updateTuioCursor2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.xspeed,eventargs.yspeed,eventargs.maccel);
-    }
-    virtual void updateTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel) {}
-    void EremoveTuioCursor2D(InputGestureTuio112D::removeTuioCursor2DArgs & eventargs)
-    {
-        removeTuioCursor2D(eventargs.id);
-    }
-    virtual void removeTuioCursor2D(int id) {}
-    void EaddTuioObject2D(InputGestureTuio112D::addTuioObject2DArgs & eventargs)
-    {
-        addTuioObject2D(eventargs.id,eventargs.f_id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
-    }
-    virtual void addTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
-    void EupdateTuioObject2D(InputGestureTuio112D::updateTuioObject2DArgs & eventargs)
-    {
-        updateTuioObject2D(eventargs.id,eventargs.f_id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
-    }
-    virtual void updateTuioObject2D(int id, int f_id ,float xpos,float ypos, float angle, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
-    void EremoveTuioObject2D(InputGestureTuio112D::removeTuioObject2DArgs & eventargs)
-    {
-        removeTuioObject2D(eventargs.id);
-    }
-    virtual void removeTuioObject2D(int id) {}
-    void EaddTuioBlob2D(InputGestureTuio112D::addTuioBlob2DArgs & eventargs)
-    {
-        addTuioBlob2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.width,eventargs.height,eventargs.area,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
-    }
-    virtual void addTuioBlob2D(int id,float xpos,float ypos, float angle, float width, float height, float area, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
-    void EupdateTuioBlob2D(InputGestureTuio112D::updateTuioBlob2DArgs & eventargs)
-    {
-        updateTuioBlob2D(eventargs.id,eventargs.xpos,eventargs.ypos,eventargs.angle,eventargs.width,eventargs.height,eventargs.area,eventargs.xspeed,eventargs.yspeed,eventargs.rspeed,eventargs.maccel,eventargs.raccel);
-    }
-    virtual void updateTuioBlob2D(int id,float xpos,float ypos, float angle, float width, float height, float area, float xspeed,float yspeed,float rspeed,float maccel, float raccel) {}
-    void EremoveTuioBlob2D(InputGestureTuio112D::removeTuioBlob2DArgs & eventargs)
-    {
-        removeTuioBlob2D(eventargs.id);
-    }
-    virtual void removeTuioBlob2D(int id) {}
-
-    //registering
-    CanTuio112D()
-    {
-
-        ///2D Events
-
-        ofAddListener(InputGestureTuio112D::Instance().removeTuioCursor2D,this,&CanTuio112D::EremoveTuioCursor2D);
-        ofAddListener(InputGestureTuio112D::Instance().addTuioCursor2D,this,&CanTuio112D::EaddTuioCursor2D);
-        ofAddListener(InputGestureTuio112D::Instance().updateTuioCursor2D,this,&CanTuio112D::EupdateTuioCursor2D);
-
-        ofAddListener(InputGestureTuio112D::Instance().addTuioObject2D,this,&CanTuio112D::EaddTuioObject2D);
-        ofAddListener(InputGestureTuio112D::Instance().updateTuioObject2D,this,&CanTuio112D::EupdateTuioObject2D);
-        ofAddListener(InputGestureTuio112D::Instance().removeTuioObject2D,this,&CanTuio112D::EremoveTuioObject2D);
-
-        ofAddListener(InputGestureTuio112D::Instance().addTuioBlob2D,this,&CanTuio112D::EaddTuioBlob2D);
-        ofAddListener(InputGestureTuio112D::Instance().updateTuioBlob2D,this,&CanTuio112D::EupdateTuioBlob2D);
-        ofAddListener(InputGestureTuio112D::Instance().removeTuioBlob2D,this,&CanTuio112D::EremoveTuioBlob2D);
-
-    }
-    virtual ~CanTuio112D()
-    {
-
-        ///2D Events
-
-        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioCursor2D,this,&CanTuio112D::EremoveTuioCursor2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().addTuioCursor2D,this,&CanTuio112D::EaddTuioCursor2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioCursor2D,this,&CanTuio112D::EupdateTuioCursor2D);
-
-        ofRemoveListener(InputGestureTuio112D::Instance().addTuioObject2D,this,&CanTuio112D::EaddTuioObject2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioObject2D,this,&CanTuio112D::EupdateTuioObject2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioObject2D,this,&CanTuio112D::EremoveTuioObject2D);
-
-        ofRemoveListener(InputGestureTuio112D::Instance().addTuioBlob2D,this,&CanTuio112D::EaddTuioBlob2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().updateTuioBlob2D,this,&CanTuio112D::EupdateTuioBlob2D);
-        ofRemoveListener(InputGestureTuio112D::Instance().removeTuioBlob2D,this,&CanTuio112D::EremoveTuioBlob2D);
-
-    }
-};
-
-
-
 
 #endif // INPUTGESTURETUIO1_12D_H_INCLUDED

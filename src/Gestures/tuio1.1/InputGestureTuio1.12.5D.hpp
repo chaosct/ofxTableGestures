@@ -37,9 +37,7 @@
 #include <set>
 #include "InputGestureOsc.hpp"
 #include "OscTools.hpp"
-
-///2.5D Events
-
+#include "InputGestureTuio1.12D.hpp"
 
 
 class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>
@@ -47,104 +45,25 @@ class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>
     
     public:
     
-    struct addTuioCursor25DArgs: public EventArgs
+    struct extraArgsFor25D
     {
-        int id;
-        float xpos;
-        float ypos;
         float zpos;
-        float xspeed;
-        float yspeed;
         float zspeed;
-        float maccel;
     };
-    struct updateTuioCursor25DArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float zpos;
-        float xspeed;
-        float yspeed;
-        float zspeed;
-        float maccel;
-    };
-    struct removeTuioCursor25DArgs: public EventArgs
-    {
-        int id;
-    };
-    struct addTuioObject25DArgs: public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float zpos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float zspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct updateTuioObject25DArgs: public EventArgs
-    {
-        int id;
-        int f_id ;
-        float xpos;
-        float ypos;
-        float zpos;
-        float angle;
-        float xspeed;
-        float yspeed;
-        float zspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct removeTuioObject25DArgs: public EventArgs
-    {
-        int id;
-    };
-    struct addTuioBlob25DArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float zpos;
-        float angle;
-        float width;
-        float height;
-        float area;
-        float xspeed;
-        float yspeed;
-        float zspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct updateTuioBlob25DArgs: public EventArgs
-    {
-        int id;
-        float xpos;
-        float ypos;
-        float zpos;
-        float angle;
-        float width;
-        float height;
-        float area;
-        float xspeed;
-        float yspeed;
-        float zspeed;
-        float rspeed;
-        float maccel;
-        float raccel;
-    };
-    struct removeTuioBlob25DArgs: public EventArgs
-    {
-        int id;
-    };
+    
+    struct commonCursor25DArgs: public InputGestureTuio112D::commonCursor2DArgs , public extraArgsFor25D{};
+    struct commonObject25DArgs: public InputGestureTuio112D::commonObject2DArgs , public extraArgsFor25D{};
+    struct commonBlob25DArgs: public InputGestureTuio112D::commonBlob2DArgs , public extraArgsFor25D{};
+    
+    typedef commonCursor25DArgs addTuioCursor25DArgs;
+    typedef commonCursor25DArgs updateTuioCursor25DArgs;
+    typedef commonIdArgs removeTuioCursor25DArgs;
+    typedef commonObject25DArgs addTuioObject25DArgs;
+    typedef commonObject25DArgs updateTuioObject25DArgs;
+    typedef commonIdArgs removeTuioObject25DArgs;
+    typedef commonBlob25DArgs addTuioBlob25DArgs;
+    typedef commonBlob25DArgs updateTuioBlob25DArgs;
+    typedef commonIdArgs removeTuioBlob25DArgs;
 
     ofEvent<addTuioCursor25DArgs>       addTuioCursor25D;
     ofEvent<updateTuioCursor25DArgs>    updateTuioCursor25D;
@@ -175,49 +94,5 @@ class InputGestureTuio1125D : public Singleton<InputGestureTuio1125D>
     void tuio25Dblb(OscOptionalUnpacker & argList);
 };
 
-/*
-template <class Base>
-class CanTuio1125D : public Base
-{
-    public:
-    //Interface redefined by ofApp
-    ///2.5D functions
-
-    virtual void addTuioCursor25D(int id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
-    virtual void updateTuioCursor25D(int id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
-    virtual void removeTuioCursor25D(int id){}
-
-    virtual void addTuioObject25D(int id, int f_id ,float xpos,float ypos, float zpos, float angle, float xspeed,float yspeed, float zspeed, float rspeed,float maccel, float raccel){}
-    virtual void updateTuioObject25D(int id, int f_id ,float xpos,float ypos, float zpos, float angle, float xspeed,float yspeed, float zspeed, float rspeed,float maccel, float raccel){}
-    virtual void removeTuioObject25D(int id){}
-
-    virtual void addTuioBlob25D(int id,float xpos,float ypos, float zpos, float angle, float width, float height, float area, float xspeed,float yspeed, float zspeed, float rspeed,float maccel, float raccel){}
-    virtual void updateTuioBlob25D(int id,float xpos,float ypos, float zpos, float angle, float width, float height, float area, float xspeed,float yspeed, float zspeed, float rspeed,float maccel, float raccel){}
-    virtual void removeTuioBlob25D(int id){}
-
-    //registering
-    void Register(Area * a)
-    {
-        Base::Register(a);
-        ///2.5D Events
-
-        SimpleRegisterEvent(CanTuio1125D,addTuioCursor25D);
-        SimpleRegisterEvent(CanTuio1125D,addTuioObject25D);
-        SimpleRegisterEvent(CanTuio1125D,addTuioBlob25D);
-
-        SimpleRegisterEvent(CanTuio1125D,updateTuioCursor25D);
-        SimpleRegisterEvent(CanTuio1125D,updateTuioObject25D);
-        SimpleRegisterEvent(CanTuio1125D,updateTuioBlob25D);
-
-        SimpleRegisterEvent(CanTuio1125D,removeTuioCursor25D);
-        SimpleRegisterEvent(CanTuio1125D,removeTuioObject25D);
-        SimpleRegisterEvent(CanTuio1125D,removeTuioBlob25D);
-
-        Base::template registerIG<InputGestureTuio1125D>();
-    }
-};
-
-
-*/
 
 #endif // INPUTGESTURETUIO1_12_5D_H_INCLUDED

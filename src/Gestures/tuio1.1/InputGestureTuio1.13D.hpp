@@ -37,18 +37,22 @@
 #include <set>
 #include "InputGestureOsc.hpp"
 #include "OscTools.hpp"
-
+#include "InputGestureTuio1.12.5D.hpp"
 
 class InputGestureTuio113D : public Singleton<InputGestureTuio113D> {
     
 
     public:
-    struct addTuioCursor3DArgs:     public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
-    struct updateTuioCursor3DArgs:  public EventArgs {int id; float xpos;float ypos;float zpos; float xspeed;float yspeed;float zspeed;float maccel;};
-    struct removeTuioCursor3DArgs:  public EventArgs {int id;};
-    struct addTuioObject3DArgs:     public EventArgs {int id; int f_id ;float xpos;float ypos; float zpos; float aangle; float bangle; float cangle; float xspeed;float yspeed; float zspeed; float aspeed; float bspeed; float cspeed; float maccel; float raccel;};
-    struct updateTuioObject3DArgs:  public EventArgs {int id; int f_id ;float xpos;float ypos; float zpos; float aangle; float bangle; float cangle; float xspeed;float yspeed; float zspeed; float aspeed; float bspeed; float cspeed; float maccel; float raccel;};
-    struct removeTuioObject3DArgs:  public EventArgs {int id;};
+    
+    typedef InputGestureTuio1125D::commonCursor25DArgs commonCursor3DArgs;
+    struct commonObject3DArgs: public commonIdArgs {int f_id ;float xpos;float ypos; float zpos; float aangle; float bangle; float cangle; float xspeed;float yspeed; float zspeed; float aspeed; float bspeed; float cspeed; float maccel; float raccel;};
+    
+    typedef commonCursor3DArgs addTuioCursor3DArgs;
+    typedef commonCursor3DArgs updateTuioCursor3DArgs;
+    typedef commonIdArgs removeTuioCursor3DArgs;
+    typedef commonObject3DArgs addTuioObject3DArgs;
+    typedef commonObject3DArgs updateTuioObject3DArgs;
+    typedef commonIdArgs removeTuioObject3DArgs;
     
     ofEvent<addTuioCursor3DArgs>    addTuioCursor3D;
     ofEvent<updateTuioCursor3DArgs> updateTuioCursor3D;
@@ -74,39 +78,6 @@ class InputGestureTuio113D : public Singleton<InputGestureTuio113D> {
         void tuio3Dobj(OscOptionalUnpacker & argList);
 
 };
-
-/*
-template <class Base>
-class CanTuio113D : public Base
-{
-    public:
-    //Interface redefined by ofApp
-
-    virtual void addTuioCursor3D(int id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
-    virtual void updateTuioCursor3D(int id, float xpos,float ypos,float zpos, float xspeed,float yspeed,float zspeed,float maccel){}
-    virtual void removeTuioCursor3D(int id){}
-
-    virtual void addTuioObject3D(int id, int f_id ,float xpos,float ypos, float zpos, float aangle, float bangle, float cangle, float xspeed,float yspeed, float zspeed, float aspeed, float bspeed, float cspeed, float maccel, float raccel){}
-    virtual void updateTuioObject3D(int id, int f_id ,float xpos,float ypos, float zpos, float aangle, float bangle, float cangle, float xspeed,float yspeed, float zspeed, float aspeed, float bspeed, float cspeed, float maccel, float raccel){}
-    virtual void removeTuioObject3D(int id){}
-
-    //registering
-    void Register(Area * a)
-    {
-        Base::Register(a);
-
-        SimpleRegisterEvent(CanTuio113D,addTuioCursor3D);
-        SimpleRegisterEvent(CanTuio113D,updateTuioCursor3D);
-        SimpleRegisterEvent(CanTuio113D,removeTuioCursor3D);
-
-        SimpleRegisterEvent(CanTuio113D,addTuioObject3D);
-        SimpleRegisterEvent(CanTuio113D,updateTuioObject3D);
-        SimpleRegisterEvent(CanTuio113D,removeTuioObject3D);
-
-        Base::template registerIG<InputGestureTuio113D>();
-    }
-};
-*/
 
 
 
