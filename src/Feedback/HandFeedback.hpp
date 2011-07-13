@@ -34,20 +34,20 @@
 
 #include "InputGestureHand.hpp"
 
-class HandFeedback: public CanHands< NotificationGraphic > 
+class HandFeedback: public  NotificationGraphic 
 {
     std::map<unsigned int,Hand *> hands;
+    InputGestureHands igh;
     public:
-    //Interface redefined by ofApp
-    void newHand(Hand * p)
+
+    void newHand(InputGestureHands::newHandArgs & a)
     {
-        hands[p->id] = p;
+        hands[a.hand->id] = a.hand;
     }
-    void removeHand(Hand * p)
+    void removeHand(InputGestureHands::removeHandArgs & a)
     {
-        hands.erase(p->id);
+        hands.erase(a.hand->id);
     }
-    void updateHand(Hand * p){}
     void draw()
     {
         ofSetColor(255,255,255);
@@ -59,6 +59,11 @@ class HandFeedback: public CanHands< NotificationGraphic >
             ofLine(h->getX()-0.01f,h->getY()-0.01f,h->getX()+0.01f,h->getY()+0.01f);
             ofLine(h->getX()-0.01f,h->getY()+0.01f,h->getX()+0.01f,h->getY()-0.01f);
         }
+    }
+    HandFeedback(Graphic * target): igh(target)
+    {
+        registerEvent(igh.newHand, &HandFeedback::newHand);
+        registerEvent(igh.removeHand, &HandFeedback::removeHand);
     }
 };
 

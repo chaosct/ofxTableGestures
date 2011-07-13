@@ -58,18 +58,17 @@ void InputGestureBasicFingers::updateTuioCursor2D(int id, float xpos,float ypos,
             ofNotifyEvent(enterTuioCursor,eventargs);
         }
     }
-    else
-    {
-        updateTuioCursorArgs eventargs;
-        eventargs.id = id;
-        eventargs.xpos = xpos;
-        eventargs.ypos = ypos;
-        eventargs.xspeed = xspeed;
-        eventargs.yspeed = yspeed;
-        eventargs.maccel = maccel;
-        eventargs.target = target;
-        ofNotifyEvent(updateTuioCursor,eventargs);
-    }
+
+    updateTuioCursorArgs eventargs;
+    eventargs.id = id;
+    eventargs.xpos = xpos;
+    eventargs.ypos = ypos;
+    eventargs.xspeed = xspeed;
+    eventargs.yspeed = yspeed;
+    eventargs.maccel = maccel;
+    eventargs.target = target;
+    ofNotifyEvent(updateTuioCursor,eventargs);
+    
 
     
 }

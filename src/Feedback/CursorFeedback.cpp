@@ -32,11 +32,11 @@
 #include "CursorFeedback.hpp"
 
 CursorFeedback::CursorFeedback(){
-    //this->Register(NULL);
+    registerEvent(InputGestureBasicFingers::I().addTuioCursor,&CursorFeedback::addTuioCursor);
+    registerEvent(InputGestureBasicFingers::I().updateTuioCursor,&CursorFeedback::updateTuioCursor);
+    registerEvent(InputGestureBasicFingers::I().removeTuioCursor,&CursorFeedback::removeTuioCursor);
 }
-//CursorFeedback::CursorFeedback(Area * a){
-//    this->Register(a);
-//}
+
 
 CursorFeedback::~CursorFeedback(){
 }
@@ -54,16 +54,16 @@ void CursorFeedback::draw(){
     }
 }
 
-void CursorFeedback::addTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]=new HistoryPoint(id,xpos,ypos);
+void CursorFeedback::addTuioCursor(InputGestureBasicFingers::addTuioCursorArgs & a){
+    finger_map[a.id]=new HistoryPoint(a.id,a.xpos,a.ypos);
 }
 
-void CursorFeedback::updateTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel){
-    finger_map[id]->SetPoint(xpos,ypos);
+void CursorFeedback::updateTuioCursor(InputGestureBasicFingers::updateTuioCursorArgs & a){
+    finger_map[a.id]->SetPoint(a.xpos,a.ypos);
 }
 
-void CursorFeedback::removeTuioCursor(int id){
-    HistoryPoint*tmp = finger_map[id];
-    finger_map.erase(id);
+void CursorFeedback::removeTuioCursor(InputGestureBasicFingers::removeTuioCursorArgs & a){
+    HistoryPoint*tmp = finger_map[a.id];
+    finger_map.erase(a.id);
     delete tmp;
 }

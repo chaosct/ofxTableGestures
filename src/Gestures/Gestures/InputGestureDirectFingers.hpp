@@ -50,16 +50,17 @@ public:
 class InputGestureDirectFingers : public EventClient, public Singleton<InputGestureDirectFingers>
 {
     std::map<int,DirectFinger *> fingers;
-    struct DirectFingerArgsBase: public EventArgs
+public:
+    struct commonDirectFingerArgs: public EventArgs
     {
         DirectFinger * finger;
     };
-public:
-    typedef DirectFingerArgsBase newCursorArgs;
-    typedef DirectFingerArgsBase removeCursorArgs;
-    typedef DirectFingerArgsBase updateCursorArgs;
-    typedef DirectFingerArgsBase enterCursorArgs;
-    typedef DirectFingerArgsBase exitCursorArgs;
+
+    typedef commonDirectFingerArgs newCursorArgs;
+    typedef commonDirectFingerArgs removeCursorArgs;
+    typedef commonDirectFingerArgs updateCursorArgs;
+    typedef commonDirectFingerArgs enterCursorArgs;
+    typedef commonDirectFingerArgs exitCursorArgs;
 
     ofEvent<removeCursorArgs> removeCursor;
     ofEvent<newCursorArgs> newCursor;
@@ -76,7 +77,7 @@ public:
 };
 
 
-
+/*
 
 template <class Base>
 class CanDirectFingers : public  Base
@@ -133,5 +134,6 @@ public:
 
 };
 
+*/
 
 #endif // INPUTGESTUREDIRECTFINGERS_H_INCLUDED

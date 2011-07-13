@@ -84,8 +84,9 @@ Hand * InputGestureHands::getNeighbour(DirectPoint * p, Hand * ignore)
     return winner;
 }
 
-void InputGestureHands::newCursor(DirectFinger *df)
+void InputGestureHands::newCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
 {
+    DirectFinger * df = a.finger;
     Hand * winner = getNeighbour(df);
     if (!winner)
     {
@@ -112,8 +113,9 @@ void InputGestureHands::newCursor(DirectFinger *df)
     }
 }
 
-void InputGestureHands::removeCursor(DirectFinger *f)
+void InputGestureHands::removeCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
 {
+    DirectFinger * f = a.finger;
     Hand * h = assignations[f->s_id];
     h->fingers.remove(f);
     h->UpdateOffset();
@@ -135,8 +137,9 @@ void InputGestureHands::removeCursor(DirectFinger *f)
 
 }
 
-void InputGestureHands::updateCursor(DirectFinger *f)
+void InputGestureHands::updateCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
 {
+    DirectFinger * f = a.finger;
     Hand * h = assignations[f->s_id];
     h->UpdateExposedInfo();
     updateHandArgs eventargs;
@@ -178,7 +181,7 @@ void InputGestureHands::updateCursor(DirectFinger *f)
         h->fingers.remove(f);
         h->UpdateOffset();
         h->UpdateExposedInfo();
-        this->newCursor(f);
+        this->newCursor(a);
     }
 }
 

@@ -84,37 +84,43 @@ public:
 
 
 
-class InputGestureHands : public CanDirectFingers<  CompositeGesture>, public Singleton<InputGestureHands>
+class InputGestureHands : public EventClient
 {
+    
     std::map<int,Hand*> assignations;
     std::list<Hand *> hands;
     Hand * getNeighbour(DirectPoint * p, Hand * ignore = NULL);
     float & HAND_MAX_RADIUS;
 public:
-    struct newHandArgs: public EventArgs
+
+    struct commonHandArgs:public EventArgs
     {
         Hand * hand;
     };
-    struct removeHandArgs: public EventArgs
-    {
-        Hand * hand;
-    };
-    struct updateHandArgs: public EventArgs
-    {
-        Hand * hand;
-    };
+    
+    typedef commonHandArgs newHandArgs;
+    typedef commonHandArgs removeHandArgs;
+    typedef commonHandArgs updateHandArgs;
     ofEvent<newHandArgs> newHand;
     ofEvent<removeHandArgs> removeHand;
     ofEvent<updateHandArgs> updateHand;
-    InputGestureHands():
-        HAND_MAX_RADIUS(ofxGlobalConfig::getRef("GESTURES:HANDS:MAX_RADIUS",0.1f))
-    {}
-    void newCursor(DirectFinger *df);
-    void removeCursor(DirectFinger *df);
-    void updateCursor(DirectFinger *df);
+
+    void newCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
+    void removeCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
+    void updateCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
+
+    InputGestureHands(Graphic * target):
+            HAND_MAX_RADIUS(ofxGlobalConfig::getRef("GESTURES:HANDS:MAX_RADIUS",0.1f))
+    {
+        target->registerMyEvent(InputGestureDirectFingers::I().newCursor, &InputGestureHands::newCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::I().enterCursor, &InputGestureHands::newCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::I().removeCursor, &InputGestureHands::removeCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::I().exitCursor, &InputGestureHands::removeCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::I().updateCursor, &InputGestureHands::updateCursor, this);
+    }
 
 };
-
+/*
 template <class Base>
 class CanHands : public Base
 {
@@ -230,6 +236,6 @@ public:
         }
     }
 };
-
+*/
 
 #endif // INPUTGESTUREHAND_HPP_INCLUDED

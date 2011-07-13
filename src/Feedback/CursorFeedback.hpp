@@ -89,7 +89,7 @@ class HistoryPoint: private DirectPoint{
         }
 };
 
-class CursorFeedback: public CanBasicFingers < NotificationGraphic > {
+class CursorFeedback: public  NotificationGraphic {
 
     private:
         std::map<int,HistoryPoint*> finger_map;
@@ -98,9 +98,9 @@ class CursorFeedback: public CanBasicFingers < NotificationGraphic > {
         CursorFeedback();
         //CursorFeedback(Area * a);
         ~CursorFeedback();
-        virtual void addTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
-        virtual void updateTuioCursor(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel);
-        virtual void removeTuioCursor(int id);
+        virtual void addTuioCursor(InputGestureBasicFingers::addTuioCursorArgs & a);
+        virtual void updateTuioCursor(InputGestureBasicFingers::updateTuioCursorArgs & a);
+        virtual void removeTuioCursor(InputGestureBasicFingers::removeTuioCursorArgs & a);
     protected:
         void update();
         void draw();

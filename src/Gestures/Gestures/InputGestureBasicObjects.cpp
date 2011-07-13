@@ -66,23 +66,20 @@ void InputGestureBasicObjects::updateTuioObject2D(int id, int f_id ,float xpos,f
             ofNotifyEvent(enterTuioObject,eventargs);
         }
     }
-    else
-    {
-        updateTuioObjectArgs eventargs;
-        eventargs.id = id;
-        eventargs.f_id = f_id ;
-        eventargs.xpos = xpos;
-        eventargs.ypos = ypos;
-        eventargs.angle = angle;
-        eventargs.xspeed = xspeed;
-        eventargs.yspeed = yspeed;
-        eventargs.rspeed = rspeed;
-        eventargs.maccel = maccel;
-        eventargs.raccel = raccel;
-        eventargs.target = target;
-        ofNotifyEvent(updateTuioObject,eventargs);
-    }
 
+    updateTuioObjectArgs eventargs;
+    eventargs.id = id;
+    eventargs.f_id = f_id ;
+    eventargs.xpos = xpos;
+    eventargs.ypos = ypos;
+    eventargs.angle = angle;
+    eventargs.xspeed = xspeed;
+    eventargs.yspeed = yspeed;
+    eventargs.rspeed = rspeed;
+    eventargs.maccel = maccel;
+    eventargs.raccel = raccel;
+    eventargs.target = target;
+    ofNotifyEvent(updateTuioObject,eventargs);
 
 }
 

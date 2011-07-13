@@ -43,6 +43,18 @@ class Singleton
             static T me;
             return me;
         }
+//        template<typename Arg>
+//        static T& Instance(Arg a)
+//        {
+//            static std::map<Arg,T*> instances;
+//            if(instances.find(a) == instances.end()))
+//                instances[a] = new T(a);
+//            return instances[a];
+//        }
+        static T& I()
+        {
+            return Instance();
+        }
 
 };
 
