@@ -2,18 +2,22 @@
 
 #include "CursorFeedback.hpp"
 #include "FigureFeedback.hpp"
-#include "HandFeedback.hpp"
 #include "TapFeedback.hpp"
 #include "LongPushFeedback.hpp"
-#include "InputGestureBasicFingers.hpp"
 
-class test: public Graphic
+
+
+#include "InputGestureDirectFingers.hpp"
+#include "FigureGraphic.hpp"
+#include "Alarm.hpp"
+
+class Test: public Graphic
 {
-    float r;
     Figures::Polygon polygon;
-    ofColor color;
+    FigureGraphic * fg;
+    float time_circle;
     public:
-    test():r(0.2f)
+    Test()
     {
         polygon.AddVertex(ofPoint(-0.05f, -0.05f));
         polygon.AddVertex(ofPoint(-0.05f, 0.05f));
@@ -26,87 +30,66 @@ class test: public Graphic
         polygon.AddVertex(ofPoint(0.05f, 0.0f));
         polygon.AddVertex(ofPoint(0.05f, -0.05f));
 
-        polygon.SetTexture("temp.png");
-
-        std::cout<< polygon.GetTriangleNumber() << std::endl;
-        this->registerEvent(InputGestureBasicFingers::Instance().updateTuioCursor, &test::updatecursor);
-        color.r = 255;
-        color.g = 255;
-        color.b = 255;
+        //polygon.SetTexture("temp.png");
+        
+        fg = new FigureGraphic(&polygon);
+        fg->transformation.setTranslation(ofRandom(0,1),ofRandom(0,1),0);
+        fg->transformation.glRotate(ofRandom(0,360),0,0,1);
+        //registerEvent(InputGestureBasicFingers::Instance().enterTuioCursor, &Test2::genericCallback);
+        fg->registerMyEvent(InputGestureDirectFingers::Instance().enterCursor, &Test::enter,this);
+        //fg->registerMyEvent(InputGestureDirectFingers::Instance().exitCursor, &Test2::genericCallback2,this);
+        
+        time_circle = ofRandom(0.1,2);
+        
+        fg->color.r = ofRandom(0,255);
+        fg->color.g = ofRandom(0,255);
+        fg->color.b = ofRandom(0,255);
+        fg->color.a = 100;
+        fg->isHidden(true);
     }
-    void draw()
+    void enter(InputGestureDirectFingers::enterCursorArgs & e)
     {
-        ofPushMatrix();
-        ofFill();
-        ofSetColor(color.r,color.g,color.b);
-        //ofCircle(0.5,0.5,r);
-        ofTranslate(0.5f,0.5f);
-        polygon.Draw();
-        ofSetColor(255,255,0);
-        ofSetLineWidth(2.0f);
-        //polygon.DrawStroke();
-        ofPopMatrix();
+        fg->isHidden(false);
+        fg->hasAlpha(true);
+        fg->canCollide(false);
+        fg->setFill(false);
+        Alarm::Setup(ofGetElapsedTimef()+4,this,&Test::alive);
     }
-
-    void updatecursor(InputGestureBasicFingers::updateTuioCursorArgs &args)
+    void alive(float & t)
     {
-        if( polygon.Collide(ofPoint(args.xpos,args.ypos)))
-        {
-            color.r = 255;
-            color.g = 0;
-            color.b = 0;
-            this->unregisterEvent(InputGestureBasicFingers::Instance().updateTuioCursor);
-        }
-        else
-        {
-            color.r = 255;
-            color.g = 255;
-            color.b = 255;
-        }
+        fg->hasAlpha(false);
+        fg->canCollide(true);
+        fg->setFill(true);
+        fg->color.r = ofRandom(0,255);
+        fg->color.g = ofRandom(0,255);
+        fg->color.b = ofRandom(0,255);
+        Alarm::Setup(ofGetElapsedTimef()+4,this,&Test::die);
     }
-//    void bundle(tuioBundles::EventNewOScMessageArgs & args)
-//    {
-//        r+= 0.001;
-//    }
-};
-
-class Test2: public Graphic
-{
-    public:
-    Test2()
+    
+    void die(float & t)
     {
-        registerEvent(InputGestureBasicFingers::Instance().addTuioCursor, &Test2::genericCallback);
+        fg->isHidden(true);
+        fg->canCollide(true);
     }
-    void genericCallback(InputGestureBasicFingers::addTuioCursorArgs & e)
+    
+    void update()
     {
-        std::cout << "addTuioCursor " << e.target << std::endl;
-    }
-    bool Collide(ofPoint const & point)
-    {
-        ofPoint d = point - ofPoint(0.5,0.5);
-        d = d*d;
-        std::cout << sqrt(d.x+d.y) << std::endl;
-        if (sqrt(d.x+d.y) < 0.02)
-            return true;
-        return false;
+        fg->transformation.glRotate(1,0,0,1);
     }
 };
 
-#include "Triangulate.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
 
     tableapp.setup();
 
-    //tuioBundles::Instance();
-    //new test();
-    //new Test2();
+    for (int i = 0; i < 500; ++i)
+        new Test();
     new CursorFeedback();
     new FigureFeedback();
-    new HandFeedback();
-    new TapFeedback();
-    new LongPushFeedback();
+    //new TapFeedback();
+    //new LongPushFeedback();
 }
 
 //--------------------------------------------------------------
