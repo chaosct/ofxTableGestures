@@ -201,7 +201,14 @@ class EventClientObject
 /// If you want a class to be able to automatically unregister 
 /// event listeners when destroyed, use this class through
 /// inheritance. Use :
-///     registerEvent( Event , &MyClass::method );
+///
+/// to take events:
+///     registerEvent( Event , &MyClass::method ); //listener is the same instance
+///     registerEvent( Event , &MyClass::method , Listener );
+///
+/// to take events where its target is this instance:
+///     registerMyEvent( Event , &MyClass::method ); //listener is the same instance
+///     registerMyEvent( Event , &MyClass::method , Listener);
 
 class EventClient : EventClientObject
 {
