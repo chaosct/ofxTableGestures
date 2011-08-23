@@ -32,11 +32,11 @@
 #ifndef FIGUREGRAPHIC_HPP_INCLUDED
 #define FIGUREGRAPHIC_HPP_INCLUDED
 
-#include "ofxVectorMath.h"
+#include "ofVectorMath.h"
 #include "Graphic.hpp"
 #include "Figure.h"
 
-inline void ofMultMatrix(ofxMatrix4x4 &m) {
+inline void ofMultMatrix(ofMatrix4x4 &m) {
     float a[] = {m(0,0),m(0,1),m(0,2),m(0,3),
                  m(1,0),m(1,1),m(1,2),m(1,3),
                  m(2,0),m(2,1),m(2,2),m(2,3),
@@ -53,7 +53,7 @@ class FigureGraphic: public Graphic
     bool hidden;
     public:
     ofColor color;
-    ofxMatrix4x4 transformation;
+    ofMatrix4x4 transformation;
     FigureGraphic(Figures::Figure * f):figure(f),testCollide(true),hasalpha(false),fill(true),hidden(false){}
     inline bool Collide(ofPoint const & point)
     {

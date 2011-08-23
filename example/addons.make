@@ -1,0 +1,5 @@
+ofxTableGestures
+ofxOsc
+ofxGlobalConfig
+ofx2DFigures
+ofxXmlSettings
