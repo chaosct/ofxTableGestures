@@ -36,12 +36,12 @@
 #include "Grid.hpp"
 #include "Renderer.hpp"
 
-///By defining the global "SIMULATOR", it enables the integrated simulator.
+///By defining the global "NO_SIMULATOR", it enables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
-#ifdef SIMULATOR
+#ifndef NO_SIMULATOR
     #include "Simulator.hpp"
 #else
-    #warning Simulator not enabled, if you need it, define SIMULATOR at project defines
+    #warning Simulator disabled
 #endif
 
 ///Table App is an interface class to deal with all table calibration processes, simulator mode and
@@ -68,7 +68,7 @@ class TableApp {
 		///Show/hide cursor flag
 		bool hide_cursor;
 		///Simulator
-		#ifdef SIMULATOR
+		#ifndef NO_SIMULATOR
             simulator::Simulator* simulator;
             ///Simulator enabled flag
             bool is_simulating;
@@ -110,13 +110,13 @@ class TableApp {
 		void mousePressed(ofMouseEventArgs & event);
 		void mouseReleased(ofMouseEventArgs & event);
 		void windowResized(ofResizeEventArgs & event);
-		
+
 		///From old GlobalConfig
 		static float height;
 		static float width;
         static float getHeight(){return TableApp::height;}
         static float getWidth(){return TableApp::width;}
-		
+
 };
 
 #endif

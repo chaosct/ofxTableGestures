@@ -52,7 +52,7 @@ TableApp::TableApp():
     show_help(false),
     show_info(false),
     hide_cursor(true),
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     simulator(new simulator::Simulator()),
     is_simulating(false),
     #endif
@@ -77,7 +77,7 @@ TableApp::TableApp():
 }
 
 TableApp::~TableApp(){
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     delete simulator;
     #endif
     delete renderer;
@@ -118,7 +118,7 @@ void TableApp::update(ofEventArgs & args){
     ///Update graphic data, with this command all update methods from all 'Graphics' are launched
     GraphicDispatcher::Instance().Update();
     ///Update simulator objects
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->Update();
     #endif
 }
@@ -164,7 +164,7 @@ void TableApp::DrawHelp()
         msg << "  l - load calibration file." << std::endl;
         msg << "  return  - toggle calibration parameter." << std::endl;
         msg << "  cursors - Changes the selected parameter." << std::endl;
-        #ifdef SIMULATOR
+        #ifndef NO_SIMULATOR
         msg << "s - enable simulator." << std::endl;
         msg << "Under simulator mode:" << std::endl;
         msg << "  r - reset." << std::endl;
@@ -178,7 +178,7 @@ void TableApp::DrawHelp()
 
 void TableApp::draw(){
     ofPushMatrix();
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) ofScale(0.91f,0.91f,1.0f);
     #endif
 
@@ -219,7 +219,7 @@ void TableApp::draw(){
     DrawInfo();
     DrawHelp();
     ofPopMatrix();
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->Draw();
     #endif
 }
@@ -227,7 +227,7 @@ void TableApp::draw(){
 //--------------------------------------------------------------
 void TableApp::keyPressed(ofKeyEventArgs & event){
     int key = event.key;
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     switch(key)
     {
         case 'a':
@@ -251,7 +251,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
         default:
             KeyReleased(key);
         break;
-        #ifdef SIMULATOR
+        #ifndef NO_SIMULATOR
         case 'a':
             simulator->Hold(false);
         break;
@@ -269,14 +269,14 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             show_grid = !show_grid;
         break;
         case OF_KEY_RETURN:
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid) calibration_mode ++;
             if(calibration_mode > 3) calibration_mode = 0;
         break;
         case OF_KEY_UP:
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid)
@@ -291,7 +291,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             }
         break;
         case OF_KEY_DOWN:
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid)
@@ -306,7 +306,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             }
         break;
         case OF_KEY_RIGHT:
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid)
@@ -321,7 +321,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             }
         break;
         case OF_KEY_LEFT:
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid)
@@ -351,13 +351,13 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
         case 'r':
             if(renderer->IsEnabled() && show_grid)
                 renderer->LoadDefaultValues();
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
                 if(is_simulating)
                     simulator->Reset();
             #endif
         break;
         case 'l':
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
             if(renderer->IsEnabled() && show_grid)
@@ -367,18 +367,18 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             show_help = !show_help;
         break;
         case 'd':
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             if(!is_simulating)
             {
             #endif
             if(renderer->IsEnabled()) renderer->Disable();
             else renderer->Enable();
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
             }
             #endif
         break;
         case 's':
-            #ifdef SIMULATOR
+            #ifndef NO_SIMULATOR
                 if(is_simulating){
                     ///restore distorsion
                     ///restore cursor
@@ -412,7 +412,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
 void TableApp::windowResized(ofResizeEventArgs & event){
     int w = event.width;
     int h = event.height;
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->windowResized(w,h);
     #endif
     grid->Resize();
@@ -424,21 +424,21 @@ void TableApp::windowResized(ofResizeEventArgs & event){
 
 //--------------------------------------------------------------
 void TableApp::mouseDragged(ofMouseEventArgs & event){
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->mouseDragged(event.x,event.y,event.button);
     #endif
 }
 
 //--------------------------------------------------------------
 void TableApp::mousePressed(ofMouseEventArgs & event){
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->mousePressed(event.x,event.y,event.button);
     #endif
 }
 
 //--------------------------------------------------------------
 void TableApp::mouseReleased(ofMouseEventArgs & event){
-    #ifdef SIMULATOR
+    #ifndef NO_SIMULATOR
     if(is_simulating) simulator->mouseReleased(event.x,event.y,event.button);
     #endif
 }
