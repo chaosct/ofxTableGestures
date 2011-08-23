@@ -243,7 +243,8 @@ void Grid::RenderArrow_two(int size)
 void Grid::DrawArrow_three(int size){
     glBegin(GL_TRIANGLE_STRIP);
     double arc = M_PI*2-0.7;
-    double sinus, cosinus;
+    double sinus = 0;
+    double cosinus = 0;
     double angle;
     double offset = M_PI /20;
 	for (angle=0; angle<arc; angle+=arc/60 ){

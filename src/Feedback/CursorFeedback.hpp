@@ -48,10 +48,10 @@ class HistoryPoint : private DirectPoint{
         GLfloat * xycoordinates;
         GLubyte * colorcoordinates;
         float * times;
-        
+
         int begin;
         int npoints;
-        
+
     public:
         int sid;
         HistoryPoint(int sid, float x, float y):
@@ -85,10 +85,10 @@ class HistoryPoint : private DirectPoint{
             xycoordinates[pos*2+1] = y;
             times[pos] = ofGetElapsedTimef();
             npoints++;
-            
+
         }
         void Update(float time){
-                
+
             while((npoints > 0 ) && (time-times[begin] > MAX_SECONDS) )
             {
                 begin= (begin+1)%MAX_POINTS;
@@ -105,24 +105,24 @@ class HistoryPoint : private DirectPoint{
             ///Draws trace
             ofSetLineWidth(3);
             float actual_time = ofGetElapsedTimef();
-            
+
             unsigned int j = 0;
-            for(unsigned int i = 0; i < MAX_POINTS; ++i)
+            for(int i = 0; i < MAX_POINTS; ++i)
             {
                 colorcoordinates[j++] = R;
                 colorcoordinates[j++] = G;
                 colorcoordinates[j++] = B;
                 colorcoordinates[j++] = (GLubyte) max(0.0f,255-255*(actual_time-times[i])/MAX_SECONDS);
             }
-            
+
             colorcoordinates[j++] = colorcoordinates[0];
             colorcoordinates[j++] = colorcoordinates[1];
             colorcoordinates[j++] = colorcoordinates[2];
             colorcoordinates[j++] = colorcoordinates[3];
-            
+
             xycoordinates[MAX_POINTS*2] = xycoordinates[0];
             xycoordinates[MAX_POINTS*2+1] = xycoordinates[1];
-            
+
             ofEnableAlphaBlending();
             glDisable(GL_DEPTH_TEST);
             glEnableClientState(GL_VERTEX_ARRAY);
@@ -134,13 +134,13 @@ class HistoryPoint : private DirectPoint{
 			{
 			    glDrawArrays(GL_LINE_STRIP, 0, (begin+npoints)%MAX_POINTS);
 			}
-			
+
 			glDisableClientState(GL_COLOR_ARRAY);
 			glDisableClientState(GL_VERTEX_ARRAY);
             glEnable(GL_DEPTH_TEST);
             ofDisableAlphaBlending();
 
-			
+
         }
 };
 
