@@ -46,7 +46,17 @@ void GraphicDispatcher::Draw(){
     std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&Graphic::draw));
 }
 
+struct Deleter
+{
+    void operator()(Graphic * g)
+    {
+        delete g;
+    }
+};
+
 void GraphicDispatcher::Update(){
+    std::for_each(to_delete.begin(),to_delete.end(),Deleter());
+    to_delete.clear();
     GraphicsList l (graphics);
     std::for_each(l.begin(),l.end(),std::mem_fun(&Graphic::update));
 }
@@ -78,4 +88,10 @@ Graphic * GraphicDispatcher::Collide(ofPoint const & point)
     if (it != graphics.rend())
         return *it;
     return NULL;
+}
+
+
+void GraphicDispatcher::SafeDeleteGraphic(Graphic* graphic)
+{
+    to_delete.push_back(graphic);
 }

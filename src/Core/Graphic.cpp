@@ -67,3 +67,8 @@ void Graphic::Position(float & x, float & y)
     x = -1;
     y = -1;
 }
+
+void Graphic::SafeDelete()
+{
+    GraphicDispatcher::I().SafeDeleteGraphic(this);
+}

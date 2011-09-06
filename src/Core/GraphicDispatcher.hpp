@@ -40,6 +40,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
         typedef std::set<Graphic*,CompareLayers> GraphicsList;
         GraphicsList graphics;
+        std::list<Graphic*> to_delete;
         unsigned long ngraphics;
     protected:
         friend class Singleton<GraphicDispatcher>;
@@ -53,6 +54,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
         void Resize(int w, int h);
         void AddGraphic(Graphic* graphic);
         void RemoveGraphic(Graphic* graphic);
+        void SafeDeleteGraphic(Graphic* graphic);
         Graphic * Collide(ofPoint const & point);
 };
 
