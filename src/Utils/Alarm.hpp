@@ -37,13 +37,19 @@
 
 class Alarm
 {
+private:
     class Alarm_detail: Graphic, public Singleton<Alarm_detail>
     {
+        ///Schedule container
         struct schedule
         {
+            void * target;
             float time;
             Poco::AbstractDelegate<float> * delegate;
         };
+        
+        ///Helper classes
+        
         struct CompareSchedule
         {
             bool operator()(const schedule & s1, const schedule & s2)
@@ -53,29 +59,47 @@ class Alarm
                 return s1.time < s2.time;
             }
         };
-        std::set<schedule,CompareSchedule> schedules;
+        
+        struct IsNotOutdated
+        {
+            float now;
+            IsNotOutdated(float t):now(t){}
+            bool operator() (const schedule & s)
+            {
+                return s.time > now;
+            }
+        };
+        
+        struct callDelegate
+        {
+            float now;
+            callDelegate(float t):now(t){}
+            void operator()(const schedule & s)
+            {
+                s.delegate->notify(NULL,now);
+            }
+        };
+        
+        struct IsListener
+        {
+            void * li;
+            IsListener(void * l):li(l){}
+            bool operator()(const schedule & s)
+            {
+                return s.target == li;
+            }
+        };
+        
+        typedef std::set<schedule,CompareSchedule> SetSchedules;
+        SetSchedules schedules;
     public:
         void update()
         {
-            std::set<schedule,CompareSchedule>::iterator lastit;
-            bool will_erase = false;
             float now = ofGetElapsedTimef();
-            for(std::set<schedule,CompareSchedule>::iterator it(schedules.begin()); it != schedules.end(); ++it)
-            {
-                if( (*it).time < now  )
-                {
-                    (*it).delegate->notify(NULL,now);
-                    lastit = it;
-                    will_erase = true;
-                }
-                else
-                    break;
-            }
-            if(will_erase)
-            {
-                schedules.erase(schedules.begin(),++lastit);
-            }
- 
+            SetSchedules::iterator newbegin = std::find_if(schedules.begin(),schedules.end(),IsNotOutdated(now));
+            SetSchedules cschedules(schedules.begin(),newbegin);
+            schedules.erase(schedules.begin(),newbegin);
+            std::for_each(cschedules.begin(),cschedules.end(),callDelegate(now));
         }
         template<class ListenerClass>
         void Setup(float time, ListenerClass * target, void (ListenerClass::*listenerMethod)(float&) )
@@ -83,7 +107,16 @@ class Alarm
             schedule s;
             s.time = time;
             s.delegate = new Poco::Delegate<ListenerClass,float,false>(target,listenerMethod);
+            s.target = static_cast<void * >( target);
             schedules.insert(s);
+        }
+        template<class ListenerClass>
+        void Cancel(ListenerClass * target)
+        {
+            void * vtarget = static_cast<void *>(target);
+            std::set<schedule,CompareSchedule> newschedules;
+            std::remove_copy_if(schedules.begin(),schedules.end(),std::insert_iterator<SetSchedules>(newschedules,newschedules.begin()),IsListener(vtarget));
+            schedules = newschedules;
         }
     };
 public:
@@ -91,6 +124,11 @@ public:
     static void Setup(float time, ListenerClass * target, void (ListenerClass::*listenerMethod)(float&) )
     {
         Alarm_detail::Instance().Setup(time,target,listenerMethod);
+    }
+    template<class ListenerClass>
+    static void Cancel(ListenerClass * target)
+    {
+        Alarm_detail::Instance().Cancel(target);
     }
 };
  
