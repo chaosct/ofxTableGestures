@@ -36,7 +36,7 @@
 
 
 
-class InputGestueTap : public EventClient, public Singleton<InputGestueTap>
+class InputGestureTap : public EventClient, public Singleton<InputGestureTap>
 {
 
     float & maxdistance;
@@ -52,12 +52,12 @@ public:
     };
     ofEvent<TapArgs> Tap;
 
-    InputGestueTap():
+    InputGestureTap():
         maxdistance(ofxGlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
         maxtime(ofxGlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f))
         {
-            registerEvent(InputGestureDirectFingers::Instance().newCursor,&InputGestueTap::newCursor);
-            registerEvent(InputGestureDirectFingers::Instance().removeCursor,&InputGestueTap::removeCursor);
+            registerEvent(InputGestureDirectFingers::Instance().newCursor,&InputGestureTap::newCursor);
+            registerEvent(InputGestureDirectFingers::Instance().removeCursor,&InputGestureTap::removeCursor);
         }
 
     virtual void newCursor(InputGestureDirectFingers::newCursorArgs & a)
@@ -87,26 +87,29 @@ public:
 };
 
 
-template<class Base>
-class CanTap: public Base
-{
-public:
-    //Interface redefined by ofApp
-    void ETap(InputGestueTap::TapArgs & eventargs)
-    {
-        Tap(eventargs.x,eventargs.y);
-    }
-    virtual void Tap(float x, float y) {}
+///Deprecated
+typedef InputGestureTap InputGestueTap;
 
-    CanTap()
-    {
-        ofAddListener(InputGestueTap::Instance().Tap,this,&CanTap::ETap);
-    }
-    virtual ~CanTap()
-    {
-        ofRemoveListener(InputGestueTap::Instance().Tap,this,&CanTap::ETap);
-    }
-};
+//template<class Base>
+//class CanTap: public Base
+//{
+//public:
+//    //Interface redefined by ofApp
+//    void ETap(InputGestureTap::TapArgs & eventargs)
+//    {
+//        Tap(eventargs.x,eventargs.y);
+//    }
+//    virtual void Tap(float x, float y) {}
+//
+//    CanTap()
+//    {
+//        ofAddListener(InputGestureTap::Instance().Tap,this,&CanTap::ETap);
+//    }
+//    virtual ~CanTap()
+//    {
+//        ofRemoveListener(InputGestureTap::Instance().Tap,this,&CanTap::ETap);
+//    }
+//};
 
 
 

@@ -35,7 +35,7 @@
 #include "InputGestureTap.hpp"
 #include "Graphic.hpp"
 
-class TapFeedback : public CanTap < Graphic >
+class TapFeedback : public Graphic 
 {
     float & lifetime;
     float & maxradius;
@@ -83,12 +83,12 @@ class TapFeedback : public CanTap < Graphic >
     lifetime(ofxGlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
     maxradius(ofxGlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
     {
-//        Register(a);
+        registerEvent(InputGestureTap::I().Tap, &TapFeedback::Tap);
     }
 
-    void Tap(float x, float y)
+    void Tap(InputGestureTap::TapArgs & args)
     {
-        new CircleTap(DirectPoint(x,y),maxradius,lifetime);
+        new CircleTap(DirectPoint(args.x,args.y),maxradius,lifetime);
     }
 };
 
