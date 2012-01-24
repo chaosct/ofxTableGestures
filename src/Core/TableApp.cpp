@@ -131,7 +131,7 @@ void TableApp::DrawInfo()
     {
         glPushMatrix();
         glTranslatef(50.0f,50.0f,0.0f);
-        ofSetColor(0x00FF00);
+        ofSetHexColor(0x00FF00);
         std::stringstream msg;
         msg << ofGetWidth() << "X" << ofGetHeight() << "@" <<  (int)ofGetFrameRate() << "fps" << std::endl;
         if(renderer->IsEnabled())
@@ -151,7 +151,7 @@ void TableApp::DrawHelp()
     {
         glPushMatrix();
         glTranslatef(50.0f,200.0f,0.0f);
-        ofSetColor(0x00FF00);
+        ofSetHexColor(0x00FF00);
         std::stringstream msg;
         msg << "h - help content." << std::endl;
         msg << "i - shows graphic information content." << std::endl;

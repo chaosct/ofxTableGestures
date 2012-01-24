@@ -60,7 +60,7 @@ void object::Draw(){
     ofLine(0,0,0,OBJECT_RADIUS*ofGetHeight()/2);
     ofPopMatrix();
     ofDisableAlphaBlending();
-    ofSetColor(0xFFFFFF);
+    ofSetHexColor(0xFFFFFF);
     std::stringstream msg;
     msg << fid;
     //text
