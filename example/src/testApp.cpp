@@ -51,8 +51,9 @@ class Test: public Graphic
     {
         fg->isHidden(false);
         fg->hasAlpha(true);
-        fg->canCollide(false);
+        //fg->canCollide(false);
         fg->setFill(false);
+        Alarm::Cancel(this);
         Alarm::Setup(ofGetElapsedTimef()+4,this,&Test::alive);
     }
     void alive(float & t)
