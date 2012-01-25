@@ -31,16 +31,16 @@
 
 #include "GraphicDispatcher.hpp"
 
-Graphic::Graphic():layer(APP_LAYER){
+Graphic::Graphic():layer(APP_LAYER),deleted(false){
     GraphicDispatcher::Instance().AddGraphic(this);
 }
 
-Graphic::Graphic(int _layer):layer(_layer){
+Graphic::Graphic(int _layer):layer(_layer),deleted(false){
     GraphicDispatcher::Instance().AddGraphic(this);
 }
 
 ///Copy constructor: this allows to copy graphic-herited members of classes
-Graphic::Graphic(Graphic & original):layer(original.layer)
+Graphic::Graphic(Graphic & original):layer(original.layer),deleted(false)
 {
     GraphicDispatcher::Instance().AddGraphic(this);
 }
@@ -70,5 +70,6 @@ void Graphic::Position(float & x, float & y)
 
 void Graphic::SafeDelete()
 {
-    GraphicDispatcher::I().SafeDeleteGraphic(this);
+    if(not deleted)    GraphicDispatcher::I().SafeDeleteGraphic(this);
+    deleted = true;
 }

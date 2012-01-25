@@ -62,6 +62,8 @@ class Graphic : public EventClient{
         virtual void draw(){}
         virtual void update(){}
         virtual void resize(int w, int h){}
+    private:
+        bool deleted;
 };
 
 template<int Layer>
