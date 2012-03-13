@@ -54,7 +54,7 @@ class FigureGraphic: public Graphic
     public:
     ofColor color;
     ofMatrix4x4 transformation;
-    FigureGraphic(Figures::Figure * f):figure(f),testCollide(true),hasalpha(false),fill(true),hidden(false){}
+    FigureGraphic(Figures::Figure * f, int layer=APP_LAYER):Graphic(layer),figure(f),testCollide(true),hasalpha(false),fill(true),hidden(false){}
     ~FigureGraphic(){}
     inline bool Collide(ofPoint const & point)
     {
