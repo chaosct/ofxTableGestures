@@ -53,7 +53,7 @@ class Graphic : public EventClient{
 		void BringTop();
 		void SafeDelete();
 		virtual bool Collide(ofPoint const & point);
-		virtual void Position(float & x, float & y);
+		virtual void Position(float & x, float & y); ///DEPRECATED!
     protected:
         int layer;
         unsigned long created_time;
