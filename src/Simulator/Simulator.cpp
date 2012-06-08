@@ -49,7 +49,8 @@ namespace simulator
             select(false),
             move_selecteds(false),
             ytray(0),
-            previous_timef(0)
+            previous_timef(0),
+            namepath(ofToDataPath(NAMEPATH))
             {
         #ifdef _ofxOscSENDER_H
         port = DEFAULT_PORT;
@@ -88,7 +89,7 @@ namespace simulator
     Simulator::~Simulator(){
         //SaveFile();
         if(!loaded){
-            std::ofstream ofs(ofToDataPath(NAMEPATH).c_str());
+            std::ofstream ofs(namepath.c_str());
             ofs << "#Simulator config file." << std::endl;
             ofs << "#p -> port" << std::endl;
             ofs << "#a -> address" << std::endl;

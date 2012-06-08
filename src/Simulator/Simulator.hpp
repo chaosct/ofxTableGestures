@@ -71,6 +71,7 @@ namespace simulator{
                 bool load_default;
             #endif
             string message_notif;
+            std::string namepath;
         public:
             Simulator();
             ~Simulator();
