@@ -68,13 +68,17 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
             float h = ofGetHeight()/mins;
             xpos = xpos * w - (w-1)/2;
             ypos = ypos * h - (h-1)/2;
+            if (limitroundarea && sqrt((xpos-0.5f)*(xpos-0.5f)+(ypos-0.5f)*(ypos-0.5f)) > 0.5f)
+            {
+                return;
+            }
         }
         else
         {
             ypos = ypos * TableApp::getHeight();
             xpos = xpos * TableApp::getWidth();
         }
-
+        
         if(c_s_ids.find(s_id) == c_s_ids.end())
         {
             addTuioCursor2DArgs eventargs;

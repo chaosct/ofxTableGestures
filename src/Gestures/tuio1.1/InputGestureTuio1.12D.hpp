@@ -102,8 +102,10 @@ public:
     std::set<int> b_s_ids;
 
     int & squaredInterface;
+    int & limitroundarea;
     InputGestureTuio112D():
-        squaredInterface(ofxGlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1))
+        squaredInterface(ofxGlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1)),
+        limitroundarea(ofxGlobalConfig::getRef("GLOBAL:LIMITFINGERSOUTSIDECIRCLE",1))
     {
         ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
     }
