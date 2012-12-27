@@ -65,13 +65,13 @@ TableApp::TableApp():
     renderer->LoadDistortion();
     show_grid = false;
 
-    ofAddListener(ofEvents.update,this,&TableApp::update);
-    ofAddListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
-    ofAddListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
-    ofAddListener(ofEvents.mouseDragged,this,&TableApp::mouseDragged);
-    ofAddListener(ofEvents.mousePressed,this,&TableApp::mousePressed);
-    ofAddListener(ofEvents.mouseReleased,this,&TableApp::mouseReleased);
-    ofAddListener(ofEvents.windowResized,this,&TableApp::windowResized);
+    ofAddListener(ofEvents().update,this,&TableApp::update);
+    ofAddListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
+    ofAddListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
+    ofAddListener(ofEvents().mouseDragged,this,&TableApp::mouseDragged);
+    ofAddListener(ofEvents().mousePressed,this,&TableApp::mousePressed);
+    ofAddListener(ofEvents().mouseReleased,this,&TableApp::mouseReleased);
+    ofAddListener(ofEvents().windowResized,this,&TableApp::windowResized);
 
     Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
 }
@@ -83,13 +83,13 @@ TableApp::~TableApp(){
     delete renderer;
     delete grid;
 
-    ofRemoveListener(ofEvents.update,this,&TableApp::update);
-    ofRemoveListener(ofEvents.keyPressed,this,&TableApp::keyPressed);
-    ofRemoveListener(ofEvents.keyReleased,this,&TableApp::keyReleased);
-    ofRemoveListener(ofEvents.mouseDragged,this,&TableApp::mouseDragged);
-    ofRemoveListener(ofEvents.mousePressed,this,&TableApp::mousePressed);
-    ofRemoveListener(ofEvents.mouseReleased,this,&TableApp::mouseReleased);
-    ofRemoveListener(ofEvents.windowResized,this,&TableApp::windowResized);
+    ofRemoveListener(ofEvents().update,this,&TableApp::update);
+    ofRemoveListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
+    ofRemoveListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
+    ofRemoveListener(ofEvents().mouseDragged,this,&TableApp::mouseDragged);
+    ofRemoveListener(ofEvents().mousePressed,this,&TableApp::mousePressed);
+    ofRemoveListener(ofEvents().mouseReleased,this,&TableApp::mouseReleased);
+    ofRemoveListener(ofEvents().windowResized,this,&TableApp::windowResized);
 
 }
 
