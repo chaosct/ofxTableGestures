@@ -43,39 +43,49 @@ GraphicDispatcher::~GraphicDispatcher(){
 }
 
 void GraphicDispatcher::Draw(){
-    std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&Graphic::draw));
+    std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&GraphicSmartContainer::draw));
 }
 
-struct Deleter
+/*struct Deleter
 {
-    void operator()(Graphic * g)
+    void operator()(GraphicSmartContainer * g)
     {
         delete g;
     }
-};
+};*/
 
 void GraphicDispatcher::Update(){
-    std::for_each(to_delete.begin(),to_delete.end(),Deleter());
-    to_delete.clear();
-    GraphicsList l (graphics);
-    std::for_each(l.begin(),l.end(),std::mem_fun(&Graphic::update));
+    for (GraphicsList::iterator it = graphics.begin(); it != graphics.end();)
+    {
+        GraphicSmartContainer * g = *it;
+        if (g->todelete())
+        {
+            graphics.erase(it++);
+            delete g;
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&GraphicSmartContainer::update));
 }
 
 void GraphicDispatcher::Resize(int w, int h){
     std::for_each(graphics.begin(),graphics.end(),
-                  std::tr1::bind(&Graphic::resize,std::tr1::placeholders::_1,w,h));
+                  std::tr1::bind(&GraphicSmartContainer::resize,std::tr1::placeholders::_1,w,h));
 }
 
-void GraphicDispatcher::AddGraphic(Graphic* graphic){
+void GraphicDispatcher::AddGraphic(GraphicSmartContainer* graphic){
     graphic->created_time = ngraphics++;
     graphics.insert(graphic);
 }
 
-void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
+/*void GraphicDispatcher::RemoveGraphic(Graphic* graphic){
     graphics.erase(graphic);
-}
+}*/
 
-void GraphicDispatcher::bring_top(Graphic* graphic){
+void GraphicDispatcher::bring_top(GraphicSmartContainer* graphic){
     graphics.erase(graphic);
     graphic->created_time = ngraphics++;
     graphics.insert(graphic);
@@ -84,14 +94,14 @@ void GraphicDispatcher::bring_top(Graphic* graphic){
 Graphic * GraphicDispatcher::Collide(ofPoint const & point)
 {
     GraphicsList::reverse_iterator it = std::find_if(graphics.rbegin(),graphics.rend(),
-                                          std::tr1::bind(&Graphic::Collide,std::tr1::placeholders::_1,point));
+                                          std::tr1::bind(&GraphicSmartContainer::Collide,std::tr1::placeholders::_1,point));
     if (it != graphics.rend())
-        return *it;
+        return (*it)->graphic;
     return NULL;
 }
 
 
-void GraphicDispatcher::SafeDeleteGraphic(Graphic* graphic)
+/*void GraphicDispatcher::SafeDeleteGraphic(Graphic* graphic)
 {
     to_delete.push_back(graphic);
-}
+}*/

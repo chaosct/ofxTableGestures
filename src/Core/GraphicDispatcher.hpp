@@ -35,26 +35,68 @@
 #include "Singleton.hpp"
 #include "Graphic.hpp"
 
+class GraphicSmartContainer
+{
+    friend class Graphic;
+    public:
+    Graphic * graphic;
+    unsigned long created_time;
+    GraphicSmartContainer(Graphic * gr):graphic(gr){}
+    void unregister(){graphic=NULL;}
+    bool todelete(){return graphic == NULL;}
+    int GetLayer()
+    {
+        if(todelete()) return 0;
+        return graphic->GetLayer();
+    }
+    void draw()
+    {
+        if(!todelete()) graphic->draw();
+    }
+    void update()
+    {
+        if(!todelete()) graphic->update();
+    }
+    void resize(int w, int h)
+    {
+        if(!todelete()) graphic->resize(w,h);
+    }
+    bool Collide(ofPoint const & point)
+    {
+        if(todelete()) return false;
+        return graphic->Collide(point);
+    }
+};
+
+struct CompareLayers
+{
+    inline bool operator()(GraphicSmartContainer* object1, GraphicSmartContainer* object2)
+    {
+        if (object1->GetLayer() == object2->GetLayer())
+            return (object1->created_time < object2->created_time);
+        return (object1->GetLayer() > object2->GetLayer());
+    }
+};
 
 class GraphicDispatcher : public Singleton<GraphicDispatcher>{
     private:
-        typedef std::set<Graphic*,CompareLayers> GraphicsList;
+        typedef std::set<GraphicSmartContainer*,CompareLayers> GraphicsList;
         GraphicsList graphics;
-        std::list<Graphic*> to_delete;
+        //std::list<Graphic*> to_delete;
         unsigned long ngraphics;
     protected:
         friend class Singleton<GraphicDispatcher>;
         GraphicDispatcher();
         friend class Graphic;
-        void bring_top(Graphic* graphic);
+        void bring_top(GraphicSmartContainer* graphic);
     public:
         ~GraphicDispatcher();
         void Draw();
         void Update();
         void Resize(int w, int h);
-        void AddGraphic(Graphic* graphic);
-        void RemoveGraphic(Graphic* graphic);
-        void SafeDeleteGraphic(Graphic* graphic);
+        void AddGraphic(GraphicSmartContainer* graphic);
+        //void RemoveGraphic(Graphic* graphic);
+        //void SafeDeleteGraphic(Graphic* graphic);
         Graphic * Collide(ofPoint const & point);
 };
 

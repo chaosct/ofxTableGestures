@@ -43,6 +43,8 @@
 
 #include "EventClient.hpp"
 
+class GraphicSmartContainer;
+
 class Graphic : public EventClient{
     public:
         Graphic();
@@ -56,14 +58,15 @@ class Graphic : public EventClient{
 		virtual void Position(float & x, float & y); ///DEPRECATED!
     protected:
         int layer;
-        unsigned long created_time;
         friend class GraphicDispatcher;
+        friend class GraphicSmartContainer;
         friend class CompareLayers;
         virtual void draw(){}
         virtual void update(){}
         virtual void resize(int w, int h){}
     private:
         bool deleted;
+        GraphicSmartContainer * smartcontainer;
 };
 
 template<int Layer>
@@ -76,15 +79,7 @@ class TGraphic: public Graphic
 typedef TGraphic<NOT_LAYER> NotificationGraphic;
 typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
-struct CompareLayers
-{
-    inline bool operator()(Graphic* object1, Graphic* object2)
-    {
-        if (object1->GetLayer() == object2->GetLayer())
-            return (object1->created_time < object2->created_time);
-        return (object1->GetLayer() > object2->GetLayer());
-    }
-};
+
 
 
 //template<typename T>

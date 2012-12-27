@@ -32,17 +32,20 @@
 #include "GraphicDispatcher.hpp"
 
 Graphic::Graphic():layer(APP_LAYER),deleted(false){
-    GraphicDispatcher::Instance().AddGraphic(this);
+    smartcontainer = new GraphicSmartContainer(this);
+    GraphicDispatcher::Instance().AddGraphic(smartcontainer);
 }
 
 Graphic::Graphic(int _layer):layer(_layer),deleted(false){
-    GraphicDispatcher::Instance().AddGraphic(this);
+    smartcontainer = new GraphicSmartContainer(this);
+    GraphicDispatcher::Instance().AddGraphic(smartcontainer);
 }
 
 ///Copy constructor: this allows to copy graphic-herited members of classes
 Graphic::Graphic(Graphic & original):layer(original.layer),deleted(false)
 {
-    GraphicDispatcher::Instance().AddGraphic(this);
+    smartcontainer = new GraphicSmartContainer(this);
+    GraphicDispatcher::Instance().AddGraphic(smartcontainer);
 }
 
 int Graphic::GetLayer(){
@@ -50,11 +53,11 @@ int Graphic::GetLayer(){
 }
 
 Graphic::~Graphic(){
-    GraphicDispatcher::Instance().RemoveGraphic(this);
+    smartcontainer->unregister();
 }
 
 void Graphic::BringTop(){
-    GraphicDispatcher::Instance().bring_top(this);
+    GraphicDispatcher::Instance().bring_top(smartcontainer);
 }
 
 bool Graphic::Collide(ofPoint const & point)
@@ -70,6 +73,5 @@ void Graphic::Position(float & x, float & y)
 
 void Graphic::SafeDelete()
 {
-    if(not deleted)    GraphicDispatcher::I().SafeDeleteGraphic(this);
-    deleted = true;
+    delete this;
 }
