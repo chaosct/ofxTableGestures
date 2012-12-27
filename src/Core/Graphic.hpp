@@ -49,7 +49,7 @@ class Graphic : public EventClient{
     public:
         Graphic();
         Graphic(int _layer);
-        Graphic(Graphic & original);
+        Graphic(const Graphic & original);
         virtual ~Graphic();
         int GetLayer();
 		void BringTop();

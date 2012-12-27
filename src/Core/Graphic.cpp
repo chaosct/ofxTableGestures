@@ -42,7 +42,7 @@ Graphic::Graphic(int _layer):layer(_layer),deleted(false){
 }
 
 ///Copy constructor: this allows to copy graphic-herited members of classes
-Graphic::Graphic(Graphic & original):layer(original.layer),deleted(false)
+Graphic::Graphic(const Graphic & original):layer(original.layer),deleted(false)
 {
     smartcontainer = new GraphicSmartContainer(this);
     GraphicDispatcher::Instance().AddGraphic(smartcontainer);
