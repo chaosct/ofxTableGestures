@@ -52,6 +52,7 @@ class Graphic : public EventClient{
         Graphic(const Graphic & original);
         virtual ~Graphic();
         int GetLayer();
+        void SetLayer(int _layer);
 		void BringTop();
 		void SafeDelete();
 		virtual bool Collide(ofPoint const & point);

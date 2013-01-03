@@ -52,6 +52,11 @@ int Graphic::GetLayer(){
     return layer;
 }
 
+void Graphic::SetLayer(int _layer){
+    layer = _layer;
+    BringTop();
+}
+
 Graphic::~Graphic(){
     smartcontainer->unregister();
 }
