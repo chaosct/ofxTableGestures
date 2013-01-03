@@ -60,7 +60,7 @@ class FigureGraphic: public Graphic
     {
         return testCollide && figure->Collide(point);
     }
-    void draw()
+    virtual void draw()
     {
         if(hidden)
         {
