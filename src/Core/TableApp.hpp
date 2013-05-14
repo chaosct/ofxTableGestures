@@ -36,7 +36,7 @@
 #include "Grid.hpp"
 #include "Renderer.hpp"
 
-///By defining the global "NO_SIMULATOR", it enables the integrated simulator.
+///By defining the global "NO_SIMULATOR", it disables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
 #ifndef NO_SIMULATOR
     #include "Simulator.hpp"
