@@ -6,6 +6,11 @@ You will need:
 ofxGlobalConfig (https://github.com/chaosct/ofxGlobalConfig)
 ofx2DFigures (https://github.com/bestsheep1/ofx2DFigures)
 
+Compilation hint:
+64bit builds have problem with old versions of OscPack (inside ofxOsc). This
+makes builds not correctly listening for OSC/TUIO messages.
+Just update it using the las version to solve the problems.
+
 Warning:
 This project is currently under heavy development. The underlying code as well as the specific interfaces of
 its different parts may change in the future, leaving your project unable to compile unless you keep
