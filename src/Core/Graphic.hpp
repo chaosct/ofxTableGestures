@@ -81,16 +81,4 @@ typedef TGraphic<NOT_LAYER> NotificationGraphic;
 typedef TGraphic<BGR_LAYER> BackgroundGraphic;
 
 
-
-
-//template<typename T>
-//class OnTable: public T
-//{
-//    public:
-//    OnTable()
-//    {
-//        this->Register(NULL);
-//    }
-//};
-
-#endif //_GRAPHICDISPATCHER
+#endif //_GRAPHIC
