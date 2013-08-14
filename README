@@ -9,7 +9,7 @@ ofx2DFigures (https://github.com/bestsheep1/ofx2DFigures)
 Compilation hint:
 64bit builds have problems with old versions of OscPack (inside ofxOsc). This
 makes builds not correctly listening for OSC/TUIO messages.
-Just update it using the last version to solve these problems.ç
+Just update it using the last version to solve these problems.
 
 Warning:
 This project is currently under heavy development. The underlying code as well as the specific interfaces of
