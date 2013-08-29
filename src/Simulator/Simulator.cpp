@@ -52,7 +52,6 @@ namespace simulator
             previous_timef(0),
             namepath(ofToDataPath(NAMEPATH))
             {
-        #ifdef _ofxOscSENDER_H
         port = DEFAULT_PORT;
         address = DEFAULT_ADDR;
         loaded = LoadConfigFile(ofToDataPath(NAMEPATH));
@@ -82,7 +81,6 @@ namespace simulator
 
         sender = new ofxOscSender();
         sender->setup(address,port);
-        #endif
         verdana.loadFont(ofxGlobalConfig::getRef<std::string>("PROGRAM:HELPFONT","verdana.ttf"),int((0.09*ofGetHeight())/7), false, true);
     }
 
@@ -99,9 +97,7 @@ namespace simulator
             ofs << "a " << DEFAULT_ADDR << std::endl;
             ofs << "d" << std::endl;
         }
-        #ifdef _ofxOscSENDER_H
         delete sender;
-        #endif
     }
 
     bool Simulator::LoadConfigFile(std::string path){
@@ -507,41 +503,39 @@ namespace simulator
     }
 
     void Simulator::addTuioObject(object* o){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dobj");
-            message_alive.addStringArg("alive");
-            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //set message
-            ofxOscMessage message_set;
-            message_set.setAddress("/tuio/2Dobj");
-            message_set.addStringArg("set");
-            message_set.addIntArg(o->sid);
-            message_set.addIntArg(o->fid);
-            message_set.addFloatArg( Transformx(o->xpos) );
-            message_set.addFloatArg( Transformy(o->ypos) );
-            message_set.addFloatArg( o->angle );
-            message_set.addFloatArg(o->xspeed);
-            message_set.addFloatArg(o->yspeed);
-            message_set.addFloatArg(o->rspeed);
-            message_set.addFloatArg(o->maccel);
-            message_set.addFloatArg(o->raccel);
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dobj");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_set);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dobj");
+        message_alive.addStringArg("alive");
+        for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //set message
+        ofxOscMessage message_set;
+        message_set.setAddress("/tuio/2Dobj");
+        message_set.addStringArg("set");
+        message_set.addIntArg(o->sid);
+        message_set.addIntArg(o->fid);
+        message_set.addFloatArg( Transformx(o->xpos) );
+        message_set.addFloatArg( Transformy(o->ypos) );
+        message_set.addFloatArg( o->angle );
+        message_set.addFloatArg(o->xspeed);
+        message_set.addFloatArg(o->yspeed);
+        message_set.addFloatArg(o->rspeed);
+        message_set.addFloatArg(o->maccel);
+        message_set.addFloatArg(o->raccel);
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dobj");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_set);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -559,41 +553,39 @@ namespace simulator
     }
 
     void Simulator::updateTuioObject(object* o){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dobj");
-            message_alive.addStringArg("alive");
-            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //set message
-            ofxOscMessage message_set;
-            message_set.setAddress("/tuio/2Dobj");
-            message_set.addStringArg("set");
-            message_set.addIntArg(o->sid);
-            message_set.addIntArg(o->fid);
-            message_set.addFloatArg( Transformx(o->xpos) );
-            message_set.addFloatArg( Transformy(o->ypos));
-            message_set.addFloatArg(o->angle);
-            message_set.addFloatArg(o->xspeed);
-            message_set.addFloatArg(o->yspeed);
-            message_set.addFloatArg(o->rspeed);
-            message_set.addFloatArg(o->maccel);
-            message_set.addFloatArg(o->raccel);
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dobj");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_set);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dobj");
+        message_alive.addStringArg("alive");
+        for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //set message
+        ofxOscMessage message_set;
+        message_set.setAddress("/tuio/2Dobj");
+        message_set.addStringArg("set");
+        message_set.addIntArg(o->sid);
+        message_set.addIntArg(o->fid);
+        message_set.addFloatArg( Transformx(o->xpos) );
+        message_set.addFloatArg( Transformy(o->ypos));
+        message_set.addFloatArg(o->angle);
+        message_set.addFloatArg(o->xspeed);
+        message_set.addFloatArg(o->yspeed);
+        message_set.addFloatArg(o->rspeed);
+        message_set.addFloatArg(o->maccel);
+        message_set.addFloatArg(o->raccel);
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dobj");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_set);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -611,23 +603,21 @@ namespace simulator
     }
 
     void Simulator::removeTuioObject(object* o){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dobj");
-            message_alive.addStringArg("alive");
-            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dobj");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dobj");
+        message_alive.addStringArg("alive");
+        for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dobj");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -637,37 +627,35 @@ namespace simulator
     }
 
     void Simulator::addTuioCursor(cursor* c){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dcur");
-            message_alive.addStringArg("alive");
-            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //set message
-            ofxOscMessage message_set;
-            message_set.setAddress("/tuio/2Dcur");
-            message_set.addStringArg("set");
-            message_set.addIntArg(c->sid);
-            message_set.addFloatArg( Transformx(c->xpos) );
-            message_set.addFloatArg( Transformy(c->ypos) );
-            message_set.addFloatArg(c->xspeed);
-            message_set.addFloatArg(c->yspeed);
-            message_set.addFloatArg(c->maccel);
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dcur");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_set);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dcur");
+        message_alive.addStringArg("alive");
+        for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //set message
+        ofxOscMessage message_set;
+        message_set.setAddress("/tuio/2Dcur");
+        message_set.addStringArg("set");
+        message_set.addIntArg(c->sid);
+        message_set.addFloatArg( Transformx(c->xpos) );
+        message_set.addFloatArg( Transformy(c->ypos) );
+        message_set.addFloatArg(c->xspeed);
+        message_set.addFloatArg(c->yspeed);
+        message_set.addFloatArg(c->maccel);
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dcur");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_set);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -681,37 +669,35 @@ namespace simulator
     }
 
     void Simulator::updateTuioCursor(cursor* c){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dcur");
-            message_alive.addStringArg("alive");
-            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //set message
-            ofxOscMessage message_set;
-            message_set.setAddress("/tuio/2Dcur");
-            message_set.addStringArg("set");
-            message_set.addIntArg(c->sid);
-            message_set.addFloatArg( Transformx(c->xpos) );
-            message_set.addFloatArg( Transformy(c->ypos) );
-            message_set.addFloatArg(c->xspeed);
-            message_set.addFloatArg(c->yspeed);
-            message_set.addFloatArg(c->maccel);
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dcur");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_set);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dcur");
+        message_alive.addStringArg("alive");
+        for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //set message
+        ofxOscMessage message_set;
+        message_set.setAddress("/tuio/2Dcur");
+        message_set.addStringArg("set");
+        message_set.addIntArg(c->sid);
+        message_set.addFloatArg( Transformx(c->xpos) );
+        message_set.addFloatArg( Transformy(c->ypos) );
+        message_set.addFloatArg(c->xspeed);
+        message_set.addFloatArg(c->yspeed);
+        message_set.addFloatArg(c->maccel);
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dcur");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_set);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -725,23 +711,21 @@ namespace simulator
     }
 
     void Simulator::removeTuioCursor(cursor* c){
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dcur");
-            message_alive.addStringArg("alive");
-            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dcur");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            Bundle.addMessage(message_alive);
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #endif
+        ofxOscBundle Bundle;
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dcur");
+        message_alive.addStringArg("alive");
+        for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dcur");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        Bundle.addMessage(message_alive);
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
         stringstream ostring;
         ostring.precision(3);
         ostring <<
@@ -753,84 +737,76 @@ namespace simulator
     ///missatge cada segon?
     void Simulator::updateCursors(){
         //if(cursors_escene.size() == 0) return;
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dcur");
-            message_alive.addStringArg("alive");
-            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dcur");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            //set messages
-            for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
-                ofxOscMessage message_set;
-                message_set.setAddress("/tuio/2Dcur");
-                message_set.addStringArg("set");
-                message_set.addIntArg((*it)->sid);
-                message_set.addFloatArg( Transformx((*it)->xpos) );
-                message_set.addFloatArg( Transformy((*it)->ypos) );
-                message_set.addFloatArg((*it)->xspeed);
-                message_set.addFloatArg((*it)->yspeed);
-                message_set.addFloatArg((*it)->maccel);
-                Bundle.addMessage(message_set);
-            }
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #else
-            std::cout << "cur update\t" << c->sid << " " << c->xpos << " " << c->ypos << std::endl;
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dcur");
+        message_alive.addStringArg("alive");
+        for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dcur");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        //set messages
+        for(cursor_list::iterator it = cursors_escene.begin(); it != cursors_escene.end(); it++){
+            ofxOscMessage message_set;
+            message_set.setAddress("/tuio/2Dcur");
+            message_set.addStringArg("set");
+            message_set.addIntArg((*it)->sid);
+            message_set.addFloatArg( Transformx((*it)->xpos) );
+            message_set.addFloatArg( Transformy((*it)->ypos) );
+            message_set.addFloatArg((*it)->xspeed);
+            message_set.addFloatArg((*it)->yspeed);
+            message_set.addFloatArg((*it)->maccel);
+            Bundle.addMessage(message_set);
+        }
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
     }
 
     void Simulator::updateObjects(){
         //if(objects_escene.size() == 0) return;
-        #ifdef _ofxOscSENDER_H
-            ofxOscBundle Bundle;
-            //alive message
-            ofxOscMessage message_alive;
-            message_alive.setAddress("/tuio/2Dobj");
-            message_alive.addStringArg("alive");
-            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
-                message_alive.addIntArg((*it)->sid);
-            }
-            //fseq message
-            fseqGenerator++;
-            ofxOscMessage message_frame;
-            message_frame.setAddress("/tuio/2Dobj");
-            message_frame.addStringArg("fseq");
-            message_frame.addIntArg(fseqGenerator);
-            //build bundle
-            Bundle.addMessage(message_alive);
-            //set message
-            for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
-                ofxOscMessage message_set;
-                message_set.setAddress("/tuio/2Dobj");
-                message_set.addStringArg("set");
-                message_set.addIntArg((*it)->sid);
-                message_set.addIntArg((*it)->fid);
-                message_set.addFloatArg( Transformx((*it)->xpos) );
-                message_set.addFloatArg( Transformy((*it)->ypos));
-                message_set.addFloatArg((*it)->angle);
-                message_set.addFloatArg((*it)->xspeed);
-                message_set.addFloatArg((*it)->yspeed);
-                message_set.addFloatArg((*it)->rspeed);
-                message_set.addFloatArg((*it)->maccel);
-                message_set.addFloatArg((*it)->raccel);
-                Bundle.addMessage(message_set);
-            }
-            Bundle.addMessage(message_frame);
-            sender->sendBundle(Bundle);
-        #else
-            std::cout << "obj update\t" << o->sid << " " << o->fid << " " << o->xpos << " " << o->ypos << " " << o->angle << std::endl;
-        #endif
+        ofxOscBundle Bundle;
+        //alive message
+        ofxOscMessage message_alive;
+        message_alive.setAddress("/tuio/2Dobj");
+        message_alive.addStringArg("alive");
+        for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+            message_alive.addIntArg((*it)->sid);
+        }
+        //fseq message
+        fseqGenerator++;
+        ofxOscMessage message_frame;
+        message_frame.setAddress("/tuio/2Dobj");
+        message_frame.addStringArg("fseq");
+        message_frame.addIntArg(fseqGenerator);
+        //build bundle
+        Bundle.addMessage(message_alive);
+        //set message
+        for(object_list::iterator it = objects_escene.begin(); it != objects_escene.end(); it++){
+            ofxOscMessage message_set;
+            message_set.setAddress("/tuio/2Dobj");
+            message_set.addStringArg("set");
+            message_set.addIntArg((*it)->sid);
+            message_set.addIntArg((*it)->fid);
+            message_set.addFloatArg( Transformx((*it)->xpos) );
+            message_set.addFloatArg( Transformy((*it)->ypos));
+            message_set.addFloatArg((*it)->angle);
+            message_set.addFloatArg((*it)->xspeed);
+            message_set.addFloatArg((*it)->yspeed);
+            message_set.addFloatArg((*it)->rspeed);
+            message_set.addFloatArg((*it)->maccel);
+            message_set.addFloatArg((*it)->raccel);
+            Bundle.addMessage(message_set);
+        }
+        Bundle.addMessage(message_frame);
+        sender->sendBundle(Bundle);
     }
 
     float Simulator::Transformx(float to_transform){

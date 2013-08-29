@@ -63,13 +63,11 @@ namespace simulator{
             float previous_timef;
             message_queue notify;
             ofTrueTypeFont	verdana;
-            #ifdef _ofxOscSENDER_H
-                ofxOscSender* sender;
-                int port;
-                std::string address;
-                bool loaded;
-                bool load_default;
-            #endif
+            ofxOscSender* sender;
+            int port;
+            std::string address;
+            bool loaded;
+            bool load_default;
             string message_notif;
             std::string namepath;
         public:
