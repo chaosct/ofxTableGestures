@@ -44,7 +44,7 @@ double Renderer::angle_w=0;
 double Renderer::angle=0;
 
 Renderer::Renderer():
-    DistortionPath(DISTORTION_PATH),
+    DistortionPath(ofToDataPath(DISTORTION_PATH)),
     distortion_enabled(false)
     {
         LoadDefaultValues();

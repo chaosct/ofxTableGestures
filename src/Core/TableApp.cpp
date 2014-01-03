@@ -39,7 +39,7 @@
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
-#define DISTORTION_PATH "calibration.conf"
+//#define DISTORTION_PATH "calibration.conf"
 
 
 float TableApp::height = 0;
