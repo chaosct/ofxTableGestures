@@ -85,10 +85,12 @@ class TableApp {
         bool matrix_updated;
         //App Window Name
         std::string win_name;
+        //Cursor key evaluation
+        void Evaluate_Cursor(int key);
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
-    TableApp(std::string name = "Table APP");
+        TableApp(std::string name = "Table APP");
         ///Destructor
         ~TableApp();
 
