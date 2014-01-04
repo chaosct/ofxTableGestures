@@ -35,6 +35,7 @@
 #include "ofMain.h"
 #include "Grid.hpp"
 #include "Renderer.hpp"
+#include <string>
 
 ///By defining the global "NO_SIMULATOR", it disables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
@@ -82,10 +83,12 @@ class TableApp {
 
         ///Flag to recalculate the ignore collision matrix.
         bool matrix_updated;
+        //App Window Name
+        std::string win_name;
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
-        TableApp();
+    TableApp(std::string name = "Table APP");
         ///Destructor
         ~TableApp();
 

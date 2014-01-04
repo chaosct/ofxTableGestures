@@ -46,7 +46,7 @@ float TableApp::height = 0;
 float TableApp::width = 0;
 
 
-TableApp::TableApp():
+TableApp::TableApp(std::string name):
 //    calibration_enabled(false),
     calibration_mode(0),
     show_help(false),
@@ -74,6 +74,8 @@ TableApp::TableApp():
     ofAddListener(ofEvents().windowResized,this,&TableApp::windowResized);
 
     Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
+    
+    win_name = name;
 }
 
 TableApp::~TableApp(){
@@ -106,7 +108,7 @@ void TableApp::setup(){
     ofSetFrameRate(60);
     ///starts the tuioinput thread
     //tuio::tuioinput::Instance().init();
-    ofSetWindowTitle("Table APP    press 'h' to show help content");
+    ofSetWindowTitle(win_name + "\t press 'h' to show help content");
     ofBackground(0, 0, 0);
     ofHideCursor();
 }
