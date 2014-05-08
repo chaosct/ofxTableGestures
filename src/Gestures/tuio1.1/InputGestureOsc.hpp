@@ -10,6 +10,8 @@
 class InputGestureOSC : public Singleton<InputGestureOSC>, public Graphic
 {
     ofxOscReceiver OscReceiver;
+    ofxOscSender OscSender;
+    bool redirectOSC;
     public:
     struct EventNewOScMessageArgs: public EventArgs
     {
@@ -20,6 +22,14 @@ class InputGestureOSC : public Singleton<InputGestureOSC>, public Graphic
     InputGestureOSC()
     {
         OscReceiver.setup(ofxGlobalConfig::getRef("INPUT:TUIO:PORT",3333));
+        redirectOSC = ofxGlobalConfig::getRef("INPUT:TUIO:REDIRECT:ACTIVE",0);
+        if(redirectOSC)
+        {
+            OscSender.setup(
+                ofxGlobalConfig::getRef<string>("INPUT:TUIO:REDIRECT:HOST","localhost"),
+                ofxGlobalConfig::getRef("INPUT:TUIO:REDIRECT:PORT",3334)
+                );
+        }
     }
     void update()
     {
@@ -32,7 +42,10 @@ class InputGestureOSC : public Singleton<InputGestureOSC>, public Graphic
                 args.m = m;
                 ofNotifyEvent(EventNewOScMessage,args);
 
-
+            if(redirectOSC)
+            {
+                OscSender.sendMessage(m);
+            }
         }
     }
     
