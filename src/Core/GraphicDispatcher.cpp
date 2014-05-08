@@ -68,7 +68,8 @@ void GraphicDispatcher::Update(){
             ++it;
         }
     }
-    std::for_each(graphics.begin(),graphics.end(),std::mem_fun(&GraphicSmartContainer::update));
+    GraphicsList gr = graphics;
+    std::for_each(gr.begin(),gr.end(),std::mem_fun(&GraphicSmartContainer::update));
 }
 
 void GraphicDispatcher::Resize(int w, int h){
@@ -86,7 +87,14 @@ void GraphicDispatcher::AddGraphic(GraphicSmartContainer* graphic){
 }*/
 
 void GraphicDispatcher::bring_top(GraphicSmartContainer* graphic){
-    graphics.erase(graphic);
+    if(!graphics.erase(graphic)) ofLogError() << "[bring_top] Unable to remove graphic from list!";
+    graphic->created_time = ngraphics++;
+    graphics.insert(graphic);
+}
+
+void GraphicDispatcher::ChangeLayer(GraphicSmartContainer * graphic, int newlayer){
+    if(!graphics.erase(graphic)) ofLogError() << "[ChangeLayer] Unable to remove graphic from list!";
+    graphic->graphic->layer = newlayer;
     graphic->created_time = ngraphics++;
     graphics.insert(graphic);
 }

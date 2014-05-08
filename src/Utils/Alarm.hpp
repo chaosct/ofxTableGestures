@@ -34,6 +34,7 @@
 
 #include "Singleton.hpp"
 #include "Graphic.hpp"
+#include "Poco/Delegate.h"
 
 class Alarm
 {

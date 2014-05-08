@@ -226,7 +226,7 @@ class EventClient : EventClientObject
     {
         if(listener == NULL)
             listener = static_cast<ListenerClass *>(this);
-        Graphic * target = static_cast<Graphic *>(this);
+        Graphic * target = (Graphic*)(this);
         this->EventClientObject::registerEventFiltered(listener,event,listenerMethod,target);
     }
     

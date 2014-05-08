@@ -39,14 +39,14 @@
 
 #define WIDTH_STEP 0.005
 #define ANGLE_STEP 1
-#define DISTORTION_PATH "calibration.conf"
+//#define DISTORTION_PATH "calibration.conf"
 
 
 float TableApp::height = 0;
 float TableApp::width = 0;
 
 
-TableApp::TableApp():
+TableApp::TableApp(std::string name):
 //    calibration_enabled(false),
     calibration_mode(0),
     show_help(false),
@@ -74,6 +74,8 @@ TableApp::TableApp():
     ofAddListener(ofEvents().windowResized,this,&TableApp::windowResized);
 
     Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
+    
+    win_name = name;
 }
 
 TableApp::~TableApp(){
@@ -106,7 +108,7 @@ void TableApp::setup(){
     ofSetFrameRate(60);
     ///starts the tuioinput thread
     //tuio::tuioinput::Instance().init();
-    ofSetWindowTitle("Table APP    press 'h' to show help content");
+    ofSetWindowTitle(win_name + "\t press 'h' to show help content");
     ofBackground(0, 0, 0);
     ofHideCursor();
 }
@@ -241,6 +243,7 @@ void TableApp::keyPressed(ofKeyEventArgs & event){
         break;
     }
     #endif
+    Evaluate_Cursor(key);
 }
 
 //--------------------------------------------------------------
@@ -275,7 +278,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             if(renderer->IsEnabled() && show_grid) calibration_mode ++;
             if(calibration_mode > 3) calibration_mode = 0;
         break;
-        case OF_KEY_UP:
+        /*case OF_KEY_UP:
             #ifndef NO_SIMULATOR
             if(!is_simulating)
             #endif
@@ -334,7 +337,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
                     case 3:renderer->angle_w-=ANGLE_STEP;break;
                 }
             }
-        break;
+        break;*/
         case 'i':
             show_info = !show_info;
         break;
@@ -408,6 +411,72 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
     }
 }
 
+void TableApp::Evaluate_Cursor(int key)
+{
+    switch(key)
+    {
+        case OF_KEY_UP:
+        #ifndef NO_SIMULATOR
+            if(!is_simulating)
+        #endif
+                if(renderer->IsEnabled() && show_grid)
+                {
+                    switch(calibration_mode)
+                    {
+                        case 0:renderer->center_y--;break;
+                        case 1:renderer->height_offset+=WIDTH_STEP;break;
+                        case 2:renderer->angle+=ANGLE_STEP;break;
+                        case 3:renderer->angle_h+=ANGLE_STEP;break;
+                    }
+                }
+            break;
+        case OF_KEY_DOWN:
+        #ifndef NO_SIMULATOR
+            if(!is_simulating)
+        #endif
+                if(renderer->IsEnabled() && show_grid)
+                {
+                    switch(calibration_mode)
+                    {
+                        case 0:renderer->center_y++;break;
+                        case 1:renderer->height_offset-=WIDTH_STEP;break;
+                        case 2:renderer->angle-=ANGLE_STEP;break;
+                        case 3:renderer->angle_h-=ANGLE_STEP;break;
+                    }
+                }
+            break;
+        case OF_KEY_RIGHT:
+        #ifndef NO_SIMULATOR
+            if(!is_simulating)
+        #endif
+                if(renderer->IsEnabled() && show_grid)
+                {
+                    switch(calibration_mode)
+                    {
+                        case 0:renderer->center_x++;break;
+                        case 1:renderer->width_offset+=WIDTH_STEP;break;
+                        case 2:renderer->angle+=ANGLE_STEP;break;
+                        case 3:renderer->angle_w+=ANGLE_STEP;break;
+                    }
+                }
+            break;
+        case OF_KEY_LEFT:
+        #ifndef NO_SIMULATOR
+            if(!is_simulating)
+        #endif
+                if(renderer->IsEnabled() && show_grid)
+                {
+                    switch(calibration_mode)
+                    {
+                        case 0:renderer->center_x--;break;
+                        case 1:renderer->width_offset-=WIDTH_STEP;break;
+                        case 2:renderer->angle-=ANGLE_STEP;break;
+                        case 3:renderer->angle_w-=ANGLE_STEP;break;
+                    }
+                }
+            break;
+    }
+}
 //--------------------------------------------------------------
 void TableApp::windowResized(ofResizeEventArgs & event){
     int w = event.width;

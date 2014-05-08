@@ -89,6 +89,7 @@ class GraphicDispatcher : public Singleton<GraphicDispatcher>{
         GraphicDispatcher();
         friend class Graphic;
         void bring_top(GraphicSmartContainer* graphic);
+        void ChangeLayer(GraphicSmartContainer * graphic, int newlayer);
     public:
         ~GraphicDispatcher();
         void Draw();

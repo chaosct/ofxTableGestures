@@ -53,8 +53,7 @@ int Graphic::GetLayer(){
 }
 
 void Graphic::SetLayer(int _layer){
-    layer = _layer;
-    BringTop();
+    GraphicDispatcher::Instance().ChangeLayer(smartcontainer,_layer);
 }
 
 Graphic::~Graphic(){
