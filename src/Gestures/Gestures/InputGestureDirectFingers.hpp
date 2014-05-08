@@ -41,6 +41,7 @@
 class DirectFinger: public DirectPoint
 {
 public:
+    DirectFinger():DirectPoint(){}
     int s_id;
     float xspeed, yspeed, maccel;
 };

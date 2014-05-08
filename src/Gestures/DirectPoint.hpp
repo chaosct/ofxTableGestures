@@ -46,7 +46,7 @@ class DirectPoint{
     /// copy constructor
         DirectPoint(const DirectPoint& point):xpos(point.xpos),ypos(point.ypos){}
     /// virtual destructor
-        ~DirectPoint(){}
+        virtual ~DirectPoint(){}
     /// Getters
         float getX()const{return xpos;}
         float getY()const{return ypos;}
