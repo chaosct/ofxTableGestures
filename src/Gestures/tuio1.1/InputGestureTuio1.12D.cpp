@@ -150,6 +150,10 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
             float h = ofGetHeight()/mins;
             xpos = xpos * w - (w-1)/2;
             ypos = ypos * h - (h-1)/2;
+            if (limitroundareaobj && sqrt((xpos-0.5f)*(xpos-0.5f)+(ypos-0.5f)*(ypos-0.5f)) > 0.5f)
+            {
+                return;
+            }
         }
         else
         {

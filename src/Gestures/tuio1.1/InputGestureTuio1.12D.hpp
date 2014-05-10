@@ -103,9 +103,11 @@ public:
 
     int & squaredInterface;
     int & limitroundarea;
+    int & limitroundareaobj;
     InputGestureTuio112D():
         squaredInterface(ofxGlobalConfig::getRef("GLOBAL:SQUAREDINTERFACE",1)),
-        limitroundarea(ofxGlobalConfig::getRef("GLOBAL:LIMITFINGERSOUTSIDECIRCLE",1))
+        limitroundarea(ofxGlobalConfig::getRef("GLOBAL:LIMITFINGERSOUTSIDECIRCLE",1)),
+        limitroundareaobj(ofxGlobalConfig::getRef("GLOBAL:LIMITOBJECTSOUTSIDECIRCLE",1))
     {
         ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
     }
