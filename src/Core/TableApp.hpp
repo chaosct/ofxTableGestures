@@ -36,6 +36,7 @@
 #include "Grid.hpp"
 #include "Renderer.hpp"
 #include <string>
+#include "OnlySimulator.h"
 
 #ifdef ONLY_SIMULATOR
 #undef NO_SIMULATOR

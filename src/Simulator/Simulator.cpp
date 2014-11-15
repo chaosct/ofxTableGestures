@@ -50,11 +50,15 @@ namespace simulator
             move_selecteds(false),
             ytray(0),
             previous_timef(0),
-            namepath(ofToDataPath(NAMEPATH))
+            namepath(ofToDataPath(NAMEPATH)),
+            loaded(false),
+            load_default(true)
             {
         port = DEFAULT_PORT;
         address = DEFAULT_ADDR;
+        #ifndef ONLY_SIMULATOR
         loaded = LoadConfigFile(ofToDataPath(NAMEPATH));
+        #endif
         objects.clear();
         if(!load_default)
         {
@@ -71,7 +75,11 @@ namespace simulator
         else if(!loaded || load_default)
         {
             std::cout << "Simulator: loading default values" << std::endl;
-            for (int i = 0; i< 50; i++){
+            int objnum = 50;
+            #ifdef ONLY_SIMULATOR
+                objnum = ONLY_SIMULATOR_NOBJECTS;
+            #endif
+            for (int i = 0; i< objnum; i++){
                 object* tmp = new object(0,i,0,0,0,0,0,0,0,0,i);
                 SortObject(tmp);
                 objects.push_back(tmp);
@@ -255,7 +263,11 @@ namespace simulator
                 }
             }
         }
-        else if(button == 2 && previous_y != -1){
+        else if(button == 2 && previous_y != -1)
+        #ifdef ONLY_SIMULATOR
+        if(ONLY_SIMULATOR_ENABLE_ANGLE)
+        #endif
+        {
             int increment = y-previous_y;
             for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
                 if((*it)->mouse_on){
@@ -307,7 +319,11 @@ namespace simulator
                     (*it)->UpdateAngle(-M_PI/30,true);
             }
         }
-        else if(button == 2){
+        else if(button == 2)
+        #ifdef ONLY_SIMULATOR
+        if(ONLY_SIMULATOR_ENABLE_ANGLE)
+        #endif
+        {
             container* tmp = Collide (x,y,true);
             if(tmp != NULL){
                 previous_y = y;
@@ -370,7 +386,11 @@ namespace simulator
                 delete(tmp);
             }
         }
-        else if(button == 2){
+        else if(button == 2)
+        #ifdef ONLY_SIMULATOR
+        if(ONLY_SIMULATOR_ENABLE_ANGLE)
+        #endif
+        {
             for(object_list::iterator it = objects.begin(); it != objects.end(); it++){
                 if((*it)->mouse_on)(*it)->mouse_on=false;
             }
@@ -811,14 +831,14 @@ namespace simulator
 
     float Simulator::Transformx(float to_transform){
         #ifdef ONLY_SIMULATOR
-        return to_transform/(ofGetWidth()*0.91f)*1280;
+        return to_transform/(ofGetWidth()*0.91f)*ONLY_SIMULATOR_WINDOWX;
         #endif
         return to_transform/(ofGetWidth()*0.91f);
     }
 
     float Simulator::Transformy(float to_transform){
         #ifdef ONLY_SIMULATOR
-        return to_transform/(ofGetHeight()*0.91f)*768;
+        return to_transform/(ofGetHeight()*0.91f)*ONLY_SIMULATOR_WINDOWY;
         #endif
         return to_transform/(ofGetHeight()*0.91f);
     }

@@ -36,6 +36,9 @@
 #include "container.hpp"
 #include <vector>
 
+#include "OnlySimulator.h"
+
+
 #include "ofxOscSender.h"
 #include "ofxOscMessage.h"
 #include "ofxOscBundle.h"
