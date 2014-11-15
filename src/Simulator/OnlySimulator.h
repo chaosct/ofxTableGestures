@@ -1,5 +1,7 @@
 #pragma once
 
+//Define ONLY_SIMULATOR to build a simulator-only view, with custom settings
+
 #ifdef ONLY_SIMULATOR
 
 #define ONLY_SIMULATOR_WINDOWX 1280
