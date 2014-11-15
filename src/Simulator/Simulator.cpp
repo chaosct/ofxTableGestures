@@ -810,10 +810,16 @@ namespace simulator
     }
 
     float Simulator::Transformx(float to_transform){
+        #ifdef ONLY_SIMULATOR
+        return to_transform/(ofGetWidth()*0.91f)*1280;
+        #endif
         return to_transform/(ofGetWidth()*0.91f);
     }
 
     float Simulator::Transformy(float to_transform){
+        #ifdef ONLY_SIMULATOR
+        return to_transform/(ofGetHeight()*0.91f)*768;
+        #endif
         return to_transform/(ofGetHeight()*0.91f);
     }
 
