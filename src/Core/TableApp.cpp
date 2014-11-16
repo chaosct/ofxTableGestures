@@ -66,10 +66,8 @@ TableApp::TableApp(std::string name):
     show_grid = false;
 
     ofAddListener(ofEvents().update,this,&TableApp::update);
-    #ifndef ONLY_SIMULATOR
-        ofAddListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
-        ofAddListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
-    #endif //ONLY_SIMULATOR
+    ofAddListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
+    ofAddListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
     ofAddListener(ofEvents().mouseDragged,this,&TableApp::mouseDragged);
     ofAddListener(ofEvents().mousePressed,this,&TableApp::mousePressed);
     ofAddListener(ofEvents().mouseReleased,this,&TableApp::mouseReleased);
@@ -89,10 +87,8 @@ TableApp::~TableApp(){
     delete grid;
 
     ofRemoveListener(ofEvents().update,this,&TableApp::update);
-    #ifndef ONLY_SIMULATOR
-        ofRemoveListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
-        ofRemoveListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
-    #endif //ONLY_SIMULATOR
+    ofRemoveListener(ofEvents().keyPressed,this,&TableApp::keyPressed);
+    ofRemoveListener(ofEvents().keyReleased,this,&TableApp::keyReleased);
     ofRemoveListener(ofEvents().mouseDragged,this,&TableApp::mouseDragged);
     ofRemoveListener(ofEvents().mousePressed,this,&TableApp::mousePressed);
     ofRemoveListener(ofEvents().mouseReleased,this,&TableApp::mouseReleased);
@@ -270,10 +266,11 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             simulator->Select(false);
         break;
         #endif
+        #ifndef ONLY_SIMULATOR
         case 'f':
             ofToggleFullscreen();
-		break;
-		case 'c':
+        break;
+        case 'c':
             if(renderer->IsEnabled()){
                 renderer->SaveDistortion();
             }
@@ -394,6 +391,7 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
         case 'b':
             Figures::CollisionHelper::debug_graphics = !Figures::CollisionHelper::debug_graphics;
         break;
+        #endif //ONLY_SIMULATOR
     }
 }
 
