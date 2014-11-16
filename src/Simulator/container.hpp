@@ -138,13 +138,20 @@ namespace simulator{
                 container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),isHolded(false),isSelected(false){}
             void Draw(){
                 ofPushMatrix();
+                ofColor color; 
+                if(isSelected)color.set(50,150,50);
+                else color.set(100,100,100);
+                #ifndef ONLY_SIMULATOR
+                color.a = 80;
                 ofEnableAlphaBlending();
-                if(isSelected)ofSetColor(50,150,50,80);
-                else ofSetColor(100,100,100,80);
+                #endif
+                ofSetColor(color);
                 ofTranslate(xpos,ypos);
                 //bug when windows is not a screen rectangle
                 ofCircle(0,0,CURSOR_RADIUS*ofGetHeight());
+                #ifndef ONLY_SIMULATOR
                 ofDisableAlphaBlending();
+                #endif
                 ofPopMatrix();
             }
             bool Collide(int x, int y){

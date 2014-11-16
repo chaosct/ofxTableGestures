@@ -36,6 +36,11 @@
 #include "Grid.hpp"
 #include "Renderer.hpp"
 #include <string>
+#include "OnlySimulator.h"
+
+#ifdef ONLY_SIMULATOR
+#undef NO_SIMULATOR
+#endif //ONLY_SIMULATOR
 
 ///By defining the global "NO_SIMULATOR", it disables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
@@ -121,6 +126,8 @@ class TableApp {
 		static float width;
         static float getHeight(){return TableApp::height;}
         static float getWidth(){return TableApp::width;}
+
+        void toggleSimulator();
 
 };
 

@@ -76,6 +76,7 @@ TableApp::TableApp(std::string name):
     Figures::CollisionHelper::ignore_transformation_matrix.SetIdentity();
     
     win_name = name;
+
 }
 
 TableApp::~TableApp(){
@@ -111,6 +112,9 @@ void TableApp::setup(){
     ofSetWindowTitle(win_name + "\t press 'h' to show help content");
     ofBackground(0, 0, 0);
     ofHideCursor();
+    #ifdef ONLY_SIMULATOR
+        toggleSimulator();
+    #endif //ONLY_SIMULATOR
 }
 
 //--------------------------------------------------------------
@@ -262,10 +266,11 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             simulator->Select(false);
         break;
         #endif
+        #ifndef ONLY_SIMULATOR
         case 'f':
             ofToggleFullscreen();
-		break;
-		case 'c':
+        break;
+        case 'c':
             if(renderer->IsEnabled()){
                 renderer->SaveDistortion();
             }
@@ -381,34 +386,40 @@ void TableApp::keyReleased(ofKeyEventArgs & event){
             #endif
         break;
         case 's':
-            #ifndef NO_SIMULATOR
-                if(is_simulating){
-                    ///restore distorsion
-                    ///restore cursor
-                    if(was_distorsion_enabled) renderer->Enable();
-                    else renderer->Disable();
-                    if(was_cursor_hide){
-                        hide_cursor=true;
-                        ofHideCursor();
-                    }
-                    is_simulating=false;
-                    simulator->Reset();
-                }
-                else{
-                    was_distorsion_enabled = renderer->IsEnabled();
-                    was_cursor_hide = hide_cursor;
-                    renderer->Disable();
-                    hide_cursor=false;
-                    ofShowCursor();
-                    is_simulating=true;
-                }
-                matrix_updated = false;
-            #endif
+            toggleSimulator();
         break;
         case 'b':
             Figures::CollisionHelper::debug_graphics = !Figures::CollisionHelper::debug_graphics;
         break;
+        #endif //ONLY_SIMULATOR
     }
+}
+
+void TableApp::toggleSimulator()
+{
+#ifndef NO_SIMULATOR
+    if(is_simulating){
+        ///restore distorsion
+        ///restore cursor
+        if(was_distorsion_enabled) renderer->Enable();
+        else renderer->Disable();
+        if(was_cursor_hide){
+            hide_cursor=true;
+            ofHideCursor();
+        }
+        is_simulating=false;
+        simulator->Reset();
+    }
+    else{
+        was_distorsion_enabled = renderer->IsEnabled();
+        was_cursor_hide = hide_cursor;
+        renderer->Disable();
+        hide_cursor=false;
+        ofShowCursor();
+        is_simulating=true;
+    }
+    matrix_updated = false;
+#endif
 }
 
 void TableApp::Evaluate_Cursor(int key)
