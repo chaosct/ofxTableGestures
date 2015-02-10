@@ -29,202 +29,100 @@
 
 */
 
-#ifndef _CONTAINER
-#define _CONTAINER
+#ifndef _CONTAINER_HPP_
+#define _CONTAINER_HPP_
 
-#include "ofMain.h"
+#include "ofVec2f.h"
 
-#define CURSOR_RADIUS 0.01
-#define OBJECT_RADIUS 0.07
+namespace tableGraphics{
+    class Polygon;
+    class Text;
+    class Line;
+}
 
-#define M_2PI M_PI*2
+#define CURSOR_RADIUS 0.01f
+#define OBJECT_RADIUS 0.08f
 
 namespace simulator{
-    class container{
-        protected:
-            float previous_time;
-            float dt;
+    class Container{
+        friend class Simulator;
 
-        private:
-            int x_old;
-            int y_old;
-
-            int xpos_old, ypos_old;
-            float mspeed_old;
-            float mspeed;
         public:
+            Container(unsigned int _sid,
+                float _xpos, float _ypos,
+                float _xspeed, float _yspeed,
+                float _maccel);
+            virtual ~Container();
+            virtual bool Collide(float x, float y);
+            virtual void Add(float x, float y, bool only = 0);
+            virtual void Update(float x, float y, bool only = 0);
+            virtual void updateGraphic() = 0;
+            virtual void setVisible(bool);
+
+        protected:
             unsigned int sid;
-            int xpos, ypos;
-            float xspeed,yspeed,maccel;
+            ofVec2f position;
+            ofVec2f speed;
+            float maccel;
             bool mouse_on;
-        public:
-            container(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float _maccel):
-                sid(_sid),
-                xpos(_xpos),
-                ypos(_ypos),
-                xspeed(_xspeed),
-                yspeed(_yspeed),
-                maccel(_maccel),
-                mouse_on(false)
-                {
-                    x_old = xpos;
-                    y_old = ypos;
-                    xpos_old = xpos;
-                    ypos_old = ypos;
-                    previous_time = ofGetElapsedTimef();
-                }
-            ~container(){}
-            float GetDistance(const container& cont){
-                return distance(xpos,ypos,cont.xpos,cont.ypos);
-            }
-            float GetDistance(int x, int y){
-                return distance(xpos,ypos,x,y);
-            }
-            virtual void Draw()=0;
-            virtual bool Collide(int x, int y)=0;
-            virtual void Add(int x, int y,bool only = false){
-                x_old = x;
-                y_old = y;
-                previous_time = ofGetElapsedTimef();
-                mspeed_old = 0;
-            }
+            tableGraphics::Polygon* graphic;
 
-            virtual void Update(int x, int y,bool only = false){
-                float actual_time = ofGetElapsedTimef();
-                dt = previous_time - actual_time;
-                previous_time = actual_time;
-                xpos_old = xpos;
-                ypos_old = ypos;
-                xpos += x-x_old;
-                ypos += y-y_old;
-                x_old=x;
-                y_old=y;
-                if(dt == 0 )return;
-                float dx = (float)(xpos - xpos_old)/ofGetScreenWidth();
-                float dy = (float)(ypos - ypos_old)/ofGetScreenHeight();
-                float dist = sqrt(dx*dx + dy*dy);
-
-                mspeed_old = mspeed;
-                mspeed = dist/dt;
-
-                xspeed = dx/dt;
-                yspeed = dy/dt;
-                maccel = ( mspeed - mspeed_old) /dt;
-            }
-
-        protected:
-
-            float distance (int x, int y, int a, int b)
-            {
-                float dx = x-a;
-                float dy = y-b;
-                return sqrtf(dx*dx+dy*dy);
-            }
-
-            float distance (float x, float y, float a, float b)
-            {
-                float dx = x-a;
-                float dy = y-b;
-                return sqrtf(dx*dx+dy*dy);
-            }
-    };
-
-    class cursor:public container{
-        public:
-            bool isHolded;
-            bool isSelected;
-        public:
-            cursor(unsigned int _sid, int _xpos,int _ypos,float _xspeed,float _yspeed,float _maccel):
-                container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),isHolded(false),isSelected(false){}
-            void Draw(){
-                ofPushMatrix();
-                ofColor color; 
-                if(isSelected)color.set(50,150,50);
-                else color.set(100,100,100);
-                #ifndef ONLY_SIMULATOR
-                color.a = 80;
-                ofEnableAlphaBlending();
-                #endif
-                ofSetColor(color);
-                ofTranslate(xpos,ypos);
-                //bug when windows is not a screen rectangle
-                ofCircle(0,0,CURSOR_RADIUS*ofGetHeight());
-                #ifndef ONLY_SIMULATOR
-                ofDisableAlphaBlending();
-                #endif
-                ofPopMatrix();
-            }
-            bool Collide(int x, int y){
-                if(GetDistance(x,y)<= CURSOR_RADIUS*ofGetHeight()) return true;
-                return false;
-            }
-    };
-
-    class object:public container{
         private:
+            ofVec2f previous_coords;
+            float previous_time;
+            float mspeed;
+    };
+
+    class Cursor : public Container{
+        public:
+            Cursor(unsigned int _sid,
+                float _xpos, float _ypos,
+                float _xspeed, float _yspeed,
+                float _maccel);
+            void updateGraphic();
+
+            void hold(bool);
+            bool isHolded();
+            void select(bool);
+            bool isSelected();
+
+        private:
+            bool holded;
+            bool selected;
+    };
+
+    class Object : public Container{
+        friend class Simulator;
+
+        public:
+            Object(unsigned int _sid,unsigned int _fid,
+                float _xpos,float _ypos,float _angle,
+                float _xspeed,float _yspeed,float _rspeed,
+                float _maccel,float _raccel,
+                int _trayNumber = 0,
+                tableGraphics::Polygon* source = NULL);
+            void AddAngle(bool only = false);
+            void UpdateAngle(float _angle, bool only = false);
+            void Add(float x, float y,bool only = false);
+            void Update(float x, float y,bool only = false);
+            void updateGraphic();
+            void setVisible(bool);
+
+        private:
+            tableGraphics::Text* idNumber;
+            tableGraphics::Line* angleLine;
+            unsigned int fid;
+            float angle;
+            float rspeed;
+            float raccel;
+            int tray_number;
+            bool isUp;
+
             float angle_old;
             float previous_angle_time;
             float rspeed_old;
-        public:
-            float angle;
-            unsigned int fid;
-            float rspeed,raccel;
-            int tray_number;
-            bool isUp;
-        public:
-            object(unsigned int _sid,unsigned int _fid, int _xpos,int _ypos,float _angle,float _xspeed,float _yspeed,float _rspeed,float _maccel,float _raccel,int _trayNumber=0):
-                container(_sid,_xpos,_ypos,_xspeed,_yspeed,_maccel),
-                angle(_angle),
-                fid(_fid),
-                rspeed(_rspeed),
-                raccel(_raccel),
-                tray_number(_trayNumber),
-                isUp(false){}
-            void Draw();
-            bool Collide(int x, int y){
-                if(GetDistance(x,y)<= OBJECT_RADIUS*ofGetHeight()/2) return true;
-                return false;
-            }
-
-            virtual void AddAngle(bool only = false){
-                angle_old = angle;
-                previous_angle_time = ofGetElapsedTimef();
-                rspeed_old = 0;
-                if(!only)
-                    this->Add(0,0,true);
-            }
-
-            virtual void UpdateAngle(float _angle, bool only = false){
-                float new_angle = ofGetElapsedTimef();
-                float dta = previous_angle_time - new_angle;
-                if(dta == 0) return;
-                angle_old = angle;
-                angle += _angle;
-                if(angle >= M_2PI)angle = angle-M_2PI;
-                if(angle < 0)angle = angle+M_2PI;
-
-                float da = angle-angle_old;
-                if (da>(M_PI*1.5f)) da-=M_2PI;
-                else if (da<(M_PI*-1.5f)) da+=M_2PI;
-
-                da = da/M_2PI;
-                rspeed_old = rspeed;
-                rspeed = da /dta;
-                raccel = (rspeed - rspeed_old)/dta;
-                if(!only)
-                    this->Update(0,0,true);
-            }
-
-            virtual void Add(int x, int y,bool only = false){
-                container::Add(x,y,only);
-                if(!only)AddAngle(true);
-            }
-
-            virtual void Update(int x, int y,bool only = false){
-                container::Update(x,y,only);
-                if(!only)UpdateAngle(0,true);
-            }
     };
 }
 
-#endif
+#endif // _CONTAINER_HPP_
+

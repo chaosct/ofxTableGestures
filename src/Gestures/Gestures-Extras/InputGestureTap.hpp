@@ -34,61 +34,23 @@
 
 #include "InputGestureDirectFingers.hpp"
 
+class InputGestureTap : public EventClient{
+    public:
+        struct TapArgs : public EventArgs{
+            float x;
+            float y;
+        };
+        static ofEvent<TapArgs> Tap;
 
+        InputGestureTap();
+        virtual void newCursor(InputGestureDirectFingers::newCursorArgs & a);
+        virtual void removeCursor(InputGestureDirectFingers::removeCursorArgs & a);
 
-class InputGestureTap : public EventClient, public Singleton<InputGestureTap>
-{
-
-    float & maxdistance;
-    float & maxtime;
-    std::map< DirectFinger *,  std::pair < DirectPoint , float > > previous;
-
-public:
-
-    struct TapArgs: public EventArgs
-    {
-        float x;
-        float y;
-    };
-    ofEvent<TapArgs> Tap;
-
-    InputGestureTap():
-        maxdistance(ofxGlobalConfig::getRef("GESTURES:TAP:MAXDISTANCE",0.002f)),
-        maxtime(ofxGlobalConfig::getRef("GESTURES:TAP:MAXTIME",0.2f))
-        {
-            registerEvent(InputGestureDirectFingers::Instance().newCursor,&InputGestureTap::newCursor);
-            registerEvent(InputGestureDirectFingers::Instance().removeCursor,&InputGestureTap::removeCursor);
-        }
-
-    virtual void newCursor(InputGestureDirectFingers::newCursorArgs & a)
-    {
-        DirectFinger * f = a.finger;
-        float now = ofGetElapsedTimef();
-        previous[f]= make_pair(DirectPoint(f->getX(),f->getY()),now);
-    }
-    virtual void removeCursor(InputGestureDirectFingers::removeCursorArgs & a)
-    {
-        DirectFinger * f = a.finger;
-        if(previous.find(f) != previous.end())
-        {
-            float now = ofGetElapsedTimef();
-            if (previous[f].second > (now - maxtime) &&
-                    previous[f].first.getDistance(f) <= maxdistance)
-            {
-                TapArgs eventargs;
-                eventargs.x = f->getX();
-                eventargs.y = f->getY();
-                eventargs.target = a.target;
-                ofNotifyEvent(Tap,eventargs);
-            }
-            previous.erase(f);
-        }
-    }
+    private:
+        float & maxdistance;
+        float & maxtime;
+        std::map< DirectFinger *, std::pair < ofVec2f , float > > previous;
 };
-
-
-///Deprecated
-typedef InputGestureTap InputGestueTap;
 
 //template<class Base>
 //class CanTap: public Base
@@ -110,7 +72,5 @@ typedef InputGestureTap InputGestueTap;
 //        ofRemoveListener(InputGestureTap::Instance().Tap,this,&CanTap::ETap);
 //    }
 //};
-
-
 
 #endif // INPUTGESTURETAP_HPP_INCLUDED

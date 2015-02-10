@@ -4,7 +4,7 @@
 class Graphic;
 
 struct EventArgs {
-    Graphic * target;
+    const Graphic * target;
     EventArgs():target(NULL){}
 };
 

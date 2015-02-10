@@ -33,13 +33,13 @@
 #define ALARM_HPP_INCLUDED
 
 #include "Singleton.hpp"
-#include "Graphic.hpp"
 #include "Poco/Delegate.h"
 
+// Warning! update() method was called automatically, now it isn't anymore
 class Alarm
 {
 private:
-    class Alarm_detail: Graphic, public Singleton<Alarm_detail>
+    class Alarm_detail : public Singleton<Alarm_detail>
     {
         ///Schedule container
         struct schedule
@@ -102,6 +102,7 @@ private:
             schedules.erase(schedules.begin(),newbegin);
             std::for_each(cschedules.begin(),cschedules.end(),callDelegate(now));
         }
+
         template<class ListenerClass>
         void Setup(float time, ListenerClass * target, void (ListenerClass::*listenerMethod)(float&) )
         {

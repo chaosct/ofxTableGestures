@@ -32,64 +32,33 @@
 #ifndef TAPFEEDBACK_HPP_INCLUDED
 #define TAPFEEDBACK_HPP_INCLUDED
 
+#include <queue>
+#include "autoGraphic.hpp"
 #include "InputGestureTap.hpp"
-#include "Graphic.hpp"
 
-class TapFeedback : public Graphic 
-{
-    float & lifetime;
-    float & maxradius;
+class TapFeedback : public EventClient{
     public:
-    class CircleTap : public Graphic
-    {
-        float born;
-        float lifetime;
-        float maxradius;
-        DirectPoint p;
-        public:
-        CircleTap(const DirectPoint & dp, float r, float lt):
-        born(ofGetElapsedTimef()),
-        lifetime(lt),
-        maxradius(r),
-        p(dp){}
-        void update()
-        {
-            float now = ofGetElapsedTimef();
-            if(now - born > lifetime)
-                delete this;
-        }
-        void draw()
-        {
-            static int & R = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
-            static int & G = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
-            static int & B = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
+        TapFeedback();
+        void Tap(InputGestureTap::TapArgs&);
 
-            float now = ofGetElapsedTimef();
-            float alpha = ((now - born) / lifetime);
-            float radius = alpha * maxradius ;
-            int alpha255 = (int)((1.0f-alpha)*255);
-            ofPushStyle();
-            ofNoFill();
-            ofSetLineWidth(4);
-            ofSetColor(R,G,B,alpha255);
-            ofEnableAlphaBlending();
-            ofCircle(p.getX(),p.getY(),radius);
-            ofDisableAlphaBlending();
-            ofPopStyle();
-        }
-    };
+        class CircleTap : public FeedbackGraphic{
+            public:
+                CircleTap(const ofVec2f& position, float maxradius, float lifeTime);
+                float getBornTime();
+                void draw();
+                void clear(){}
 
-    TapFeedback():
-    lifetime(ofxGlobalConfig::getRef("FEEDBACK:TAP:DURATION",1.0f)),
-    maxradius(ofxGlobalConfig::getRef("FEEDBACK:TAP:MAXRADIUS",0.1f))
-    {
-        registerEvent(InputGestureTap::I().Tap, &TapFeedback::Tap);
-    }
+            private:
+                float born;
+                float lifetime;
+                float maxradius;
+                ofVec2f p;
+        };
 
-    void Tap(InputGestureTap::TapArgs & args)
-    {
-        new CircleTap(DirectPoint(args.x,args.y),maxradius,lifetime);
-    }
+    private:
+        float& lifetime;
+        float& maxradius;
+        std::queue<CircleTap*> taps;
 };
 
 #endif // TAPFEEDBACK_HPP_INCLUDED

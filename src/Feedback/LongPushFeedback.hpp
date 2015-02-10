@@ -45,15 +45,15 @@ class LongPushFeedback : public CanLongPush < Graphic >
         float born;
         float lifetime;
         float maxradius;
-        DirectPoint p;
+        ofVec2f p;
 
         public:
 
-        CircleTap(const DirectPoint & dp, float r, float lt):
-        born(ofGetElapsedTimef()),
-        lifetime(lt),
-        maxradius(r),
-        p(dp){}
+        CircleTap(const ofVec2f& dp, float r, float lt):
+            born(ofGetElapsedTimef()),
+            lifetime(lt),
+            maxradius(r),
+            p(dp) {}
 
         void update()
         {
@@ -72,7 +72,7 @@ class LongPushFeedback : public CanLongPush < Graphic >
             ofSetLineWidth(4);
             ofSetColor(255,0,0,alpha255);
             ofEnableAlphaBlending();
-            ofCircle(p.getX(),p.getY(),radius);
+            ofCircle(p.x,p.y,radius);
             ofDisableAlphaBlending();
             ofPopStyle();
         }
@@ -87,7 +87,7 @@ class LongPushFeedback : public CanLongPush < Graphic >
 
     void LongPushTriger(float x, float y)
     {
-        new CircleTap(DirectPoint(x,y),maxradius,lifetime);
+        new CircleTap(ofVec2f(x,y),maxradius,lifetime);
     }
 };
 

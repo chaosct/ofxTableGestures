@@ -29,56 +29,50 @@
 
 */
 
-#ifndef _GRAPHIC
-#define _GRAPHIC
+#ifndef _GRAPHIC_HPP_
+#define _GRAPHIC_HPP_
 
-
-#define BGR_LAYER 200
-#define APP_LAYER 100
-#define NOT_LAYER 0
-
-
-
-#include "ofMain.h"
-
+#include "ofGraphics.h"
 #include "EventClient.hpp"
-
-class GraphicSmartContainer;
+#include "ofShader.h"
 
 class Graphic : public EventClient{
     public:
         Graphic();
-        Graphic(int _layer);
-        Graphic(const Graphic & original);
-        virtual ~Graphic();
-        int GetLayer();
-        void SetLayer(int _layer);
-		void BringTop();
-		void SafeDelete();
-		virtual bool Collide(ofPoint const & point);
-		virtual void Position(float & x, float & y); ///DEPRECATED!
+        virtual ~Graphic() {}
+        virtual void draw() = 0;
+        virtual bool collide(const ofPoint&) { return false; }
+        virtual void clear() = 0;
+
+        void drawGraphic();
+        bool collideGraphic(ofPoint const & point);
+
+        void setColor(const ofColor& iColor);
+        ofColor& getColor();
+
+        void setPosition(const ofVec2f&, float angle = 0); // Angle is in degrees
+        void setMatrix(ofMatrix4x4&);
+        const ofMatrix4x4& getMatrix();
+        void ignoreMatrixStack(bool);
+        bool ignoresMatrixStack();
+
+        // Passing an empty string as filePath unloads shaders
+        bool loadShader(const string& filePath,
+                        const string& defaultVertex = std::string(),
+                        const string& defaultFragment = std::string());
+
+        void setCollide(bool);
+        void setVisible(bool);
+
     protected:
-        int layer;
-        friend class GraphicDispatcher;
-        friend class GraphicSmartContainer;
-        friend class CompareLayers;
-        virtual void draw(){}
-        virtual void update(){}
-        virtual void resize(int w, int h){}
+        bool visible;
+        bool canCollide;
+        ofShader shader;
+ 
     private:
-        bool deleted;
-        GraphicSmartContainer * smartcontainer;
+        ofColor color;
+        ofMatrix4x4 transformMatrix;
+        bool bypassMatrix;
 };
 
-template<int Layer>
-class TGraphic: public Graphic
-{
-    public:
-    TGraphic():Graphic(Layer){}
-};
-
-typedef TGraphic<NOT_LAYER> NotificationGraphic;
-typedef TGraphic<BGR_LAYER> BackgroundGraphic;
-
-
-#endif //_GRAPHIC
+#endif //_GRAPHIC_HPP_

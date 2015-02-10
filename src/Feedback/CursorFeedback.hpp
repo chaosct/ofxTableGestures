@@ -33,133 +33,64 @@
 #ifndef CURSORFEEDBACK_H_INCLUDED
 #define CURSORFEEDBACK_H_INCLUDED
 
-#include "ofMain.h"
 #include "InputGestureBasicFingers.hpp"
-#include "Graphic.hpp"
-#include "DirectPoint.hpp"
-#include <map>
+#include "autoGraphic.hpp"
+#include "ofMesh.h"
+#include "ofFbo.h"
 
-
-class HistoryPoint : private DirectPoint{
-    private:
-
-        float & MAX_SECONDS;
-        int MAX_POINTS;
-        GLfloat * xycoordinates;
-        GLubyte * colorcoordinates;
-        float * times;
-
-        int begin;
-        int npoints;
-
+class HistoryPoint {
     public:
-        int sid;
-        HistoryPoint(int sid, float x, float y):
-        MAX_SECONDS(ofxGlobalConfig::getRef("FEEDBACK:CURSOR:MAX_TAIL_SECONDS",0.5f)),
-        MAX_POINTS(ofxGlobalConfig::getRef("FEEDBACK:CURSOR:MAX_TAIL_POINTS",100)),
-        begin(0),
-        npoints(0)
-        {
-            xycoordinates = new GLfloat[(MAX_POINTS+1)*2];
-            colorcoordinates = new GLubyte[(MAX_POINTS+1)*4];
-            times = new float[MAX_POINTS];
-            SetPoint(x,y);
-        }
-        ~HistoryPoint()
-        {
-            delete [] xycoordinates;
-            delete [] colorcoordinates;
-            delete [] times;
-        }
-        void SetPoint(float x, float y){
-            xpos = x;
-            ypos = y;
+        HistoryPoint(float _x, float _y) : currentPos(_x,_y), lastPos(currentPos) {}
 
-            if(npoints == MAX_POINTS)
-            {
-                begin= (begin+1)%MAX_POINTS;
-                npoints--;
+        void SetPoint(float x, float y) {
+            currentPos = ofPoint(x, y);
+        }
+
+        void Draw() {
+            ofVec2f direction = currentPos - lastPos;
+
+            // Draw trace
+            if (direction != ofVec2f(0, 0)) {
+                direction = direction.perpendicular();
+                ofMesh mesh;
+                mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+                mesh.addVertex(lastPos + (pointWidth * direction));
+                mesh.addVertex(lastPos + (-pointWidth * direction));
+                mesh.addVertex(currentPos + (-pointWidth * direction));
+                mesh.addVertex(currentPos + (pointWidth * direction));
+                mesh.addTriangle(0, 1, 2);
+                mesh.addTriangle(2, 3, 0);
+                mesh.draw();
             }
-            int pos = (begin + npoints) % MAX_POINTS;
-            xycoordinates[pos*2] = x;
-            xycoordinates[pos*2+1] = y;
-            times[pos] = ofGetElapsedTimef();
-            npoints++;
-
+            // Draw cursor
+            ofCircle(currentPos.x, currentPos.y, pointWidth);
+            lastPos = currentPos;
         }
-        void Update(float time){
 
-            while((npoints > 0 ) && (time-times[begin] > MAX_SECONDS) )
-            {
-                begin= (begin+1)%MAX_POINTS;
-                npoints--;
-            }
-        }
-        void Draw(){
-            static int & R = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:R",255);
-            static int & G = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:G",0);
-            static int & B = ofxGlobalConfig::getRef("FEEDBACK:CURSOR:COLOR:B",0);
-            ///Draws cursor
-            ofSetColor(R,G,B);
-            ofCircle(xpos,ypos,0.007);
-            ///Draws trace
-            ofSetLineWidth(3);
-            float actual_time = ofGetElapsedTimef();
-
-            unsigned int j = 0;
-            for(int i = 0; i < MAX_POINTS; ++i)
-            {
-                colorcoordinates[j++] = R;
-                colorcoordinates[j++] = G;
-                colorcoordinates[j++] = B;
-                colorcoordinates[j++] = (GLubyte) max(0.0f,255-255*(actual_time-times[i])/MAX_SECONDS);
-            }
-
-            colorcoordinates[j++] = colorcoordinates[0];
-            colorcoordinates[j++] = colorcoordinates[1];
-            colorcoordinates[j++] = colorcoordinates[2];
-            colorcoordinates[j++] = colorcoordinates[3];
-
-            xycoordinates[MAX_POINTS*2] = xycoordinates[0];
-            xycoordinates[MAX_POINTS*2+1] = xycoordinates[1];
-
-            ofEnableAlphaBlending();
-            glDisable(GL_DEPTH_TEST);
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glEnableClientState(GL_COLOR_ARRAY);
-			glVertexPointer(2, GL_FLOAT, 0, xycoordinates);
-			glColorPointer(4,GL_UNSIGNED_BYTE,0,colorcoordinates);
-			glDrawArrays(GL_LINE_STRIP, begin, min(npoints,MAX_POINTS-begin+1));
-			if(begin+npoints > MAX_POINTS)
-			{
-			    glDrawArrays(GL_LINE_STRIP, 0, (begin+npoints)%MAX_POINTS);
-			}
-
-			glDisableClientState(GL_COLOR_ARRAY);
-			glDisableClientState(GL_VERTEX_ARRAY);
-            glEnable(GL_DEPTH_TEST);
-            ofDisableAlphaBlending();
-
-
-        }
+    private:
+        const static unsigned char pointWidth;
+        ofPoint currentPos;
+        ofPoint lastPos;
 };
 
-class CursorFeedback: public  NotificationGraphic {
-
-    private:
-        std::map<int,HistoryPoint*> finger_map;
-
+class CursorFeedback : public FeedbackGraphic {
     public:
         CursorFeedback();
-        //CursorFeedback(Area * a);
-        ~CursorFeedback();
+        virtual ~CursorFeedback() {}
         virtual void addTuioCursor(InputGestureBasicFingers::addTuioCursorArgs & a);
         virtual void updateTuioCursor(InputGestureBasicFingers::updateTuioCursorArgs & a);
         virtual void removeTuioCursor(InputGestureBasicFingers::removeTuioCursorArgs & a);
-    protected:
-        void update();
-        void draw();
 
+    protected:
+        virtual void draw();
+        virtual void clear();
+
+    private:
+        std::map<int,HistoryPoint*> finger_map;
+        const static unsigned short fboSize;
+        ofFbo frame;
+        ofFbo frameLast;
+        ofPlanePrimitive drawPlane;
 };
 
 

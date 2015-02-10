@@ -32,22 +32,39 @@
 #ifndef _GRID
 #define _GRID
 
-class Grid{
+#include "Graphic.hpp"
+#include "ofMesh.h"
+#include "ofPath.h"
+
+class Grid : public Graphic{
+    public:
+        Grid(int _w_lines = 6, int _h_lines = 6);
+        void draw();
+        void clear();
+        void setMode(int calibration_mode);
+
     private:
-        /// opengl list index
-        int grid_list;
+        int mode;
         int w_lines;
         int h_lines;
-    public:
-        Grid(int _w_lines, int _h_lines);
-        ~Grid();
-        void Draw(bool calibration_enabled, int calibration_mode);
-        void Resize();
-    private:
-        void GenerateOpenGL_lists();
-        void RenderArrow_one(int size);
-        void RenderArrow_two(int size);
-        void DrawArrow_three(int size);
+
+        ofMesh scaleArrow;
+        ofPath grid;
+        ofPath rotateArrow;
+
+        static const float lineWidth;
+        static const float center;
+        static const float baseSize;
+        static const ofColor arrowsColor;
+        static const ofVec2f scaleArrowVerts[9];
+
+        void generateGrid();
+        void arrows_translate();
+        void arrows_rotate();
+        void arrows_scale();
+        void arrows_tilt();
+        void drawRotateArrow();
 };
 
 #endif
+

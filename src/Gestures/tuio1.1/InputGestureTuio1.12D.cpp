@@ -32,10 +32,18 @@
 #include "InputGestureTuio1.12D.hpp"
 
 #include <string>
-#include "TableApp.hpp"
 
+ofEvent<InputGestureTuio112D::addTuioCursor2DArgs> InputGestureTuio112D::addTuioCursor2D;
+ofEvent<InputGestureTuio112D::updateTuioCursor2DArgs> InputGestureTuio112D::updateTuioCursor2D;
+ofEvent<InputGestureTuio112D::removeTuioCursor2DArgs> InputGestureTuio112D::removeTuioCursor2D;
+ofEvent<InputGestureTuio112D::addTuioObject2DArgs> InputGestureTuio112D::addTuioObject2D;
+ofEvent<InputGestureTuio112D::updateTuioObject2DArgs> InputGestureTuio112D::updateTuioObject2D;
+ofEvent<InputGestureTuio112D::removeTuioObject2DArgs> InputGestureTuio112D::removeTuioObject2D;
+ofEvent<InputGestureTuio112D::addTuioBlob2DArgs> InputGestureTuio112D::addTuioBlob2D;
+ofEvent<InputGestureTuio112D::updateTuioBlob2DArgs> InputGestureTuio112D::updateTuioBlob2D;
+ofEvent<InputGestureTuio112D::removeTuioBlob2DArgs> InputGestureTuio112D::removeTuioBlob2D;
 
-void InputGestureTuio112D::ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args)
+void InputGestureTuio112D::ReceiveCall(OscInput::EventNewOscMessageArgs & args)
 {
     std::string addr = args.m.getAddress();
     OscOptionalUnpacker uargs(args.m);
@@ -53,61 +61,44 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
     std::string cmd;
     args >> cmd;
 
-    if(cmd=="set")
+    if(cmd == "set")
     {
         int s_id;
         float xpos=0, ypos=0, xspeed=0, yspeed=0, maccel=0;
 
         args >> s_id >> xpos >> ypos >> xspeed >> yspeed >> maccel ;
 
-        ///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
-        if(squaredInterface)
-        {
-            float mins = min(ofGetWidth(),ofGetHeight());
-            float w = ofGetWidth()/mins;
-            float h = ofGetHeight()/mins;
-            xpos = xpos * w - (w-1)/2;
-            ypos = ypos * h - (h-1)/2;
-            if (limitroundarea && sqrt((xpos-0.5f)*(xpos-0.5f)+(ypos-0.5f)*(ypos-0.5f)) > 0.5f)
-            {
-                return;
-            }
-        }
-        else
-        {
-            ypos = ypos * TableApp::getHeight();
-            xpos = xpos * TableApp::getWidth();
-        }
-        
-        if(c_s_ids.find(s_id) == c_s_ids.end())
-        {
-            addTuioCursor2DArgs eventargs;
-            eventargs.id = s_id;
-            eventargs. xpos =  xpos;
-            eventargs.ypos = ypos;
-            eventargs.xspeed = xspeed;
-            eventargs.yspeed = yspeed;
-            eventargs.maccel  = maccel ;
-            ofNotifyEvent(addTuioCursor2D,eventargs);
+	///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
+	if(squaredInterface){
+	    if (limitroundarea && sqrt((xpos-0.5f)*(xpos-0.5f) + (ypos-0.5f)*(ypos-0.5f)) > 0.5f){
+		return;
+	    }
+	}else{
+	    float mins = min(ofGetWidth(), ofGetHeight());
+	    float w = ofGetWidth() / mins;
+	    float h = ofGetHeight() / mins;
+	    xpos = xpos * w;
+	    ypos = ypos * h;
+	}
 
+        commonCursor2DArgs eventargs;
+        eventargs.id = s_id;
+        eventargs.xpos = xpos;
+        eventargs.ypos = ypos;
+        eventargs.xspeed = xspeed;
+        eventargs.yspeed = yspeed;
+        eventargs.maccel = maccel;
+        if (c_s_ids.find(s_id) == c_s_ids.end())
+        {
             c_s_ids.insert(s_id);
+            ofNotifyEvent(addTuioCursor2D, eventargs);
         }
         else
         {
-
-            updateTuioCursor2DArgs eventargs;
-            eventargs.id = s_id;
-            eventargs. xpos =  xpos;
-            eventargs.ypos = ypos;
-            eventargs.xspeed = xspeed;
-            eventargs.yspeed = yspeed;
-            eventargs.maccel  = maccel ;
-            ofNotifyEvent(updateTuioCursor2D,eventargs);
-
+            ofNotifyEvent(updateTuioCursor2D, eventargs);
         }
-
     }
-    else if( cmd== "alive"  )
+    else if(cmd == "alive")
     {
         int s_id=0;
         std::set<int> t(c_s_ids);
@@ -124,10 +115,8 @@ void InputGestureTuio112D::tuio2Dcur(OscOptionalUnpacker & args)
             removeTuioCursor2DArgs eventargs;
             eventargs.id = s_id;
             ofNotifyEvent(removeTuioCursor2D,eventargs);
-
         }
     }
-
 }
 
 void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
@@ -142,62 +131,42 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
 
         args >> s_id >> f_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel ;
 
-        ///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
-        if(squaredInterface)
-        {
-            float mins = min(ofGetWidth(),ofGetHeight());
-            float w = ofGetWidth()/mins;
-            float h = ofGetHeight()/mins;
-            xpos = xpos * w - (w-1)/2;
-            ypos = ypos * h - (h-1)/2;
-            if (limitroundareaobj && sqrt((xpos-0.5f)*(xpos-0.5f)+(ypos-0.5f)*(ypos-0.5f)) > 0.5f)
-            {
-                return;
-            }
-        }
-        else
-        {
-            ypos = ypos * TableApp::getHeight();
-            xpos = xpos * TableApp::getWidth();
-        }
+	///We definetively need a different way to specify this (a parameter for tuio aspect ratio?)
+	if(squaredInterface){
+	    if (limitroundareaobj && sqrt((xpos-0.5f)*(xpos-0.5f) + (ypos-0.5f)*(ypos-0.5f)) > 0.5f){
+		return;
+	    }
+	}else{
+	    float mins = min(ofGetWidth(), ofGetHeight());
+	    float w = ofGetWidth() / mins;
+	    float h = ofGetHeight() / mins;
+	    xpos = xpos * w;
+	    ypos = ypos * h;
+	}
+
+        commonObject2DArgs eventargs;
+        eventargs.id = s_id;
+        eventargs.f_id = f_id;
+        eventargs.xpos = xpos;
+        eventargs.ypos = ypos;
+        eventargs.angle = angle;
+        eventargs.xspeed = xspeed;
+        eventargs.yspeed = yspeed;
+        eventargs.rspeed = rspeed;
+        eventargs.maccel = maccel;
+        eventargs.raccel = raccel;
         if(o_s_ids.find(s_id) == o_s_ids.end())
         {
             o_s_ids.insert(s_id);
-            addTuioObject2DArgs eventargs;
-            eventargs.id =  s_id;
-            eventargs. f_id  =  f_id ;
-            eventargs.xpos = xpos;
-            eventargs. ypos =  ypos;
-            eventargs. angle =  angle;
-            eventargs. xspeed =  xspeed;
-            eventargs.yspeed = yspeed;
-            eventargs. rspeed =  rspeed;
-            eventargs. maccel =  maccel;
-            eventargs.  raccel =   raccel;
-            ofNotifyEvent(addTuioObject2D,eventargs);
-
+            ofNotifyEvent(addTuioObject2D, eventargs);
         }
         else
         {
-            updateTuioObject2DArgs eventargs;
-            eventargs. id =  s_id;
-            eventargs. f_id  =  f_id ;
-            eventargs.xpos = xpos;
-            eventargs. ypos =  ypos;
-            eventargs. angle =  angle;
-            eventargs. xspeed =  xspeed;
-            eventargs.yspeed = yspeed;
-            eventargs. rspeed =  rspeed;
-            eventargs. maccel =  maccel;
-            eventargs.  raccel =   raccel;
-            ofNotifyEvent(updateTuioObject2D,eventargs);
-
+            ofNotifyEvent(updateTuioObject2D, eventargs);
         }
-
     }
-    else if( cmd == "alive"  )
+    else if(cmd == "alive")
     {
-
         int s_id=0;
         std::set<int> t(o_s_ids);
         while(!args.Eos())
@@ -212,10 +181,8 @@ void InputGestureTuio112D::tuio2Dobj(OscOptionalUnpacker & args)
             removeTuioObject2DArgs eventargs;
             eventargs.id = s_id;
             ofNotifyEvent(removeTuioObject2D,eventargs);
-
         }
     }
-
 }
 
 void InputGestureTuio112D::tuio2Dblb(OscOptionalUnpacker & args)
@@ -288,5 +255,4 @@ void InputGestureTuio112D::tuio2Dblb(OscOptionalUnpacker & args)
 
         }
     }
-
 }

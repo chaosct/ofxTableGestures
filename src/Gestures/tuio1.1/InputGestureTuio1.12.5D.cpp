@@ -32,9 +32,17 @@
 #include "InputGestureTuio1.12.5D.hpp"
 #include <string>
 
+ofEvent<InputGestureTuio1125D::addTuioCursor25DArgs> InputGestureTuio1125D::addTuioCursor25D;
+ofEvent<InputGestureTuio1125D::updateTuioCursor25DArgs> InputGestureTuio1125D::updateTuioCursor25D;
+ofEvent<InputGestureTuio1125D::removeTuioCursor25DArgs> InputGestureTuio1125D::removeTuioCursor25D;
+ofEvent<InputGestureTuio1125D::addTuioObject25DArgs> InputGestureTuio1125D::addTuioObject25D;
+ofEvent<InputGestureTuio1125D::updateTuioObject25DArgs> InputGestureTuio1125D::updateTuioObject25D;
+ofEvent<InputGestureTuio1125D::removeTuioObject25DArgs> InputGestureTuio1125D::removeTuioObject25D;
+ofEvent<InputGestureTuio1125D::addTuioBlob25DArgs> InputGestureTuio1125D::addTuioBlob25D;
+ofEvent<InputGestureTuio1125D::updateTuioBlob25DArgs> InputGestureTuio1125D::updateTuioBlob25D;
+ofEvent<InputGestureTuio1125D::removeTuioBlob25DArgs> InputGestureTuio1125D::removeTuioBlob25D;
 
-
-void InputGestureTuio1125D::ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args)
+void InputGestureTuio1125D::ReceiveCall(OscInput::EventNewOscMessageArgs & args)
 {
     std::string addr = args.m.getAddress();
     OscOptionalUnpacker uargs(args.m);

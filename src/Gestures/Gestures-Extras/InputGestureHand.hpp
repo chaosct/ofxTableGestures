@@ -33,8 +33,8 @@
 
 #include "InputGestureBasicFingers.hpp"
 #include "InputGestureDirectFingers.hpp"
-#include "DirectPoint.hpp"
 #include <algorithm>
+#include "Graphic.hpp"
 
 
 
@@ -43,7 +43,7 @@ class InputGestureHands;
 class Hand : public DirectFinger
 {
 private:
-    DirectPoint  getCenter();
+    ofVec2f getCenter();
     bool isValid();
     float getRadius();
 protected:
@@ -52,15 +52,15 @@ protected:
     void UpdateExposedInfo()
     {
         center = getCenter();
-        DirectPoint nc = center + offset;
-        set(nc.getX(),nc.getY());
+        ofVec2f nc = center + offset;
+        set(nc.x,nc.y);
         is_valid = isValid();
         radius = getRadius();
         population = fingers.size();
     }
     void UpdateOffset()
     {
-        DirectPoint pc(getX(),getY());
+        ofVec2f pc(x,y);
         UpdateExposedInfo();
         offset = pc - center;
     }
@@ -77,8 +77,8 @@ public:
     bool is_valid;
     float radius;
     unsigned int population;
-    DirectPoint center;
-    DirectPoint offset;
+    ofVec2f center;
+    ofVec2f offset;
 };
 
 
@@ -89,7 +89,7 @@ class InputGestureHands : public EventClient
     
     std::map<int,Hand*> assignations;
     std::list<Hand *> hands;
-    Hand * getNeighbour(DirectPoint * p, Hand * ignore = NULL);
+    Hand * getNeighbour(ofVec2f * p, Hand * ignore = NULL);
     float & HAND_MAX_RADIUS;
 public:
 
@@ -105,18 +105,18 @@ public:
     ofEvent<removeHandArgs> removeHand;
     ofEvent<updateHandArgs> updateHand;
 
-    void newCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
-    void removeCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
-    void updateCursor(InputGestureDirectFingers::commonDirectFingerArgs & a);
+    void newCursor(InputGestureDirectFingers::newCursorArgs & a);
+    void removeCursor(InputGestureDirectFingers::removeCursorArgs & a);
+    void updateCursor(InputGestureDirectFingers::updateCursorArgs & a);
 
     InputGestureHands(Graphic * target):
             HAND_MAX_RADIUS(ofxGlobalConfig::getRef("GESTURES:HANDS:MAX_RADIUS",0.1f))
     {
-        target->registerMyEvent(InputGestureDirectFingers::I().newCursor, &InputGestureHands::newCursor, this);
-        target->registerMyEvent(InputGestureDirectFingers::I().enterCursor, &InputGestureHands::newCursor, this);
-        target->registerMyEvent(InputGestureDirectFingers::I().removeCursor, &InputGestureHands::removeCursor, this);
-        target->registerMyEvent(InputGestureDirectFingers::I().exitCursor, &InputGestureHands::removeCursor, this);
-        target->registerMyEvent(InputGestureDirectFingers::I().updateCursor, &InputGestureHands::updateCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::newCursor, &InputGestureHands::newCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::enterCursor, &InputGestureHands::newCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::removeCursor, &InputGestureHands::removeCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::exitCursor, &InputGestureHands::removeCursor, this);
+        target->registerMyEvent(InputGestureDirectFingers::updateCursor, &InputGestureHands::updateCursor, this);
     }
 
 };

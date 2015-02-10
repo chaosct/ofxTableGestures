@@ -30,239 +30,201 @@
 */
 
 #include "Grid.hpp"
-#include "ofMain.h"
 
-Grid::Grid(int _w_lines, int _h_lines)
+// Grid related constants
+const float Grid::lineWidth = 0.004f;
+const float Grid::center = 0.5f;
+//const float Grid::center = lineWidth * 0.5f + 0.5f;
+
+// Arrow related constants
+const float Grid::baseSize = 0.1f;
+const ofColor Grid::arrowsColor(255, 0, 0, 230);
+
+const ofVec2f Grid::scaleArrowVerts[9] = { \
+                    ofVec2f(-baseSize, -baseSize/8), \
+                    ofVec2f(-baseSize, baseSize/8),  \
+                    ofVec2f(0, baseSize/4),    \
+                    ofVec2f(-baseSize, -baseSize/8), \
+                    ofVec2f(0, baseSize/4),    \
+                    ofVec2f(0, -baseSize/4),    \
+                    ofVec2f(0, -baseSize/2),   \
+                    ofVec2f(0, baseSize/2),    \
+                    ofVec2f(baseSize, 0)       \
+};
+
+Grid::Grid(int _w_lines, int _h_lines) :
+    mode(0),
+    w_lines(_w_lines),
+    h_lines(_h_lines),
+    scaleArrow(OF_PRIMITIVE_TRIANGLES, \
+        std::vector<ofVec3f>(scaleArrowVerts, scaleArrowVerts + \
+            sizeof scaleArrowVerts / sizeof scaleArrowVerts[0]))
 {
-    w_lines=_w_lines;
-    h_lines=_h_lines;
-    GenerateOpenGL_lists();
+    rotateArrow.setPolyWindingMode(OF_POLY_WINDING_POSITIVE);
+    rotateArrow.setCircleResolution(64);
+    rotateArrow.setColor(arrowsColor);
+    rotateArrow.arc(0, 0, baseSize, baseSize, 30, 350);
+    rotateArrow.arcNegative(0, 0, baseSize - baseSize/5, baseSize - baseSize/5, 350, 30);
+    rotateArrow.close();
+    generateGrid();
 }
 
-Grid::~Grid()
+void Grid::clear()
 {
-    glDeleteLists( grid_list,5);
+    setVisible(false);
 }
 
-void Grid::Resize()
+void Grid::draw()
 {
-    GenerateOpenGL_lists();
-}
-
-void Grid::Draw(bool calibration_enabled, int calibration_mode)
-{
-    if(calibration_enabled)
+    grid.draw();
+    ofPushStyle();
+    ofEnableAlphaBlending();
+    ofSetColor(arrowsColor);
+    switch(mode)
     {
-        glPushMatrix();
-        ofSetLineWidth(4.0f);
-        ofSetColor(255,255,255);
-        glCallList(grid_list);
-        glColor4f(1,0,0,0.6f);
-        switch(calibration_mode)
-        {
-            case 0: glCallList(grid_list+1); break;
-            case 1: glCallList(grid_list+2); break;
-            case 2: glCallList(grid_list+3); break;
-            case 3: glCallList(grid_list+4); break;
-        }
-        glPopMatrix();
+        case 0:
+            arrows_translate();
+            break;
+        case 1:
+            arrows_scale();
+            break;
+        case 2:
+            arrows_rotate();
+            break;
+        case 3:
+            arrows_tilt();
+            break;
+        default:
+            break;
     }
+    ofPopStyle();
 }
 
-void Grid::GenerateOpenGL_lists()
+void Grid::setMode(int m)
 {
-    int width = ofGetWidth();
-    int height = ofGetHeight();
-    ofSetColor(255,255,255);
-    ofSetLineWidth(4.0f);
-    int linelength;
-    grid_list = glGenLists(5);
+    mode = m;
+}
+
+void Grid::generateGrid()
+{
+    grid.setPolyWindingMode(OF_POLY_WINDING_POSITIVE);
+    grid.setCircleResolution(64);
 
     //################################
     // Render the Main Grid
     //################################
-    glNewList(grid_list,GL_COMPILE);
-    glPushMatrix();
-    ///Draws the line-grid depending the dimensions of the screen,
-    ///for the reactable, the grid must be square shaped.
-    if(width>height)
+    ///Draws the line-grid on a [0, 1] squared range.
+
+    // Vertical lines
+    for (int i = 0; i <= w_lines; i++)
     {
-        linelength = height;
-        glTranslatef((width-height)/2,0,0);
-        for (int i =0; i<=w_lines; i++)
-            ofLine( i*(linelength/w_lines) ,  0 , i*(linelength/w_lines), linelength);
-        for (int i =0; i<=h_lines; i++)
-            ofLine(0, i*(linelength/h_lines) , linelength, i*(linelength/h_lines));
-    }else
-    {
-        glTranslatef(0,(height-width)/2,0);
-        linelength = width;
-        for (int i =0; i<=w_lines; i++)
-            ofLine( i*(linelength/w_lines) ,  0 , i*(linelength/w_lines), linelength);
-        for (int i =0; i<=h_lines; i++)
-            ofLine(0, i*(linelength/h_lines) , linelength, i*(linelength/h_lines));
+        grid.rectangle(i*(1.0f/w_lines) - lineWidth/2, 0, lineWidth, 1.0f);
     }
-    ofNoFill();
-    ///Draws the helping circles of the grid.
-    ofSetCircleResolution(60);
+    // Horizontal lines
+    for (int i = 0; i <= h_lines; i++)
+    {
+        grid.rectangle(0, i*(1.0f/h_lines) - lineWidth/2, 1.0f, lineWidth);
+    }
+    // Helping circles
     for (int i =0; i<=w_lines/2; i++)
-        ofCircle(linelength/2,linelength/2,(i*(linelength/w_lines)));
-    ofFill();
-    ofSetCircleResolution(20);
-    glPopMatrix();
-    glEndList();
-
-    //################################
-    // Render the "Move" Arrows
-    //################################
-    glNewList(grid_list+1,GL_COMPILE);
-    glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
-		glTranslatef(0.5f*linelength,0.55f*linelength,0);
-		RenderArrow_two(linelength/2);
-		glTranslatef(-0.05*linelength,-0.05f*linelength,0);
-		glRotatef(90,0,0,1);
-		RenderArrow_two(linelength/2);
-	glPopMatrix();
-    glEndList();
-	//################################
-    // Render the "Scale" Arrows
-    //################################
-    glNewList(grid_list+2,GL_COMPILE);
-    glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
-		glPushMatrix();
-		glTranslatef(0.5f*linelength,0.9f*linelength,0);
-		RenderArrow_one(linelength);
-		glTranslatef(0,-0.8f*linelength,0);
-		glRotatef(180,0,0,1);
-		RenderArrow_one(linelength);
-		glPopMatrix();
-		glTranslatef(0.9f*linelength,0.5f*linelength,0);
-		glPushMatrix();
-		glRotatef(-90,0,0,1);
-		RenderArrow_one(linelength);
-		glPopMatrix();
-		glTranslatef(-0.8f*linelength,0,0);
-		glPushMatrix();
-		glRotatef(90,0,0,1);
-		RenderArrow_one(linelength);
-		glPopMatrix();
-	glPopMatrix();
-    glEndList();
-    //################################
-    // Render the "Rotate" Arrows
-    //################################
-    glNewList(grid_list+3,GL_COMPILE);
-	glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
-		glTranslatef(0.5f*linelength,0.5f*linelength,0);
-		glRotatef(-90,0,0,1);
-		DrawArrow_three(linelength);
-	glPopMatrix();
-    glEndList();
-	//################################
-    // Render the "Paral" Arrows
-    //################################
-    glNewList(grid_list+4,GL_COMPILE);
-    glPushMatrix();
-        if(width>height) glTranslatef((width-height)/2,0,0);
-        else glTranslatef(0,(height-width)/2,0);
-		glPushMatrix();
-		glTranslatef(0.05f*linelength,0.5f*linelength,0);
-		glPushMatrix();
-		glRotatef(-90,0,0,1);
-		glScalef(1,0.5f,1);
-		DrawArrow_three(linelength);
-		glPopMatrix();
-		glPushMatrix();
-		glTranslatef(0.9f*linelength,0,0);
-		glRotatef(-90,0,0,1);
-		glScalef(1,0.5f,1);
-		DrawArrow_three(linelength);
-		glPopMatrix();
-		glPopMatrix();
-		glPushMatrix();
-		glTranslatef(0.5f*linelength,0.05f*linelength,0);
-		glPushMatrix();
-		glRotatef(-90,0,0,1);
-		glScalef(0.5f,1,1);
-		DrawArrow_three(linelength);
-		glPopMatrix();
-		glPushMatrix();
-		glTranslatef(0,0.9f*linelength,0);
-		glRotatef(-90,0,0,1);
-		glScalef(0.5f,1,1);
-		DrawArrow_three(linelength);
-		glPopMatrix();
-		glPopMatrix();
-	glPopMatrix();
-	glEndList();
+    {
+        float circleSize = i * 1.0f/w_lines + lineWidth/2;
+        grid.arc(center, center, circleSize, circleSize, 0, 360);
+        grid.arcNegative(center, center, circleSize - lineWidth, circleSize - lineWidth, 0, 360);
+    }
+    grid.close();
 }
 
-void Grid::RenderArrow_one(int size)
+void Grid::arrows_translate()
 {
-    glPushMatrix();
-    glBegin(GL_TRIANGLE_STRIP);
-    glVertex2d(-0.05*size,0);
-    glVertex2d(0,0.1*size);
-    glVertex2d(0.05*size,0);
-    glEnd();
-    glBegin(GL_TRIANGLE_FAN);
-    glVertex2d(-0.025*size,0);
-    glVertex2d(-0.0125*size,-0.1*size);
-    glVertex2d(0.0125*size,-0.1*size);
-    glVertex2d(0.025*size,0);
-    glEnd();
-    glPopMatrix();
+    ofPushMatrix();
+    ofTranslate(center, center);
+    for (int i = 0; i < 2; ++i)
+    {
+        ofTriangle(baseSize/8, baseSize/2, 0, baseSize, -baseSize/8, baseSize/2);
+        ofTriangle(-baseSize/8, -baseSize/2, 0, -baseSize, baseSize/8, -baseSize/2);
+        ofRect(-baseSize/16, -baseSize/2, baseSize/8, baseSize);
+        ofRotate(90, 0, 0, 1);
+    }
+    ofPopMatrix();
 }
 
-void Grid::RenderArrow_two(int size)
+void Grid::arrows_rotate()
 {
-    glBegin(GL_TRIANGLE_STRIP);
-    glVertex2d(-0.025*size,0);
-    glVertex2d(0,0.1*size);
-    glVertex2d(0.025*size,0);
-    glEnd();
-    glBegin(GL_TRIANGLE_FAN);
-    glVertex2d(-0.0125*size,0);
-    glVertex2d(-0.0125*size,-0.2*size);
-    glVertex2d(0.0125*size,-0.2*size);
-    glVertex2d(0.0125*size,0);
-    glEnd();
-    glBegin(GL_TRIANGLE_STRIP);
-    glVertex2d(-0.025*size,-0.2*size);
-    glVertex2d(0,-0.3*size);
-    glVertex2d(0.025*size,-0.2*size);
-    glEnd();
+    ofPushMatrix();
+    ofTranslate(center, center, 0);
+    drawRotateArrow();
+    ofPopMatrix();
 }
 
-void Grid::DrawArrow_three(int size){
-    glBegin(GL_TRIANGLE_STRIP);
-    double arc = M_PI*2-0.7;
-    double sinus = 0;
-    double cosinus = 0;
-    double angle;
-    double offset = M_PI /20;
-	for (angle=0; angle<arc; angle+=arc/60 ){
-		sinus = sin(angle+offset);
-		cosinus = cos(angle+offset);
-		glVertex2d(0.08*sinus*size, 0.08*cosinus*size);
-        glVertex2d(0.1*sinus*size, 0.1*cosinus*size);
-	}
-	glEnd();
+void Grid::arrows_scale()
+{
+    // Right
+    ofPushMatrix();
+    ofTranslate(0.9, center, 0);
+    scaleArrow.draw();
+    ofPopMatrix();
 
-    double ax = 0.08*sinus - 0.1*sinus;
-    double ay = 0.08*cosinus - 0.1*cosinus;
-    double mod = sqrt(ax*ax + ay*ay);
-    ax = ax/mod;
-    ay = ay/mod;
-	glBegin(GL_TRIANGLES);
-        glVertex2d(0.055*sinus*size, 0.055*cosinus*size);
-        glVertex2d(0.125*sinus*size, 0.125*cosinus*size);
-        glVertex2d((-ay*0.05*size)+0.09*sinus*size, (ax*0.05*size)+0.09*cosinus*size);
-	glEnd();
+    // Down
+    ofPushMatrix();
+    ofTranslate(center, 0.9, 0);
+    ofRotate(90, 0, 0, 1);
+    scaleArrow.draw();
+    ofPopMatrix();
+
+    // Left
+    ofPushMatrix();
+    ofTranslate(0.1, center, 0);
+    ofRotate(180, 0, 0, 1);
+    scaleArrow.draw();
+    ofPopMatrix();
+
+    // Up
+    ofPushMatrix();
+    ofTranslate(center, 0.1, 0);
+    ofRotate(270, 0, 0, 1);
+    scaleArrow.draw();
+    ofPopMatrix();
 }
+
+void Grid::arrows_tilt()
+{
+    // Right
+    ofPushMatrix();
+    ofTranslate(1 - baseSize/2, center, 0);
+    ofScale(0.5, 1, 1);
+    drawRotateArrow();
+    ofPopMatrix();
+
+    // Down
+    ofPushMatrix();
+    ofTranslate(center, 1 - baseSize/2, 0);
+    ofScale(1, 0.5, 1);
+    drawRotateArrow();
+    ofPopMatrix();
+
+    // Left
+    ofPushMatrix();
+    ofTranslate(baseSize/2, center, 0);
+    ofScale(0.5, 1, 1);
+    drawRotateArrow();
+    ofPopMatrix();
+
+    // Up
+    ofPushMatrix();
+    ofTranslate(center, baseSize/2, 0);
+    ofScale(1, 0.5, 1);
+    drawRotateArrow();
+    ofPopMatrix();
+}
+
+void Grid::drawRotateArrow()
+{
+    rotateArrow.draw();
+    ofPushMatrix();
+    ofRotate(30, 0, 0, 1);
+    ofTranslate(baseSize - baseSize/10, 0, 0);
+    ofTriangle(-3*baseSize/10, 0, 3*baseSize/10, 0, 0, -baseSize/2);
+    ofPopMatrix();
+}
+

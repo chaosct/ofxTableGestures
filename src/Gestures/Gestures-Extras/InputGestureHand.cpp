@@ -32,19 +32,19 @@
 #include "InputGestureHand.hpp"
 
 
-DirectPoint  Hand::getCenter()
+ofVec2f Hand::getCenter()
 {
-    DirectPoint p(0,0);
+    ofVec2f p(0);
     if(fingers.size() < 1)
         return p;
     float x = 0;
     float y = 0;
     for(std::list<DirectFinger *>::iterator it = fingers.begin(); it != fingers.end(); ++it)
     {
-        x += (*it)->getX();
-        y += (*it)->getY();
+        x += (*it)->x;
+        y += (*it)->y;
     }
-    p.set(x/fingers.size(),y/fingers.size());
+    p.set(x/fingers.size(), y/fingers.size());
     return p;
 }
 
@@ -53,8 +53,8 @@ float Hand::getRadius()
     float distance = 0;
     for(std::list<DirectFinger *>::iterator it = fingers.begin(); it != fingers.end(); ++it)
     {
-        DirectFinger * f = *it;
-        distance = std::max(f->getDistance(this->center),distance);
+        ofVec2f* f = *it;
+        distance = std::max(f->distance(this->center),distance);
     }
     return distance;
 }
@@ -64,7 +64,7 @@ bool Hand::isValid()
     return fingers.size() >= 1;
 }
 
-Hand * InputGestureHands::getNeighbour(DirectPoint * p, Hand * ignore)
+Hand * InputGestureHands::getNeighbour(ofVec2f * p, Hand * ignore)
 {
     Hand * winner = NULL;
     float dwinner = 1000;
@@ -73,8 +73,8 @@ Hand * InputGestureHands::getNeighbour(DirectPoint * p, Hand * ignore)
         Hand *h = *it;
         if (h->is_valid && h != ignore)
         {
-            float d = h->center.getDistance(p);
-            if (d < HAND_MAX_RADIUS and d < dwinner)
+            float d = h->center.distance(*p);
+            if (d < HAND_MAX_RADIUS && d < dwinner)
             {
                 dwinner = d;
                 winner = h;
@@ -84,7 +84,7 @@ Hand * InputGestureHands::getNeighbour(DirectPoint * p, Hand * ignore)
     return winner;
 }
 
-void InputGestureHands::newCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
+void InputGestureHands::newCursor(InputGestureDirectFingers::newCursorArgs & a)
 {
     DirectFinger * df = a.finger;
     Hand * winner = getNeighbour(df);
@@ -113,7 +113,7 @@ void InputGestureHands::newCursor(InputGestureDirectFingers::commonDirectFingerA
     }
 }
 
-void InputGestureHands::removeCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
+void InputGestureHands::removeCursor(InputGestureDirectFingers::removeCursorArgs & a)
 {
     DirectFinger * f = a.finger;
     Hand * h = assignations[f->s_id];
@@ -137,7 +137,7 @@ void InputGestureHands::removeCursor(InputGestureDirectFingers::commonDirectFing
 
 }
 
-void InputGestureHands::updateCursor(InputGestureDirectFingers::commonDirectFingerArgs & a)
+void InputGestureHands::updateCursor(InputGestureDirectFingers::updateCursorArgs & a)
 {
     DirectFinger * f = a.finger;
     Hand * h = assignations[f->s_id];
@@ -176,7 +176,7 @@ void InputGestureHands::updateCursor(InputGestureDirectFingers::commonDirectFing
 
         }
     }
-    else if(h->getDistance(f) > HAND_MAX_RADIUS)
+    else if(h->distance(*f) > HAND_MAX_RADIUS)
     {
         h->fingers.remove(f);
         h->UpdateOffset();

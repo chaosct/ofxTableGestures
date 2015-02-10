@@ -31,13 +31,19 @@
 
 #include "InputGestureDirectObjects.hpp"
 
+ofEvent<InputGestureDirectObjects::newObjectArgs> InputGestureDirectObjects::newObject;
+ofEvent<InputGestureDirectObjects::removeObjectArgs> InputGestureDirectObjects::removeObject;
+ofEvent<InputGestureDirectObjects::updateObjectArgs> InputGestureDirectObjects::updateObject;
+ofEvent<InputGestureDirectObjects::enterObjectArgs> InputGestureDirectObjects::enterObject;
+ofEvent<InputGestureDirectObjects::exitObjectArgs> InputGestureDirectObjects::exitObject;
+
 InputGestureDirectObjects::InputGestureDirectObjects()
 {
-    registerEvent(InputGestureBasicObjects::Instance().addTuioObject,&InputGestureDirectObjects::addTuioObject);
-    registerEvent(InputGestureBasicObjects::Instance().enterTuioObject,&InputGestureDirectObjects::enterTuioObject);
-    registerEvent(InputGestureBasicObjects::Instance().updateTuioObject,&InputGestureDirectObjects::updateTuioObject);
-    registerEvent(InputGestureBasicObjects::Instance().removeTuioObject,&InputGestureDirectObjects::removeTuioObject);
-    registerEvent(InputGestureBasicObjects::Instance().exitTuioObject,&InputGestureDirectObjects::exitTuioObject);
+    registerEvent(InputGestureBasicObjects::addTuioObject,&InputGestureDirectObjects::addTuioObject);
+    registerEvent(InputGestureBasicObjects::enterTuioObject,&InputGestureDirectObjects::enterTuioObject);
+    registerEvent(InputGestureBasicObjects::updateTuioObject,&InputGestureDirectObjects::updateTuioObject);
+    registerEvent(InputGestureBasicObjects::removeTuioObject,&InputGestureDirectObjects::removeTuioObject);
+    registerEvent(InputGestureBasicObjects::exitTuioObject,&InputGestureDirectObjects::exitTuioObject);
 }
 
 void InputGestureDirectObjects::addTuioObject(InputGestureBasicObjects::addTuioObjectArgs & a)
@@ -45,9 +51,8 @@ void InputGestureDirectObjects::addTuioObject(InputGestureBasicObjects::addTuioO
     DirectObject * dob = new DirectObject();
     dob->s_id = a.id;
     dob->f_id = a.f_id;
-    dob->setX( a.xpos);
-    dob->setY( a.ypos);
-    dob->angle = a.angle;
+    dob->set(a.xpos, a.ypos);
+    dob->orientation = a.angle;
     dob->xspeed = a.xspeed;
     dob->yspeed= a.yspeed;
     dob->rspeed = a.rspeed;
@@ -58,7 +63,6 @@ void InputGestureDirectObjects::addTuioObject(InputGestureBasicObjects::addTuioO
     eventargs.object = dob;
     eventargs.target = a.target;
     ofNotifyEvent(newObject,eventargs);
-
 }
 
 void InputGestureDirectObjects::enterTuioObject(InputGestureBasicObjects::enterTuioObjectArgs & a)
@@ -66,9 +70,8 @@ void InputGestureDirectObjects::enterTuioObject(InputGestureBasicObjects::enterT
     DirectObject * dob = objects[a.id];
     dob->s_id = a.id;
     dob->f_id = a.f_id;
-    dob->setX( a.xpos);
-    dob->setY( a.ypos);
-    dob->angle = a.angle;
+    dob->set(a.xpos, a.ypos);
+    dob->orientation = a.angle;
     dob->xspeed = a.xspeed;
     dob->yspeed= a.yspeed;
     dob->rspeed = a.rspeed;
@@ -87,9 +90,16 @@ void InputGestureDirectObjects::updateTuioObject(InputGestureBasicObjects::updat
     DirectObject * dob = objects[a.id];
     dob->s_id = a.id;
     dob->f_id = a.f_id;
-    dob->setX( a.xpos);
-    dob->setY( a.ypos);
-    dob->angle = a.angle;
+    dob->set(a.xpos, a.ypos);
+
+    float increment = a.angle - dob->orientation;
+    if (increment > PI){
+        increment -= 2*PI;
+    }else if (increment < -PI){
+        increment += 2*PI;
+    }
+
+    dob->orientation = a.angle;
     dob->xspeed = a.xspeed;
     dob->yspeed= a.yspeed;
     dob->rspeed = a.rspeed;

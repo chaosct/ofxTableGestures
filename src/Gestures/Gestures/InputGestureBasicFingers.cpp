@@ -1,18 +1,24 @@
 #include "InputGestureBasicFingers.hpp"
+#include "GenericManager.hpp"
 #include "GraphicDispatcher.hpp"
+
+ofEvent<InputGestureBasicFingers::removeTuioCursorArgs> InputGestureBasicFingers::removeTuioCursor;
+ofEvent<InputGestureBasicFingers::exitTuioCursorArgs> InputGestureBasicFingers::exitTuioCursor;
+ofEvent<InputGestureBasicFingers::addTuioCursorArgs> InputGestureBasicFingers::addTuioCursor;
+ofEvent<InputGestureBasicFingers::enterTuioCursorArgs> InputGestureBasicFingers::enterTuioCursor;
+ofEvent<InputGestureBasicFingers::updateTuioCursorArgs> InputGestureBasicFingers::updateTuioCursor;
 
 InputGestureBasicFingers::InputGestureBasicFingers()
 {
-    registerEvent( InputGestureTuio112D::Instance().removeTuioCursor2D , &InputGestureBasicFingers::removeTuioCursor2D );
-    registerEvent( InputGestureTuio112D::Instance().updateTuioCursor2D , &InputGestureBasicFingers::updateTuioCursor2D );
-    registerEvent( InputGestureTuio112D::Instance().addTuioCursor2D , &InputGestureBasicFingers::addTuioCursor2D );
+    registerEvent(InputGestureTuio112D::removeTuioCursor2D, &InputGestureBasicFingers::removeTuioCursor2D);
+    registerEvent(InputGestureTuio112D::updateTuioCursor2D, &InputGestureBasicFingers::updateTuioCursor2D);
+    registerEvent(InputGestureTuio112D::addTuioCursor2D, &InputGestureBasicFingers::addTuioCursor2D);
 }
 
 void InputGestureBasicFingers::addTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
 {
-        
         ids.insert(id);
-        Graphic * target = GraphicDispatcher::Instance().Collide(ofPoint(xpos,ypos));
+        const Graphic * target = GenericManager::get<GraphicDispatcher>()->Collide(ofPoint(xpos,ypos));
         graphic_assignations[id] = target;
         addTuioCursorArgs eventargs;
         eventargs.id = id;
@@ -23,19 +29,17 @@ void InputGestureBasicFingers::addTuioCursor2D(int id, float xpos,float ypos,flo
         eventargs.maccel = maccel;
         eventargs.target = target;
         ofNotifyEvent(addTuioCursor,eventargs);
-
 }
 
 void InputGestureBasicFingers::updateTuioCursor2D(int id, float xpos,float ypos,float xspeed,float yspeed,float maccel)
 {
-
     if(ids.find(id) == ids.end())
     {
         addTuioCursor2D(id,xpos,ypos,xspeed,yspeed,maccel);
         return;
     }
     
-    Graphic * target = GraphicDispatcher::Instance().Collide(ofPoint(xpos,ypos));
+    const Graphic * target = GenericManager::get<GraphicDispatcher>()->Collide(ofPoint(xpos,ypos));
     
     if(graphic_assignations[id] != target)
     {
@@ -68,9 +72,6 @@ void InputGestureBasicFingers::updateTuioCursor2D(int id, float xpos,float ypos,
     eventargs.maccel = maccel;
     eventargs.target = target;
     ofNotifyEvent(updateTuioCursor,eventargs);
-    
-
-    
 }
 
 void InputGestureBasicFingers::removeTuioCursor2D(int id)

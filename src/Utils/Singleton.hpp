@@ -38,6 +38,7 @@ template<typename T>
 class Singleton 
 {
     public:
+        virtual ~Singleton() {}
         static T& Instance()
         {
             static T me;

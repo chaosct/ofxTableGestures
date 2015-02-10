@@ -4,7 +4,6 @@ We are changing a lot of code, modernizing and making it more OF-ish. It is inco
 
 You will need:
 ofxGlobalConfig (https://github.com/chaosct/ofxGlobalConfig)
-ofx2DFigures (https://github.com/bestsheep1/ofx2DFigures)
 
 Compilation hint:
 64bit builds have problems with old versions of OscPack (inside ofxOsc). This

@@ -48,7 +48,7 @@ Renderer::Renderer():
     distortion_enabled(false)
     {
         LoadDefaultValues();
-        SetIdentity(matrix);
+        matrix.makeIdentityMatrix();
     }
 
 Renderer::~Renderer(){}
@@ -145,12 +145,6 @@ void Renderer::LoadDefaultValues(){
     angle=0;
 }
 
-void Renderer::SetIdentity(double* _matrix){
-    for (int i=0;i<4;i++)
-        for (int j=0;j<4;j++)
-            _matrix[(i*4)+j] = (i==j)?1:0;
-}
-
-double * Renderer::GetDistortionMatrix(){
+ofMatrix4x4 Renderer::GetDistortionMatrix(){
     return matrix;
 }

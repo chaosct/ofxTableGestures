@@ -33,14 +33,20 @@
 #define _TABLE_APP
 
 #include "ofMain.h"
-#include "Grid.hpp"
-#include "Renderer.hpp"
 #include <string>
+#include "GenericManager.hpp"
+#include "OscInput.hpp"
 #include "OnlySimulator.h"
 
 #ifdef ONLY_SIMULATOR
 #undef NO_SIMULATOR
 #endif //ONLY_SIMULATOR
+
+class Grid;
+class Renderer;
+namespace tableGraphics{
+    class Text;
+}
 
 ///By defining the global "NO_SIMULATOR", it disables the integrated simulator.
 ///When it is enabled, it can be activated by tapping the 's' key.
@@ -56,79 +62,83 @@ class TableApp {
     ///The data contained by this class is private and it is mainly used for distortionate the output,
     ///draws the calibration grid and draws the simulator scene.
     private:
+        GenericManager genericManager;
+        OscInput oscInput;
+
+        ///Global matrix
+        ofMatrix4x4 matrix;
+
         ///Renderer: used for distortionate the graphic output.
         Renderer *renderer;
+
         ///Grid: used for drawing the calibration grid on the screen.
         Grid* grid;
-        ///Show grid flag
         bool show_grid;
-        /// Full/windowed screen flag
-        bool full;
-        /// selector of calibration parameter
-        /// translate, rotate, scale, rotate x and y axes,...
+	/// selector of calibration parameter
+	/// translate, rotate, scale, rotate x and y axes,...
         int calibration_mode;
-        ///Show/hide help content flag
-        bool show_help;
-        ///Show/hide information flag
-        bool show_info;
-		///Show/hide cursor flag
-		bool hide_cursor;
-		///Simulator
-		#ifndef NO_SIMULATOR
-            simulator::Simulator* simulator;
-            ///Simulator enabled flag
-            bool is_simulating;
-            ///distortion status before enable simulator.
-            bool was_distorsion_enabled;
-            ///cursor status before enable simulator.
-            bool was_cursor_hide;
-        #endif
-//        static double* calibration_matrix;
-        int & squaredInterface;
 
-        ///Flag to recalculate the ignore collision matrix.
-        bool matrix_updated;
-        //App Window Name
+        ///Help text
+        tableGraphics::Text* helpText;
+        bool show_help;
+
+        ///Graphic information text
+        tableGraphics::Text* infoText;
+        bool show_info;
+
+        ///Show/hide cursor flag
+        bool hide_cursor;
+
+        ///Simulator
+#ifndef NO_SIMULATOR
+        simulator::Simulator* simulator;
+        ///distortion status before enable simulator.
+        bool was_distorsion_enabled;
+        ///cursor status before enable simulator.
+        bool was_cursor_hide;
+#endif
+        ///App Window Name
         std::string win_name;
-        //Cursor key evaluation
+
+        ///Cursor key evaluation
         void Evaluate_Cursor(int key);
+
+	///Update global matrix
+	void updateMatrix(const ofVec2f& winSize);
+
+        void toggleSimulator();
+
     public:
         ///Constructor, here is initialized all data
         ///and loaded distortion parameters from file.
         TableApp(std::string name = "Table APP");
         ///Destructor
-        ~TableApp();
+        virtual ~TableApp();
 
-        /// Draws text screen information
-        void DrawInfo();
-        /// Draws text help content
-        void DrawHelp();
+        /// Screen information
+        void loadInfo();
+        void updateInfo();
+
+        /// Help content
+        void loadHelp();
+
         ///returns the biggest side of the screen
         static int GetSquareSide();
-//        static double* GetTransformationMatrix(){return calibration_matrix;}
+
         ///Key funcs, they only repports the ones that are not used by the system
-        virtual void KeyPressed  (int key){}
-		virtual void KeyReleased (int key){}
+        virtual void KeyPressed  (int){}
+        virtual void KeyReleased (int){}
 
         /// ofBaseApp methods..
-		void setup();
-		void update(ofEventArgs & args);
-		void draw();
-		void keyPressed  (ofKeyEventArgs & event);
-		void keyReleased(ofKeyEventArgs & event);
-		void mouseDragged(ofMouseEventArgs & event);
-		void mousePressed(ofMouseEventArgs & event);
-		void mouseReleased(ofMouseEventArgs & event);
-		void windowResized(ofResizeEventArgs & event);
-
-		///From old GlobalConfig
-		static float height;
-		static float width;
-        static float getHeight(){return TableApp::height;}
-        static float getWidth(){return TableApp::width;}
-
-        void toggleSimulator();
-
+                void setup();
+                void update(ofEventArgs & args);
+                void draw();
+                void keyPressed  (ofKeyEventArgs & event);
+                void keyReleased(ofKeyEventArgs & event);
+                void mouseDragged(ofMouseEventArgs & event);
+                void mousePressed(ofMouseEventArgs & event);
+                void mouseReleased(ofMouseEventArgs & event);
+                void windowResized(ofResizeEventArgs & event);
 };
 
 #endif

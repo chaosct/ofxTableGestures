@@ -32,6 +32,9 @@
 #ifndef EVENTCLIENT_HPP_INCLUDED
 #define EVENTCLIENT_HPP_INCLUDED
 
+#include <list>
+#include "ofEvents.h"
+
 /// interface AbstractUnregister
 /// Basically it's a commander, that do something
 /// when unregister() is called.
@@ -103,8 +106,9 @@ struct EventUnregisterFiltered: public AbstractUnregister
     
     void my_callback(EventArgsType & e)
     {
-        if(e.target == target)
+        if(e.target == target){
             (listener->*listenerMethod)(e);
+        }
     }
     
     bool isevent(void * eventptr)
@@ -205,6 +209,7 @@ class EventClientObject
 /// to take events:
 ///     registerEvent( Event , &MyClass::method ); //listener is the same instance
 ///     registerEvent( Event , &MyClass::method , Listener );
+///     registerEvent( Event , &MyClass::method , Listener , Graphic ); // Only report events colliding with Graphic
 ///
 /// to take events where its target is this instance:
 ///     registerMyEvent( Event , &MyClass::method ); //listener is the same instance
@@ -214,20 +219,26 @@ class EventClient : EventClientObject
 {
     public:
     template <class EventType,typename ArgumentsType, class ListenerClass>
-    void registerEvent(EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&),ListenerClass * listener =NULL)
-    {
-        if(listener == NULL)
+    void registerEvent(EventType & event,
+                    void (ListenerClass::*listenerMethod)(ArgumentsType&),
+                    ListenerClass * listener = NULL,
+                    Graphic* graphic = NULL){
+        if(listener == NULL){
             listener = static_cast<ListenerClass *>(this);
-        this->EventClientObject::registerEvent(listener,event,listenerMethod);
+        }
+        if (graphic == NULL){
+            this->EventClientObject::registerEvent(listener, event, listenerMethod);
+        }else{
+            this->EventClientObject::registerEventFiltered(listener, event, listenerMethod, graphic);
+        }
+
     }
-    
+
     template <class EventType,typename ArgumentsType, class ListenerClass>
-    void registerMyEvent(EventType & event, void (ListenerClass::*listenerMethod)(ArgumentsType&),ListenerClass * listener =NULL)
-    {
-        if(listener == NULL)
-            listener = static_cast<ListenerClass *>(this);
-        Graphic * target = (Graphic*)(this);
-        this->EventClientObject::registerEventFiltered(listener,event,listenerMethod,target);
+    void registerMyEvent(EventType & event,
+                        void (ListenerClass::*listenerMethod)(ArgumentsType&),
+                        ListenerClass * listener = NULL){
+        registerEvent(event, listenerMethod, listener, dynamic_cast<Graphic*>(this));
     }
     
     template <class EventType>

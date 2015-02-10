@@ -36,13 +36,11 @@
 #include <set>
 
 #include "ofxGlobalConfig.hpp"
-#include "InputGestureOsc.hpp"
+#include "OscInput.hpp"
 #include "OscTools.hpp"
 
 
-
-class InputGestureTuio112D  : public Singleton<InputGestureTuio112D>
-{
+class InputGestureTuio112D{
     
 public:
     
@@ -87,15 +85,15 @@ public:
     typedef commonBlob2DArgs updateTuioBlob2DArgs;
     typedef commonIdArgs removeTuioBlob2DArgs;
 
-    ofEvent<addTuioCursor2DArgs>    addTuioCursor2D;
-    ofEvent<updateTuioCursor2DArgs> updateTuioCursor2D;
-    ofEvent<removeTuioCursor2DArgs> removeTuioCursor2D;
-    ofEvent<addTuioObject2DArgs>    addTuioObject2D;
-    ofEvent<updateTuioObject2DArgs> updateTuioObject2D;
-    ofEvent<removeTuioObject2DArgs> removeTuioObject2D;
-    ofEvent<addTuioBlob2DArgs>      addTuioBlob2D;
-    ofEvent<updateTuioBlob2DArgs>   updateTuioBlob2D;
-    ofEvent<removeTuioBlob2DArgs>   removeTuioBlob2D;
+    static ofEvent<addTuioCursor2DArgs>    addTuioCursor2D;
+    static ofEvent<updateTuioCursor2DArgs> updateTuioCursor2D;
+    static ofEvent<removeTuioCursor2DArgs> removeTuioCursor2D;
+    static ofEvent<addTuioObject2DArgs>    addTuioObject2D;
+    static ofEvent<updateTuioObject2DArgs> updateTuioObject2D;
+    static ofEvent<removeTuioObject2DArgs> removeTuioObject2D;
+    static ofEvent<addTuioBlob2DArgs>      addTuioBlob2D;
+    static ofEvent<updateTuioBlob2DArgs>   updateTuioBlob2D;
+    static ofEvent<removeTuioBlob2DArgs>   removeTuioBlob2D;
 
     std::set<int> c_s_ids;
     std::set<int> o_s_ids;
@@ -109,13 +107,13 @@ public:
         limitroundarea(ofxGlobalConfig::getRef("GLOBAL:LIMITFINGERSOUTSIDECIRCLE",1)),
         limitroundareaobj(ofxGlobalConfig::getRef("GLOBAL:LIMITOBJECTSOUTSIDECIRCLE",1))
     {
-        ofAddListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
+        ofAddListener(OscInput::EventNewOscMessage,this,&InputGestureTuio112D::ReceiveCall);
     }
     virtual ~InputGestureTuio112D()
     {
-        ofRemoveListener(InputGestureOSC::Instance().EventNewOScMessage,this,&InputGestureTuio112D::ReceiveCall);
+        ofRemoveListener(OscInput::EventNewOscMessage,this,&InputGestureTuio112D::ReceiveCall);
     }
-    void ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args);
+    void ReceiveCall(OscInput::EventNewOscMessageArgs & args);
     void tuio2Dcur(OscOptionalUnpacker & argList);
     void tuio2Dobj(OscOptionalUnpacker & argList);
     void tuio2Dblb(OscOptionalUnpacker & argList);

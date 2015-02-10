@@ -36,4 +36,6 @@
 #include "InputGestureTuio1.12.5D.hpp"
 #include "InputGestureTuio1.13D.hpp"
 
+#include "EventClient.hpp"
+
 #endif // INPUTGESTURETUIO1_1_H_INCLUDED

@@ -34,7 +34,7 @@
 
 #include "InputGestureHand.hpp"
 
-class HandFeedback: public  NotificationGraphic 
+class HandFeedback: public FeedbackGraphic
 {
     std::map<unsigned int,Hand *> hands;
     InputGestureHands igh;
@@ -55,9 +55,9 @@ class HandFeedback: public  NotificationGraphic
         for (std::map<unsigned int,Hand *>::iterator it = hands.begin(); it != hands.end(); ++it)
         {
             Hand * h = it->second;
-            ofCircle(h->center.getX(),h->center.getY(),h->radius);
-            ofLine(h->getX()-0.01f,h->getY()-0.01f,h->getX()+0.01f,h->getY()+0.01f);
-            ofLine(h->getX()-0.01f,h->getY()+0.01f,h->getX()+0.01f,h->getY()-0.01f);
+            ofCircle(h->center.x, h->center.y, h->radius);
+            ofLine(h->x-0.01f, h->y-0.01f, h->x+0.01f, h->y+0.01f);
+            ofLine(h->x-0.01f, h->y+0.01f, h->x+0.01f, h->y-0.01f);
         }
     }
     HandFeedback(Graphic * target): igh(target)

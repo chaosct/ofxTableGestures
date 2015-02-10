@@ -32,9 +32,14 @@
 #include "InputGestureTuio1.13D.hpp"
 #include <string>
 
+ofEvent<InputGestureTuio113D::addTuioCursor3DArgs> InputGestureTuio113D::addTuioCursor3D;
+ofEvent<InputGestureTuio113D::updateTuioCursor3DArgs> InputGestureTuio113D::updateTuioCursor3D;
+ofEvent<InputGestureTuio113D::removeTuioCursor3DArgs> InputGestureTuio113D::removeTuioCursor3D;
+ofEvent<InputGestureTuio113D::addTuioObject3DArgs> InputGestureTuio113D::addTuioObject3D;
+ofEvent<InputGestureTuio113D::updateTuioObject3DArgs> InputGestureTuio113D::updateTuioObject3D;
+ofEvent<InputGestureTuio113D::removeTuioObject3DArgs> InputGestureTuio113D::removeTuioObject3D;
 
-
-void InputGestureTuio113D::ReceiveCall(InputGestureOSC::EventNewOScMessageArgs & args)
+void InputGestureTuio113D::ReceiveCall(OscInput::EventNewOscMessageArgs & args)
 {
     std::string addr = args.m.getAddress();
     OscOptionalUnpacker uargs(args.m);

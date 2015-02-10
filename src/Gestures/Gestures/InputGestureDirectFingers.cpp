@@ -1,21 +1,25 @@
 #include "InputGestureDirectFingers.hpp"
 
+ofEvent<InputGestureDirectFingers::removeCursorArgs> InputGestureDirectFingers::removeCursor;
+ofEvent<InputGestureDirectFingers::newCursorArgs> InputGestureDirectFingers::newCursor;
+ofEvent<InputGestureDirectFingers::updateCursorArgs> InputGestureDirectFingers::updateCursor;
+ofEvent<InputGestureDirectFingers::enterCursorArgs> InputGestureDirectFingers::enterCursor;
+ofEvent<InputGestureDirectFingers::exitCursorArgs> InputGestureDirectFingers::exitCursor;
+
 InputGestureDirectFingers::InputGestureDirectFingers()
 {
-    registerEvent(InputGestureBasicFingers::Instance().addTuioCursor,&InputGestureDirectFingers::addTuioCursor);
-    registerEvent(InputGestureBasicFingers::Instance().enterTuioCursor,&InputGestureDirectFingers::enterTuioCursor);
-    registerEvent(InputGestureBasicFingers::Instance().updateTuioCursor,&InputGestureDirectFingers::updateTuioCursor);
-    registerEvent(InputGestureBasicFingers::Instance().removeTuioCursor,&InputGestureDirectFingers::removeTuioCursor);
-    registerEvent(InputGestureBasicFingers::Instance().exitTuioCursor,&InputGestureDirectFingers::exitTuioCursor);
+    registerEvent(InputGestureBasicFingers::addTuioCursor,&InputGestureDirectFingers::addTuioCursor);
+    registerEvent(InputGestureBasicFingers::enterTuioCursor,&InputGestureDirectFingers::enterTuioCursor);
+    registerEvent(InputGestureBasicFingers::updateTuioCursor,&InputGestureDirectFingers::updateTuioCursor);
+    registerEvent(InputGestureBasicFingers::removeTuioCursor,&InputGestureDirectFingers::removeTuioCursor);
+    registerEvent(InputGestureBasicFingers::exitTuioCursor,&InputGestureDirectFingers::exitTuioCursor);
 }
 
 void InputGestureDirectFingers::addTuioCursor(InputGestureBasicFingers::addTuioCursorArgs & a)
 {
-
     DirectFinger * e = new DirectFinger();
     e->s_id = a.id;
-    e->setX(a.xpos);
-    e->setY(a.ypos);
+    e->set(a.xpos, a.ypos);
     e->xspeed = a.xspeed;
     e->yspeed = a.yspeed;
     e->maccel = a.maccel;
@@ -30,8 +34,7 @@ void InputGestureDirectFingers::enterTuioCursor(InputGestureBasicFingers::enterT
 {
     DirectFinger * e = fingers[a.id];
     e->s_id = a.id;
-    e->setX(a.xpos);
-    e->setY(a.ypos);
+    e->set(a.xpos, a.ypos);
     e->xspeed = a.xspeed;
     e->yspeed = a.yspeed;
     e->maccel = a.maccel;
