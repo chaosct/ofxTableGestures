@@ -33,7 +33,6 @@
 #include "GraphicDispatcher.hpp"
 #include <algorithm>
 #include <functional>
-#include <tr1/functional>
 #include <cassert>
 
 GraphicDispatcher::GraphicDispatcher():ngraphics(0) {
@@ -74,7 +73,7 @@ void GraphicDispatcher::Update(){
 
 void GraphicDispatcher::Resize(int w, int h){
     std::for_each(graphics.begin(),graphics.end(),
-                  std::tr1::bind(&GraphicSmartContainer::resize,std::tr1::placeholders::_1,w,h));
+                  std::bind(&GraphicSmartContainer::resize,std::placeholders::_1,w,h));
 }
 
 void GraphicDispatcher::AddGraphic(GraphicSmartContainer* graphic){
@@ -102,7 +101,7 @@ void GraphicDispatcher::ChangeLayer(GraphicSmartContainer * graphic, int newlaye
 Graphic * GraphicDispatcher::Collide(ofPoint const & point)
 {
     GraphicsList::reverse_iterator it = std::find_if(graphics.rbegin(),graphics.rend(),
-                                          std::tr1::bind(&GraphicSmartContainer::Collide,std::tr1::placeholders::_1,point));
+                                          std::bind(&GraphicSmartContainer::Collide,std::placeholders::_1,point));
     if (it != graphics.rend())
         return (*it)->graphic;
     return NULL;
